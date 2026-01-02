@@ -198,21 +198,26 @@ public abstract class RoleBase : IComparable<RoleBase>
         countsAs = 1;
     }
 
+    protected CustomRoles ResolveRoleId() 
+    { 
+        return Enum.Parse<CustomRoles>(GetType().Name, ignoreCase: true); 
+    }
+
     protected bool IsThisRole(PlayerControl pc)
     {
-        return pc.GetCustomRole() == Enum.Parse<CustomRoles>(GetType().Name, true);
+        return pc.GetCustomRole() == ResolveRoleId();
     }
 
     protected bool IsThisRole(byte id)
     {
         CustomRoles role = Main.PlayerStates.TryGetValue(id, out PlayerState state) ? state.MainRole : CustomRoles.NotAssigned;
-        return role == Enum.Parse<CustomRoles>(GetType().Name, true);
+        return role == ResolveRoleId();
     }
 
     // Option setup simplifier
     protected OptionSetupHandler StartSetup(int id, bool single = false)
     {
-        var role = Enum.Parse<CustomRoles>(GetType().Name, true);
+        var role = ResolveRoleId();
         var tab = TabGroup.OtherRoles;
 
         if (role.IsCoven()) tab = TabGroup.CovenRoles;

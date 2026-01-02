@@ -5,7 +5,7 @@ using Hazel;
 
 namespace EHR.Roles;
 
-public class Investor : RoleBase
+public class Investor : RoleBase, IStandardRole
 {
     public static bool On;
 
@@ -28,6 +28,10 @@ public class Investor : RoleBase
             return marked > 0 && (int)Math.Round(won * 100f / marked) >= percentNeeded;
         }
     }
+
+    public Team Faction => Team.Neutral;
+    public RoleOptionType? Alignment => RoleOptionType.Neutral_Benign;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

@@ -3,7 +3,7 @@ using AmongUs.GameOptions;
 
 namespace EHR.Roles;
 
-internal class Swapster : RoleBase
+internal class Swapster : RoleBase, IStandardRole
 {
     public static OptionItem SSCD;
     public static readonly Dictionary<byte, byte> FirstSwapTarget = [];
@@ -26,6 +26,10 @@ internal class Swapster : RoleBase
     {
         FirstSwapTarget.Remove(playerId);
     }
+
+    public Team Faction => Team.Impostor;
+    public RoleOptionType? Alignment => RoleOptionType.Impostor_Support;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

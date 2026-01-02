@@ -6,7 +6,7 @@ using Hazel;
 
 namespace EHR.Roles;
 
-public class Vacuum : RoleBase
+public class Vacuum : RoleBase, IStandardRole
 {
     public static bool On;
     private static List<Vacuum> Instances = [];
@@ -21,6 +21,10 @@ public class Vacuum : RoleBase
 
     private byte VacuumId;
     private long AbilityEndTS;
+
+    public Team Faction => Team.Crewmate;
+    public RoleOptionType? Alignment => RoleOptionType.Crewmate_Miscellaneous;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

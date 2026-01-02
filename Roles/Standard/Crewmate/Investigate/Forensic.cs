@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace EHR.Roles;
 
-internal class Forensic : RoleBase
+internal class Forensic : RoleBase, IStandardRole
 {
     public static OptionItem ForensicCanknowKiller;
     public static OptionItem ForensicCanknowDeathReason;
@@ -16,6 +16,10 @@ internal class Forensic : RoleBase
     public static Dictionary<byte, string> ForensicNotify = [];
 
     public override bool IsEnable => false;
+
+    public Team Faction => Team.Crewmate;
+    public RoleOptionType? Alignment => RoleOptionType.Crewmate_Investigate;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

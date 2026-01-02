@@ -5,7 +5,7 @@ using AmongUs.GameOptions;
 
 namespace EHR.Roles;
 
-public class Farmer : RoleBase
+public class Farmer : RoleBase, IStandardRole
 {
     public static bool On;
     private static List<Farmer> Instances = [];
@@ -24,6 +24,10 @@ public class Farmer : RoleBase
     private static OptionItem IncreasedSpeedDuration;
     private static OptionItem ShieldDuration;
     private static OptionItem InvisibilityDuration;
+
+    public Team Faction => Team.Crewmate;
+    public RoleOptionType? Alignment => RoleOptionType.Crewmate_Support;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

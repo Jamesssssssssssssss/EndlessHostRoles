@@ -8,7 +8,7 @@ using Math = System.Math;
 
 namespace EHR.Roles;
 
-public class Follower : RoleBase
+public class Follower : RoleBase, IStandardRole
 {
     private const int Id = 9800;
     public static List<byte> PlayerIdList = [];
@@ -24,6 +24,10 @@ public class Follower : RoleBase
     private int BetTimes;
 
     public override bool IsEnable => PlayerIdList.Count > 0;
+
+    public Team Faction => Team.Neutral;
+    public RoleOptionType? Alignment => RoleOptionType.Neutral_Benign;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

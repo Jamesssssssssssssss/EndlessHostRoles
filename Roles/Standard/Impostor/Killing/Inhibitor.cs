@@ -1,10 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using AmongUs.GameOptions;
 using static EHR.Options;
 
 namespace EHR.Roles;
 
-internal class Inhibitor : RoleBase
+internal class Inhibitor : RoleBase, IStandardRole
 {
     public static bool On;
     private byte InhibitorId;
@@ -13,6 +14,10 @@ internal class Inhibitor : RoleBase
     public static OptionItem InhibitorCD;
     public static OptionItem InhibitorCDAfterMeetings;
     public static OptionItem InhibitorSpeed;
+
+    public Team Faction => Team.Impostor;
+    public RoleOptionType? Alignment => RoleOptionType.Impostor_Killing;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

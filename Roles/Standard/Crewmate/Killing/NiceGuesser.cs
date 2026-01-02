@@ -1,11 +1,16 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 using static EHR.Options;
 
 namespace EHR.Roles;
 
-internal class NiceGuesser : RoleBase
+internal class NiceGuesser : RoleBase, IStandardRole
 {
     public override bool IsEnable => false;
+
+    public Team Faction => Team.Crewmate;
+    public RoleOptionType? Alignment => RoleOptionType.Crewmate_Killing;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

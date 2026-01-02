@@ -1,11 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using EHR.Modules;
 using Hazel;
 
 namespace EHR.Roles;
 
-public class Leery : RoleBase
+public class Leery : RoleBase, IStandardRole
 {
     public static bool On;
 
@@ -21,6 +22,10 @@ public class Leery : RoleBase
     private byte LeeryId;
 
     public override bool IsEnable => On;
+
+    public Team Faction => Team.Crewmate;
+    public RoleOptionType? Alignment => RoleOptionType.Crewmate_Investigate;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

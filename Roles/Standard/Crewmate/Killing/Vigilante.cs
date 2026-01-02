@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace EHR.Roles;
 
-public class Vigilante : RoleBase
+public class Vigilante : RoleBase, IStandardRole
 {
     private const int Id = 652300;
     private static List<byte> PlayerIdList = [];
@@ -16,6 +16,10 @@ public class Vigilante : RoleBase
     public static OptionItem UsePet;
 
     public override bool IsEnable => PlayerIdList.Count > 0;
+
+    public Team Faction => Team.Crewmate;
+    public RoleOptionType? Alignment => RoleOptionType.Crewmate_Killing;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

@@ -1,8 +1,9 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace EHR.Roles;
 
-public class Transmitter : RoleBase
+public class Transmitter : RoleBase, IStandardRole
 {
     public static bool On;
     public override bool IsEnable => On;
@@ -16,6 +17,10 @@ public class Transmitter : RoleBase
     {
         On = false;
     }
+
+    public Team Faction => Team.Crewmate;
+    public RoleOptionType? Alignment => RoleOptionType.Crewmate_Miscellaneous;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

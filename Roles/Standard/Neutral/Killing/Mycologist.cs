@@ -9,7 +9,7 @@ using static EHR.Utils;
 
 namespace EHR.Roles;
 
-internal class Mycologist : RoleBase
+internal class Mycologist : RoleBase, IStandardRole
 {
     private static readonly string[] SpreadMode =
     [
@@ -34,6 +34,10 @@ internal class Mycologist : RoleBase
     private PlayerControl MycologistPC => GetPlayerById(MycologistId);
 
     public override bool IsEnable => MycologistId != byte.MaxValue;
+
+    public Team Faction => Team.Neutral;
+    public RoleOptionType? Alignment => RoleOptionType.Neutral_Killing;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

@@ -6,7 +6,7 @@ using Hazel;
 
 namespace EHR.Roles;
 
-public class Catcher : RoleBase
+public class Catcher : RoleBase, IStandardRole
 {
     public static bool On;
 
@@ -24,6 +24,10 @@ public class Catcher : RoleBase
     private Dictionary<Vector2, CatcherTrap> Traps;
 
     public override bool IsEnable => On;
+
+    public Team Faction => Team.Crewmate;
+    public RoleOptionType? Alignment => RoleOptionType.Crewmate_Investigate;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

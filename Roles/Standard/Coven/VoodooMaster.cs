@@ -1,7 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 namespace EHR.Roles;
 
-public class VoodooMaster : CovenBase
+public class VoodooMaster : CovenBase, IStandardRole
 {
     public static bool On;
 
@@ -13,6 +14,10 @@ public class VoodooMaster : CovenBase
     protected override NecronomiconReceivePriorities NecronomiconReceivePriority => NecronomiconReceivePriorities.Random;
 
     public override bool IsEnable => On;
+
+    public Team Faction => Team.Coven;
+    public RoleOptionType? Alignment => RoleOptionType.Coven_Miscellaneous;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

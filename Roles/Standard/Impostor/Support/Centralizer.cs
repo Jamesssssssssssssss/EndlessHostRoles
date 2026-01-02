@@ -1,9 +1,10 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using AmongUs.GameOptions;
 
 namespace EHR.Roles;
 
-public class Centralizer : RoleBase
+public class Centralizer : RoleBase, IStandardRole
 {
     public static bool On;
 
@@ -15,6 +16,10 @@ public class Centralizer : RoleBase
     private static OptionItem AbilityUseGainWithEachKill;
 
     public Vector2? MarkedPosition;
+
+    public Team Faction => Team.Impostor;
+    public RoleOptionType? Alignment => RoleOptionType.Impostor_Support;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

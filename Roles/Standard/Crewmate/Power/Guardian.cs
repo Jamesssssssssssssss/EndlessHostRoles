@@ -1,6 +1,8 @@
-﻿namespace EHR.Roles;
+﻿using System.Collections.Generic;
 
-internal class Guardian : RoleBase
+namespace EHR.Roles;
+
+internal class Guardian : RoleBase, IStandardRole
 {
     public static bool On;
     public override bool IsEnable => On;
@@ -19,6 +21,10 @@ internal class Guardian : RoleBase
     {
         return !target.AllTasksCompleted();
     }
+
+    public Team Faction => Team.Crewmate;
+    public RoleOptionType? Alignment => RoleOptionType.Crewmate_Power;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

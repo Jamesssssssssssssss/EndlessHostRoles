@@ -8,7 +8,7 @@ using Hazel;
 
 namespace EHR.Roles;
 
-public class Dad : RoleBase
+public class Dad : RoleBase, IStandardRole
 {
     public enum Ability
     {
@@ -56,6 +56,10 @@ public class Dad : RoleBase
     public HashSet<Ability> UsingAbilities;
 
     public override bool IsEnable => On;
+
+    public Team Faction => Team.Crewmate;
+    public RoleOptionType? Alignment => RoleOptionType.Crewmate_Chaos;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

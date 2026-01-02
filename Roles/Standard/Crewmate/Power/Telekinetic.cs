@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using AmongUs.GameOptions;
 using EHR.Modules;
 using EHR.Patches;
@@ -6,7 +7,7 @@ using Hazel;
 
 namespace EHR.Roles;
 
-public class Telekinetic : RoleBase
+public class Telekinetic : RoleBase, IStandardRole
 {
     public static bool On;
 
@@ -21,6 +22,10 @@ public class Telekinetic : RoleBase
     private PlayerControl TelekineticPC;
     private int Timer;
     public override bool IsEnable => On;
+
+    public Team Faction => Team.Crewmate;
+    public RoleOptionType? Alignment => RoleOptionType.Crewmate_Power;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

@@ -7,7 +7,7 @@ using Hazel;
 
 namespace EHR.Roles;
 
-public class Thanos : RoleBase
+public class Thanos : RoleBase, IStandardRole
 {
     public static bool On;
     private static List<Thanos> Instances = [];
@@ -29,6 +29,10 @@ public class Thanos : RoleBase
     private bool MindStoneUsed;
     private List<byte> PlayersWithStones;
     private byte ThanosId;
+
+    public Team Faction => Team.Neutral;
+    public RoleOptionType? Alignment => RoleOptionType.Neutral_Killing;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

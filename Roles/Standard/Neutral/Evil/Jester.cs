@@ -1,9 +1,10 @@
-﻿using AmongUs.GameOptions;
+﻿using System.Collections.Generic;
+using AmongUs.GameOptions;
 using static EHR.Options;
 
 namespace EHR.Roles;
 
-internal class Jester : RoleBase
+internal class Jester : RoleBase, IStandardRole
 {
     public static bool On;
 
@@ -15,6 +16,10 @@ internal class Jester : RoleBase
     public static OptionItem MaxInVentTime;
     public static OptionItem BlockVentMovement;
     public override bool IsEnable => On;
+
+    public Team Faction => Team.Neutral;
+    public RoleOptionType? Alignment => RoleOptionType.Neutral_Evil;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

@@ -9,7 +9,7 @@ using static EHR.Options;
 
 namespace EHR.Roles;
 
-public class Silencer : RoleBase
+public class Silencer : RoleBase, IStandardRole
 {
     private const int Id = 643050;
     private static List<byte> PlayerIdList = [];
@@ -30,6 +30,10 @@ public class Silencer : RoleBase
     ];
 
     public override bool IsEnable => PlayerIdList.Count > 0;
+
+    public Team Faction => Team.Impostor;
+    public RoleOptionType? Alignment => RoleOptionType.Impostor_Support;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

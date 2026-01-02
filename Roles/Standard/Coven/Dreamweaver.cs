@@ -6,7 +6,7 @@ using Hazel;
 
 namespace EHR.Roles;
 
-public class Dreamweaver : CovenBase
+public class Dreamweaver : CovenBase, IStandardRole
 {
     public static bool On;
 
@@ -22,6 +22,10 @@ public class Dreamweaver : CovenBase
     protected override NecronomiconReceivePriorities NecronomiconReceivePriority => NecronomiconReceivePriorities.Random;
 
     public override bool IsEnable => On;
+
+    public Team Faction => Team.Coven;
+    public RoleOptionType? Alignment => RoleOptionType.Coven_Miscellaneous;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

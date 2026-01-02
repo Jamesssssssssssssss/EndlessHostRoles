@@ -1,10 +1,15 @@
-﻿using static EHR.Options;
+﻿using System.Collections.Generic;
+using static EHR.Options;
 
 namespace EHR.Roles;
 
-internal class Vindicator : RoleBase
+internal class Vindicator : RoleBase, IStandardRole
 {
     public override bool IsEnable => false;
+
+    public Team Faction => Team.Impostor;
+    public RoleOptionType? Alignment => RoleOptionType.Impostor_Support;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

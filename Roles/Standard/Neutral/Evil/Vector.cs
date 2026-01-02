@@ -9,7 +9,7 @@ using static EHR.Options;
 
 namespace EHR.Roles;
 
-internal class Vector : RoleBase
+internal class Vector : RoleBase, IStandardRole
 {
     public static Dictionary<byte, int> VectorVentCount = [];
 
@@ -21,6 +21,10 @@ internal class Vector : RoleBase
     private static int VectorVentNumWin;
     
     public override bool IsEnable => On;
+
+    public Team Faction => Team.Neutral;
+    public RoleOptionType? Alignment => RoleOptionType.Neutral_Evil;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

@@ -6,7 +6,7 @@ using Hazel;
 
 namespace EHR.Roles;
 
-public class NoteKiller : RoleBase
+public class NoteKiller : RoleBase, IStandardRole
 {
     public static bool On;
 
@@ -50,6 +50,10 @@ public class NoteKiller : RoleBase
     public static int NumKillsNeededToWin => NumPlayersToKill.GetInt();
 
     public override bool IsEnable => On;
+
+    public Team Faction => Team.Neutral;
+    public RoleOptionType? Alignment => RoleOptionType.Neutral_Killing;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace EHR.Roles;
 
-public class Oxyman : RoleBase
+public class Oxyman : RoleBase, IStandardRole
 {
     public static bool On;
 
@@ -21,6 +21,10 @@ public class Oxyman : RoleBase
     private byte OxymanId;
 
     public override bool IsEnable => On;
+
+    public Team Faction => Team.Crewmate;
+    public RoleOptionType? Alignment => RoleOptionType.Crewmate_Power;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

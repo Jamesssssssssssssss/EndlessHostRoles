@@ -1,8 +1,9 @@
-﻿using AmongUs.GameOptions;
+﻿using System.Collections.Generic;
+using AmongUs.GameOptions;
 
 namespace EHR.Roles;
 
-public class Carrier : RoleBase
+public class Carrier : RoleBase, IStandardRole
 {
     public static bool On;
 
@@ -16,6 +17,10 @@ public class Carrier : RoleBase
     private Vector2? Location;
     private bool TaskMode;
     private int Count;
+
+    public Team Faction => Team.Crewmate;
+    public RoleOptionType? Alignment => RoleOptionType.Crewmate_Miscellaneous;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

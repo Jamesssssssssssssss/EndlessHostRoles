@@ -7,7 +7,7 @@ using static EHR.Options;
 
 namespace EHR.Roles;
 
-public class Bandit : RoleBase
+public class Bandit : RoleBase, IStandardRole
 {
     private const int Id = 18420;
     public static bool On;
@@ -31,6 +31,10 @@ public class Bandit : RoleBase
     ];
 
     public override bool IsEnable => On;
+
+    public Team Faction => Team.Neutral;
+    public RoleOptionType? Alignment => RoleOptionType.Neutral_Killing;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace EHR.Roles;
 
-public class Psychopath : RoleBase
+public class Psychopath : RoleBase, IStandardRole
 {
     public static bool On;
 
@@ -14,6 +14,10 @@ public class Psychopath : RoleBase
     private static OptionItem KillCooldown;
 
     private int Count;
+
+    public Team Faction => Team.Impostor;
+    public RoleOptionType? Alignment => RoleOptionType.Impostor_Killing;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

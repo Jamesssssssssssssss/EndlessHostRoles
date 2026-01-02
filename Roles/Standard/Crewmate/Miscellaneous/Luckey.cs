@@ -1,9 +1,15 @@
-﻿namespace EHR.Roles;
+﻿using System.Collections.Generic;
 
-internal class Luckey : RoleBase
+namespace EHR.Roles;
+
+internal class Luckey : RoleBase, IStandardRole
 {
     public static bool On;
     public override bool IsEnable => On;
+
+    public Team Faction => Team.Crewmate;
+    public RoleOptionType? Alignment => RoleOptionType.Crewmate_Miscellaneous;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

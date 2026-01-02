@@ -6,7 +6,7 @@ using Hazel;
 
 namespace EHR.Roles;
 
-public class Auditor : RoleBase
+public class Auditor : RoleBase, IStandardRole
 {
     public static bool On;
     private static List<Auditor> Instances = [];
@@ -25,6 +25,10 @@ public class Auditor : RoleBase
     private HashSet<byte> RevealedPlayers = [];
 
     public override bool IsEnable => On;
+
+    public Team Faction => Team.Neutral;
+    public RoleOptionType? Alignment => RoleOptionType.Neutral_Pariah;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

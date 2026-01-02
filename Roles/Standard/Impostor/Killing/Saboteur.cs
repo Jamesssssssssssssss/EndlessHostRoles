@@ -4,11 +4,15 @@ using static EHR.Options;
 
 namespace EHR.Roles;
 
-internal class Saboteur : RoleBase
+internal class Saboteur : RoleBase, IStandardRole
 {
     public static bool On;
     private byte SaboteurId;
     public override bool IsEnable => On;
+
+    public Team Faction => Team.Impostor;
+    public RoleOptionType? Alignment => RoleOptionType.Impostor_Killing;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

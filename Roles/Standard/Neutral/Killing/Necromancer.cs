@@ -7,7 +7,7 @@ using static EHR.Translator;
 
 namespace EHR.Roles;
 
-internal class Necromancer : RoleBase
+internal class Necromancer : RoleBase, IStandardRole
 {
     private static byte NecromancerId = byte.MaxValue;
     private static PlayerControl NecromancerPC;
@@ -28,6 +28,10 @@ internal class Necromancer : RoleBase
     private static int Id => 643450;
 
     public override bool IsEnable => NecromancerId != byte.MaxValue;
+
+    public Team Faction => Team.Neutral;
+    public RoleOptionType? Alignment => RoleOptionType.Neutral_Killing;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {
@@ -170,12 +174,16 @@ internal class Necromancer : RoleBase
     }
 }
 
-internal class Deathknight : RoleBase
+internal class Deathknight : RoleBase, IStandardRole
 {
     public static byte DeathknightId = byte.MaxValue;
     public static PlayerControl DeathknightPC;
 
     public override bool IsEnable => DeathknightId != byte.MaxValue;
+
+    public Team Faction => Team.Neutral;
+    public RoleOptionType? Alignment => RoleOptionType.Neutral_Killing;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption() { }
 

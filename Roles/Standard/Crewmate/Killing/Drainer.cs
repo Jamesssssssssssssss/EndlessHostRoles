@@ -5,7 +5,7 @@ using static EHR.Options;
 
 namespace EHR.Roles;
 
-public class Drainer : RoleBase
+public class Drainer : RoleBase, IStandardRole
 {
     private const int Id = 642500;
     private static List<byte> PlayerIdList = [];
@@ -18,6 +18,10 @@ public class Drainer : RoleBase
     public static Dictionary<byte, int> PlayersInVents = [];
 
     public override bool IsEnable => PlayerIdList.Count > 0;
+
+    public Team Faction => Team.Crewmate;
+    public RoleOptionType? Alignment => RoleOptionType.Crewmate_Killing;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

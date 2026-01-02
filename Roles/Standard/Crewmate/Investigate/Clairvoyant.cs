@@ -4,12 +4,16 @@ using AmongUs.GameOptions;
 
 namespace EHR.Roles;
 
-public class Clairvoyant : RoleBase
+public class Clairvoyant : RoleBase, IStandardRole
 {
     public static bool On;
 
     public static readonly Dictionary<Options.GameStateInfo, OptionItem> Settings = [];
     public override bool IsEnable => On;
+
+    public Team Faction => Team.Crewmate;
+    public RoleOptionType? Alignment => RoleOptionType.Crewmate_Investigate;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

@@ -5,7 +5,7 @@ using static EHR.Options;
 
 namespace EHR.Roles;
 
-internal class Cleaner : RoleBase
+internal class Cleaner : RoleBase, IStandardRole
 {
     public static bool On;
     public static HashSet<byte> CleanerBodies = [];
@@ -23,6 +23,10 @@ internal class Cleaner : RoleBase
     private bool WasOnCooldown;
 
     public override bool IsEnable => On;
+
+    public Team Faction => Team.Impostor;
+    public RoleOptionType? Alignment => RoleOptionType.Impostor_Support;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

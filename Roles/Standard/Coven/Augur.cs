@@ -1,8 +1,9 @@
-﻿using AmongUs.GameOptions;
+﻿using System.Collections.Generic;
+using AmongUs.GameOptions;
 
 namespace EHR.Roles;
 
-public class Augur : CovenBase
+public class Augur : CovenBase, IStandardRole
 {
     public static bool On;
 
@@ -15,6 +16,10 @@ public class Augur : CovenBase
     protected override NecronomiconReceivePriorities NecronomiconReceivePriority => NecronomiconReceivePriorities.Never;
 
     public override bool IsEnable => On;
+
+    public Team Faction => Team.Coven;
+    public RoleOptionType? Alignment => RoleOptionType.Coven_Miscellaneous;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

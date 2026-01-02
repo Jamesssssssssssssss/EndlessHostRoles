@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace EHR.Roles;
 
-public class Infection : RoleBase
+public class Infection : RoleBase, IStandardRole
 {
     private const int Id = 641700;
     private static List<byte> PlayerIdList = [];
@@ -34,6 +34,10 @@ public class Infection : RoleBase
     private static bool LateCheckWin;
 
     public override bool IsEnable => PlayerIdList.Count > 0;
+
+    public Team Faction => Team.Neutral;
+    public RoleOptionType? Alignment => RoleOptionType.Neutral_Killing;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

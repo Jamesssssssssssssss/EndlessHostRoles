@@ -6,7 +6,7 @@ using static EHR.Translator;
 
 namespace EHR.Roles;
 
-internal class Analyst : RoleBase
+internal class Analyst : RoleBase, IStandardRole
 {
     private const int Id = 643100;
     private static byte PlayerId = byte.MaxValue;
@@ -25,6 +25,10 @@ internal class Analyst : RoleBase
     public (byte ID, long TIME) CurrentTarget = (byte.MaxValue, Utils.TimeStamp);
 
     public override bool IsEnable => PlayerId != byte.MaxValue;
+
+    public Team Faction => Team.Crewmate;
+    public RoleOptionType? Alignment => RoleOptionType.Crewmate_Investigate;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

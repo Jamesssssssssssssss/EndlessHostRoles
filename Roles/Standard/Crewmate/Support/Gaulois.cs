@@ -4,7 +4,7 @@ using static EHR.Options;
 
 namespace EHR.Roles;
 
-public class Gaulois : RoleBase
+public class Gaulois : RoleBase, IStandardRole
 {
     private const int Id = 643070;
     private static List<byte> PlayerIdList = [];
@@ -17,6 +17,10 @@ public class Gaulois : RoleBase
     public static List<byte> IncreasedSpeedPlayerList = [];
 
     public override bool IsEnable => PlayerIdList.Count > 0;
+
+    public Team Faction => Team.Crewmate;
+    public RoleOptionType? Alignment => RoleOptionType.Crewmate_Support;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

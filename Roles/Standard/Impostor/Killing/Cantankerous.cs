@@ -3,7 +3,7 @@ using static EHR.Options;
 
 namespace EHR.Roles;
 
-public class Cantankerous : RoleBase
+public class Cantankerous : RoleBase, IStandardRole
 {
     private const int Id = 642860;
     private static List<byte> PlayerIdList = [];
@@ -13,6 +13,10 @@ public class Cantankerous : RoleBase
     private static OptionItem KCD;
 
     public override bool IsEnable => PlayerIdList.Count > 0;
+
+    public Team Faction => Team.Impostor;
+    public RoleOptionType? Alignment => RoleOptionType.Impostor_Killing;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

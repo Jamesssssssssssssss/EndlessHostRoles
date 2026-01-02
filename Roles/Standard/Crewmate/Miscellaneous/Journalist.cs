@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace EHR.Roles;
 
-public class Journalist : RoleBase
+public class Journalist : RoleBase, IStandardRole
 {
     public static bool On;
     private byte JournalistId;
@@ -12,6 +12,10 @@ public class Journalist : RoleBase
     private bool Sent;
 
     public override bool IsEnable => On;
+
+    public Team Faction => Team.Crewmate;
+    public RoleOptionType? Alignment => RoleOptionType.Crewmate_Miscellaneous;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

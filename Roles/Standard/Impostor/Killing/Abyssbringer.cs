@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace EHR.Roles;
 
-public class Abyssbringer : RoleBase
+public class Abyssbringer : RoleBase, IStandardRole
 {
     public static bool On;
 
@@ -27,6 +27,10 @@ public class Abyssbringer : RoleBase
 
     public override bool IsEnable => On;
     public static bool ShouldDespawnCNOOnMeeting => (DespawnMode)BlackHoleDespawnMode.GetValue() == DespawnMode.AfterMeeting;
+
+    public Team Faction => Team.Impostor;
+    public RoleOptionType? Alignment => RoleOptionType.Impostor_Killing;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

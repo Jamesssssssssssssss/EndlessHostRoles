@@ -8,7 +8,7 @@ using Hazel;
 
 namespace EHR.Roles;
 
-public class Mechanic : RoleBase
+public class Mechanic : RoleBase, IStandardRole
 {
     private const int Id = 7000;
     private static List<byte> PlayerIdList = [];
@@ -34,6 +34,10 @@ public class Mechanic : RoleBase
     private int PetLimit;
 
     public override bool IsEnable => PlayerIdList.Count > 0;
+
+    public Team Faction => Team.Crewmate;
+    public RoleOptionType? Alignment => RoleOptionType.Crewmate_Support;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

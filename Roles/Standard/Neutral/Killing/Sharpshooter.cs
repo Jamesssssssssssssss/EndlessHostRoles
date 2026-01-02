@@ -1,10 +1,11 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using AmongUs.GameOptions;
 using UnityEngine;
 
 namespace EHR.Roles;
 
-public class Sharpshooter : RoleBase
+public class Sharpshooter : RoleBase, IStandardRole
 {
     public static bool On;
 
@@ -20,6 +21,10 @@ public class Sharpshooter : RoleBase
     private long AbilityEndTS;
     private Vector2 RealPosition;
     private byte SharpshooterId;
+
+    public Team Faction => Team.Neutral;
+    public RoleOptionType? Alignment => RoleOptionType.Neutral_Killing;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

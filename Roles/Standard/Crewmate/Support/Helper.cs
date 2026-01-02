@@ -1,14 +1,19 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using EHR.Modules;
 using Il2CppSystem;
 
 namespace EHR.Roles;
 
-public class Helper : RoleBase
+public class Helper : RoleBase, IStandardRole
 {
     public static bool On;
 
     public override bool IsEnable => On;
+
+    public Team Faction => Team.Crewmate;
+    public RoleOptionType? Alignment => RoleOptionType.Crewmate_Support;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

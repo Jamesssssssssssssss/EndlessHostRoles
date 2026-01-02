@@ -5,7 +5,7 @@ using Hazel;
 
 namespace EHR.Roles;
 
-public class Clerk : RoleBase
+public class Clerk : RoleBase, IStandardRole
 {
     public static bool On;
 
@@ -19,6 +19,10 @@ public class Clerk : RoleBase
 
     public static HashSet<byte> DidTaskThisRound = [];
     public static HashSet<byte> HasBoost = [];
+
+    public Team Faction => Team.Neutral;
+    public RoleOptionType? Alignment => RoleOptionType.Neutral_Pariah;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

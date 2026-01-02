@@ -6,7 +6,7 @@ using Hazel;
 
 namespace EHR.Roles;
 
-public class Spirit : RoleBase
+public class Spirit : RoleBase, IStandardRole
 {
     public static bool On;
     private static List<Spirit> Instances = [];
@@ -17,6 +17,10 @@ public class Spirit : RoleBase
     public (byte, byte) Targets;
 
     public override bool IsEnable => On;
+
+    public Team Faction => Team.Neutral;
+    public RoleOptionType? Alignment => RoleOptionType.Neutral_Pariah;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

@@ -4,7 +4,7 @@ using static EHR.Translator;
 
 namespace EHR.Roles;
 
-public class Gangster : RoleBase
+public class Gangster : RoleBase, IStandardRole
 {
     private const int Id = 2900;
     private static List<byte> PlayerIdList = [];
@@ -20,6 +20,10 @@ public class Gangster : RoleBase
     public static OptionItem PresidentCanBeMadmate;
 
     public override bool IsEnable => PlayerIdList.Count > 0;
+
+    public Team Faction => Team.Impostor;
+    public RoleOptionType? Alignment => RoleOptionType.Impostor_Support;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

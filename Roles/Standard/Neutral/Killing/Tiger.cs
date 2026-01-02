@@ -1,11 +1,12 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using AmongUs.GameOptions;
 using EHR.Modules;
 using UnityEngine;
 
 namespace EHR.Roles;
 
-internal class Tiger : RoleBase
+internal class Tiger : RoleBase, IStandardRole
 {
     private const int Id = 643500;
 
@@ -23,6 +24,10 @@ internal class Tiger : RoleBase
     public float EnrageTimer;
 
     public override bool IsEnable => On;
+
+    public Team Faction => Team.Neutral;
+    public RoleOptionType? Alignment => RoleOptionType.Neutral_Killing;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

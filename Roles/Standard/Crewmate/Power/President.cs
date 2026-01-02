@@ -14,7 +14,7 @@ internal static class DecreeExtension
     }
 }
 
-public class President : RoleBase
+public class President : RoleBase, IStandardRole
 {
     public enum Decree
     {
@@ -52,6 +52,10 @@ public class President : RoleBase
     public override bool IsEnable => On;
 
     public bool IsRevealed => UsedDecrees.Contains(Decree.Reveal);
+
+    public Team Faction => Team.Crewmate;
+    public RoleOptionType? Alignment => RoleOptionType.Crewmate_Power;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

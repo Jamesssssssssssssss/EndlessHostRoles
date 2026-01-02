@@ -1,4 +1,5 @@
-﻿using AmongUs.GameOptions;
+﻿using System.Collections.Generic;
+using AmongUs.GameOptions;
 using EHR.Modules;
 using Hazel;
 using static EHR.Options;
@@ -6,7 +7,7 @@ using static EHR.Utils;
 
 namespace EHR.Roles;
 
-internal class Hookshot : RoleBase
+internal class Hookshot : RoleBase, IStandardRole
 {
     private static OptionItem KillCooldown;
     private static OptionItem HasImpostorVision;
@@ -21,6 +22,10 @@ internal class Hookshot : RoleBase
     private PlayerControl HookshotPC => GetPlayerById(HookshotId);
 
     public override bool IsEnable => HookshotId != byte.MaxValue;
+
+    public Team Faction => Team.Neutral;
+    public RoleOptionType? Alignment => RoleOptionType.Neutral_Killing;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

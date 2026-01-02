@@ -7,7 +7,7 @@ using Hazel;
 
 namespace EHR.Roles;
 
-public class Amogus : RoleBase
+public class Amogus : RoleBase, IStandardRole
 {
     public static bool On;
     private static List<Amogus> Instances = [];
@@ -30,6 +30,10 @@ public class Amogus : RoleBase
     public override bool IsEnable => On;
 
     public override bool SeesArrowsToDeadBodies => CurrentLevel >= Levels.SuspiciousSus && SuspiciousSusArrowsToBodies.GetBool() && AmogusFormEndTS != 0;
+
+    public Team Faction => Team.Neutral;
+    public RoleOptionType? Alignment => RoleOptionType.Neutral_Killing;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

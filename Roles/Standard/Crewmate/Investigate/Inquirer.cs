@@ -1,6 +1,8 @@
-﻿namespace EHR.Roles;
+﻿using System.Collections.Generic;
 
-public class Inquirer : RoleBase
+namespace EHR.Roles;
+
+public class Inquirer : RoleBase, IStandardRole
 {
     public static OptionItem FailChance;
     private static OptionItem AbilityUseLimit;
@@ -8,6 +10,10 @@ public class Inquirer : RoleBase
     private static OptionItem AbilityChargesWhenFinishedTasks;
 
     public override bool IsEnable => false;
+
+    public Team Faction => Team.Crewmate;
+    public RoleOptionType? Alignment => RoleOptionType.Crewmate_Investigate;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

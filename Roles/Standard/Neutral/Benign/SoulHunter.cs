@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using AmongUs.GameOptions;
 using EHR.Modules;
@@ -9,7 +10,7 @@ using static EHR.Utils;
 
 namespace EHR.Roles;
 
-internal class SoulHunter : RoleBase
+internal class SoulHunter : RoleBase, IStandardRole
 {
     public static OptionItem CanVent;
     private static OptionItem HasImpostorVision;
@@ -29,6 +30,10 @@ internal class SoulHunter : RoleBase
     public override bool IsEnable => SoulHunterId != byte.MaxValue;
 
     private bool IsTargetBlocked => IsEnable && CurrentTarget.ID != byte.MaxValue && CurrentTarget.StartTimeStamp != 0;
+
+    public Team Faction => Team.Neutral;
+    public RoleOptionType? Alignment => RoleOptionType.Neutral_Benign;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

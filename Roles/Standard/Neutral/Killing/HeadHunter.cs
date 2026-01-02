@@ -8,7 +8,7 @@ using static EHR.Options;
 
 namespace EHR.Roles;
 
-public class HeadHunter : RoleBase
+public class HeadHunter : RoleBase, IStandardRole
 {
     private const int Id = 12870;
     public static List<byte> PlayerIdList = [];
@@ -27,6 +27,10 @@ public class HeadHunter : RoleBase
     public List<byte> Targets = [];
 
     public override bool IsEnable => PlayerIdList.Count > 0;
+
+    public Team Faction => Team.Neutral;
+    public RoleOptionType? Alignment => RoleOptionType.Neutral_Killing;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

@@ -1,15 +1,20 @@
 ﻿using System;
+using System.Collections.Generic;
 using EHR.Modules;
 
 namespace EHR.Roles;
 
-internal class Mathematician : RoleBase
+internal class Mathematician : RoleBase, IStandardRole
 {
     public static (bool AskedQuestion, int Answer, byte ProtectedPlayerId, byte MathematicianPlayerId) State = (false, int.MaxValue, byte.MaxValue, byte.MaxValue);
     public static bool On;
     private static int Id => 643370;
 
     public override bool IsEnable => On;
+
+    public Team Faction => Team.Crewmate;
+    public RoleOptionType? Alignment => RoleOptionType.Crewmate_Support;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

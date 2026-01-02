@@ -1,8 +1,9 @@
+using System.Collections.Generic;
 using static EHR.Options;
 
 namespace EHR.Roles;
 
-public class BloodKnight : RoleBase
+public class BloodKnight : RoleBase, IStandardRole
 {
     private const int Id = 11800;
 
@@ -12,6 +13,10 @@ public class BloodKnight : RoleBase
     public static OptionItem ProtectDuration;
 
     public override bool IsEnable => false;
+
+    public Team Faction => Team.Neutral;
+    public RoleOptionType? Alignment => RoleOptionType.Neutral_Killing;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

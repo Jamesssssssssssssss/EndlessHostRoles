@@ -1,6 +1,8 @@
-﻿namespace EHR.Roles;
+﻿using System.Collections.Generic;
 
-public class Nightmare : RoleBase
+namespace EHR.Roles;
+
+public class Nightmare : RoleBase, IStandardRole
 {
     public static bool On;
     public override bool IsEnable => On;
@@ -14,6 +16,10 @@ public class Nightmare : RoleBase
     {
         On = false;
     }
+
+    public Team Faction => Team.Crewmate;
+    public RoleOptionType? Alignment => RoleOptionType.Crewmate_Miscellaneous;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

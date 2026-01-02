@@ -5,7 +5,7 @@ using AmongUs.GameOptions;
 
 namespace EHR.Roles;
 
-public class MoonDancer : CovenBase
+public class MoonDancer : CovenBase, IStandardRole
 {
     public static bool On;
 
@@ -23,6 +23,10 @@ public class MoonDancer : CovenBase
     protected override NecronomiconReceivePriorities NecronomiconReceivePriority => NecronomiconReceivePriorities.Random;
 
     private Dictionary<byte, List<CustomRoles>> ToAssign = [];
+
+    public Team Faction => Team.Coven;
+    public RoleOptionType? Alignment => RoleOptionType.Coven_Miscellaneous;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

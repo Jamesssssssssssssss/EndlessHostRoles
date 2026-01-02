@@ -5,7 +5,7 @@ using EHR.Modules;
 
 namespace EHR.Roles;
 
-internal class Perceiver : RoleBase
+internal class Perceiver : RoleBase, IStandardRole
 {
     private static OptionItem Radius;
     public static OptionItem CD;
@@ -17,6 +17,10 @@ internal class Perceiver : RoleBase
     private static int Id => 643360;
 
     public override bool IsEnable => On;
+
+    public Team Faction => Team.Crewmate;
+    public RoleOptionType? Alignment => RoleOptionType.Crewmate_Investigate;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

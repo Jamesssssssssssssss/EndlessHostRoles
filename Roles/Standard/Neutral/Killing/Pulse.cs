@@ -1,6 +1,8 @@
-﻿namespace EHR.Roles;
+﻿using System.Collections.Generic;
 
-public class Pulse : RoleBase
+namespace EHR.Roles;
+
+public class Pulse : RoleBase, IStandardRole
 {
     private const int Id = 11950;
 
@@ -11,6 +13,10 @@ public class Pulse : RoleBase
     public static OptionItem HasImpostorVision;
 
     public override bool IsEnable => false;
+
+    public Team Faction => Team.Neutral;
+    public RoleOptionType? Alignment => RoleOptionType.Neutral_Killing;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

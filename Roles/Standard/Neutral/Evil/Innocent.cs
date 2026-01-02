@@ -1,11 +1,16 @@
-﻿using AmongUs.GameOptions;
+﻿using System.Collections.Generic;
+using AmongUs.GameOptions;
 
 namespace EHR.Roles;
 
-internal class Innocent : RoleBase
+internal class Innocent : RoleBase, IStandardRole
 {
     public static bool On;
     public override bool IsEnable => On;
+
+    public Team Faction => Team.Neutral;
+    public RoleOptionType? Alignment => RoleOptionType.Neutral_Evil;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

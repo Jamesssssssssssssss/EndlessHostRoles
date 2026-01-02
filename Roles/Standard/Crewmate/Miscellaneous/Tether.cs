@@ -7,7 +7,7 @@ namespace EHR.Roles;
 
 using static Options;
 
-public class Tether : RoleBase
+public class Tether : RoleBase, IStandardRole
 {
     private const int Id = 640300;
     public static List<byte> PlayerIdList = [];
@@ -22,6 +22,10 @@ public class Tether : RoleBase
     private byte TetherId;
 
     public override bool IsEnable => PlayerIdList.Count > 0;
+
+    public Team Faction => Team.Crewmate;
+    public RoleOptionType? Alignment => RoleOptionType.Crewmate_Miscellaneous;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

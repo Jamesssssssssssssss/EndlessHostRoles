@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using AmongUs.GameOptions;
 using EHR.Modules;
 using Hazel;
@@ -6,7 +7,7 @@ using UnityEngine;
 
 namespace EHR.Roles;
 
-public class Astral : RoleBase
+public class Astral : RoleBase, IStandardRole
 {
     public static bool On;
 
@@ -21,6 +22,10 @@ public class Astral : RoleBase
     private long LastNotifyTS;
 
     public override bool IsEnable => On;
+
+    public Team Faction => Team.Crewmate;
+    public RoleOptionType? Alignment => RoleOptionType.Crewmate_Power;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

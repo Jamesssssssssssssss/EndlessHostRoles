@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace EHR.Roles;
 
-public class Romantic : RoleBase
+public class Romantic : RoleBase, IStandardRole
 {
     private const int Id = 9850;
 
@@ -45,6 +45,10 @@ public class Romantic : RoleBase
     public static bool HasPickedPartner => PartnerId != byte.MaxValue;
 
     public override bool IsEnable => RomanticId != byte.MaxValue;
+
+    public Team Faction => Team.Neutral;
+    public RoleOptionType? Alignment => RoleOptionType.Neutral_Benign;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {
@@ -337,7 +341,7 @@ public class Romantic : RoleBase
     }
 }
 
-public class VengefulRomantic : RoleBase
+public class VengefulRomantic : RoleBase, IStandardRole
 {
     private static byte VengefulRomanticId = byte.MaxValue;
 
@@ -345,6 +349,10 @@ public class VengefulRomantic : RoleBase
     public static byte Target = byte.MaxValue;
 
     public override bool IsEnable => VengefulRomanticId != byte.MaxValue;
+
+    public Team Faction => Team.Neutral;
+    public RoleOptionType? Alignment => RoleOptionType.Neutral_Benign;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption() { }
 
@@ -422,11 +430,15 @@ public class VengefulRomantic : RoleBase
     }
 }
 
-public class RuthlessRomantic : RoleBase
+public class RuthlessRomantic : RoleBase, IStandardRole
 {
     public static List<byte> PlayerIdList = [];
 
     public override bool IsEnable => PlayerIdList.Count > 0;
+
+    public Team Faction => Team.Neutral;
+    public RoleOptionType? Alignment => RoleOptionType.Neutral_Benign;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption() { }
 

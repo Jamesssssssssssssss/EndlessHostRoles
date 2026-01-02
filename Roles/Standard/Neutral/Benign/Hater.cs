@@ -1,10 +1,11 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using AmongUs.GameOptions;
 using static EHR.Options;
 
 namespace EHR.Roles;
 
-public class Hater : RoleBase
+public class Hater : RoleBase, IStandardRole
 {
     private const int Id = 11300;
     private static bool On;
@@ -38,6 +39,10 @@ public class Hater : RoleBase
     public bool IsWon;
 
     public override bool IsEnable => On;
+
+    public Team Faction => Team.Neutral;
+    public RoleOptionType? Alignment => RoleOptionType.Neutral_Benign;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

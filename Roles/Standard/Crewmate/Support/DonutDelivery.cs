@@ -7,7 +7,7 @@ using static EHR.Translator;
 
 namespace EHR.Roles;
 
-public class DonutDelivery : RoleBase
+public class DonutDelivery : RoleBase, IStandardRole
 {
     private const int Id = 642700;
     private static List<DonutDelivery> Instances = [];
@@ -27,6 +27,10 @@ public class DonutDelivery : RoleBase
     private HashSet<byte> Players = [];
 
     public override bool IsEnable => Instances.Count > 0;
+
+    public Team Faction => Team.Crewmate;
+    public RoleOptionType? Alignment => RoleOptionType.Crewmate_Support;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

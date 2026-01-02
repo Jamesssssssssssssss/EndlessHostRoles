@@ -7,7 +7,7 @@ using static EHR.Options;
 
 namespace EHR.Roles;
 
-public class Tracefinder : RoleBase
+public class Tracefinder : RoleBase, IStandardRole
 {
     private const int Id = 6100;
     private static List<byte> PlayerIdList = [];
@@ -20,6 +20,10 @@ public class Tracefinder : RoleBase
     private byte TracefinderId;
 
     public override bool IsEnable => PlayerIdList.Count > 0;
+
+    public Team Faction => Team.Crewmate;
+    public RoleOptionType? Alignment => RoleOptionType.Crewmate_Miscellaneous;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

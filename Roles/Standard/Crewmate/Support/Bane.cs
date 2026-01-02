@@ -1,6 +1,8 @@
-﻿namespace EHR.Roles;
+﻿using System.Collections.Generic;
 
-public class Bane : RoleBase
+namespace EHR.Roles;
+
+public class Bane : RoleBase, IStandardRole
 {
     public static bool On;
     public override bool IsEnable => On;
@@ -14,6 +16,10 @@ public class Bane : RoleBase
     {
         On = true;
     }
+
+    public Team Faction => Team.Crewmate;
+    public RoleOptionType? Alignment => RoleOptionType.Crewmate_Support;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

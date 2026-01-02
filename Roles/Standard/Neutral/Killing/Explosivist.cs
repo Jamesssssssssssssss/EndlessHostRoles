@@ -1,9 +1,10 @@
-﻿using AmongUs.GameOptions;
+﻿using System.Collections.Generic;
+using AmongUs.GameOptions;
 using Hazel;
 
 namespace EHR.Roles;
 
-public class Explosivist : RoleBase
+public class Explosivist : RoleBase, IStandardRole
 {
     public static bool On;
 
@@ -18,6 +19,10 @@ public class Explosivist : RoleBase
     private Vector2 RealPosition;
     private long ExplodeTS;
     private byte ExplosivistId;
+
+    public Team Faction => Team.Neutral;
+    public RoleOptionType? Alignment => RoleOptionType.Neutral_Killing;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

@@ -8,7 +8,7 @@ using static EHR.Utils;
 
 namespace EHR.Roles;
 
-public class Librarian : RoleBase
+public class Librarian : RoleBase, IStandardRole
 {
     private const int Id = 643150;
     private static List<byte> PlayerIdList = [];
@@ -25,6 +25,10 @@ public class Librarian : RoleBase
     private (bool SILENCING, long LAST_CHANGE) IsInSilencingMode = (false, 0);
 
     public override bool IsEnable => PlayerIdList.Count > 0;
+
+    public Team Faction => Team.Impostor;
+    public RoleOptionType? Alignment => RoleOptionType.Impostor_Support;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

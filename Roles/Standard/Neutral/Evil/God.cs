@@ -1,8 +1,9 @@
-﻿using static EHR.Options;
+﻿using System.Collections.Generic;
+using static EHR.Options;
 
 namespace EHR.Roles;
 
-internal class God : RoleBase
+internal class God : RoleBase, IStandardRole
 {
     public static OptionItem NotifyGodAlive;
     public static OptionItem GodCanGuess;
@@ -16,6 +17,10 @@ internal class God : RoleBase
     ];
 
     public override bool IsEnable => false;
+
+    public Team Faction => Team.Neutral;
+    public RoleOptionType? Alignment => RoleOptionType.Neutral_Evil;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

@@ -5,7 +5,7 @@ using static EHR.Options;
 
 namespace EHR.Roles;
 
-internal class Bodyguard : RoleBase
+internal class Bodyguard : RoleBase, IStandardRole
 {
     public static bool On;
     private static List<Bodyguard> Instances = [];
@@ -29,6 +29,10 @@ internal class Bodyguard : RoleBase
     {
         Instances.Remove(this);
     }
+
+    public Team Faction => Team.Crewmate;
+    public RoleOptionType? Alignment => RoleOptionType.Crewmate_Support;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace EHR.Roles;
 
-public class Berserker : RoleBase
+public class Berserker : RoleBase, IStandardRole
 {
     public static bool On;
     private static List<Berserker> Instances = [];
@@ -20,6 +20,10 @@ public class Berserker : RoleBase
 
     private byte BerserkerId;
     public int Form;
+
+    public Team Faction => Team.Neutral;
+    public RoleOptionType? Alignment => RoleOptionType.Neutral_Killing;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

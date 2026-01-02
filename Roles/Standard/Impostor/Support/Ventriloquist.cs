@@ -1,12 +1,13 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
-﻿using EHR.Modules;
+using EHR.Modules;
 using Hazel;
 using UnityEngine;
 
 namespace EHR.Roles;
 
-public class Ventriloquist : RoleBase
+public class Ventriloquist : RoleBase, IStandardRole
 {
     public static bool On;
 
@@ -15,6 +16,10 @@ public class Ventriloquist : RoleBase
 
     public byte Target;
     public override bool IsEnable => On;
+
+    public Team Faction => Team.Impostor;
+    public RoleOptionType? Alignment => RoleOptionType.Impostor_Support;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

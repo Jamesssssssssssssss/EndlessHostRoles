@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace EHR.Roles;
 
-internal class Blackmailer : RoleBase
+internal class Blackmailer : RoleBase, IStandardRole
 {
     public static bool On;
 
@@ -17,6 +17,10 @@ internal class Blackmailer : RoleBase
     public List<byte> BlackmailedPlayerIds;
     private int NumBlackmailedThisRound;
     public override bool IsEnable => On;
+
+    public Team Faction => Team.Impostor;
+    public RoleOptionType? Alignment => RoleOptionType.Impostor_Support;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

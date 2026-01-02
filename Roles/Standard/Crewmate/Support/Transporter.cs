@@ -5,7 +5,7 @@ using EHR.Modules;
 
 namespace EHR.Roles;
 
-internal class Transporter : RoleBase
+internal class Transporter : RoleBase, IStandardRole
 {
     public static bool On;
     public override bool IsEnable => On;
@@ -13,6 +13,10 @@ internal class Transporter : RoleBase
     public static Dictionary<byte, byte> FirstSwapTarget = [];
 
     private static OptionItem AbilityCooldown;
+
+    public Team Faction => Team.Crewmate;
+    public RoleOptionType? Alignment => RoleOptionType.Crewmate_Support;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

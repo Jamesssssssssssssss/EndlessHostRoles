@@ -8,7 +8,7 @@ using static EHR.Translator;
 
 namespace EHR.Roles;
 
-public class Swapper : RoleBase
+public class Swapper : RoleBase, IStandardRole
 {
     private const int Id = 642680;
 
@@ -26,6 +26,10 @@ public class Swapper : RoleBase
     public static bool On => SwapperId != byte.MaxValue;
 
     private ShapeshiftMenuElement CNO;
+
+    public Team Faction => Team.Crewmate;
+    public RoleOptionType? Alignment => RoleOptionType.Crewmate_Power;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

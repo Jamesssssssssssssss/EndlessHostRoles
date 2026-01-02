@@ -6,7 +6,7 @@ using Hazel;
 
 namespace EHR.Roles;
 
-public class Collector : RoleBase
+public class Collector : RoleBase, IStandardRole
 {
     private const int Id = 11100;
     public static OptionItem CollectorCollectAmount;
@@ -15,6 +15,10 @@ public class Collector : RoleBase
     public static Dictionary<byte, int> CollectVote = [];
 
     public override bool IsEnable => PlayerIdList.Count > 0;
+
+    public Team Faction => Team.Neutral;
+    public RoleOptionType? Alignment => RoleOptionType.Neutral_Evil;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

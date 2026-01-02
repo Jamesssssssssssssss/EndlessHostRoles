@@ -5,7 +5,7 @@ using Hazel;
 
 namespace EHR.Roles;
 
-internal class Visionary : RoleBase
+internal class Visionary : RoleBase, IStandardRole
 {
     public static bool On;
 
@@ -16,6 +16,10 @@ internal class Visionary : RoleBase
 
     public List<byte> RevealedPlayerIds = [];
     public override bool IsEnable => On;
+
+    public Team Faction => Team.Impostor;
+    public RoleOptionType? Alignment => RoleOptionType.Impostor_Miscellaneous;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

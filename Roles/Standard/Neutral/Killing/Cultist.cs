@@ -8,7 +8,7 @@ using static EHR.Translator;
 
 namespace EHR.Roles;
 
-public class Cultist : RoleBase
+public class Cultist : RoleBase, IStandardRole
 {
     private const int Id = 11200;
     private static List<byte> PlayerIdList = [];
@@ -30,6 +30,10 @@ public class Cultist : RoleBase
     ];
 
     public override bool IsEnable => PlayerIdList.Count > 0;
+
+    public Team Faction => Team.Neutral;
+    public RoleOptionType? Alignment => RoleOptionType.Neutral_Killing;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

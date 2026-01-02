@@ -2,11 +2,15 @@
 
 namespace EHR.Roles;
 
-internal class Tunneler : RoleBase
+internal class Tunneler : RoleBase, IStandardRole
 {
     public static Dictionary<byte, Vector2> TunnelerPositions = [];
     public static bool On;
     public override bool IsEnable => On;
+
+    public Team Faction => Team.Crewmate;
+    public RoleOptionType? Alignment => RoleOptionType.Crewmate_Miscellaneous;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

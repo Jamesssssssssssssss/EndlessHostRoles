@@ -7,7 +7,7 @@ using EHR.Modules;
 
 namespace EHR.Roles;
 
-public class Altruist : RoleBase
+public class Altruist : RoleBase, IStandardRole
 {
     public static bool On;
 
@@ -27,6 +27,10 @@ public class Altruist : RoleBase
     private bool RevivingMode;
 
     public override bool IsEnable => On;
+
+    public Team Faction => Team.Crewmate;
+    public RoleOptionType? Alignment => RoleOptionType.Crewmate_Support;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

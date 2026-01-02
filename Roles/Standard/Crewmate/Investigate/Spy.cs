@@ -7,7 +7,7 @@ namespace EHR.Roles;
 using static Options;
 using static Utils;
 
-public class Spy : RoleBase
+public class Spy : RoleBase, IStandardRole
 {
     private const int Id = 640400;
     private static List<byte> PlayerIdList = [];
@@ -21,6 +21,10 @@ public class Spy : RoleBase
     private long LastUpdate;
 
     public override bool IsEnable => PlayerIdList.Count > 0;
+
+    public Team Faction => Team.Crewmate;
+    public RoleOptionType? Alignment => RoleOptionType.Crewmate_Investigate;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

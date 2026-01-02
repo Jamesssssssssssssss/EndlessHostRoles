@@ -4,7 +4,7 @@ using static EHR.Translator;
 
 namespace EHR.Roles;
 
-internal class NiceEraser : RoleBase
+internal class NiceEraser : RoleBase, IStandardRole
 {
     private const int Id = 5580;
     public static List<byte> PlayerIdList = [];
@@ -20,6 +20,10 @@ internal class NiceEraser : RoleBase
     public static List<byte> ErasedPlayers = [];
 
     public override bool IsEnable => PlayerIdList.Count > 0;
+
+    public Team Faction => Team.Crewmate;
+    public RoleOptionType? Alignment => RoleOptionType.Crewmate_Power;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

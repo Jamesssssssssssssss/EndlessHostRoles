@@ -1,8 +1,9 @@
+using System.Collections.Generic;
 using static EHR.Options;
 
 namespace EHR.Roles;
 
-public class Jinx : RoleBase
+public class Jinx : RoleBase, IStandardRole
 {
     private const int Id = 12200;
 
@@ -13,6 +14,10 @@ public class Jinx : RoleBase
     public static OptionItem KillAttacker;
 
     public override bool IsEnable => false;
+
+    public Team Faction => Team.Neutral;
+    public RoleOptionType? Alignment => RoleOptionType.Neutral_Killing;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

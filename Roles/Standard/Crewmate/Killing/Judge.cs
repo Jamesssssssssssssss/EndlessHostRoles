@@ -9,7 +9,7 @@ using static EHR.Translator;
 
 namespace EHR.Roles;
 
-public class Judge : RoleBase
+public class Judge : RoleBase, IStandardRole
 {
     private const int Id = 9300;
     private static List<byte> PlayerIdList = [];
@@ -32,6 +32,10 @@ public class Judge : RoleBase
     private static Dictionary<byte, int> TotalUseLimit = [];
 
     public override bool IsEnable => PlayerIdList.Count > 0;
+
+    public Team Faction => Team.Crewmate;
+    public RoleOptionType? Alignment => RoleOptionType.Crewmate_Killing;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

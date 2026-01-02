@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace EHR.Roles;
 
-public class TimeThief : RoleBase
+public class TimeThief : RoleBase, IStandardRole
 {
     private const int Id = 3300;
     public static List<byte> PlayerIdList = [];
@@ -13,6 +13,10 @@ public class TimeThief : RoleBase
     public static OptionItem ReturnStolenTimeUponDeath;
 
     public override bool IsEnable => PlayerIdList.Count > 0;
+
+    public Team Faction => Team.Impostor;
+    public RoleOptionType? Alignment => RoleOptionType.Impostor_Support;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

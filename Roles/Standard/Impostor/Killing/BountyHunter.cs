@@ -7,7 +7,7 @@ using static EHR.Translator;
 
 namespace EHR.Roles;
 
-public class BountyHunter : RoleBase
+public class BountyHunter : RoleBase, IStandardRole
 {
     private const int Id = 800;
     private static List<byte> PlayerIdList = [];
@@ -28,6 +28,10 @@ public class BountyHunter : RoleBase
     private int Timer;
 
     public override bool IsEnable => PlayerIdList.Count > 0;
+
+    public Team Faction => Team.Impostor;
+    public RoleOptionType? Alignment => RoleOptionType.Impostor_Killing;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

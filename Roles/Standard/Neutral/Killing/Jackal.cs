@@ -9,7 +9,7 @@ using static EHR.Translator;
 
 namespace EHR.Roles;
 
-public class Jackal : RoleBase
+public class Jackal : RoleBase, IStandardRole
 {
     private const int Id = 12100;
     public static List<Jackal> Instances = [];
@@ -35,6 +35,10 @@ public class Jackal : RoleBase
     public byte SidekickId;
 
     public override bool IsEnable => Instances.Count > 0;
+
+    public Team Faction => Team.Neutral;
+    public RoleOptionType? Alignment => RoleOptionType.Neutral_Killing;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {
@@ -220,11 +224,15 @@ public class Jackal : RoleBase
     }
 }
 
-public class Sidekick : RoleBase
+public class Sidekick : RoleBase, IStandardRole
 {
     private static List<byte> PlayerIdList = [];
 
     public override bool IsEnable => PlayerIdList.Count > 0;
+
+    public Team Faction => Team.Neutral;
+    public RoleOptionType? Alignment => RoleOptionType.Neutral_Killing;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption() { }
 

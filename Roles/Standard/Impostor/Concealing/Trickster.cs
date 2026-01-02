@@ -1,8 +1,14 @@
-﻿namespace EHR.Roles;
+﻿using System.Collections.Generic;
 
-internal class Trickster : RoleBase
+namespace EHR.Roles;
+
+internal class Trickster : RoleBase, IStandardRole
 {
     public override bool IsEnable => false;
+
+    public Team Faction => Team.Impostor;
+    public RoleOptionType? Alignment => RoleOptionType.Impostor_Concealing;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

@@ -1,10 +1,11 @@
-﻿using AmongUs.GameOptions;
+﻿using System.Collections.Generic;
+using AmongUs.GameOptions;
 using EHR.Modules;
 using Hazel;
 
 namespace EHR.Roles;
 
-public class Goddess : CovenBase
+public class Goddess : CovenBase, IStandardRole
 {
     public static bool On;
 
@@ -21,6 +22,10 @@ public class Goddess : CovenBase
     protected override NecronomiconReceivePriorities NecronomiconReceivePriority => NecronomiconReceivePriorities.Random;
 
     public override bool IsEnable => On;
+
+    public Team Faction => Team.Coven;
+    public RoleOptionType? Alignment => RoleOptionType.Coven_Miscellaneous;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

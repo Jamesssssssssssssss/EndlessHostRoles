@@ -1,9 +1,15 @@
-﻿namespace EHR.Roles;
+﻿using System.Collections.Generic;
 
-internal class Detour : RoleBase
+namespace EHR.Roles;
+
+internal class Detour : RoleBase, IStandardRole
 {
     public static int TotalRedirections;
     public override bool IsEnable => false;
+
+    public Team Faction => Team.Crewmate;
+    public RoleOptionType? Alignment => RoleOptionType.Crewmate_Power;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

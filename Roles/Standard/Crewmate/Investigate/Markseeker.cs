@@ -2,7 +2,7 @@
 
 namespace EHR.Roles;
 
-internal class Markseeker : RoleBase
+internal class Markseeker : RoleBase, IStandardRole
 {
     private const int Id = 643550;
     public static List<byte> PlayerIdList = [];
@@ -12,6 +12,10 @@ internal class Markseeker : RoleBase
     public byte MarkedId;
     public bool TargetRevealed;
     public override bool IsEnable => On;
+
+    public Team Faction => Team.Crewmate;
+    public RoleOptionType? Alignment => RoleOptionType.Crewmate_Investigate;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

@@ -9,7 +9,7 @@ using static EHR.Utils;
 
 namespace EHR.Roles;
 
-public class Druid : RoleBase
+public class Druid : RoleBase, IStandardRole
 {
     private const int Id = 642800;
     private static List<byte> PlayerIdList = [];
@@ -27,6 +27,10 @@ public class Druid : RoleBase
     private Dictionary<Vector2, string> Triggers = [];
 
     public override bool IsEnable => PlayerIdList.Count > 0;
+
+    public Team Faction => Team.Crewmate;
+    public RoleOptionType? Alignment => RoleOptionType.Crewmate_Investigate;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

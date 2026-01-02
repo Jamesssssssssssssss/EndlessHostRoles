@@ -1,8 +1,10 @@
+using System.Collections.Generic;
+
 using static EHR.Options;
 
 namespace EHR.Roles;
 
-public class Ritualist : RoleBase
+public class Ritualist : RoleBase, IStandardRole
 {
     private const int Id = 13000;
 
@@ -12,6 +14,10 @@ public class Ritualist : RoleBase
     public static OptionItem HasImpostorVision;
 
     public override bool IsEnable => false;
+
+    public Team Faction => Team.Neutral;
+    public RoleOptionType? Alignment => RoleOptionType.Neutral_Killing;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

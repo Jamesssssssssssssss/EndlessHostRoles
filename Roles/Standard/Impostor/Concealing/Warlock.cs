@@ -8,7 +8,7 @@ using static EHR.Options;
 
 namespace EHR.Roles;
 
-internal class Warlock : RoleBase
+internal class Warlock : RoleBase, IStandardRole
 {
     public static bool On;
 
@@ -29,6 +29,10 @@ internal class Warlock : RoleBase
     private float KCD;
     private long LastNotify;
     public override bool IsEnable => On;
+
+    public Team Faction => Team.Impostor;
+    public RoleOptionType? Alignment => RoleOptionType.Impostor_Concealing;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

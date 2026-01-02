@@ -6,7 +6,7 @@ using Hazel;
 namespace EHR.Roles;
 
 // Credit: https://github.com/Yumenopai/TownOfHost_Y
-public class Stalker : RoleBase
+public class Stalker : RoleBase, IStandardRole
 {
     private const int Id = 12900;
     private static List<byte> PlayerIdList = [];
@@ -21,6 +21,10 @@ public class Stalker : RoleBase
     public bool IsWinKill;
 
     public override bool IsEnable => PlayerIdList.Count > 0;
+
+    public Team Faction => Team.Neutral;
+    public RoleOptionType? Alignment => RoleOptionType.Neutral_Killing;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

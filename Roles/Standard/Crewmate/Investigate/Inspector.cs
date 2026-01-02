@@ -9,7 +9,7 @@ using static EHR.Translator;
 
 namespace EHR.Roles;
 
-public class Inspector : RoleBase
+public class Inspector : RoleBase, IStandardRole
 {
     private const int Id = 6900;
     private static List<byte> PlayerIdList = [];
@@ -34,6 +34,10 @@ public class Inspector : RoleBase
     public static OptionItem InspectorChargesWhenFinishedTasks;
 
     public override bool IsEnable => PlayerIdList.Count > 0;
+
+    public Team Faction => Team.Crewmate;
+    public RoleOptionType? Alignment => RoleOptionType.Crewmate_Investigate;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

@@ -1,10 +1,15 @@
-﻿using static EHR.Options;
+﻿using System.Collections.Generic;
+using static EHR.Options;
 
 namespace EHR.Roles;
 
-internal class Specter : RoleBase
+internal class Specter : RoleBase, IStandardRole
 {
     public override bool IsEnable => false;
+
+    public Team Faction => Team.Neutral;
+    public RoleOptionType? Alignment => RoleOptionType.Neutral_Benign;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

@@ -1,10 +1,11 @@
-﻿using AmongUs.GameOptions;
+﻿using System.Collections.Generic;
+using AmongUs.GameOptions;
 using EHR.Modules;
 using UnityEngine;
 
 namespace EHR.Roles;
 
-public class Overheat : RoleBase
+public class Overheat : RoleBase, IStandardRole
 {
     private const int StartingTemperature = 35;
     public static bool On;
@@ -20,6 +21,10 @@ public class Overheat : RoleBase
     public int Temperature;
 
     public override bool IsEnable => On;
+
+    public Team Faction => Team.Impostor;
+    public RoleOptionType? Alignment => RoleOptionType.Impostor_Killing;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

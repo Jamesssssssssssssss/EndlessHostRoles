@@ -9,7 +9,7 @@ using static EHR.Options;
 
 namespace EHR.Roles;
 
-internal class Chemist : RoleBase
+internal class Chemist : RoleBase, IStandardRole
 {
     public static bool On;
     public static List<Chemist> Instances = [];
@@ -117,6 +117,10 @@ internal class Chemist : RoleBase
     private List<string> SortedAvailableProcesses;
 
     public override bool IsEnable => On;
+
+    public Team Faction => Team.Neutral;
+    public RoleOptionType? Alignment => RoleOptionType.Neutral_Killing;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

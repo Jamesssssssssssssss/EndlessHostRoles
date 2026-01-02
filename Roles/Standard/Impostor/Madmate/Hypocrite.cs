@@ -1,8 +1,9 @@
-﻿using EHR.Modules;
+﻿using System.Collections.Generic;
+using EHR.Modules;
 
 namespace EHR.Roles;
 
-public class Hypocrite : RoleBase
+public class Hypocrite : RoleBase, IStandardRole
 {
     public static bool On;
 
@@ -14,6 +15,10 @@ public class Hypocrite : RoleBase
     private PlayerControl HypocritePC;
 
     public override bool IsEnable => On;
+
+    public Team Faction => Team.Impostor;
+    public RoleOptionType? Alignment => RoleOptionType.Impostor_Madmate;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

@@ -6,7 +6,7 @@ using static EHR.Translator;
 
 namespace EHR.Roles;
 
-public class Oracle : RoleBase
+public class Oracle : RoleBase, IStandardRole
 {
     private const int Id = 7600;
     private static List<byte> PlayerIdList = [];
@@ -21,6 +21,10 @@ public class Oracle : RoleBase
     public static readonly List<byte> DidVote = [];
 
     public override bool IsEnable => PlayerIdList.Count > 0;
+
+    public Team Faction => Team.Crewmate;
+    public RoleOptionType? Alignment => RoleOptionType.Crewmate_Investigate;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

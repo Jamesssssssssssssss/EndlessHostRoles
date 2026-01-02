@@ -5,7 +5,7 @@ using Hazel;
 
 namespace EHR.Roles;
 
-public class Reaper : CovenBase
+public class Reaper : CovenBase, IStandardRole
 {
     public static bool On;
     private static List<Reaper> Instances = [];
@@ -23,6 +23,10 @@ public class Reaper : CovenBase
     protected override NecronomiconReceivePriorities NecronomiconReceivePriority => NecronomiconReceivePriorities.Never;
 
     public override bool IsEnable => On;
+
+    public Team Faction => Team.Coven;
+    public RoleOptionType? Alignment => RoleOptionType.Coven_Miscellaneous;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {
@@ -107,13 +111,17 @@ public class Reaper : CovenBase
     }
 }
 
-public class Death : CovenBase
+public class Death : CovenBase, IStandardRole
 {
     public static bool On;
 
     protected override NecronomiconReceivePriorities NecronomiconReceivePriority => NecronomiconReceivePriorities.Never;
 
     public override bool IsEnable => On;
+
+    public Team Faction => Team.Coven;
+    public RoleOptionType? Alignment => RoleOptionType.Coven_Miscellaneous;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption() { }
 

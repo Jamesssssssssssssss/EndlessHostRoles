@@ -4,7 +4,7 @@ using static EHR.Translator;
 
 namespace EHR.Roles;
 
-public class Medium : RoleBase
+public class Medium : RoleBase, IStandardRole
 {
     private const int Id = 7200;
     public static List<byte> PlayerIdList = [];
@@ -17,6 +17,10 @@ public class Medium : RoleBase
     public static Dictionary<byte, byte> ContactPlayer = [];
 
     public override bool IsEnable => PlayerIdList.Count > 0;
+
+    public Team Faction => Team.Crewmate;
+    public RoleOptionType? Alignment => RoleOptionType.Crewmate_Investigate;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

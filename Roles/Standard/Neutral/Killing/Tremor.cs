@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using AmongUs.GameOptions;
 using EHR.Modules;
@@ -7,7 +8,7 @@ using UnityEngine;
 
 namespace EHR.Roles;
 
-public class Tremor : RoleBase
+public class Tremor : RoleBase, IStandardRole
 {
     private const int Id = 644600;
     public static bool On;
@@ -27,6 +28,10 @@ public class Tremor : RoleBase
 
     public override bool IsEnable => On;
     public bool IsDoom => Timer <= 0;
+
+    public Team Faction => Team.Neutral;
+    public RoleOptionType? Alignment => RoleOptionType.Neutral_Killing;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

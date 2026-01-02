@@ -1,8 +1,10 @@
+using System.Collections.Generic;
+
 using static EHR.Options;
 
 namespace EHR.Roles;
 
-public class Reckless : RoleBase
+public class Reckless : RoleBase, IStandardRole
 {
     private const int Id = 640500;
 
@@ -14,6 +16,10 @@ public class Reckless : RoleBase
     public static OptionItem ShowProgressText;
 
     public override bool IsEnable => false;
+
+    public Team Faction => Team.Neutral;
+    public RoleOptionType? Alignment => RoleOptionType.Neutral_Killing;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

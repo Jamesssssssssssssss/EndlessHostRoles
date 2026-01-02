@@ -5,7 +5,7 @@ using static EHR.Options;
 
 namespace EHR.Roles;
 
-internal class Electric : RoleBase
+internal class Electric : RoleBase, IStandardRole
 {
     public static bool On;
     private static OptionItem FreezeDuration;
@@ -22,6 +22,10 @@ internal class Electric : RoleBase
     {
         On = false;
     }
+
+    public Team Faction => Team.Crewmate;
+    public RoleOptionType? Alignment => RoleOptionType.Crewmate_Support;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

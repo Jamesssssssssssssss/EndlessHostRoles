@@ -4,7 +4,7 @@ using Hazel;
 
 namespace EHR.Roles;
 
-public class Grappler : RoleBase
+public class Grappler : RoleBase, IStandardRole
 {
     public static bool On;
     private static List<Grappler> Instances = [];
@@ -17,6 +17,10 @@ public class Grappler : RoleBase
     private bool InUse;
 
     public override bool IsEnable => On;
+
+    public Team Faction => Team.Crewmate;
+    public RoleOptionType? Alignment => RoleOptionType.Crewmate_Support;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

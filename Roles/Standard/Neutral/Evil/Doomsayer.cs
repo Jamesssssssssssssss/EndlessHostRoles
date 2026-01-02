@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace EHR.Roles;
 
-public class Doomsayer : RoleBase
+public class Doomsayer : RoleBase, IStandardRole
 {
     private const int Id = 27000;
     private static List<byte> PlayerIdList = [];
@@ -32,6 +32,10 @@ public class Doomsayer : RoleBase
     public static OptionItem DoomsayerTryHideMsg;
 
     public override bool IsEnable => PlayerIdList.Count > 0;
+
+    public Team Faction => Team.Neutral;
+    public RoleOptionType? Alignment => RoleOptionType.Neutral_Evil;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

@@ -1,10 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using EHR.Modules;
 
 namespace EHR.Roles;
 
-public class Loner : RoleBase
+public class Loner : RoleBase, IStandardRole
 {
     public static bool On;
 
@@ -13,6 +14,10 @@ public class Loner : RoleBase
     public byte PickedPlayer;
     public CustomRoles PickedRole;
     public bool Done;
+
+    public Team Faction => Team.Impostor;
+    public RoleOptionType? Alignment => RoleOptionType.Impostor_Miscellaneous;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

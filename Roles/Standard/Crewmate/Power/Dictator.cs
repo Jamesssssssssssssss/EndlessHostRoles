@@ -1,10 +1,16 @@
-﻿namespace EHR.Roles;
+﻿using System.Collections.Generic;
 
-internal class Dictator : RoleBase
+namespace EHR.Roles;
+
+internal class Dictator : RoleBase, IStandardRole
 {
     public override bool IsEnable => false;
 
     public static OptionItem MinTasksToDictate;
+
+    public Team Faction => Team.Crewmate;
+    public RoleOptionType? Alignment => RoleOptionType.Crewmate_Power;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

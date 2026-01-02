@@ -11,7 +11,7 @@ using static Options;
 using static Translator;
 using static Utils;
 
-public class Hacker : RoleBase
+public class Hacker : RoleBase, IStandardRole
 {
     private const int Id = 641000;
     public static Dictionary<byte, bool> PlayerIdList = [];
@@ -29,6 +29,10 @@ public class Hacker : RoleBase
     public static OptionItem VanillaClientSeesInfoFor;
 
     public override bool IsEnable => PlayerIdList.Count > 0;
+
+    public Team Faction => Team.Crewmate;
+    public RoleOptionType? Alignment => RoleOptionType.Crewmate_Investigate;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

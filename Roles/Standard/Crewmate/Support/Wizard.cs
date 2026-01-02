@@ -7,7 +7,7 @@ using Hazel;
 
 namespace EHR.Roles;
 
-public class Wizard : RoleBase
+public class Wizard : RoleBase, IStandardRole
 {
     public static bool On;
     private static List<Wizard> Instances = [];
@@ -58,6 +58,10 @@ public class Wizard : RoleBase
     private byte WizardId;
 
     public override bool IsEnable => On;
+
+    public Team Faction => Team.Crewmate;
+    public RoleOptionType? Alignment => RoleOptionType.Crewmate_Support;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

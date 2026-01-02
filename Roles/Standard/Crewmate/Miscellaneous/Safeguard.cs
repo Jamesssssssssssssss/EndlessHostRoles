@@ -1,9 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace EHR.Roles;
 
-public class Safeguard : RoleBase
+public class Safeguard : RoleBase, IStandardRole
 {
     public static bool On;
 
@@ -15,6 +16,10 @@ public class Safeguard : RoleBase
     private bool Shielded => Timer > 0;
 
     public override bool IsEnable => On;
+
+    public Team Faction => Team.Crewmate;
+    public RoleOptionType? Alignment => RoleOptionType.Crewmate_Miscellaneous;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

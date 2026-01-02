@@ -1,14 +1,19 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using AmongUs.GameOptions;
 using EHR.Modules;
 using static EHR.Options;
 
 namespace EHR.Roles;
 
-internal class Pacifist : RoleBase
+internal class Pacifist : RoleBase, IStandardRole
 {
     public static bool On;
     public override bool IsEnable => On;
+
+    public Team Faction => Team.Crewmate;
+    public RoleOptionType? Alignment => RoleOptionType.Crewmate_Support;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

@@ -6,7 +6,7 @@ using static EHR.Translator;
 
 namespace EHR.Roles;
 
-public class Cleanser : RoleBase
+public class Cleanser : RoleBase, IStandardRole
 {
     private const int Id = 23420;
     public static List<byte> PlayerIdList = [];
@@ -24,6 +24,10 @@ public class Cleanser : RoleBase
     public int CleanserUses;
 
     public override bool IsEnable => PlayerIdList.Count > 0;
+
+    public Team Faction => Team.Crewmate;
+    public RoleOptionType? Alignment => RoleOptionType.Crewmate_Support;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

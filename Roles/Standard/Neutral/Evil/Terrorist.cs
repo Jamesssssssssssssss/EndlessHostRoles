@@ -1,9 +1,10 @@
-﻿using AmongUs.GameOptions;
+﻿using System.Collections.Generic;
+using AmongUs.GameOptions;
 using static EHR.Options;
 
 namespace EHR.Roles;
 
-internal class Terrorist : RoleBase
+internal class Terrorist : RoleBase, IStandardRole
 {
     public override bool IsEnable => false;
     
@@ -12,6 +13,10 @@ internal class Terrorist : RoleBase
     public static OptionItem CanVent;
     public static OptionItem VentCooldown;
     public static OptionItem MaxInVentTime;
+
+    public Team Faction => Team.Neutral;
+    public RoleOptionType? Alignment => RoleOptionType.Neutral_Evil;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

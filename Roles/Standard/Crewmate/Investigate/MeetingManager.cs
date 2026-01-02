@@ -3,11 +3,15 @@ using static EHR.Translator;
 
 namespace EHR.Roles;
 
-public class MeetingManager : RoleBase
+public class MeetingManager : RoleBase, IStandardRole
 {
     public static List<byte> PlayerIdList = [];
 
     public override bool IsEnable => PlayerIdList.Count > 0;
+
+    public Team Faction => Team.Crewmate;
+    public RoleOptionType? Alignment => RoleOptionType.Crewmate_Investigate;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

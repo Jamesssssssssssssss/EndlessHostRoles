@@ -5,7 +5,7 @@ using static EHR.Options;
 
 namespace EHR.Roles;
 
-internal class Samurai : RoleBase
+internal class Samurai : RoleBase, IStandardRole
 {
     public static bool On;
 
@@ -21,6 +21,10 @@ internal class Samurai : RoleBase
     public (byte Id, long TimeStamp) Target;
 
     public override bool IsEnable => On;
+
+    public Team Faction => Team.Neutral;
+    public RoleOptionType? Alignment => RoleOptionType.Neutral_Killing;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

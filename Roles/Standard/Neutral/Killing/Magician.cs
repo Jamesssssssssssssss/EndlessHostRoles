@@ -9,7 +9,7 @@ using static EHR.Utils;
 
 namespace EHR.Roles;
 
-public class Magician : RoleBase
+public class Magician : RoleBase, IStandardRole
 {
     private const int Id = 641300;
     public static List<byte> PlayerIdList = [];
@@ -43,6 +43,10 @@ public class Magician : RoleBase
     private static long LastTP = TimeStamp;
 
     public override bool IsEnable => PlayerIdList.Count > 0;
+
+    public Team Faction => Team.Neutral;
+    public RoleOptionType? Alignment => RoleOptionType.Neutral_Killing;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

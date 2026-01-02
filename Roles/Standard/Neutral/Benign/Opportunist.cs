@@ -1,8 +1,10 @@
-﻿using AmongUs.GameOptions;
+﻿using System.Collections.Generic;
+
+using AmongUs.GameOptions;
 
 namespace EHR.Roles;
 
-internal class Opportunist : RoleBase
+internal class Opportunist : RoleBase, IStandardRole
 {
     public static bool On;
 
@@ -34,6 +36,10 @@ internal class Opportunist : RoleBase
     {
         return !OppoImmuneToAttacksWhenTasksDone.GetBool() || !target.Is(CustomRoles.Opportunist) || !target.AllTasksCompleted();
     }
+
+    public Team Faction => Team.Neutral;
+    public RoleOptionType? Alignment => RoleOptionType.Neutral_Benign;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

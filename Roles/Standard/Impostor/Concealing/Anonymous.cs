@@ -5,7 +5,7 @@ using static EHR.Translator;
 
 namespace EHR.Roles;
 
-public class Anonymous : RoleBase
+public class Anonymous : RoleBase, IStandardRole
 {
     private const int Id = 2200;
     private static List<byte> PlayerIdList = [];
@@ -17,6 +17,10 @@ public class Anonymous : RoleBase
     private static List<byte> DeadBodyList = [];
 
     public override bool IsEnable => PlayerIdList.Count > 0;
+
+    public Team Faction => Team.Impostor;
+    public RoleOptionType? Alignment => RoleOptionType.Impostor_Concealing;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

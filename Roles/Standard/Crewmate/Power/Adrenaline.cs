@@ -1,9 +1,10 @@
-﻿using EHR.Modules;
+﻿using System.Collections.Generic;
+using EHR.Modules;
 using Hazel;
 
 namespace EHR.Roles;
 
-public class Adrenaline : RoleBase
+public class Adrenaline : RoleBase, IStandardRole
 {
     public static bool On;
 
@@ -20,6 +21,10 @@ public class Adrenaline : RoleBase
     private long LastUpdate;
     private int Timer;
     public override bool IsEnable => On;
+
+    public Team Faction => Team.Crewmate;
+    public RoleOptionType? Alignment => RoleOptionType.Crewmate_Power;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

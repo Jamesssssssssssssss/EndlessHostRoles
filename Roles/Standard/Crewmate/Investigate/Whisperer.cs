@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace EHR.Roles;
 
-public class Whisperer : RoleBase
+public class Whisperer : RoleBase, IStandardRole
 {
     public static bool On;
     private static List<Whisperer> Instances = [];
@@ -28,6 +28,10 @@ public class Whisperer : RoleBase
     private byte WhispererId;
     
     public override bool IsEnable => On;
+
+    public Team Faction => Team.Crewmate;
+    public RoleOptionType? Alignment => RoleOptionType.Crewmate_Investigate;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

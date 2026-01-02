@@ -1,9 +1,10 @@
+using System.Collections.Generic;
 using AmongUs.GameOptions;
 using static EHR.Options;
 
 namespace EHR.Roles;
 
-public class HexMaster : RoleBase
+public class HexMaster : RoleBase, IStandardRole
 {
     private const int Id = 11900;
 
@@ -12,6 +13,10 @@ public class HexMaster : RoleBase
     private static OptionItem HasImpostorVision;
 
     public override bool IsEnable => false;
+
+    public Team Faction => Team.Neutral;
+    public RoleOptionType? Alignment => RoleOptionType.Neutral_Killing;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

@@ -1,15 +1,20 @@
-﻿using AmongUs.GameOptions;
+﻿using System.Collections.Generic;
+using AmongUs.GameOptions;
 using EHR.Patches;
 
 namespace EHR.Roles;
 
-internal class Cherokious : RoleBase
+internal class Cherokious : RoleBase, IStandardRole
 {
     public static bool On;
 
     public static OptionItem KillCooldown;
     public static OptionItem ImpostorVision;
     public override bool IsEnable => On;
+
+    public Team Faction => Team.Neutral;
+    public RoleOptionType? Alignment => RoleOptionType.Neutral_Killing;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

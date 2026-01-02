@@ -1,10 +1,11 @@
-﻿using AmongUs.GameOptions;
+﻿using System.Collections.Generic;
+using AmongUs.GameOptions;
 using EHR.Modules;
 using Hazel;
 
 namespace EHR.Roles;
 
-public class Ankylosaurus : RoleBase
+public class Ankylosaurus : RoleBase, IStandardRole
 {
     public static bool On;
 
@@ -15,6 +16,10 @@ public class Ankylosaurus : RoleBase
     private int LivesLeft;
 
     public override bool IsEnable => On;
+
+    public Team Faction => Team.Crewmate;
+    public RoleOptionType? Alignment => RoleOptionType.Crewmate_Chaos;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

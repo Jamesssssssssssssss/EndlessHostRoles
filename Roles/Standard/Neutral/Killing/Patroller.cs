@@ -5,7 +5,7 @@ using AmongUs.GameOptions;
 
 namespace EHR.Roles;
 
-public class Patroller : RoleBase
+public class Patroller : RoleBase, IStandardRole
 {
     private const int Id = 645000;
     public static bool On;
@@ -21,6 +21,10 @@ public class Patroller : RoleBase
     private Dictionary<Boost, PlainShipRoom> RoomBoosts = [];
 
     public override bool IsEnable => On;
+
+    public Team Faction => Team.Neutral;
+    public RoleOptionType? Alignment => RoleOptionType.Neutral_Killing;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

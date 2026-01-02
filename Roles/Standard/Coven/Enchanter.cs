@@ -3,7 +3,7 @@ using EHR.Modules;
 
 namespace EHR.Roles;
 
-public class Enchanter : CovenBase
+public class Enchanter : CovenBase, IStandardRole
 {
     public static bool On;
 
@@ -17,6 +17,10 @@ public class Enchanter : CovenBase
     protected override NecronomiconReceivePriorities NecronomiconReceivePriority => NecronomiconReceivePriorities.Random;
 
     public override bool IsEnable => On;
+
+    public Team Faction => Team.Coven;
+    public RoleOptionType? Alignment => RoleOptionType.Coven_Miscellaneous;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

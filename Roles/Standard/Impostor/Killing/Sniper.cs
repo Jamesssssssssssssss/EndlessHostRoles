@@ -8,7 +8,7 @@ using static EHR.Translator;
 
 namespace EHR.Roles;
 
-public class Sniper : RoleBase
+public class Sniper : RoleBase, IStandardRole
 {
     private const int Id = 1900;
     private static List<byte> PlayerIdList = [];
@@ -36,6 +36,10 @@ public class Sniper : RoleBase
 
     private byte snipeTarget;
     public override bool IsEnable => On;
+
+    public Team Faction => Team.Impostor;
+    public RoleOptionType? Alignment => RoleOptionType.Impostor_Killing;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

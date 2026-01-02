@@ -7,7 +7,7 @@ using static EHR.Options;
 
 namespace EHR.Roles;
 
-internal class Changeling : RoleBase
+internal class Changeling : RoleBase, IStandardRole
 {
     private const int Id = 643510;
     public static readonly Dictionary<byte, bool> ChangedRole = [];
@@ -28,6 +28,10 @@ internal class Changeling : RoleBase
 
     public CustomRoles CurrentRole;
     public override bool IsEnable => On;
+
+    public Team Faction => Team.Impostor;
+    public RoleOptionType? Alignment => RoleOptionType.Impostor_Miscellaneous;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

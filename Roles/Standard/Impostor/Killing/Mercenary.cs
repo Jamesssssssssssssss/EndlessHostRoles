@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Diagnostics;
 using EHR.Modules;
 using EHR.Modules.Extensions;
@@ -5,7 +6,7 @@ using Hazel;
 
 namespace EHR.Roles;
 
-public class Mercenary : RoleBase
+public class Mercenary : RoleBase, IStandardRole
 {
     private const int Id = 1700;
     public static bool On;
@@ -19,6 +20,10 @@ public class Mercenary : RoleBase
     private byte MercenaryId;
 
     public override bool IsEnable => On;
+
+    public Team Faction => Team.Impostor;
+    public RoleOptionType? Alignment => RoleOptionType.Impostor_Killing;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

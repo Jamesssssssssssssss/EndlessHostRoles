@@ -4,7 +4,7 @@ using static EHR.Translator;
 
 namespace EHR.Roles;
 
-public class Escort : RoleBase
+public class Escort : RoleBase, IStandardRole
 {
     private const int Id = 642300;
     private static List<byte> PlayerIdList = [];
@@ -15,6 +15,10 @@ public class Escort : RoleBase
     public static OptionItem UsePet;
 
     public override bool IsEnable => PlayerIdList.Count > 0;
+
+    public Team Faction => Team.Crewmate;
+    public RoleOptionType? Alignment => RoleOptionType.Crewmate_Support;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

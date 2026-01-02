@@ -8,7 +8,7 @@ using static EHR.Options;
 
 namespace EHR.Roles;
 
-public class Simon : RoleBase
+public class Simon : RoleBase, IStandardRole
 {
     public enum Instruction
     {
@@ -30,6 +30,10 @@ public class Simon : RoleBase
     private byte SimonId;
 
     public override bool IsEnable => On;
+
+    public Team Faction => Team.Neutral;
+    public RoleOptionType? Alignment => RoleOptionType.Neutral_Killing;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

@@ -11,7 +11,7 @@ using static EHR.Translator;
 
 namespace EHR.Roles;
 
-public class EvilTracker : RoleBase
+public class EvilTracker : RoleBase, IStandardRole
 {
     private const int Id = 500;
     private static List<byte> PlayerIdList = [];
@@ -40,6 +40,10 @@ public class EvilTracker : RoleBase
     private byte[] ImpostorsId => Main.AllAlivePlayerControls.Where(x => x.PlayerId != EvilTrackerId && x.Is(CustomRoleTypes.Impostor)).Select(x => x.PlayerId).ToArray();
 
     public override bool IsEnable => PlayerIdList.Count > 0;
+
+    public Team Faction => Team.Impostor;
+    public RoleOptionType? Alignment => RoleOptionType.Impostor_Miscellaneous;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace EHR.Roles;
 
-public class Venerer : RoleBase
+public class Venerer : RoleBase, IStandardRole
 {
     public static bool On;
 
@@ -22,6 +22,10 @@ public class Venerer : RoleBase
     private int Stage;
     public bool ChangedSkin;
     private byte VenererId;
+
+    public Team Faction => Team.Impostor;
+    public RoleOptionType? Alignment => RoleOptionType.Impostor_Concealing;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace EHR.Roles;
 
-public class Rogue : RoleBase
+public class Rogue : RoleBase, IStandardRole
 {
     private const int Id = 644300;
     public static bool On;
@@ -33,6 +33,10 @@ public class Rogue : RoleBase
 
     public override bool IsEnable => On;
     public bool DisableDevices => GotRewards.Contains(Reward.DisableDevices);
+
+    public Team Faction => Team.Neutral;
+    public RoleOptionType? Alignment => RoleOptionType.Neutral_Killing;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

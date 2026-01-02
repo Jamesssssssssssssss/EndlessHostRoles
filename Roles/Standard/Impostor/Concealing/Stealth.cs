@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace EHR.Roles;
 
-public sealed class Stealth : RoleBase
+public sealed class Stealth : RoleBase, IStandardRole
 {
     private static readonly LogHandler Logger = EHR.Logger.Handler(nameof(Stealth));
 
@@ -31,6 +31,10 @@ public sealed class Stealth : RoleBase
     private PlayerControl StealthPC;
     
     public override bool IsEnable => On;
+
+    public Team Faction => Team.Impostor;
+    public RoleOptionType? Alignment => RoleOptionType.Impostor_Concealing;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

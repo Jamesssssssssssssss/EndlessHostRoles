@@ -1,14 +1,19 @@
-﻿using AmongUs.GameOptions;
+﻿using System.Collections.Generic;
+using AmongUs.GameOptions;
 using static EHR.Options;
 
 namespace EHR.Roles;
 
-internal class Lighter : RoleBase
+internal class Lighter : RoleBase, IStandardRole
 {
     public static bool On;
     private long ActivateTimeStamp;
     private bool IsAbilityActive;
     public override bool IsEnable => On;
+
+    public Team Faction => Team.Crewmate;
+    public RoleOptionType? Alignment => RoleOptionType.Crewmate_Investigate;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

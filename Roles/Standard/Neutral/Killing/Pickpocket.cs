@@ -4,7 +4,7 @@ using static EHR.Options;
 
 namespace EHR.Roles;
 
-public class Pickpocket : RoleBase
+public class Pickpocket : RoleBase, IStandardRole
 {
     private const int Id = 12600;
     public static List<byte> PlayerIdList = [];
@@ -15,6 +15,10 @@ public class Pickpocket : RoleBase
     public static OptionItem VotesPerKill;
 
     public override bool IsEnable => PlayerIdList.Count > 0;
+
+    public Team Faction => Team.Neutral;
+    public RoleOptionType? Alignment => RoleOptionType.Neutral_Killing;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

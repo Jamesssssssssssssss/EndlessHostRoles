@@ -1,9 +1,10 @@
-﻿using AmongUs.GameOptions;
+﻿using System.Collections.Generic;
+using AmongUs.GameOptions;
 using EHR.Modules;
 
 namespace EHR.Roles;
 
-public class Backstabber : RoleBase
+public class Backstabber : RoleBase, IStandardRole
 {
     public static bool On;
 
@@ -15,6 +16,10 @@ public class Backstabber : RoleBase
     private WinningTeam Team;
 
     public override bool IsEnable => On;
+
+    public Team Faction => EHR.Team.Neutral;
+    public RoleOptionType? Alignment => RoleOptionType.Neutral_Benign;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

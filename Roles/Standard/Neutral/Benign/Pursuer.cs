@@ -3,7 +3,7 @@ using EHR.Modules;
 
 namespace EHR.Roles;
 
-public class Pursuer : RoleBase
+public class Pursuer : RoleBase, IStandardRole
 {
     private const int Id = 10200;
     private static List<byte> PlayerIdList = [];
@@ -15,6 +15,10 @@ public class Pursuer : RoleBase
     private List<byte> clientList = [];
 
     public override bool IsEnable => PlayerIdList.Count > 0;
+
+    public Team Faction => Team.Neutral;
+    public RoleOptionType? Alignment => RoleOptionType.Neutral_Benign;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

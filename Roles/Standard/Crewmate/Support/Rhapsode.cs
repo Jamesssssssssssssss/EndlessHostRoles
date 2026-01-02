@@ -6,7 +6,7 @@ using Hazel;
 
 namespace EHR.Roles;
 
-public class Rhapsode : RoleBase
+public class Rhapsode : RoleBase, IStandardRole
 {
     public static bool On;
     private static List<Rhapsode> Instances = [];
@@ -23,6 +23,10 @@ public class Rhapsode : RoleBase
     private byte RhapsodeId;
 
     public override bool IsEnable => On;
+
+    public Team Faction => Team.Crewmate;
+    public RoleOptionType? Alignment => RoleOptionType.Crewmate_Support;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

@@ -7,7 +7,7 @@ using static EHR.Utils;
 
 namespace EHR.Roles;
 
-public class Duellist : RoleBase
+public class Duellist : RoleBase, IStandardRole
 {
     private const int Id = 642850;
     private static List<byte> PlayerIdList = [];
@@ -17,6 +17,10 @@ public class Duellist : RoleBase
     private int Count;
 
     public override bool IsEnable => PlayerIdList.Count > 0 || Randomizer.Exists;
+
+    public Team Faction => Team.Impostor;
+    public RoleOptionType? Alignment => RoleOptionType.Impostor_Concealing;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

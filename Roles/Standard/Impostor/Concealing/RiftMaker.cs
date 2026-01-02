@@ -8,7 +8,7 @@ using static EHR.Utils;
 
 namespace EHR.Roles;
 
-public class RiftMaker : RoleBase
+public class RiftMaker : RoleBase, IStandardRole
 {
     private const int Id = 640900;
     public static List<byte> PlayerIdList = [];
@@ -20,6 +20,10 @@ public class RiftMaker : RoleBase
     public List<Vector2> Marks = [];
 
     public override bool IsEnable => PlayerIdList.Count > 0;
+
+    public Team Faction => Team.Impostor;
+    public RoleOptionType? Alignment => RoleOptionType.Impostor_Concealing;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

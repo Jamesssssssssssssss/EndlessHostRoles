@@ -1,8 +1,9 @@
-﻿using static EHR.Options;
+﻿using System.Collections.Generic;
+using static EHR.Options;
 
 namespace EHR.Roles;
 
-internal class Undertaker : RoleBase
+internal class Undertaker : RoleBase, IStandardRole
 {
     private const int Id = 720;
     public static OptionItem UndertakerMarkCooldown;
@@ -10,6 +11,10 @@ internal class Undertaker : RoleBase
     public static OptionItem UndertakerCanKillAfterAssassinate;
 
     public override bool IsEnable => false;
+
+    public Team Faction => Team.Impostor;
+    public RoleOptionType? Alignment => RoleOptionType.Impostor_Concealing;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

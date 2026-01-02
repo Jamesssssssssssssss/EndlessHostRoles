@@ -1,12 +1,17 @@
-﻿using EHR.Modules;
+﻿using System.Collections.Generic;
+using EHR.Modules;
 using UnityEngine;
 using static EHR.Options;
 
 namespace EHR.Roles;
 
-internal class Demolitionist : RoleBase
+internal class Demolitionist : RoleBase, IStandardRole
 {
     public override bool IsEnable => false;
+
+    public Team Faction => Team.Crewmate;
+    public RoleOptionType? Alignment => RoleOptionType.Crewmate_Miscellaneous;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

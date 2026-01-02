@@ -7,7 +7,7 @@ using static EHR.Options;
 
 namespace EHR.Roles;
 
-public class Lightning : RoleBase
+public class Lightning : RoleBase, IStandardRole
 {
     private const int Id = 16700;
     public static List<byte> PlayerIdList = [];
@@ -20,6 +20,10 @@ public class Lightning : RoleBase
     private static Dictionary<byte, PlayerControl> RealKiller = [];
 
     public override bool IsEnable => PlayerIdList.Count > 0 || Randomizer.Exists;
+
+    public Team Faction => Team.Impostor;
+    public RoleOptionType? Alignment => RoleOptionType.Impostor_Concealing;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

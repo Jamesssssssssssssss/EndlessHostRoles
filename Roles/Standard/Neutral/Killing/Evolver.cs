@@ -7,7 +7,7 @@ using Hazel;
 
 namespace EHR.Roles;
 
-public class Evolver : RoleBase
+public class Evolver : RoleBase, IStandardRole
 {
     private const int Id = 644500;
     public static bool On;
@@ -24,6 +24,10 @@ public class Evolver : RoleBase
 
     public override bool IsEnable => On;
     private (float MinKillCooldown, float MaxVision, float MaxSpeed, int MaxKillDistance) Limits => (1f, Stats.ImpostorVision ? 1.5f : 5f, 3f, 2);
+
+    public Team Faction => Team.Neutral;
+    public RoleOptionType? Alignment => RoleOptionType.Neutral_Killing;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

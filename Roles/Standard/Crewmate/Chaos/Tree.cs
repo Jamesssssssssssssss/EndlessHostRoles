@@ -1,9 +1,10 @@
-﻿using AmongUs.GameOptions;
+﻿using System.Collections.Generic;
+using AmongUs.GameOptions;
 using EHR.Modules;
 
 namespace EHR.Roles;
 
-public class Tree : RoleBase
+public class Tree : RoleBase, IStandardRole
 {
     public static bool On;
 
@@ -22,6 +23,10 @@ public class Tree : RoleBase
     public static OptionItem FallStunDuration;
 
     public bool TreeSpriteActive;
+
+    public Team Faction => Team.Crewmate;
+    public RoleOptionType? Alignment => RoleOptionType.Crewmate_Chaos;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

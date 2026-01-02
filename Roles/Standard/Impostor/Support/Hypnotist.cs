@@ -6,7 +6,7 @@ using Hazel;
 
 namespace EHR.Roles;
 
-public class Hypnotist : RoleBase
+public class Hypnotist : RoleBase, IStandardRole
 {
     public static bool On;
     private static List<Hypnotist> Instances = [];
@@ -22,6 +22,10 @@ public class Hypnotist : RoleBase
     private byte HypnotistId;
 
     public override bool IsEnable => On;
+
+    public Team Faction => Team.Impostor;
+    public RoleOptionType? Alignment => RoleOptionType.Impostor_Support;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

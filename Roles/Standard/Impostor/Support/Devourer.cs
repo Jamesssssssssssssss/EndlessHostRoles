@@ -7,7 +7,7 @@ using static EHR.Translator;
 
 namespace EHR.Roles;
 
-public class Devourer : RoleBase
+public class Devourer : RoleBase, IStandardRole
 {
     private const int Id = 3550;
     private static readonly NetworkedPlayerInfo.PlayerOutfit ConsumedOutfit = new NetworkedPlayerInfo.PlayerOutfit().Set("", 15, "", "", "visor_Crack", "", "");
@@ -24,6 +24,10 @@ public class Devourer : RoleBase
     public List<byte> PlayerSkinsCosumed = [];
 
     public override bool IsEnable => PlayerIdList.Count > 0;
+
+    public Team Faction => Team.Impostor;
+    public RoleOptionType? Alignment => RoleOptionType.Impostor_Support;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

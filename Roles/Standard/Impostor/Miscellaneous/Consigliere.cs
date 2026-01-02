@@ -6,7 +6,7 @@ using static EHR.Options;
 
 namespace EHR.Roles;
 
-public class Consigliere : RoleBase
+public class Consigliere : RoleBase, IStandardRole
 {
     private const int Id = 2700;
     public static List<byte> PlayerIdList = [];
@@ -23,6 +23,10 @@ public class Consigliere : RoleBase
     private float KCD;
 
     public override bool IsEnable => PlayerIdList.Count > 0;
+
+    public Team Faction => Team.Impostor;
+    public RoleOptionType? Alignment => RoleOptionType.Impostor_Miscellaneous;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

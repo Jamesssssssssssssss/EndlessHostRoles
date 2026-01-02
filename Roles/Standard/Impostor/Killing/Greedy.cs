@@ -7,7 +7,7 @@ using Hazel;
 namespace EHR.Roles;
 
 // Reference: https://github.com/Yumenopai/TownOfHost_Y
-public class Greedy : RoleBase // Also used for Pulse as the NK version of this
+public class Greedy : RoleBase, IStandardRole // Also used for Pulse as the NK version of this
 {
     private const int Id = 1300;
     public static List<byte> PlayerIdList = [];
@@ -26,6 +26,10 @@ public class Greedy : RoleBase // Also used for Pulse as the NK version of this
     private float OddKCD;
 
     public override bool IsEnable => PlayerIdList.Count > 0;
+
+    public Team Faction => Team.Impostor;
+    public RoleOptionType? Alignment => RoleOptionType.Impostor_Killing;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

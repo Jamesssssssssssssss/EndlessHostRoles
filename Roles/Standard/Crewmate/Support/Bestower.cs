@@ -1,10 +1,10 @@
-﻿using System;
+﻿using System.Collections.Generic;
 using AmongUs.GameOptions;
 using EHR.Modules;
 
 namespace EHR.Roles;
 
-public class Bestower : RoleBase
+public class Bestower : RoleBase, IStandardRole
 {
     public static bool On;
 
@@ -14,6 +14,10 @@ public class Bestower : RoleBase
     private static OptionItem AbilityUseLimit;
     private static OptionItem GivenUses;
     public static OptionItem UsePet;
+
+    public Team Faction => Team.Crewmate;
+    public RoleOptionType? Alignment => RoleOptionType.Crewmate_Support;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

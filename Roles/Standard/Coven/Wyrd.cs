@@ -7,7 +7,7 @@ using Hazel;
 
 namespace EHR.Roles;
 
-public class Wyrd : CovenBase
+public class Wyrd : CovenBase, IStandardRole
 {
     public enum Action
     {
@@ -41,6 +41,10 @@ public class Wyrd : CovenBase
     protected override NecronomiconReceivePriorities NecronomiconReceivePriority => NecronomiconReceivePriorities.Random;
 
     public override bool IsEnable => On;
+
+    public Team Faction => Team.Coven;
+    public RoleOptionType? Alignment => RoleOptionType.Coven_Miscellaneous;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

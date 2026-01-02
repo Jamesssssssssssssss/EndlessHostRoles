@@ -1,9 +1,10 @@
-﻿using AmongUs.GameOptions;
+﻿using System.Collections.Generic;
+using AmongUs.GameOptions;
 using static EHR.Options;
 
 namespace EHR.Roles;
 
-internal class Mole : RoleBase
+internal class Mole : RoleBase, IStandardRole
 {
     public static bool On;
 
@@ -21,6 +22,10 @@ internal class Mole : RoleBase
     {
         On = false;
     }
+
+    public Team Faction => Team.Crewmate;
+    public RoleOptionType? Alignment => RoleOptionType.Crewmate_Miscellaneous;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

@@ -9,7 +9,7 @@ using UnityEngine;
 
 namespace EHR.Roles;
 
-internal class Adventurer : RoleBase
+internal class Adventurer : RoleBase, IStandardRole
 {
     public enum Resource
     {
@@ -89,6 +89,10 @@ internal class Adventurer : RoleBase
     {
         return new BooleanOptionItem(id, $"AdventurerWeaponEnabled.{weapon}", true, TabGroup.CrewmateRoles).SetParent(Options.CustomRoleSpawnChances[CustomRoles.Adventurer]);
     }
+
+    public Team Faction => Team.Crewmate;
+    public RoleOptionType? Alignment => RoleOptionType.Crewmate_Power;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

@@ -3,13 +3,17 @@ using System.Linq;
 
 namespace EHR.Roles;
 
-internal class Insight : RoleBase
+internal class Insight : RoleBase, IStandardRole
 {
     public static bool On;
     private byte InsightId;
     private List<byte> KnownRolesOfPlayerIds = [];
     private List<CustomRoles> RolesKnownThisRound = [];
     public override bool IsEnable => On;
+
+    public Team Faction => Team.Crewmate;
+    public RoleOptionType? Alignment => RoleOptionType.Crewmate_Investigate;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

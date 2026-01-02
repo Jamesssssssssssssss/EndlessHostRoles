@@ -3,7 +3,7 @@ using AmongUs.GameOptions;
 
 namespace EHR.Roles;
 
-internal class Swiftclaw : RoleBase
+internal class Swiftclaw : RoleBase, IStandardRole
 {
     public static OptionItem DashCD;
     public static OptionItem DashDuration;
@@ -13,6 +13,10 @@ internal class Swiftclaw : RoleBase
     public static bool On;
     private static int Id => 643340;
     public override bool IsEnable => On;
+
+    public Team Faction => Team.Impostor;
+    public RoleOptionType? Alignment => RoleOptionType.Impostor_Concealing;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

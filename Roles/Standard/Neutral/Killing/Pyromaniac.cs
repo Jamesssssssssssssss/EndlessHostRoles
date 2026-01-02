@@ -4,7 +4,7 @@ using static EHR.Options;
 
 namespace EHR.Roles;
 
-public class Pyromaniac : RoleBase
+public class Pyromaniac : RoleBase, IStandardRole
 {
     private const int Id = 648000;
     public static List<byte> PlayerIdList = [];
@@ -18,6 +18,10 @@ public class Pyromaniac : RoleBase
     public List<byte> DousedList = [];
 
     public override bool IsEnable => PlayerIdList.Count > 0;
+
+    public Team Faction => Team.Neutral;
+    public RoleOptionType? Alignment => RoleOptionType.Neutral_Killing;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

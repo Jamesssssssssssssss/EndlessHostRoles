@@ -1,10 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using UnityEngine;
 
 namespace EHR.Roles;
 
-public class Bard : RoleBase
+public class Bard : RoleBase, IStandardRole
 {
     public static int BardCreations;
     public static bool On;
@@ -20,6 +21,10 @@ public class Bard : RoleBase
         On = false;
         BardCreations = 0;
     }
+
+    public Team Faction => Team.Impostor;
+    public RoleOptionType? Alignment => RoleOptionType.Impostor_Killing;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption() { }
 

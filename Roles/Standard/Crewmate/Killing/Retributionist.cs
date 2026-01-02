@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using AmongUs.GameOptions;
 using EHR.Modules;
@@ -7,7 +8,7 @@ using UnityEngine;
 
 namespace EHR.Roles;
 
-public class Retributionist : RoleBase
+public class Retributionist : RoleBase, IStandardRole
 {
     public static bool On;
 
@@ -19,6 +20,10 @@ public class Retributionist : RoleBase
     public byte Camping;
     public bool Notified;
     private PlayerControl RetributionistPC;
+
+    public Team Faction => Team.Crewmate;
+    public RoleOptionType? Alignment => RoleOptionType.Crewmate_Killing;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

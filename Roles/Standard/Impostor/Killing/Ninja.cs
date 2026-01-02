@@ -7,7 +7,7 @@ using static EHR.Translator;
 
 namespace EHR.Roles;
 
-internal class Ninja : RoleBase
+internal class Ninja : RoleBase, IStandardRole
 {
     private const int Id = 700;
     public static List<byte> PlayerIdList = [];
@@ -24,6 +24,10 @@ internal class Ninja : RoleBase
     public byte MarkedPlayer;
 
     public override bool IsEnable => PlayerIdList.Count > 0;
+
+    public Team Faction => Team.Impostor;
+    public RoleOptionType? Alignment => RoleOptionType.Impostor_Killing;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

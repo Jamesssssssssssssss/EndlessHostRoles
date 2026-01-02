@@ -1,12 +1,18 @@
-﻿namespace EHR.Roles;
+﻿using System.Collections.Generic;
 
-public class CovenMember : CovenBase
+namespace EHR.Roles;
+
+public class CovenMember : CovenBase, IStandardRole
 {
     public static bool On;
 
     protected override NecronomiconReceivePriorities NecronomiconReceivePriority => NecronomiconReceivePriorities.Never;
 
     public override bool IsEnable => On;
+
+    public Team Faction => Team.Coven;
+    public RoleOptionType? Alignment => RoleOptionType.Coven_Miscellaneous;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption() { }
 

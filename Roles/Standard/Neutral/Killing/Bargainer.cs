@@ -11,7 +11,7 @@ using static EHR.Options;
 
 namespace EHR.Roles;
 
-internal class Bargainer : RoleBase
+internal class Bargainer : RoleBase, IStandardRole
 {
     public enum Item
     {
@@ -85,6 +85,10 @@ internal class Bargainer : RoleBase
     }
 
     public override bool IsEnable => On;
+
+    public Team Faction => Team.Neutral;
+    public RoleOptionType? Alignment => RoleOptionType.Neutral_Killing;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

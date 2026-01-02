@@ -6,7 +6,7 @@ using Hazel;
 
 namespace EHR.Roles;
 
-public class Seamstress : RoleBase
+public class Seamstress : RoleBase, IStandardRole
 {
     public static bool On;
     private static List<Seamstress> Instances = [];
@@ -17,6 +17,10 @@ public class Seamstress : RoleBase
     public (byte, byte) SewedPlayers;
 
     public override bool IsEnable => On;
+
+    public Team Faction => Team.Neutral;
+    public RoleOptionType? Alignment => RoleOptionType.Neutral_Pariah;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

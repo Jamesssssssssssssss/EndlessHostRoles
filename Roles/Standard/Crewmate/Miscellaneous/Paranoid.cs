@@ -4,7 +4,7 @@ using static EHR.Options;
 
 namespace EHR.Roles;
 
-internal class Paranoid : RoleBase
+internal class Paranoid : RoleBase, IStandardRole
 {
     public static Dictionary<byte, int> ParaUsedButtonCount = [];
 
@@ -14,6 +14,10 @@ internal class Paranoid : RoleBase
     
     public static bool On;
     public override bool IsEnable => On;
+
+    public Team Faction => Team.Crewmate;
+    public RoleOptionType? Alignment => RoleOptionType.Crewmate_Miscellaneous;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

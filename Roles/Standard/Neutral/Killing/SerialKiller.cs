@@ -1,8 +1,10 @@
+using System.Collections.Generic;
+
 using AmongUs.GameOptions;
 
 namespace EHR.Roles;
 
-public class SerialKiller : RoleBase
+public class SerialKiller : RoleBase, IStandardRole
 {
     public static bool On;
 
@@ -11,6 +13,10 @@ public class SerialKiller : RoleBase
     private static OptionItem ImpostorVision;
 
     public override bool IsEnable => On;
+
+    public Team Faction => Team.Neutral;
+    public RoleOptionType? Alignment => RoleOptionType.Neutral_Killing;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

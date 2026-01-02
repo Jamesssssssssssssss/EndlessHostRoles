@@ -1,11 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using AmongUs.GameOptions;
 using EHR.Modules;
 using static EHR.Options;
 
 namespace EHR.Roles;
 
-internal class Bomber : RoleBase
+internal class Bomber : RoleBase, IStandardRole
 {
     public static bool On;
 
@@ -21,6 +22,10 @@ internal class Bomber : RoleBase
     public static OptionItem NukeCooldown;
     private bool IsNuker;
     public override bool IsEnable => On;
+
+    public Team Faction => Team.Impostor;
+    public RoleOptionType? Alignment => RoleOptionType.Impostor_Killing;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

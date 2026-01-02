@@ -5,7 +5,7 @@ using EHR.Modules;
 
 namespace EHR.Roles;
 
-public class Sheriff : RoleBase
+public class Sheriff : RoleBase, IStandardRole
 {
     private const int Id = 653000;
     private static List<byte> PlayerIdList = [];
@@ -38,6 +38,10 @@ public class Sheriff : RoleBase
     ];
 
     public override bool IsEnable => PlayerIdList.Count > 0;
+
+    public Team Faction => Team.Crewmate;
+    public RoleOptionType? Alignment => RoleOptionType.Crewmate_Killing;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

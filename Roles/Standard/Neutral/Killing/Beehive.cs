@@ -7,7 +7,7 @@ using Hazel;
 
 namespace EHR.Roles;
 
-public class Beehive : RoleBase
+public class Beehive : RoleBase, IStandardRole
 {
     public static bool On;
 
@@ -23,6 +23,10 @@ public class Beehive : RoleBase
     public Dictionary<byte, (long TimeStamp, Vector2 InitialPosition)> StungPlayers = [];
 
     public override bool IsEnable => On;
+
+    public Team Faction => Team.Neutral;
+    public RoleOptionType? Alignment => RoleOptionType.Neutral_Killing;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

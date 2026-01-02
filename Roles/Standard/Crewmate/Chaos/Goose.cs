@@ -1,6 +1,8 @@
-﻿namespace EHR.Roles;
+﻿using System.Collections.Generic;
 
-public class Goose : RoleBase
+namespace EHR.Roles;
+
+public class Goose : RoleBase, IStandardRole
 {
     private const int Id = 641820;
 
@@ -11,6 +13,10 @@ public class Goose : RoleBase
     public static OptionItem Cooldown;
 
     public override bool IsEnable => false;
+
+    public Team Faction => Team.Crewmate;
+    public RoleOptionType? Alignment => RoleOptionType.Crewmate_Chaos;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

@@ -1,9 +1,10 @@
-﻿using AmongUs.GameOptions;
+﻿using System.Collections.Generic;
+using AmongUs.GameOptions;
 using EHR.Modules;
 
 namespace EHR.Roles;
 
-internal class Convener : RoleBase
+internal class Convener : RoleBase, IStandardRole
 {
     public static OptionItem CD;
     public static OptionItem Limit;
@@ -13,6 +14,10 @@ internal class Convener : RoleBase
     public static bool On;
     private static int Id => 643350;
     public override bool IsEnable => On;
+
+    public Team Faction => Team.Crewmate;
+    public RoleOptionType? Alignment => RoleOptionType.Crewmate_Support;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

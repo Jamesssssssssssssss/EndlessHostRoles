@@ -5,7 +5,7 @@ using static EHR.Options;
 
 namespace EHR.Roles;
 
-public class DoubleAgent : RoleBase
+public class DoubleAgent : RoleBase, IStandardRole
 {
     private const int Id = 645175;
     public static bool On;
@@ -13,6 +13,10 @@ public class DoubleAgent : RoleBase
     public static Dictionary<byte, CustomRoles> ShownRoles = [];
 
     public override bool IsEnable => On;
+
+    public Team Faction => Team.Crewmate;
+    public RoleOptionType? Alignment => RoleOptionType.Crewmate_Investigate;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

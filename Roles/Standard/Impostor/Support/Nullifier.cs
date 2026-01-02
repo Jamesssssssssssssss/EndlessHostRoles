@@ -3,7 +3,7 @@ using static EHR.Options;
 
 namespace EHR.Roles;
 
-internal class Nullifier : RoleBase
+internal class Nullifier : RoleBase, IStandardRole
 {
     private const int Id = 642000;
     public static List<byte> PlayerIdList = [];
@@ -13,6 +13,10 @@ internal class Nullifier : RoleBase
     private static OptionItem Delay;
 
     public override bool IsEnable => PlayerIdList.Count > 0;
+
+    public Team Faction => Team.Impostor;
+    public RoleOptionType? Alignment => RoleOptionType.Impostor_Support;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

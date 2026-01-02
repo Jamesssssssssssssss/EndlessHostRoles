@@ -1,8 +1,9 @@
+using System.Collections.Generic;
 using static EHR.Options;
 
 namespace EHR.Roles;
 
-public class Chameleon : RoleBase
+public class Chameleon : RoleBase, IStandardRole
 {
     private const int Id = 6300;
 
@@ -13,6 +14,10 @@ public class Chameleon : RoleBase
     public static OptionItem AbilityChargesWhenFinishedTasks;
 
     public override bool IsEnable => false;
+
+    public Team Faction => Team.Crewmate;
+    public RoleOptionType? Alignment => RoleOptionType.Crewmate_Investigate;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

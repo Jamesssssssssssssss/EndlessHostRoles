@@ -5,7 +5,7 @@ using Hazel;
 
 namespace EHR.Roles;
 
-internal class Impartial : RoleBase
+internal class Impartial : RoleBase, IStandardRole
 {
     public static bool On;
 
@@ -40,6 +40,10 @@ internal class Impartial : RoleBase
             return ImpKillCount.Killed == ImpKillCount.Limit && NeutralKillCount.Killed == NeutralKillCount.Limit && CrewKillCount.Killed == CrewKillCount.Limit && CovenKillCount.Killed == CovenKillCount.Limit;
         }
     }
+
+    public Team Faction => Team.Neutral;
+    public RoleOptionType? Alignment => RoleOptionType.Neutral_Benign;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

@@ -4,7 +4,7 @@ using Hazel;
 
 namespace EHR.Roles;
 
-public class Exclusionary : RoleBase
+public class Exclusionary : RoleBase, IStandardRole
 {
     public static bool On;
 
@@ -15,6 +15,10 @@ public class Exclusionary : RoleBase
     public override bool IsEnable => On;
 
     private List<(byte ID, long TS)> ExcludedPlayers;
+
+    public Team Faction => Team.Impostor;
+    public RoleOptionType? Alignment => RoleOptionType.Impostor_Concealing;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

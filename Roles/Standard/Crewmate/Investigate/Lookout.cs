@@ -1,8 +1,9 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace EHR.Roles;
 
-internal class Lookout : RoleBase
+internal class Lookout : RoleBase, IStandardRole
 {
     public static bool On;
     public override bool IsEnable => On;
@@ -16,6 +17,10 @@ internal class Lookout : RoleBase
     {
         On = false;
     }
+
+    public Team Faction => Team.Crewmate;
+    public RoleOptionType? Alignment => RoleOptionType.Crewmate_Investigate;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

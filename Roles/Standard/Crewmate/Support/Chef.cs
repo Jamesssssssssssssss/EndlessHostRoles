@@ -6,7 +6,7 @@ using Hazel;
 
 namespace EHR.Roles;
 
-public class Chef : RoleBase
+public class Chef : RoleBase, IStandardRole
 {
     public static bool On;
     private static List<Chef> Instances = [];
@@ -31,6 +31,10 @@ public class Chef : RoleBase
     private Dictionary<byte, long> RottenFood = [];
 
     public override bool IsEnable => On;
+
+    public Team Faction => Team.Crewmate;
+    public RoleOptionType? Alignment => RoleOptionType.Crewmate_Support;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

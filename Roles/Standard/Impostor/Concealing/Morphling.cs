@@ -4,7 +4,7 @@ using static EHR.Options;
 
 namespace EHR.Roles;
 
-public class Morphling : RoleBase
+public class Morphling : RoleBase, IStandardRole
 {
     private const int Id = 3000;
     public static List<byte> PlayerIdList = [];
@@ -14,6 +14,10 @@ public class Morphling : RoleBase
     private static OptionItem ShapeshiftDur;
     public override bool IsEnable => PlayerIdList.Count > 0;
 
+
+    public Team Faction => Team.Impostor;
+    public RoleOptionType? Alignment => RoleOptionType.Impostor_Concealing;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

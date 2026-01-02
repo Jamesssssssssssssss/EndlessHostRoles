@@ -4,7 +4,7 @@ using AmongUs.GameOptions;
 
 namespace EHR.Roles;
 
-public class Siren : CovenBase
+public class Siren : CovenBase, IStandardRole
 {
     public static bool On;
     private static List<Siren> Instances = [];
@@ -45,6 +45,10 @@ public class Siren : CovenBase
     protected override NecronomiconReceivePriorities NecronomiconReceivePriority => NecronomiconReceivePriorities.Random;
 
     public override bool IsEnable => On;
+
+    public Team Faction => Team.Coven;
+    public RoleOptionType? Alignment => RoleOptionType.Coven_Miscellaneous;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

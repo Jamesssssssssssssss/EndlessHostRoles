@@ -1,6 +1,8 @@
+using System.Collections.Generic;
+
 namespace EHR.Roles;
 
-public class Wraith : RoleBase
+public class Wraith : RoleBase, IStandardRole
 {
     public static OptionItem WraithCooldown;
     public static OptionItem WraithDuration;
@@ -10,6 +12,10 @@ public class Wraith : RoleBase
     public static OptionItem KillCooldown;
 
     public override bool IsEnable => false;
+
+    public Team Faction => Team.Neutral;
+    public RoleOptionType? Alignment => RoleOptionType.Neutral_Killing;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

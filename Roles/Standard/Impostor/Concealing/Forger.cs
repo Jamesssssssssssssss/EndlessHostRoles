@@ -2,7 +2,7 @@
 
 namespace EHR.Roles;
 
-public class Forger : RoleBase
+public class Forger : RoleBase, IStandardRole
 {
     public static bool On;
 
@@ -12,6 +12,10 @@ public class Forger : RoleBase
     private static OptionItem AbilityUseGainWithEachKill;
 
     public override bool IsEnable => On;
+
+    public Team Faction => Team.Impostor;
+    public RoleOptionType? Alignment => RoleOptionType.Impostor_Concealing;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

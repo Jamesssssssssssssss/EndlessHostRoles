@@ -8,7 +8,7 @@ using static EHR.Translator;
 
 namespace EHR.Roles;
 
-public class FortuneTeller : RoleBase
+public class FortuneTeller : RoleBase, IStandardRole
 {
     private const int Id = 6700;
     private static int RolesPerCategory;
@@ -28,6 +28,10 @@ public class FortuneTeller : RoleBase
     private static Dictionary<byte, List<CustomRoles>> AllPlayerRoleList = [];
 
     public override bool IsEnable => PlayerIdList.Count > 0;
+
+    public Team Faction => Team.Crewmate;
+    public RoleOptionType? Alignment => RoleOptionType.Crewmate_Investigate;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

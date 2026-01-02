@@ -1,8 +1,10 @@
-﻿using EHR.Modules;
+﻿using System.Collections.Generic;
+
+using EHR.Modules;
 
 namespace EHR.Roles;
 
-public class Pawn : RoleBase
+public class Pawn : RoleBase, IStandardRole
 {
     public static bool On;
 
@@ -11,6 +13,10 @@ public class Pawn : RoleBase
     public CustomRoles ChosenRole;
 
     public override bool IsEnable => On;
+
+    public Team Faction => Team.Neutral;
+    public RoleOptionType? Alignment => RoleOptionType.Neutral_Benign;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

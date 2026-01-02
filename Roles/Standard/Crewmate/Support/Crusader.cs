@@ -3,7 +3,7 @@ using AmongUs.GameOptions;
 
 namespace EHR.Roles;
 
-public class Crusader : RoleBase
+public class Crusader : RoleBase, IStandardRole
 {
     private const int Id = 20050;
     private static List<byte> PlayerIdList = [];
@@ -17,6 +17,10 @@ public class Crusader : RoleBase
     private float CurrentKillCooldown;
 
     public override bool IsEnable => PlayerIdList.Count > 0;
+
+    public Team Faction => Team.Crewmate;
+    public RoleOptionType? Alignment => RoleOptionType.Crewmate_Support;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

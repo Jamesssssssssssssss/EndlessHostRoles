@@ -1,13 +1,18 @@
-﻿using EHR.Modules;
+﻿using System.Collections.Generic;
+using EHR.Modules;
 using UnityEngine;
 using static EHR.Options;
 
 namespace EHR.Roles;
 
-internal class Scavenger : RoleBase
+internal class Scavenger : RoleBase, IStandardRole
 {
     public static bool On;
     public override bool IsEnable => On;
+
+    public Team Faction => Team.Impostor;
+    public RoleOptionType? Alignment => RoleOptionType.Impostor_Concealing;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

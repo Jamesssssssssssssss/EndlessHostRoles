@@ -5,7 +5,7 @@ using static EHR.Options;
 
 namespace EHR.Roles;
 
-public class Snitch : RoleBase
+public class Snitch : RoleBase, IStandardRole
 {
     private const int Id = 8000;
     private static readonly List<byte> PlayerIdList = [];
@@ -33,6 +33,10 @@ public class Snitch : RoleBase
     private byte SnitchId;
 
     public override bool IsEnable => PlayerIdList.Count > 0;
+
+    public Team Faction => Team.Crewmate;
+    public RoleOptionType? Alignment => RoleOptionType.Crewmate_Investigate;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

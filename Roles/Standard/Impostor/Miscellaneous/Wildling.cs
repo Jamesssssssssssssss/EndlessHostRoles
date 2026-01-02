@@ -7,7 +7,7 @@ using static EHR.Options;
 
 namespace EHR.Roles;
 
-public class Wildling : RoleBase
+public class Wildling : RoleBase, IStandardRole
 {
     private const int Id = 4700;
     public static List<byte> PlayerIdList = [];
@@ -34,6 +34,10 @@ public class Wildling : RoleBase
     public override bool IsEnable => PlayerIdList.Count > 0;
 
     private bool InProtect => TimeStamp > Utils.TimeStamp;
+
+    public Team Faction => Team.Impostor;
+    public RoleOptionType? Alignment => RoleOptionType.Impostor_Miscellaneous;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

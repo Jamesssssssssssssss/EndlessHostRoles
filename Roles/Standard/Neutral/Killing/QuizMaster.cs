@@ -9,7 +9,7 @@ using static EHR.Options;
 
 namespace EHR.Roles;
 
-internal class QuizMaster : RoleBase
+internal class QuizMaster : RoleBase, IStandardRole
 {
     private const int Id = 10890;
     public static bool On;
@@ -49,6 +49,10 @@ internal class QuizMaster : RoleBase
     public byte Target;
 
     public override bool IsEnable => On;
+
+    public Team Faction => Team.Neutral;
+    public RoleOptionType? Alignment => RoleOptionType.Neutral_Killing;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

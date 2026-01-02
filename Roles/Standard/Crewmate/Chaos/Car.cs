@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace EHR.Roles;
 
-public class Car : RoleBase
+public class Car : RoleBase, IStandardRole
 {
     public static bool On;
 
@@ -18,6 +18,10 @@ public class Car : RoleBase
     public static string Name => "<voffset=7em><alpha=#00>.</alpha></voffset><size=150%><font=\"VCR SDF\"><line-height=67%><br><alpha=#00>\u2588<#628d85>\u2588<#628d85>\u2588<#628d85>\u2588<#628d85>\u2588<#628d85>\u2588<alpha=#00>\u2588<alpha=#00>\u2588<br><#586874>\u2588<#586874>\u2588<#547a96>\u2588<#547a96>\u2588<#6894b6>\u2588<#6894b6>\u2588<#586874>\u2588<alpha=#00>\u2588<br><#586874>\u2588<#586874>\u2588<#586874>\u2588<#547a96>\u2588<#547a96>\u2588<#586874>\u2588<#586874>\u2588<#f5ee2e>\u2588<br><#000000>\u2588<#0d233f>\u2588<#586874>\u2588<#586874>\u2588<#586874>\u2588<#f5ee2e>\u2588<#586874>\u2588<#517a9a>\u2588<br><#000000>\u2588<#000000>\u2588<alpha=#00>\u2588<#000000>\u2588<#0d233f>\u2588<#586874>\u2588<#517a9a>\u2588<alpha=#00>\u2588<br><alpha=#00>\u2588<alpha=#00>\u2588<alpha=#00>\u2588<#000000>\u2588<#000000>\u2588<alpha=#00>\u2588<alpha=#00>\u2588<alpha=#00>\u2588<br></color></line-height></font></size>";
 
     public override bool IsEnable => On;
+
+    public Team Faction => Team.Crewmate;
+    public RoleOptionType? Alignment => RoleOptionType.Crewmate_Chaos;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace EHR.Roles;
 
-public class Stasis : RoleBase
+public class Stasis : RoleBase, IStandardRole
 {
     public static bool On;
     private static List<Stasis> Instances = [];
@@ -24,6 +24,10 @@ public class Stasis : RoleBase
     public override bool IsEnable => On;
 
     public static bool IsTimeFrozen => Instances.Any(x => x.UsingAbility);
+
+    public Team Faction => Team.Impostor;
+    public RoleOptionType? Alignment => RoleOptionType.Impostor_Concealing;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

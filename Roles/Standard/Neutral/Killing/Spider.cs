@@ -7,7 +7,7 @@ using Hazel;
 
 namespace EHR.Roles;
 
-public class Spider : RoleBase
+public class Spider : RoleBase, IStandardRole
 {
     public static bool On;
     private static List<Spider> Instances = [];
@@ -26,6 +26,10 @@ public class Spider : RoleBase
     private long LastNotifyTS;
     private bool NameDirty;
     private byte SpiderId;
+
+    public Team Faction => Team.Neutral;
+    public RoleOptionType? Alignment => RoleOptionType.Neutral_Killing;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

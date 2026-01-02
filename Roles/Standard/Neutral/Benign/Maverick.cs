@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using AmongUs.GameOptions;
 using EHR.Modules;
 using Hazel;
@@ -6,7 +7,7 @@ using static EHR.Options;
 
 namespace EHR.Roles;
 
-public class Maverick : RoleBase
+public class Maverick : RoleBase, IStandardRole
 {
     private const int Id = 10000;
 
@@ -19,6 +20,10 @@ public class Maverick : RoleBase
     public int NumOfKills;
 
     public override bool IsEnable => MaverickId != byte.MaxValue;
+
+    public Team Faction => Team.Neutral;
+    public RoleOptionType? Alignment => RoleOptionType.Neutral_Benign;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

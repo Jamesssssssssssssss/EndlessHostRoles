@@ -7,7 +7,7 @@ using static EHR.Translator;
 
 namespace EHR.Roles;
 
-public class PlagueBearer : RoleBase
+public class PlagueBearer : RoleBase, IStandardRole
 {
     private const int Id = 26000;
     public static List<byte> PlayerIdList = [];
@@ -21,6 +21,10 @@ public class PlagueBearer : RoleBase
     public static OptionItem InfectionSpreads;
 
     public override bool IsEnable => PlayerIdList.Count > 0;
+
+    public Team Faction => Team.Neutral;
+    public RoleOptionType? Alignment => RoleOptionType.Neutral_Killing;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {
@@ -156,10 +160,14 @@ public class PlagueBearer : RoleBase
     }
 }
 
-public class Pestilence : RoleBase
+public class Pestilence : RoleBase, IStandardRole
 {
     public static bool On;
     public override bool IsEnable => On;
+
+    public Team Faction => Team.Neutral;
+    public RoleOptionType? Alignment => RoleOptionType.Neutral_Killing;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption() { }
 

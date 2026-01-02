@@ -7,7 +7,7 @@ using static EHR.Translator;
 
 namespace EHR.Roles;
 
-public class Jailor : RoleBase
+public class Jailor : RoleBase, IStandardRole
 {
     private const int Id = 63420;
     public static List<byte> PlayerIdList = [];
@@ -21,6 +21,10 @@ public class Jailor : RoleBase
     public byte JailorTarget;
 
     public override bool IsEnable => PlayerIdList.Count > 0;
+
+    public Team Faction => Team.Crewmate;
+    public RoleOptionType? Alignment => RoleOptionType.Crewmate_Support;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

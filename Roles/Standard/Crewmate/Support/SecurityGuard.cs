@@ -4,12 +4,16 @@ using static EHR.Options;
 
 namespace EHR.Roles;
 
-internal class SecurityGuard : RoleBase
+internal class SecurityGuard : RoleBase, IStandardRole
 {
     public static Dictionary<byte, long> BlockSabo = [];
 
     public static bool On;
     public override bool IsEnable => On;
+
+    public Team Faction => Team.Crewmate;
+    public RoleOptionType? Alignment => RoleOptionType.Crewmate_Support;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

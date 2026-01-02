@@ -1,6 +1,8 @@
+using System.Collections.Generic;
+
 namespace EHR.Roles;
 
-public class Poisoner : RoleBase
+public class Poisoner : RoleBase, IStandardRole
 {
     private const int Id = 12700;
     public static OptionItem OptionKillDelay;
@@ -10,6 +12,10 @@ public class Poisoner : RoleBase
     public static OptionItem ImpostorVision;
 
     public override bool IsEnable => false;
+
+    public Team Faction => Team.Neutral;
+    public RoleOptionType? Alignment => RoleOptionType.Neutral_Killing;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

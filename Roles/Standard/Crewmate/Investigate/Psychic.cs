@@ -7,7 +7,7 @@ using static EHR.Options;
 
 namespace EHR.Roles;
 
-public class Psychic : RoleBase
+public class Psychic : RoleBase, IStandardRole
 {
     private const int Id = 7900;
     private static List<byte> PlayerIdList = [];
@@ -22,6 +22,10 @@ public class Psychic : RoleBase
     private List<byte> RedPlayer = [];
 
     public override bool IsEnable => PlayerIdList.Count > 0;
+
+    public Team Faction => Team.Crewmate;
+    public RoleOptionType? Alignment => RoleOptionType.Crewmate_Investigate;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

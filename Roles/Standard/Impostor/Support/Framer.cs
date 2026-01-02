@@ -2,7 +2,7 @@
 
 namespace EHR.Roles;
 
-public class Framer : RoleBase
+public class Framer : RoleBase, IStandardRole
 {
     public static bool On;
     public static readonly HashSet<byte> FramedPlayers = [];
@@ -11,6 +11,10 @@ public class Framer : RoleBase
     public static OptionItem FramerAbilityUseGainWithEachKill;
 
     public override bool IsEnable => On;
+
+    public Team Faction => Team.Impostor;
+    public RoleOptionType? Alignment => RoleOptionType.Impostor_Support;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

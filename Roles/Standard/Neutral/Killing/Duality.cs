@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System.Collections.Generic;
+using System.Diagnostics;
 using AmongUs.GameOptions;
 using EHR.Modules;
 using EHR.Modules.Extensions;
@@ -6,7 +7,7 @@ using Hazel;
 
 namespace EHR.Roles;
 
-public class Duality : RoleBase
+public class Duality : RoleBase, IStandardRole
 {
     public static bool On;
 
@@ -20,6 +21,10 @@ public class Duality : RoleBase
     private Stopwatch Timer;
     private long LastUpdateTS;
     private byte DualityId;
+
+    public Team Faction => Team.Neutral;
+    public RoleOptionType? Alignment => RoleOptionType.Neutral_Killing;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

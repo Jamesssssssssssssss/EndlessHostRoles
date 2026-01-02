@@ -7,7 +7,7 @@ using static EHR.Options;
 
 namespace EHR.Roles;
 
-public class Lawyer : RoleBase
+public class Lawyer : RoleBase, IStandardRole
 {
     private const int Id = 9900;
     private static List<byte> PlayerIdList = [];
@@ -40,6 +40,10 @@ public class Lawyer : RoleBase
     private byte LawyerId;
 
     public override bool IsEnable => PlayerIdList.Count > 0;
+
+    public Team Faction => Team.Neutral;
+    public RoleOptionType? Alignment => RoleOptionType.Neutral_Benign;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

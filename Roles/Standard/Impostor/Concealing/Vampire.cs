@@ -8,7 +8,7 @@ using static EHR.Translator;
 
 namespace EHR.Roles;
 
-public class Vampire : RoleBase
+public class Vampire : RoleBase, IStandardRole
 {
     private const int Id = 4500;
     private static readonly List<byte> PlayerIdList = [];
@@ -25,6 +25,10 @@ public class Vampire : RoleBase
     private float KillDelay;
 
     public override bool IsEnable => PlayerIdList.Count > 0;
+
+    public Team Faction => Team.Impostor;
+    public RoleOptionType? Alignment => RoleOptionType.Impostor_Concealing;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

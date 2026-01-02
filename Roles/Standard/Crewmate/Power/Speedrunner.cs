@@ -1,10 +1,11 @@
-﻿using AmongUs.GameOptions;
+﻿using System.Collections.Generic;
+using AmongUs.GameOptions;
 using EHR.Modules;
 using static EHR.Options;
 
 namespace EHR.Roles;
 
-internal class Speedrunner : RoleBase
+internal class Speedrunner : RoleBase, IStandardRole
 {
     public static bool On;
 
@@ -26,6 +27,10 @@ internal class Speedrunner : RoleBase
         On = false;
         SpeedrunnerPC = null;
     }
+
+    public Team Faction => Team.Crewmate;
+    public RoleOptionType? Alignment => RoleOptionType.Crewmate_Power;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

@@ -1,9 +1,10 @@
-﻿using AmongUs.GameOptions;
+﻿using System.Collections.Generic;
+using AmongUs.GameOptions;
 using EHR.Modules;
 
 namespace EHR.Roles;
 
-public class Vortex : RoleBase
+public class Vortex : RoleBase, IStandardRole
 {
     private const int Id = 645650;
     public static bool On;
@@ -14,6 +15,10 @@ public class Vortex : RoleBase
     private static OptionItem IfTargetCannotBeTeleported;
 
     public override bool IsEnable => On;
+
+    public Team Faction => Team.Neutral;
+    public RoleOptionType? Alignment => RoleOptionType.Neutral_Killing;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

@@ -1,6 +1,8 @@
-﻿namespace EHR.Roles;
+﻿using System.Collections.Generic;
 
-public class NecroGuesser : RoleBase
+namespace EHR.Roles;
+
+public class NecroGuesser : RoleBase, IStandardRole
 {
     public static bool On;
 
@@ -9,6 +11,10 @@ public class NecroGuesser : RoleBase
     public int GuessedPlayers;
 
     public override bool IsEnable => On;
+
+    public Team Faction => Team.Neutral;
+    public RoleOptionType? Alignment => RoleOptionType.Neutral_Benign;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

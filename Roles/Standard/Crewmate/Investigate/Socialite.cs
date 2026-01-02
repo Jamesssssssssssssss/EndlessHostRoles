@@ -5,7 +5,7 @@ using Hazel;
 
 namespace EHR.Roles;
 
-public class Socialite : RoleBase
+public class Socialite : RoleBase, IStandardRole
 {
     public static bool On;
     private static List<Socialite> Instances = [];
@@ -18,6 +18,10 @@ public class Socialite : RoleBase
     private byte SocialiteId;
 
     public override bool IsEnable => On;
+
+    public Team Faction => Team.Crewmate;
+    public RoleOptionType? Alignment => RoleOptionType.Crewmate_Investigate;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

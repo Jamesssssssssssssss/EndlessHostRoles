@@ -9,7 +9,7 @@ using static EHR.Utils;
 
 namespace EHR.Roles;
 
-internal class Tornado : RoleBase
+internal class Tornado : RoleBase, IStandardRole
 {
     private static readonly List<byte> PlayerIdList = [];
 
@@ -27,6 +27,10 @@ internal class Tornado : RoleBase
     private static int Id => 64420;
 
     public override bool IsEnable => PlayerIdList.Count > 0 || Randomizer.Exists;
+
+    public Team Faction => Team.Crewmate;
+    public RoleOptionType? Alignment => RoleOptionType.Crewmate_Chaos;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

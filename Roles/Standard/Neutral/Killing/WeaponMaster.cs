@@ -7,7 +7,7 @@ using static EHR.Translator;
 
 namespace EHR.Roles;
 
-public class WeaponMaster : RoleBase
+public class WeaponMaster : RoleBase, IStandardRole
 {
     private const int Id = 641200;
     public static List<byte> PlayerIdList = [];
@@ -30,6 +30,10 @@ public class WeaponMaster : RoleBase
      * 2 = Reach + Swift / Can't Vent (Lance)
      * 3 = 1-Time Shield / Can't Kill (Shield)
      */
+
+    public Team Faction => Team.Neutral;
+    public RoleOptionType? Alignment => RoleOptionType.Neutral_Killing;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

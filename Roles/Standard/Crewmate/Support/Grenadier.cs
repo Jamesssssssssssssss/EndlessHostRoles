@@ -6,13 +6,17 @@ using static EHR.Options;
 
 namespace EHR.Roles;
 
-internal class Grenadier : RoleBase
+internal class Grenadier : RoleBase, IStandardRole
 {
     public static Dictionary<byte, long> GrenadierBlinding = [];
     public static Dictionary<byte, long> MadGrenadierBlinding = [];
 
     public static bool On;
     public override bool IsEnable => On;
+
+    public Team Faction => Team.Crewmate;
+    public RoleOptionType? Alignment => RoleOptionType.Crewmate_Support;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

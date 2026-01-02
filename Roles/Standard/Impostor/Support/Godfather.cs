@@ -1,10 +1,16 @@
-﻿namespace EHR.Roles;
+﻿using System.Collections.Generic;
 
-internal class Godfather : RoleBase
+namespace EHR.Roles;
+
+internal class Godfather : RoleBase, IStandardRole
 {
     public static byte GodfatherTarget = byte.MaxValue;
     public static bool On;
     public override bool IsEnable => On;
+
+    public Team Faction => Team.Impostor;
+    public RoleOptionType? Alignment => RoleOptionType.Impostor_Support;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

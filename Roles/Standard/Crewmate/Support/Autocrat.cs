@@ -1,8 +1,9 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace EHR.Roles;
 
-internal class Autocrat : RoleBase
+internal class Autocrat : RoleBase, IStandardRole
 {
     public static bool On;
     public override bool IsEnable => On;
@@ -16,6 +17,10 @@ internal class Autocrat : RoleBase
     {
         On = false;
     }
+
+    public Team Faction => Team.Crewmate;
+    public RoleOptionType? Alignment => RoleOptionType.Crewmate_Support;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

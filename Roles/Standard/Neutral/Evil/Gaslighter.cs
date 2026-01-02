@@ -7,7 +7,7 @@ using Hazel;
 
 namespace EHR.Roles;
 
-public class Gaslighter : RoleBase
+public class Gaslighter : RoleBase, IStandardRole
 {
     public static bool On;
     private static List<Gaslighter> Instances = [];
@@ -31,6 +31,10 @@ public class Gaslighter : RoleBase
     private HashSet<byte> ShieldedPlayers;
 
     public override bool IsEnable => On;
+
+    public Team Faction => Team.Neutral;
+    public RoleOptionType? Alignment => RoleOptionType.Neutral_Evil;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

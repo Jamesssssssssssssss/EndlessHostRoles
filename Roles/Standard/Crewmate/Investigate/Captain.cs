@@ -5,7 +5,7 @@ using Hazel;
 
 namespace EHR.Roles;
 
-public class Captain : RoleBase
+public class Captain : RoleBase, IStandardRole
 {
     public static bool On;
 
@@ -18,6 +18,10 @@ public class Captain : RoleBase
     private int Count;
     private byte TargetId;
     private List<SystemTypes> TargetRooms;
+
+    public Team Faction => Team.Crewmate;
+    public RoleOptionType? Alignment => RoleOptionType.Crewmate_Investigate;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

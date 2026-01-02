@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace EHR.Roles;
 
-public class Dealer : RoleBase
+public class Dealer : RoleBase, IStandardRole
 {
     public static bool On;
 
@@ -28,6 +28,10 @@ public class Dealer : RoleBase
     public override bool IsEnable => On;
 
     public bool IsWon => AssignedNum >= AssignNeedToWin.GetInt();
+
+    public Team Faction => Team.Neutral;
+    public RoleOptionType? Alignment => RoleOptionType.Neutral_Benign;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

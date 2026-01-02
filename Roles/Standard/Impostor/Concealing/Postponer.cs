@@ -1,9 +1,9 @@
-﻿using EHR.Modules;
-using UnityEngine;
+﻿using System.Collections.Generic;
+using EHR.Modules;
 
 namespace EHR.Roles;
 
-public class Postponer : RoleBase
+public class Postponer : RoleBase, IStandardRole
 {
     public static bool On;
 
@@ -11,6 +11,10 @@ public class Postponer : RoleBase
 
     private static OptionItem KillCooldown;
     private static OptionItem BodyDelay;
+
+    public Team Faction => Team.Impostor;
+    public RoleOptionType? Alignment => RoleOptionType.Impostor_Concealing;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

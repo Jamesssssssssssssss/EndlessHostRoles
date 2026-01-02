@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace EHR.Roles;
 
-public class Catalyst : RoleBase
+public class Catalyst : RoleBase, IStandardRole
 {
     public static bool On;
     private static List<CustomRoles> Addons = [];
@@ -15,6 +15,10 @@ public class Catalyst : RoleBase
     public override bool IsEnable => On;
 
     public Dictionary<byte, List<CustomRoles>> GivenAddons;
+
+    public Team Faction => Team.Impostor;
+    public RoleOptionType? Alignment => RoleOptionType.Impostor_Support;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

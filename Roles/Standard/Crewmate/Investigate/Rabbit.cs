@@ -5,7 +5,7 @@ using Hazel;
 
 namespace EHR.Roles;
 
-internal class Rabbit : RoleBase
+internal class Rabbit : RoleBase, IStandardRole
 {
     private static readonly Dictionary<byte, RabbitState> RabbitStates = [];
     private static OptionItem OptionTaskTrigger;
@@ -13,6 +13,10 @@ internal class Rabbit : RoleBase
 
     private static int Id => 643330;
     public override bool IsEnable => RabbitStates.Count > 0;
+
+    public Team Faction => Team.Crewmate;
+    public RoleOptionType? Alignment => RoleOptionType.Crewmate_Investigate;
+    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
 
     public override void SetupCustomOption()
     {

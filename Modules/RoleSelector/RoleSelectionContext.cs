@@ -11,6 +11,7 @@ public sealed record class RoleSelectionContext
 
     public RoleLimits Limits { get; init; }
     
+    #nullable enable
     public StandardRoleBase? Candidate { get; set; }
 
     public void RemoveRole(CustomRoles roleId)

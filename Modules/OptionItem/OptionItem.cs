@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using EHR.Modules;
+using EHR.Roles;
 using UnityEngine;
 
 namespace EHR;

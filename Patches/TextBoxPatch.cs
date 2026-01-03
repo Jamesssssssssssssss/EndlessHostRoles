@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using AmongUs.Data;
+using EHR.Roles;
 using HarmonyLib;
 using InnerNet;
 using TMPro;

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using EHR.Roles;
 using Hazel;
 
 namespace EHR;

@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using EHR.Roles;
 using UnityEngine;
 using static EHR.Translator;
 

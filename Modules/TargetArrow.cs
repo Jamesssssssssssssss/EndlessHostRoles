@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using EHR.Modules;
+using EHR.Roles;
 using Hazel;
 using UnityEngine;
 

@@ -1,5 +1,6 @@
 using System;
 using AmongUs.GameOptions;
+using EHR.Roles;
 using HarmonyLib;
 using UnityEngine;
 

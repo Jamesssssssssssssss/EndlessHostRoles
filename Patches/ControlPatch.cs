@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using EHR.Modules;
 using EHR.Patches;
+using EHR.Roles;
 using HarmonyLib;
 using Rewired;
 using TMPro;

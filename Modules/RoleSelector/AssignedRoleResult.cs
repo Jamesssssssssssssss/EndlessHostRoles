@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using EHR;
+using EHR.Roles;
 
 public sealed class AssignedRoleResult
 {

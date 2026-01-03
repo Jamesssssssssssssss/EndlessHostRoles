@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using EHR.Roles;
 
 namespace EHR.Modules.RoleSelector;
 

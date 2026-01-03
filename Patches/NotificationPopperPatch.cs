@@ -1,4 +1,5 @@
 ﻿using EHR.Modules;
+using EHR.Roles;
 using HarmonyLib;
 using Il2CppSystem;
 using UnityEngine;

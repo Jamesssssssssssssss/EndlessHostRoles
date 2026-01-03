@@ -1,3 +1,4 @@
+using EHR.Roles;
 using HarmonyLib;
 
 namespace EHR;

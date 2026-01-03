@@ -1,4 +1,4 @@
-﻿namespace EHR;
+﻿namespace EHR.Roles;
 
 public enum CustomRoles
 {
@@ -427,19 +427,19 @@ public enum CustomRoles
     VoodooMaster,
     Wyrd,
 
-    // Solo Kombat
+    // Solo PVP
     Challenger,
 
     // FFA
     Killer,
 
-    // Move And Stop
+    // Stop And Go
     Tasker,
 
     // Hot Potato
     Potato,
 
-    // H&S
+    // Hide And Seek
     Hider,
     Seeker,
     Fox,

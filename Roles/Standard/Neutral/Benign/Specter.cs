@@ -3,13 +3,12 @@ using static EHR.Options;
 
 namespace EHR.Roles;
 
-internal class Specter : RoleBase, IStandardRole
+internal class Specter : StandardRoleBase
 {
     public override bool IsEnable => false;
 
-    public Team Faction => Team.Neutral;
-    public RoleOptionType? Alignment => RoleOptionType.Neutral_Benign;
-    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
+    public override Team Faction => Team.Neutral;
+    public override RoleOptionType? Alignment => RoleOptionType.Neutral_Benign;
 
     public override void SetupCustomOption()
     {

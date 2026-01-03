@@ -6,7 +6,7 @@ using static EHR.Translator;
 
 namespace EHR.Roles;
 
-public class Monarch : RoleBase, IStandardRole
+public class Monarch : StandardRoleBase
 {
     private const int Id = 9600;
     private static List<byte> PlayerIdList = [];
@@ -17,9 +17,8 @@ public class Monarch : RoleBase, IStandardRole
 
     public override bool IsEnable => PlayerIdList.Count > 0;
 
-    public Team Faction => Team.Crewmate;
-    public RoleOptionType? Alignment => RoleOptionType.Crewmate_Support;
-    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
+    public override Team Faction => Team.Crewmate;
+    public override RoleOptionType? Alignment => RoleOptionType.Crewmate_Support;
 
     public override void SetupCustomOption()
     {

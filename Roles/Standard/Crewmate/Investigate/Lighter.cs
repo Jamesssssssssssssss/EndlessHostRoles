@@ -4,16 +4,15 @@ using static EHR.Options;
 
 namespace EHR.Roles;
 
-internal class Lighter : RoleBase, IStandardRole
+internal class Lighter : StandardRoleBase
 {
     public static bool On;
     private long ActivateTimeStamp;
     private bool IsAbilityActive;
     public override bool IsEnable => On;
 
-    public Team Faction => Team.Crewmate;
-    public RoleOptionType? Alignment => RoleOptionType.Crewmate_Investigate;
-    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
+    public override Team Faction => Team.Crewmate;
+    public override RoleOptionType? Alignment => RoleOptionType.Crewmate_Investigate;
 
     public override void SetupCustomOption()
     {

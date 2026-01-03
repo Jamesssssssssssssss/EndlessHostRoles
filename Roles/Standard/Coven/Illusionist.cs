@@ -5,7 +5,7 @@ using Hazel;
 
 namespace EHR.Roles;
 
-public class Illusionist : CovenBase, IStandardRole
+public class Illusionist : CovenBase
 {
     public static bool On;
 
@@ -22,9 +22,8 @@ public class Illusionist : CovenBase, IStandardRole
 
     public override bool IsEnable => On;
 
-    public Team Faction => Team.Coven;
-    public RoleOptionType? Alignment => RoleOptionType.Coven_Miscellaneous;
-    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
+    public override Team Faction => Team.Coven;
+    public override RoleOptionType? Alignment => RoleOptionType.Coven_Miscellaneous;
 
     public override void SetupCustomOption()
     {

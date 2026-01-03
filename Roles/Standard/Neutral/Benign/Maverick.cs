@@ -7,7 +7,7 @@ using static EHR.Options;
 
 namespace EHR.Roles;
 
-public class Maverick : RoleBase, IStandardRole
+public class Maverick : StandardRoleBase
 {
     private const int Id = 10000;
 
@@ -21,9 +21,8 @@ public class Maverick : RoleBase, IStandardRole
 
     public override bool IsEnable => MaverickId != byte.MaxValue;
 
-    public Team Faction => Team.Neutral;
-    public RoleOptionType? Alignment => RoleOptionType.Neutral_Benign;
-    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
+    public override Team Faction => Team.Neutral;
+    public override RoleOptionType? Alignment => RoleOptionType.Neutral_Benign;
 
     public override void SetupCustomOption()
     {

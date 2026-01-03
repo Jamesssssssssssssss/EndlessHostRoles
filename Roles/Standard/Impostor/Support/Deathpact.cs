@@ -9,7 +9,7 @@ using static EHR.Utils;
 
 namespace EHR.Roles;
 
-public class Deathpact : RoleBase, IStandardRole
+public class Deathpact : StandardRoleBase
 {
     private const int Id = 1100;
     private static List<Deathpact> Instances = [];
@@ -31,9 +31,8 @@ public class Deathpact : RoleBase, IStandardRole
 
     public override bool IsEnable => Instances.Count > 0 || Randomizer.Exists;
 
-    public Team Faction => Team.Impostor;
-    public RoleOptionType? Alignment => RoleOptionType.Impostor_Support;
-    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
+    public override Team Faction => Team.Impostor;
+    public override RoleOptionType? Alignment => RoleOptionType.Impostor_Support;
 
     public override void SetupCustomOption()
     {

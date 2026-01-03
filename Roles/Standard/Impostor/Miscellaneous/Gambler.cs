@@ -8,7 +8,7 @@ using static EHR.Utils;
 
 namespace EHR.Roles;
 
-public class Gambler : RoleBase, IStandardRole
+public class Gambler : StandardRoleBase
 {
     private const int Id = 640700;
     private static List<byte> PlayerIdList = [];
@@ -42,9 +42,8 @@ public class Gambler : RoleBase, IStandardRole
 
     public override bool IsEnable => PlayerIdList.Count > 0;
 
-    public Team Faction => Team.Impostor;
-    public RoleOptionType? Alignment => RoleOptionType.Impostor_Miscellaneous;
-    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
+    public override Team Faction => Team.Impostor;
+    public override RoleOptionType? Alignment => RoleOptionType.Impostor_Miscellaneous;
 
     public override void SetupCustomOption()
     {

@@ -3,7 +3,7 @@ using static EHR.Translator;
 
 namespace EHR.Roles;
 
-public class Consort : RoleBase, IStandardRole
+public class Consort : StandardRoleBase
 {
     private const int Id = 642400;
     private static List<byte> PlayerIdList = [];
@@ -14,9 +14,8 @@ public class Consort : RoleBase, IStandardRole
 
     public override bool IsEnable => PlayerIdList.Count > 0;
 
-    public Team Faction => Team.Impostor;
-    public RoleOptionType? Alignment => RoleOptionType.Impostor_Support;
-    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
+    public override Team Faction => Team.Impostor;
+    public override RoleOptionType? Alignment => RoleOptionType.Impostor_Support;
 
     public override void SetupCustomOption()
     {

@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace EHR.Roles;
 
-internal class Lookout : RoleBase, IStandardRole
+internal class Lookout : StandardRoleBase
 {
     public static bool On;
     public override bool IsEnable => On;
@@ -18,9 +18,8 @@ internal class Lookout : RoleBase, IStandardRole
         On = false;
     }
 
-    public Team Faction => Team.Crewmate;
-    public RoleOptionType? Alignment => RoleOptionType.Crewmate_Investigate;
-    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
+    public override Team Faction => Team.Crewmate;
+    public override RoleOptionType? Alignment => RoleOptionType.Crewmate_Investigate;
 
     public override void SetupCustomOption()
     {

@@ -2,7 +2,7 @@
 
 namespace EHR.Roles;
 
-public class Sensor : RoleBase, IStandardRole
+public class Sensor : StandardRoleBase
 {
     public static bool On;
 
@@ -15,9 +15,8 @@ public class Sensor : RoleBase, IStandardRole
 
     private byte SensorId;
 
-    public Team Faction => Team.Crewmate;
-    public RoleOptionType? Alignment => RoleOptionType.Crewmate_Investigate;
-    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
+    public override Team Faction => Team.Crewmate;
+    public override RoleOptionType? Alignment => RoleOptionType.Crewmate_Investigate;
 
     public override void SetupCustomOption()
     {

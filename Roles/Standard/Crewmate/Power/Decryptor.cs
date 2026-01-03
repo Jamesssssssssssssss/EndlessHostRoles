@@ -6,7 +6,7 @@ using Hazel;
 
 namespace EHR.Roles;
 
-public class Decryptor : RoleBase, IStandardRole
+public class Decryptor : StandardRoleBase
 {
     public static bool On;
     public static List<Decryptor> Instances = [];
@@ -30,9 +30,8 @@ public class Decryptor : RoleBase, IStandardRole
 
     public override bool IsEnable => On;
 
-    public Team Faction => Team.Crewmate;
-    public RoleOptionType? Alignment => RoleOptionType.Crewmate_Power;
-    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
+    public override Team Faction => Team.Crewmate;
+    public override RoleOptionType? Alignment => RoleOptionType.Crewmate_Power;
 
     public override void SetupCustomOption()
     {

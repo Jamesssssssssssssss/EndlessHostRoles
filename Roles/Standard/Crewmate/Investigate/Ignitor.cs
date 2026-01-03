@@ -7,7 +7,7 @@ namespace EHR.Roles;
 
 using static Options;
 
-public class Ignitor : RoleBase, IStandardRole // Candle Lighter from TOHY
+public class Ignitor : StandardRoleBase // Candle Lighter from TOHY
 {
     private const int Id = 5280;
     private static List<byte> PlayerIdList = [];
@@ -25,9 +25,8 @@ public class Ignitor : RoleBase, IStandardRole // Candle Lighter from TOHY
 
     public override bool IsEnable => PlayerIdList.Count > 0;
 
-    public Team Faction => Team.Crewmate;
-    public RoleOptionType? Alignment => RoleOptionType.Crewmate_Investigate;
-    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
+    public override Team Faction => Team.Crewmate;
+    public override RoleOptionType? Alignment => RoleOptionType.Crewmate_Investigate;
 
     public override void SetupCustomOption()
     {

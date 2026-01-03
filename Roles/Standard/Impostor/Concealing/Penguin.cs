@@ -7,7 +7,7 @@ using static EHR.Translator;
 
 namespace EHR.Roles;
 
-public class Penguin : RoleBase, IStandardRole
+public class Penguin : StandardRoleBase
 {
     private const int Id = 641800;
 
@@ -50,9 +50,8 @@ public class Penguin : RoleBase, IStandardRole
         return false;
     }
 
-    public Team Faction => Team.Impostor;
-    public RoleOptionType? Alignment => RoleOptionType.Impostor_Concealing;
-    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
+    public override Team Faction => Team.Impostor;
+    public override RoleOptionType? Alignment => RoleOptionType.Impostor_Concealing;
 
     public override void SetupCustomOption()
     {

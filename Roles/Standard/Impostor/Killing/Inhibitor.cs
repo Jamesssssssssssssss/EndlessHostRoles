@@ -5,7 +5,7 @@ using static EHR.Options;
 
 namespace EHR.Roles;
 
-internal class Inhibitor : RoleBase, IStandardRole
+internal class Inhibitor : StandardRoleBase
 {
     public static bool On;
     private byte InhibitorId;
@@ -15,9 +15,8 @@ internal class Inhibitor : RoleBase, IStandardRole
     public static OptionItem InhibitorCDAfterMeetings;
     public static OptionItem InhibitorSpeed;
 
-    public Team Faction => Team.Impostor;
-    public RoleOptionType? Alignment => RoleOptionType.Impostor_Killing;
-    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
+    public override Team Faction => Team.Impostor;
+    public override RoleOptionType? Alignment => RoleOptionType.Impostor_Killing;
 
     public override void SetupCustomOption()
     {

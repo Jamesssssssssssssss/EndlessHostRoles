@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace EHR.Roles;
 
-public class Inquisitor : RoleBase, IStandardRole
+public class Inquisitor : StandardRoleBase
 {
     public static bool On;
 
@@ -15,9 +15,8 @@ public class Inquisitor : RoleBase, IStandardRole
     private static OptionItem AbilityUseGainWithEachTaskCompleted;
     private static OptionItem AbilityChargesWhenFinishedTasks;
 
-    public Team Faction => Team.Crewmate;
-    public RoleOptionType? Alignment => RoleOptionType.Crewmate_Investigate;
-    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
+    public override Team Faction => Team.Crewmate;
+    public override RoleOptionType? Alignment => RoleOptionType.Crewmate_Investigate;
 
     public override void SetupCustomOption()
     {

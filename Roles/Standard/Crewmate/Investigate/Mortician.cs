@@ -4,7 +4,7 @@ using static EHR.Options;
 
 namespace EHR.Roles;
 
-public class Mortician : RoleBase, IStandardRole
+public class Mortician : StandardRoleBase
 {
     private const int Id = 7400;
     public static List<byte> PlayerIdList = [];
@@ -20,9 +20,8 @@ public class Mortician : RoleBase, IStandardRole
 
     public override bool SeesArrowsToDeadBodies => ShowArrows.GetBool();
 
-    public Team Faction => Team.Crewmate;
-    public RoleOptionType? Alignment => RoleOptionType.Crewmate_Investigate;
-    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
+    public override Team Faction => Team.Crewmate;
+    public override RoleOptionType? Alignment => RoleOptionType.Crewmate_Investigate;
 
     public override void SetupCustomOption()
     {

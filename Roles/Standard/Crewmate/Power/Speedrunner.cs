@@ -5,7 +5,7 @@ using static EHR.Options;
 
 namespace EHR.Roles;
 
-internal class Speedrunner : RoleBase, IStandardRole
+internal class Speedrunner : StandardRoleBase
 {
     public static bool On;
 
@@ -28,9 +28,8 @@ internal class Speedrunner : RoleBase, IStandardRole
         SpeedrunnerPC = null;
     }
 
-    public Team Faction => Team.Crewmate;
-    public RoleOptionType? Alignment => RoleOptionType.Crewmate_Power;
-    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
+    public override Team Faction => Team.Crewmate;
+    public override RoleOptionType? Alignment => RoleOptionType.Crewmate_Power;
 
     public override void SetupCustomOption()
     {

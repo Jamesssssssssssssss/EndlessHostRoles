@@ -5,7 +5,7 @@ using static EHR.Translator;
 
 namespace EHR.Roles;
 
-public class Enigma : RoleBase, IStandardRole
+public class Enigma : StandardRoleBase
 {
     private const int Id = 8460;
     public static List<byte> PlayerIdList = [];
@@ -51,9 +51,8 @@ public class Enigma : RoleBase, IStandardRole
 
     public override bool IsEnable => PlayerIdList.Count > 0;
 
-    public Team Faction => Team.Crewmate;
-    public RoleOptionType? Alignment => RoleOptionType.Crewmate_Investigate;
-    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
+    public override Team Faction => Team.Crewmate;
+    public override RoleOptionType? Alignment => RoleOptionType.Crewmate_Investigate;
 
     public override void SetupCustomOption()
     {

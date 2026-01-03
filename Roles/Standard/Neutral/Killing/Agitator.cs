@@ -8,7 +8,7 @@ using static EHR.Translator;
 
 namespace EHR.Roles;
 
-public class Agitator : RoleBase, IStandardRole
+public class Agitator : StandardRoleBase
 {
     private const int Id = 12420;
     private static List<byte> PlayerIdList = [];
@@ -28,9 +28,8 @@ public class Agitator : RoleBase, IStandardRole
 
     public override bool IsEnable => PlayerIdList.Count > 0 || Randomizer.Exists;
 
-    public Team Faction => Team.Neutral;
-    public RoleOptionType? Alignment => RoleOptionType.Neutral_Killing;
-    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
+    public override Team Faction => Team.Neutral;
+    public override RoleOptionType? Alignment => RoleOptionType.Neutral_Killing;
 
     public override void SetupCustomOption()
     {

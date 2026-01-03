@@ -9,7 +9,7 @@ using static EHR.Translator;
 
 namespace EHR.Roles;
 
-public class Virus : RoleBase, IStandardRole
+public class Virus : StandardRoleBase
 {
     private const int Id = 13200;
     public static List<byte> PlayerIdList = [];
@@ -37,9 +37,8 @@ public class Virus : RoleBase, IStandardRole
 
     public override bool IsEnable => PlayerIdList.Count > 0;
 
-    public Team Faction => Team.Neutral;
-    public RoleOptionType? Alignment => RoleOptionType.Neutral_Killing;
-    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
+    public override Team Faction => Team.Neutral;
+    public override RoleOptionType? Alignment => RoleOptionType.Neutral_Killing;
 
     public override void SetupCustomOption()
     {

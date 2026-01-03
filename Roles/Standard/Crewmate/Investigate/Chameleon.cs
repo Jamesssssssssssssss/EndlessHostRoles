@@ -3,7 +3,7 @@ using static EHR.Options;
 
 namespace EHR.Roles;
 
-public class Chameleon : RoleBase, IStandardRole
+public class Chameleon : StandardRoleBase
 {
     private const int Id = 6300;
 
@@ -15,9 +15,8 @@ public class Chameleon : RoleBase, IStandardRole
 
     public override bool IsEnable => false;
 
-    public Team Faction => Team.Crewmate;
-    public RoleOptionType? Alignment => RoleOptionType.Crewmate_Investigate;
-    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
+    public override Team Faction => Team.Crewmate;
+    public override RoleOptionType? Alignment => RoleOptionType.Crewmate_Investigate;
 
     public override void SetupCustomOption()
     {

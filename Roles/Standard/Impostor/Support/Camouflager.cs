@@ -3,7 +3,7 @@ using AmongUs.GameOptions;
 
 namespace EHR.Roles;
 
-public class Camouflager : RoleBase, IStandardRole
+public class Camouflager : StandardRoleBase
 {
     private const int Id = 2500;
 
@@ -18,9 +18,8 @@ public class Camouflager : RoleBase, IStandardRole
 
     public override bool IsEnable => On;
 
-    public Team Faction => Team.Impostor;
-    public RoleOptionType? Alignment => RoleOptionType.Impostor_Support;
-    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
+    public override Team Faction => Team.Impostor;
+    public override RoleOptionType? Alignment => RoleOptionType.Impostor_Support;
 
     public override void SetupCustomOption()
     {

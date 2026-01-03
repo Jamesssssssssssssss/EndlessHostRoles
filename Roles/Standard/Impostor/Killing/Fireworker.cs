@@ -7,7 +7,7 @@ using static EHR.Translator;
 
 namespace EHR.Roles;
 
-public class Fireworker : RoleBase, IStandardRole
+public class Fireworker : StandardRoleBase
 {
     [Flags]
     public enum FireworkerState
@@ -37,9 +37,8 @@ public class Fireworker : RoleBase, IStandardRole
 
     public override bool IsEnable => On;
 
-    public Team Faction => Team.Impostor;
-    public RoleOptionType? Alignment => RoleOptionType.Impostor_Killing;
-    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
+    public override Team Faction => Team.Impostor;
+    public override RoleOptionType? Alignment => RoleOptionType.Impostor_Killing;
 
     public override void SetupCustomOption()
     {

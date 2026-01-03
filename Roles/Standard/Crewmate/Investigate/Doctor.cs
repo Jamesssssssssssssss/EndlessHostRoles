@@ -3,14 +3,13 @@ using AmongUs.GameOptions;
 
 namespace EHR.Roles;
 
-internal class Doctor : RoleBase, IStandardRole
+internal class Doctor : StandardRoleBase
 {
     public static bool On;
     public override bool IsEnable => On;
 
-    public Team Faction => Team.Crewmate;
-    public RoleOptionType? Alignment => RoleOptionType.Crewmate_Investigate;
-    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
+    public override Team Faction => Team.Crewmate;
+    public override RoleOptionType? Alignment => RoleOptionType.Crewmate_Investigate;
 
     public override void SetupCustomOption()
     {

@@ -6,7 +6,7 @@ using static EHR.Utils;
 
 namespace EHR.Roles;
 
-public class Mastermind : RoleBase, IStandardRole
+public class Mastermind : StandardRoleBase
 {
     private const int Id = 640600;
 
@@ -27,9 +27,8 @@ public class Mastermind : RoleBase, IStandardRole
 
     public override bool IsEnable => MastermindId != byte.MaxValue || Randomizer.Exists;
 
-    public Team Faction => Team.Impostor;
-    public RoleOptionType? Alignment => RoleOptionType.Impostor_Concealing;
-    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
+    public override Team Faction => Team.Impostor;
+    public override RoleOptionType? Alignment => RoleOptionType.Impostor_Concealing;
 
     public override void SetupCustomOption()
     {

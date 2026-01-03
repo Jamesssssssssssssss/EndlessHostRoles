@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace EHR.Roles;
 
-public class Retributionist : RoleBase, IStandardRole
+public class Retributionist : StandardRoleBase
 {
     public static bool On;
 
@@ -21,9 +21,8 @@ public class Retributionist : RoleBase, IStandardRole
     public bool Notified;
     private PlayerControl RetributionistPC;
 
-    public Team Faction => Team.Crewmate;
-    public RoleOptionType? Alignment => RoleOptionType.Crewmate_Killing;
-    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
+    public override Team Faction => Team.Crewmate;
+    public override RoleOptionType? Alignment => RoleOptionType.Crewmate_Killing;
 
     public override void SetupCustomOption()
     {

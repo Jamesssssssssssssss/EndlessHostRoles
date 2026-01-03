@@ -2,7 +2,7 @@
 
 namespace EHR.Roles;
 
-public class Forger : RoleBase, IStandardRole
+public class Forger : StandardRoleBase
 {
     public static bool On;
 
@@ -13,9 +13,8 @@ public class Forger : RoleBase, IStandardRole
 
     public override bool IsEnable => On;
 
-    public Team Faction => Team.Impostor;
-    public RoleOptionType? Alignment => RoleOptionType.Impostor_Concealing;
-    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
+    public override Team Faction => Team.Impostor;
+    public override RoleOptionType? Alignment => RoleOptionType.Impostor_Concealing;
 
     public override void SetupCustomOption()
     {

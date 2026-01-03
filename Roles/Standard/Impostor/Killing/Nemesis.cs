@@ -10,16 +10,15 @@ using static EHR.Translator;
 
 namespace EHR.Roles;
 
-internal class Nemesis : RoleBase, IStandardRole
+internal class Nemesis : StandardRoleBase
 {
     public static bool On;
 
     public static Dictionary<byte, int> NemesisRevenged = [];
     public override bool IsEnable => On;
 
-    public Team Faction => Team.Impostor;
-    public RoleOptionType? Alignment => RoleOptionType.Impostor_Killing;
-    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
+    public override Team Faction => Team.Impostor;
+    public override RoleOptionType? Alignment => RoleOptionType.Impostor_Killing;
 
     public override void SetupCustomOption()
     {

@@ -4,7 +4,7 @@ using static EHR.Options;
 
 namespace EHR.Roles;
 
-internal class Terrorist : RoleBase, IStandardRole
+internal class Terrorist : StandardRoleBase
 {
     public override bool IsEnable => false;
     
@@ -14,9 +14,8 @@ internal class Terrorist : RoleBase, IStandardRole
     public static OptionItem VentCooldown;
     public static OptionItem MaxInVentTime;
 
-    public Team Faction => Team.Neutral;
-    public RoleOptionType? Alignment => RoleOptionType.Neutral_Evil;
-    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
+    public override Team Faction => Team.Neutral;
+    public override RoleOptionType? Alignment => RoleOptionType.Neutral_Evil;
 
     public override void SetupCustomOption()
     {

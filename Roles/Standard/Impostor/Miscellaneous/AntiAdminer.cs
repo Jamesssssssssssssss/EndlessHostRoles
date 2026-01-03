@@ -8,7 +8,7 @@ namespace EHR.Roles;
 
 // Reference: https://github.com/ykundesu/SuperNewRoles/blob/master/SuperNewRoles/Mode/SuperHostRoles/BlockTool.cs
 // Reference: https://github.com/Yumenopai/TownOfHost_Y/tree/AntiAdminer
-internal class AntiAdminer : RoleBase, IStandardRole
+internal class AntiAdminer : StandardRoleBase
 {
     public enum Device
     {
@@ -40,9 +40,8 @@ internal class AntiAdminer : RoleBase, IStandardRole
 
     public override bool IsEnable => PlayerIdList.Count > 0;
 
-    public Team Faction => Team.Impostor;
-    public RoleOptionType? Alignment => RoleOptionType.Impostor_Miscellaneous;
-    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
+    public override Team Faction => Team.Impostor;
+    public override RoleOptionType? Alignment => RoleOptionType.Impostor_Miscellaneous;
 
     public override void SetupCustomOption()
     {

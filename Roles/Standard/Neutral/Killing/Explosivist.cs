@@ -4,7 +4,7 @@ using Hazel;
 
 namespace EHR.Roles;
 
-public class Explosivist : RoleBase, IStandardRole
+public class Explosivist : StandardRoleBase
 {
     public static bool On;
 
@@ -20,9 +20,8 @@ public class Explosivist : RoleBase, IStandardRole
     private long ExplodeTS;
     private byte ExplosivistId;
 
-    public Team Faction => Team.Neutral;
-    public RoleOptionType? Alignment => RoleOptionType.Neutral_Killing;
-    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
+    public override Team Faction => Team.Neutral;
+    public override RoleOptionType? Alignment => RoleOptionType.Neutral_Killing;
 
     public override void SetupCustomOption()
     {

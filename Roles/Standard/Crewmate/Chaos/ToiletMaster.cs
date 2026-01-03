@@ -8,7 +8,7 @@ using static EHR.Options;
 
 namespace EHR.Roles;
 
-public class ToiletMaster : RoleBase, IStandardRole
+public class ToiletMaster : StandardRoleBase
 {
     public static bool On;
     private static List<ToiletMaster> Instances = [];
@@ -38,9 +38,8 @@ public class ToiletMaster : RoleBase, IStandardRole
     private static ToiletVisibilityOptions ToiletVisible => (ToiletVisibilityOptions)ToiletVisibility.GetValue();
     public override bool IsEnable => On;
 
-    public Team Faction => Team.Crewmate;
-    public RoleOptionType? Alignment => RoleOptionType.Crewmate_Chaos;
-    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
+    public override Team Faction => Team.Crewmate;
+    public override RoleOptionType? Alignment => RoleOptionType.Crewmate_Chaos;
 
     public override void SetupCustomOption()
     {

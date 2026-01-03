@@ -8,7 +8,7 @@ using static EHR.Translator;
 
 namespace EHR.Roles;
 
-public class Swooper : RoleBase, IStandardRole
+public class Swooper : StandardRoleBase
 {
     private const int Id = 4200;
     private static List<byte> PlayerIdList = [];
@@ -41,9 +41,8 @@ public class Swooper : RoleBase, IStandardRole
     private bool CanGoInvis => GameStates.IsInTask && InvisTime == -10 && lastTime == -10;
     private bool IsInvis => InvisTime != -10;
 
-    public Team Faction => Team.Impostor;
-    public RoleOptionType? Alignment => RoleOptionType.Impostor_Concealing;
-    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
+    public override Team Faction => Team.Impostor;
+    public override RoleOptionType? Alignment => RoleOptionType.Impostor_Concealing;
 
     public override void SetupCustomOption()
     {

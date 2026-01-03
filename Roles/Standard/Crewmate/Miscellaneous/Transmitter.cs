@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace EHR.Roles;
 
-public class Transmitter : RoleBase, IStandardRole
+public class Transmitter : StandardRoleBase
 {
     public static bool On;
     public override bool IsEnable => On;
@@ -18,9 +18,8 @@ public class Transmitter : RoleBase, IStandardRole
         On = false;
     }
 
-    public Team Faction => Team.Crewmate;
-    public RoleOptionType? Alignment => RoleOptionType.Crewmate_Miscellaneous;
-    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
+    public override Team Faction => Team.Crewmate;
+    public override RoleOptionType? Alignment => RoleOptionType.Crewmate_Miscellaneous;
 
     public override void SetupCustomOption()
     {

@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace EHR.Roles;
 
-internal class Commander : RoleBase, IStandardRole
+internal class Commander : StandardRoleBase
 {
     private const int Id = 643560;
     public static List<Commander> PlayerList = [];
@@ -23,9 +23,8 @@ internal class Commander : RoleBase, IStandardRole
     public byte MarkedPlayer;
     public override bool IsEnable => On;
 
-    public Team Faction => Team.Impostor;
-    public RoleOptionType? Alignment => RoleOptionType.Impostor_Support;
-    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
+    public override Team Faction => Team.Impostor;
+    public override RoleOptionType? Alignment => RoleOptionType.Impostor_Support;
 
     public override void SetupCustomOption()
     {

@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace EHR.Roles;
 
-public class Tremor : RoleBase, IStandardRole
+public class Tremor : StandardRoleBase
 {
     private const int Id = 644600;
     public static bool On;
@@ -29,9 +29,8 @@ public class Tremor : RoleBase, IStandardRole
     public override bool IsEnable => On;
     public bool IsDoom => Timer <= 0;
 
-    public Team Faction => Team.Neutral;
-    public RoleOptionType? Alignment => RoleOptionType.Neutral_Killing;
-    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
+    public override Team Faction => Team.Neutral;
+    public override RoleOptionType? Alignment => RoleOptionType.Neutral_Killing;
 
     public override void SetupCustomOption()
     {

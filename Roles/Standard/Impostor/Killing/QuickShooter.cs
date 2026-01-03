@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace EHR.Roles;
 
-internal class QuickShooter : RoleBase, IStandardRole
+internal class QuickShooter : StandardRoleBase
 {
     private const int Id = 1800;
     public static List<byte> PlayerIdList = [];
@@ -19,9 +19,8 @@ internal class QuickShooter : RoleBase, IStandardRole
 
     public override bool IsEnable => PlayerIdList.Count > 0;
 
-    public Team Faction => Team.Impostor;
-    public RoleOptionType? Alignment => RoleOptionType.Impostor_Killing;
-    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
+    public override Team Faction => Team.Impostor;
+    public override RoleOptionType? Alignment => RoleOptionType.Impostor_Killing;
 
     public override void SetupCustomOption()
     {

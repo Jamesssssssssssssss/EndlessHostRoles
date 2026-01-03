@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace EHR.Roles;
 
-public class Timelord : CovenBase, IStandardRole
+public class Timelord : CovenBase
 {
     public static bool On;
 
@@ -16,9 +16,8 @@ public class Timelord : CovenBase, IStandardRole
 
     public override bool IsEnable => On;
 
-    public Team Faction => Team.Coven;
-    public RoleOptionType? Alignment => RoleOptionType.Coven_Miscellaneous;
-    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
+    public override Team Faction => Team.Coven;
+    public override RoleOptionType? Alignment => RoleOptionType.Coven_Miscellaneous;
 
     public override void SetupCustomOption()
     {

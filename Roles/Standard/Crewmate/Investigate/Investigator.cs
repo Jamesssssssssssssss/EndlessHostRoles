@@ -10,7 +10,7 @@ using static EHR.Utils;
 
 namespace EHR.Roles;
 
-public class Investigator : RoleBase, IStandardRole
+public class Investigator : StandardRoleBase
 {
     private const int Id = 9700;
 
@@ -30,9 +30,8 @@ public class Investigator : RoleBase, IStandardRole
     private static CustomRoles[] RandomRolesForTrickster => Enum.GetValues<CustomRoles>().Where(x => x.IsCrewmate()).ToArray();
     public override bool IsEnable => On;
 
-    public Team Faction => Team.Crewmate;
-    public RoleOptionType? Alignment => RoleOptionType.Crewmate_Investigate;
-    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
+    public override Team Faction => Team.Crewmate;
+    public override RoleOptionType? Alignment => RoleOptionType.Crewmate_Investigate;
 
     public override void SetupCustomOption()
     {

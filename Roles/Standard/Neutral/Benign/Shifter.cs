@@ -5,7 +5,7 @@ using EHR.Patches;
 
 namespace EHR.Roles;
 
-public class Shifter : RoleBase, IStandardRole
+public class Shifter : StandardRoleBase
 {
     public static bool On;
 
@@ -22,9 +22,8 @@ public class Shifter : RoleBase, IStandardRole
 
     public override bool IsEnable => On;
 
-    public Team Faction => Team.Neutral;
-    public RoleOptionType? Alignment => RoleOptionType.Neutral_Benign;
-    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
+    public override Team Faction => Team.Neutral;
+    public override RoleOptionType? Alignment => RoleOptionType.Neutral_Benign;
 
     public override void SetupCustomOption()
     {

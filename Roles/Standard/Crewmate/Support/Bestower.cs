@@ -4,7 +4,7 @@ using EHR.Modules;
 
 namespace EHR.Roles;
 
-public class Bestower : RoleBase, IStandardRole
+public class Bestower : StandardRoleBase
 {
     public static bool On;
 
@@ -15,9 +15,8 @@ public class Bestower : RoleBase, IStandardRole
     private static OptionItem GivenUses;
     public static OptionItem UsePet;
 
-    public Team Faction => Team.Crewmate;
-    public RoleOptionType? Alignment => RoleOptionType.Crewmate_Support;
-    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
+    public override Team Faction => Team.Crewmate;
+    public override RoleOptionType? Alignment => RoleOptionType.Crewmate_Support;
 
     public override void SetupCustomOption()
     {

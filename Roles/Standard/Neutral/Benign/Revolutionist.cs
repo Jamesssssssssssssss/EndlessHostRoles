@@ -6,7 +6,7 @@ using static EHR.Options;
 
 namespace EHR.Roles;
 
-internal class Revolutionist : RoleBase, IStandardRole
+internal class Revolutionist : StandardRoleBase
 {
     public static Dictionary<(byte, byte), bool> IsDraw = [];
     public static Dictionary<byte, (PlayerControl Player, float Timer)> RevolutionistTimer = [];
@@ -24,9 +24,8 @@ internal class Revolutionist : RoleBase, IStandardRole
     public static OptionItem RevolutionistVentCountDown;
     public override bool IsEnable => On;
 
-    public Team Faction => Team.Neutral;
-    public RoleOptionType? Alignment => RoleOptionType.Neutral_Benign;
-    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
+    public override Team Faction => Team.Neutral;
+    public override RoleOptionType? Alignment => RoleOptionType.Neutral_Benign;
 
     public override void SetupCustomOption()
     {

@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace EHR.Roles;
 
-public class Romantic : RoleBase, IStandardRole
+public class Romantic : StandardRoleBase
 {
     private const int Id = 9850;
 
@@ -46,9 +46,8 @@ public class Romantic : RoleBase, IStandardRole
 
     public override bool IsEnable => RomanticId != byte.MaxValue;
 
-    public Team Faction => Team.Neutral;
-    public RoleOptionType? Alignment => RoleOptionType.Neutral_Benign;
-    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
+    public override Team Faction => Team.Neutral;
+    public override RoleOptionType? Alignment => RoleOptionType.Neutral_Benign;
 
     public override void SetupCustomOption()
     {
@@ -341,7 +340,7 @@ public class Romantic : RoleBase, IStandardRole
     }
 }
 
-public class VengefulRomantic : RoleBase, IStandardRole
+public class VengefulRomantic : StandardRoleBase
 {
     private static byte VengefulRomanticId = byte.MaxValue;
 
@@ -350,9 +349,8 @@ public class VengefulRomantic : RoleBase, IStandardRole
 
     public override bool IsEnable => VengefulRomanticId != byte.MaxValue;
 
-    public Team Faction => Team.Neutral;
-    public RoleOptionType? Alignment => RoleOptionType.Neutral_Benign;
-    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
+    public override Team Faction => Team.Neutral;
+    public override RoleOptionType? Alignment => RoleOptionType.Neutral_Benign;
 
     public override void SetupCustomOption() { }
 
@@ -430,15 +428,14 @@ public class VengefulRomantic : RoleBase, IStandardRole
     }
 }
 
-public class RuthlessRomantic : RoleBase, IStandardRole
+public class RuthlessRomantic : StandardRoleBase
 {
     public static List<byte> PlayerIdList = [];
 
     public override bool IsEnable => PlayerIdList.Count > 0;
 
-    public Team Faction => Team.Neutral;
-    public RoleOptionType? Alignment => RoleOptionType.Neutral_Benign;
-    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
+    public override Team Faction => Team.Neutral;
+    public override RoleOptionType? Alignment => RoleOptionType.Neutral_Benign;
 
     public override void SetupCustomOption() { }
 

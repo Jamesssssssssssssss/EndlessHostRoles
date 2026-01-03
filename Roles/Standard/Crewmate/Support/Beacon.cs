@@ -4,7 +4,7 @@ using EHR.Modules;
 
 namespace EHR.Roles;
 
-internal class Beacon : RoleBase, IStandardRole
+internal class Beacon : StandardRoleBase
 {
     private static List<PlayerControl> Beacons = [];
 
@@ -18,9 +18,8 @@ internal class Beacon : RoleBase, IStandardRole
     public override bool IsEnable => On;
     public static float IncreasedVision => VisionIncrease.GetFloat() * 5f;
 
-    public Team Faction => Team.Crewmate;
-    public RoleOptionType? Alignment => RoleOptionType.Crewmate_Support;
-    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
+    public override Team Faction => Team.Crewmate;
+    public override RoleOptionType? Alignment => RoleOptionType.Crewmate_Support;
 
     public override void SetupCustomOption()
     {

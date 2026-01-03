@@ -2,7 +2,7 @@
 
 namespace EHR.Roles;
 
-internal class Express : RoleBase, IStandardRole
+internal class Express : StandardRoleBase
 {
     public static Dictionary<byte, long> SpeedUp = [];
     public static Dictionary<byte, float> SpeedNormal = [];
@@ -10,9 +10,8 @@ internal class Express : RoleBase, IStandardRole
     public static bool On;
     public override bool IsEnable => On;
 
-    public Team Faction => Team.Crewmate;
-    public RoleOptionType? Alignment => RoleOptionType.Crewmate_Miscellaneous;
-    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
+    public override Team Faction => Team.Crewmate;
+    public override RoleOptionType? Alignment => RoleOptionType.Crewmate_Miscellaneous;
 
     public override void SetupCustomOption()
     {

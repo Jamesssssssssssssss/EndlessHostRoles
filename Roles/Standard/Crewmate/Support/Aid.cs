@@ -6,7 +6,7 @@ using Hazel;
 
 namespace EHR.Roles;
 
-public class Aid : RoleBase, IStandardRole
+public class Aid : StandardRoleBase
 {
     private const int Id = 640200;
     public static Dictionary<byte, long> ShieldedPlayers = [];
@@ -22,9 +22,8 @@ public class Aid : RoleBase, IStandardRole
     public byte TargetId;
     public override bool IsEnable => On;
 
-    public Team Faction => Team.Crewmate;
-    public RoleOptionType? Alignment => RoleOptionType.Crewmate_Support;
-    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
+    public override Team Faction => Team.Crewmate;
+    public override RoleOptionType? Alignment => RoleOptionType.Crewmate_Support;
 
     public override void SetupCustomOption()
     {

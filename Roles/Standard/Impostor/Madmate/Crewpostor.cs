@@ -7,16 +7,15 @@ using static EHR.Options;
 
 namespace EHR.Roles;
 
-internal class Crewpostor : RoleBase, IStandardRole
+internal class Crewpostor : StandardRoleBase
 {
     public static Dictionary<byte, int> TasksDone = [];
 
     public static bool On;
     public override bool IsEnable => On;
 
-    public Team Faction => Team.Impostor;
-    public RoleOptionType? Alignment => RoleOptionType.Impostor_Madmate;
-    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
+    public override Team Faction => Team.Impostor;
+    public override RoleOptionType? Alignment => RoleOptionType.Impostor_Madmate;
 
     public override void SetupCustomOption()
     {

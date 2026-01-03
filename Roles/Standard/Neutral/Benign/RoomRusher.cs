@@ -9,7 +9,7 @@ using UnityEngine;
 
 namespace EHR.Roles;
 
-public class RoomRusher : RoleBase, IStandardRole
+public class RoomRusher : StandardRoleBase
 {
     public static bool On;
 
@@ -36,9 +36,8 @@ public class RoomRusher : RoleBase, IStandardRole
 
     public bool Won => CompletedNum >= RoomsToWin.GetInt();
 
-    public Team Faction => Team.Neutral;
-    public RoleOptionType? Alignment => RoleOptionType.Neutral_Benign;
-    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
+    public override Team Faction => Team.Neutral;
+    public override RoleOptionType? Alignment => RoleOptionType.Neutral_Benign;
 
     public override void SetupCustomOption()
     {

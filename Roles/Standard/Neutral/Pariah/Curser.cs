@@ -4,7 +4,7 @@ using AmongUs.GameOptions;
 
 namespace EHR.Roles;
 
-public class Curser : RoleBase, IStandardRole
+public class Curser : StandardRoleBase
 {
     public static bool On;
     private static List<Curser> Instances = [];
@@ -23,9 +23,8 @@ public class Curser : RoleBase, IStandardRole
 
     public override bool IsEnable => On;
 
-    public Team Faction => Team.Neutral;
-    public RoleOptionType? Alignment => RoleOptionType.Neutral_Pariah;
-    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
+    public override Team Faction => Team.Neutral;
+    public override RoleOptionType? Alignment => RoleOptionType.Neutral_Pariah;
 
     public override void SetupCustomOption()
     {

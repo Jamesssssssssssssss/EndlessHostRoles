@@ -3,7 +3,7 @@ using AmongUs.GameOptions;
 
 namespace EHR.Roles;
 
-internal class Parasite : RoleBase, IStandardRole
+internal class Parasite : StandardRoleBase
 {
     public static bool On;
 
@@ -16,9 +16,8 @@ internal class Parasite : RoleBase, IStandardRole
 
     public override bool IsEnable => On;
 
-    public Team Faction => Team.Impostor;
-    public RoleOptionType? Alignment => RoleOptionType.Impostor_Madmate;
-    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
+    public override Team Faction => Team.Impostor;
+    public override RoleOptionType? Alignment => RoleOptionType.Impostor_Madmate;
 
     public override void SetupCustomOption()
     {

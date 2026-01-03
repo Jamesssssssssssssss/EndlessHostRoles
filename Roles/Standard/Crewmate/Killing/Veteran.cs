@@ -5,7 +5,7 @@ using static EHR.Options;
 
 namespace EHR.Roles;
 
-internal class Veteran : RoleBase, IStandardRole
+internal class Veteran : StandardRoleBase
 {
     public static Dictionary<byte, long> VeteranInProtect = [];
 
@@ -19,9 +19,8 @@ internal class Veteran : RoleBase, IStandardRole
     public static OptionItem VeteranAbilityChargesWhenFinishedTasks;
     public static OptionItem VeteranAlertActivatesOnNonKillingInteractions;
 
-    public Team Faction => Team.Crewmate;
-    public RoleOptionType? Alignment => RoleOptionType.Crewmate_Killing;
-    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
+    public override Team Faction => Team.Crewmate;
+    public override RoleOptionType? Alignment => RoleOptionType.Crewmate_Killing;
 
     public override void SetupCustomOption()
     {

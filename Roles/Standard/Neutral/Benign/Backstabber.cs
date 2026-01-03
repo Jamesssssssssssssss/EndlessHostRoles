@@ -4,7 +4,7 @@ using EHR.Modules;
 
 namespace EHR.Roles;
 
-public class Backstabber : RoleBase, IStandardRole
+public class Backstabber : StandardRoleBase
 {
     public static bool On;
 
@@ -17,9 +17,8 @@ public class Backstabber : RoleBase, IStandardRole
 
     public override bool IsEnable => On;
 
-    public Team Faction => EHR.Team.Neutral;
-    public RoleOptionType? Alignment => RoleOptionType.Neutral_Benign;
-    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
+    public override Team Faction => EHR.Team.Neutral;
+    public override RoleOptionType? Alignment => RoleOptionType.Neutral_Benign;
 
     public override void SetupCustomOption()
     {

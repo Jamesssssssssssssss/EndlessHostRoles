@@ -3,7 +3,7 @@ using static EHR.Options;
 
 namespace EHR.Roles;
 
-public class Juggernaut : RoleBase, IStandardRole
+public class Juggernaut : StandardRoleBase
 {
     private const int Id = 12300;
 
@@ -16,9 +16,8 @@ public class Juggernaut : RoleBase, IStandardRole
 
     public override bool IsEnable => false;
 
-    public Team Faction => Team.Neutral;
-    public RoleOptionType? Alignment => RoleOptionType.Neutral_Killing;
-    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
+    public override Team Faction => Team.Neutral;
+    public override RoleOptionType? Alignment => RoleOptionType.Neutral_Killing;
 
     public override void SetupCustomOption()
     {

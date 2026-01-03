@@ -4,7 +4,7 @@ using static EHR.Options;
 
 namespace EHR.Roles;
 
-public class HexMaster : RoleBase, IStandardRole
+public class HexMaster : StandardRoleBase
 {
     private const int Id = 11900;
 
@@ -14,9 +14,8 @@ public class HexMaster : RoleBase, IStandardRole
 
     public override bool IsEnable => false;
 
-    public Team Faction => Team.Neutral;
-    public RoleOptionType? Alignment => RoleOptionType.Neutral_Killing;
-    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
+    public override Team Faction => Team.Neutral;
+    public override RoleOptionType? Alignment => RoleOptionType.Neutral_Killing;
 
     public override void SetupCustomOption()
     {

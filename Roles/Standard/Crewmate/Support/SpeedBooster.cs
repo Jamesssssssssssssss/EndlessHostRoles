@@ -2,14 +2,13 @@
 
 namespace EHR.Roles;
 
-internal class SpeedBooster : RoleBase, IStandardRole
+internal class SpeedBooster : StandardRoleBase
 {
     public static bool On;
     public override bool IsEnable => On;
 
-    public Team Faction => Team.Crewmate;
-    public RoleOptionType? Alignment => RoleOptionType.Crewmate_Support;
-    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
+    public override Team Faction => Team.Crewmate;
+    public override RoleOptionType? Alignment => RoleOptionType.Crewmate_Support;
 
     public override void SetupCustomOption()
     {

@@ -3,7 +3,7 @@ using AmongUs.GameOptions;
 
 namespace EHR.Roles;
 
-public class Carrier : RoleBase, IStandardRole
+public class Carrier : StandardRoleBase
 {
     public static bool On;
 
@@ -18,9 +18,8 @@ public class Carrier : RoleBase, IStandardRole
     private bool TaskMode;
     private int Count;
 
-    public Team Faction => Team.Crewmate;
-    public RoleOptionType? Alignment => RoleOptionType.Crewmate_Miscellaneous;
-    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
+    public override Team Faction => Team.Crewmate;
+    public override RoleOptionType? Alignment => RoleOptionType.Crewmate_Miscellaneous;
 
     public override void SetupCustomOption()
     {

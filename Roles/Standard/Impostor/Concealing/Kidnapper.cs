@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace EHR.Roles;
 
-internal class Kidnapper : RoleBase, IStandardRole
+internal class Kidnapper : StandardRoleBase
 {
     public static bool On;
 
@@ -12,9 +12,8 @@ internal class Kidnapper : RoleBase, IStandardRole
     private static int Id => 643300;
     public override bool IsEnable => On;
 
-    public Team Faction => Team.Impostor;
-    public RoleOptionType? Alignment => RoleOptionType.Impostor_Concealing;
-    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
+    public override Team Faction => Team.Impostor;
+    public override RoleOptionType? Alignment => RoleOptionType.Impostor_Concealing;
 
     public override void SetupCustomOption()
     {

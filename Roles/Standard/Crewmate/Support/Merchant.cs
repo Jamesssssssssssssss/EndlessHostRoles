@@ -5,7 +5,7 @@ using static EHR.Translator;
 
 namespace EHR.Roles;
 
-internal class Merchant : RoleBase, IStandardRole
+internal class Merchant : StandardRoleBase
 {
     private const int Id = 7300;
     private static readonly List<byte> PlayerIdList = [];
@@ -39,9 +39,8 @@ internal class Merchant : RoleBase, IStandardRole
         return (AddonsSold[playerId] * OptionMoneyPerSell.GetInt()) - (BribedKiller[playerId].Count * OptionMoneyRequiredToBribe.GetInt());
     }
 
-    public Team Faction => Team.Crewmate;
-    public RoleOptionType? Alignment => RoleOptionType.Crewmate_Support;
-    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
+    public override Team Faction => Team.Crewmate;
+    public override RoleOptionType? Alignment => RoleOptionType.Crewmate_Support;
 
     public override void SetupCustomOption()
     {

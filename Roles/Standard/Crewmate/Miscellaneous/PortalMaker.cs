@@ -6,7 +6,7 @@ using Color = UnityEngine.Color;
 
 namespace EHR.Roles;
 
-public class PortalMaker : RoleBase, IStandardRole
+public class PortalMaker : StandardRoleBase
 {
     public static bool On;
 
@@ -16,9 +16,8 @@ public class PortalMaker : RoleBase, IStandardRole
     private List<Vector2> Marks;
     private Dictionary<byte, long> LastTP;
 
-    public Team Faction => Team.Crewmate;
-    public RoleOptionType? Alignment => RoleOptionType.Crewmate_Miscellaneous;
-    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
+    public override Team Faction => Team.Crewmate;
+    public override RoleOptionType? Alignment => RoleOptionType.Crewmate_Miscellaneous;
 
     public override void SetupCustomOption()
     {

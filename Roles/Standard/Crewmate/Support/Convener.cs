@@ -4,7 +4,7 @@ using EHR.Modules;
 
 namespace EHR.Roles;
 
-internal class Convener : RoleBase, IStandardRole
+internal class Convener : StandardRoleBase
 {
     public static OptionItem CD;
     public static OptionItem Limit;
@@ -15,9 +15,8 @@ internal class Convener : RoleBase, IStandardRole
     private static int Id => 643350;
     public override bool IsEnable => On;
 
-    public Team Faction => Team.Crewmate;
-    public RoleOptionType? Alignment => RoleOptionType.Crewmate_Support;
-    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
+    public override Team Faction => Team.Crewmate;
+    public override RoleOptionType? Alignment => RoleOptionType.Crewmate_Support;
 
     public override void SetupCustomOption()
     {

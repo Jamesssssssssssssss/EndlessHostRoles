@@ -6,7 +6,7 @@ namespace EHR.Roles;
 
 using static Options;
 
-public class Ricochet : RoleBase, IStandardRole
+public class Ricochet : StandardRoleBase
 {
     private const int Id = 640100;
     public static List<byte> PlayerIdList = [];
@@ -21,9 +21,8 @@ public class Ricochet : RoleBase, IStandardRole
 
     public override bool IsEnable => PlayerIdList.Count > 0;
 
-    public Team Faction => Team.Crewmate;
-    public RoleOptionType? Alignment => RoleOptionType.Crewmate_Miscellaneous;
-    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
+    public override Team Faction => Team.Crewmate;
+    public override RoleOptionType? Alignment => RoleOptionType.Crewmate_Miscellaneous;
 
     public override void SetupCustomOption()
     {

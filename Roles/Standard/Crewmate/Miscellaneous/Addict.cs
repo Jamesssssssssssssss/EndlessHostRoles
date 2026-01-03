@@ -8,7 +8,7 @@ namespace EHR.Roles;
 
 using static Options;
 
-public class Addict : RoleBase, IStandardRole
+public class Addict : StandardRoleBase
 {
     private const int Id = 5200;
     private static List<byte> PlayerIdList = [];
@@ -28,9 +28,8 @@ public class Addict : RoleBase, IStandardRole
 
     public override bool IsEnable => PlayerIdList.Count > 0;
 
-    public Team Faction => Team.Crewmate;
-    public RoleOptionType? Alignment => RoleOptionType.Crewmate_Miscellaneous;
-    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
+    public override Team Faction => Team.Crewmate;
+    public override RoleOptionType? Alignment => RoleOptionType.Crewmate_Miscellaneous;
 
     public override void SetupCustomOption()
     {

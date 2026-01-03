@@ -3,7 +3,7 @@ using Hazel;
 
 namespace EHR.Roles;
 
-internal class SchrodingersCat : RoleBase, IStandardRole
+internal class SchrodingersCat : StandardRoleBase
 {
     public static bool On;
 
@@ -11,9 +11,8 @@ internal class SchrodingersCat : RoleBase, IStandardRole
     public static OptionItem StealsExactImpostorRole;
     public override bool IsEnable => On;
 
-    public Team Faction => Team.Neutral;
-    public RoleOptionType? Alignment => RoleOptionType.Neutral_Benign;
-    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
+    public override Team Faction => Team.Neutral;
+    public override RoleOptionType? Alignment => RoleOptionType.Neutral_Benign;
 
     public override void SetupCustomOption()
     {

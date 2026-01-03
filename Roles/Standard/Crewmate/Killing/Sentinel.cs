@@ -92,7 +92,7 @@ public class PatrollingState(byte sentinelId, int patrolDuration, float patrolRa
     }
 }
 
-internal class Sentinel : RoleBase, IStandardRole
+internal class Sentinel : StandardRoleBase
 {
     public static OptionItem PatrolCooldown;
     private static OptionItem PatrolDuration;
@@ -104,9 +104,8 @@ internal class Sentinel : RoleBase, IStandardRole
 
     public override bool IsEnable => PatrolStates.Count > 0 || Randomizer.Exists;
 
-    public Team Faction => Team.Crewmate;
-    public RoleOptionType? Alignment => RoleOptionType.Crewmate_Killing;
-    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
+    public override Team Faction => Team.Crewmate;
+    public override RoleOptionType? Alignment => RoleOptionType.Crewmate_Killing;
 
     public override void SetupCustomOption()
     {

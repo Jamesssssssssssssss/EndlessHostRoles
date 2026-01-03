@@ -4,7 +4,7 @@ using static EHR.Translator;
 
 namespace EHR.Roles;
 
-public class CopyCat : RoleBase, IStandardRole
+public class CopyCat : StandardRoleBase
 {
     private const int Id = 666420;
     public static List<CopyCat> Instances = [];
@@ -25,9 +25,8 @@ public class CopyCat : RoleBase, IStandardRole
 
     public override bool IsEnable => Instances.Count > 0;
 
-    public Team Faction => Team.Crewmate;
-    public RoleOptionType? Alignment => RoleOptionType.Crewmate_Power;
-    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
+    public override Team Faction => Team.Crewmate;
+    public override RoleOptionType? Alignment => RoleOptionType.Crewmate_Power;
 
     public override void SetupCustomOption()
     {

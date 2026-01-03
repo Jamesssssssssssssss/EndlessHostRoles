@@ -25,7 +25,7 @@ namespace EHR.Roles;
  * XP needed to level up: 100
  *
  */
-public class Mafioso : RoleBase, IStandardRole
+public class Mafioso : StandardRoleBase
 {
     private const int Id = 642200;
     private static List<byte> PlayerIdList = [];
@@ -49,9 +49,8 @@ public class Mafioso : RoleBase, IStandardRole
 
     public override bool IsEnable => PlayerIdList.Count > 0;
 
-    public Team Faction => Team.Impostor;
-    public RoleOptionType? Alignment => RoleOptionType.Impostor_Killing;
-    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
+    public override Team Faction => Team.Impostor;
+    public override RoleOptionType? Alignment => RoleOptionType.Impostor_Killing;
 
     public override void SetupCustomOption()
     {

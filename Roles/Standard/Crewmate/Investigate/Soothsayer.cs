@@ -2,7 +2,7 @@
 
 namespace EHR.Roles;
 
-public class Soothsayer : RoleBase, IStandardRole
+public class Soothsayer : StandardRoleBase
 {
     public static bool On;
     private static List<Soothsayer> Instances = [];
@@ -12,9 +12,8 @@ public class Soothsayer : RoleBase, IStandardRole
     private byte Target;
     public override bool IsEnable => On;
 
-    public Team Faction => Team.Crewmate;
-    public RoleOptionType? Alignment => RoleOptionType.Crewmate_Investigate;
-    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
+    public override Team Faction => Team.Crewmate;
+    public override RoleOptionType? Alignment => RoleOptionType.Crewmate_Investigate;
 
     public override void SetupCustomOption()
     {

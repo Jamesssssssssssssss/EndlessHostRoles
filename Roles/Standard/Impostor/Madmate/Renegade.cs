@@ -3,14 +3,13 @@ using AmongUs.GameOptions;
 
 namespace EHR.Roles;
 
-internal class Renegade : RoleBase, IStandardRole
+internal class Renegade : StandardRoleBase
 {
     public static bool On;
     public override bool IsEnable => On;
 
-    public Team Faction => Team.Impostor;
-    public RoleOptionType? Alignment => RoleOptionType.Impostor_Madmate;
-    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
+    public override Team Faction => Team.Impostor;
+    public override RoleOptionType? Alignment => RoleOptionType.Impostor_Madmate;
 
     public override void SetupCustomOption() { }
 

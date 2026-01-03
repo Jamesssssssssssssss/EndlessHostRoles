@@ -4,14 +4,13 @@ using static EHR.Options;
 
 namespace EHR.Roles;
 
-internal class SuperStar : RoleBase, IStandardRole
+internal class SuperStar : StandardRoleBase
 {
     public static bool On;
     public override bool IsEnable => On;
 
-    public Team Faction => Team.Crewmate;
-    public RoleOptionType? Alignment => RoleOptionType.Crewmate_Miscellaneous;
-    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
+    public override Team Faction => Team.Crewmate;
+    public override RoleOptionType? Alignment => RoleOptionType.Crewmate_Miscellaneous;
 
     public override void SetupCustomOption()
     {

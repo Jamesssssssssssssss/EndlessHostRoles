@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace EHR.Roles;
 
-internal class Tiger : RoleBase, IStandardRole
+internal class Tiger : StandardRoleBase
 {
     private const int Id = 643500;
 
@@ -25,9 +25,8 @@ internal class Tiger : RoleBase, IStandardRole
 
     public override bool IsEnable => On;
 
-    public Team Faction => Team.Neutral;
-    public RoleOptionType? Alignment => RoleOptionType.Neutral_Killing;
-    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
+    public override Team Faction => Team.Neutral;
+    public override RoleOptionType? Alignment => RoleOptionType.Neutral_Killing;
 
     public override void SetupCustomOption()
     {

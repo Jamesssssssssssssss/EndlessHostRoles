@@ -4,7 +4,7 @@ using Hazel;
 
 namespace EHR.Roles;
 
-public class SoulCollector : RoleBase, IStandardRole
+public class SoulCollector : StandardRoleBase
 {
     public static bool On;
 
@@ -16,9 +16,8 @@ public class SoulCollector : RoleBase, IStandardRole
 
     public List<byte> ToExile = [];
 
-    public Team Faction => Team.Neutral;
-    public RoleOptionType? Alignment => RoleOptionType.Neutral_Killing;
-    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
+    public override Team Faction => Team.Neutral;
+    public override RoleOptionType? Alignment => RoleOptionType.Neutral_Killing;
 
     public override void SetupCustomOption()
     {

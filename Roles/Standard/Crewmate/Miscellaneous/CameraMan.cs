@@ -7,7 +7,7 @@ namespace EHR.Roles;
 
 using static Options;
 
-public class CameraMan : RoleBase, IStandardRole
+public class CameraMan : StandardRoleBase
 {
     private const int Id = 641600;
     private static List<byte> PlayerIdList = [];
@@ -24,9 +24,8 @@ public class CameraMan : RoleBase, IStandardRole
     private bool IsTeleported;
     public override bool IsEnable => PlayerIdList.Count > 0;
 
-    public Team Faction => Team.Crewmate;
-    public RoleOptionType? Alignment => RoleOptionType.Crewmate_Miscellaneous;
-    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
+    public override Team Faction => Team.Crewmate;
+    public override RoleOptionType? Alignment => RoleOptionType.Crewmate_Miscellaneous;
 
     public override void SetupCustomOption()
     {

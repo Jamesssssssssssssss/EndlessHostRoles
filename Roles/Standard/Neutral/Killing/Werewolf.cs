@@ -7,7 +7,7 @@ using static EHR.Translator;
 
 namespace EHR.Roles;
 
-public class Werewolf : RoleBase, IStandardRole
+public class Werewolf : StandardRoleBase
 {
     private const int Id = 12850;
     private static List<byte> PlayerIdList = [];
@@ -34,9 +34,8 @@ public class Werewolf : RoleBase, IStandardRole
     private bool CanRampage => GameStates.IsInTask && RampageTime == -10 && lastTime == -10;
     private bool IsRampaging => RampageTime != -10;
 
-    public Team Faction => Team.Neutral;
-    public RoleOptionType? Alignment => RoleOptionType.Neutral_Killing;
-    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
+    public override Team Faction => Team.Neutral;
+    public override RoleOptionType? Alignment => RoleOptionType.Neutral_Killing;
 
     public override void SetupCustomOption()
     {

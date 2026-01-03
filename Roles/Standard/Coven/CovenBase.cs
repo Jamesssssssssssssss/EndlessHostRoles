@@ -4,7 +4,7 @@ using Hazel;
 
 namespace EHR.Roles;
 
-public abstract class CovenBase : RoleBase
+public abstract class CovenBase : StandardRoleBase
 {
     public enum NecronomiconReceivePriorities
     {

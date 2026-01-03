@@ -4,7 +4,7 @@ using EHR.Modules;
 
 namespace EHR.Roles;
 
-public class Echo : RoleBase, IStandardRole
+public class Echo : StandardRoleBase
 {
     public static bool On;
     public static List<Echo> Instances = [];
@@ -17,9 +17,8 @@ public class Echo : RoleBase, IStandardRole
     private bool SkipCheck;
     public override bool IsEnable => On;
 
-    public Team Faction => Team.Impostor;
-    public RoleOptionType? Alignment => RoleOptionType.Impostor_Concealing;
-    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
+    public override Team Faction => Team.Impostor;
+    public override RoleOptionType? Alignment => RoleOptionType.Impostor_Concealing;
 
     public override void SetupCustomOption()
     {

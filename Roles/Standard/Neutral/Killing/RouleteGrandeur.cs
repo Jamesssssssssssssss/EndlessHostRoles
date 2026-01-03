@@ -6,7 +6,7 @@ using Hazel;
 
 namespace EHR.Roles;
 
-public class RouleteGrandeur : RoleBase, IStandardRole
+public class RouleteGrandeur : StandardRoleBase
 {
     private const int Id = 647500;
     private const int BulletCount = 5;
@@ -26,9 +26,8 @@ public class RouleteGrandeur : RoleBase, IStandardRole
 
     public override bool IsEnable => On;
 
-    public Team Faction => Team.Neutral;
-    public RoleOptionType? Alignment => RoleOptionType.Neutral_Killing;
-    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
+    public override Team Faction => Team.Neutral;
+    public override RoleOptionType? Alignment => RoleOptionType.Neutral_Killing;
 
     public override void SetupCustomOption()
     {

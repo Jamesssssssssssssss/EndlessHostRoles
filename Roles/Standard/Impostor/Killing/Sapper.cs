@@ -8,7 +8,7 @@ using static EHR.Utils;
 
 namespace EHR.Roles;
 
-public class Sapper : RoleBase, IStandardRole
+public class Sapper : StandardRoleBase
 {
     private const int Id = 643000;
     public static List<byte> PlayerIdList = [];
@@ -26,9 +26,8 @@ public class Sapper : RoleBase, IStandardRole
 
     private long LastNotify;
 
-    public Team Faction => Team.Impostor;
-    public RoleOptionType? Alignment => RoleOptionType.Impostor_Killing;
-    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
+    public override Team Faction => Team.Impostor;
+    public override RoleOptionType? Alignment => RoleOptionType.Impostor_Killing;
 
     public override void SetupCustomOption()
     {

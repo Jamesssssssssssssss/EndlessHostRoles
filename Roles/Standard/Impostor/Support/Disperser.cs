@@ -7,7 +7,7 @@ using static EHR.Utils;
 
 namespace EHR.Roles;
 
-public class Disperser : RoleBase, IStandardRole
+public class Disperser : StandardRoleBase
 {
     private const int Id = 17000;
 
@@ -19,9 +19,8 @@ public class Disperser : RoleBase, IStandardRole
     public static bool On;
     public override bool IsEnable => On;
 
-    public Team Faction => Team.Impostor;
-    public RoleOptionType? Alignment => RoleOptionType.Impostor_Support;
-    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
+    public override Team Faction => Team.Impostor;
+    public override RoleOptionType? Alignment => RoleOptionType.Impostor_Support;
 
     public override void SetupCustomOption()
     {

@@ -3,7 +3,7 @@ using AmongUs.GameOptions;
 
 namespace EHR.Roles;
 
-internal class CursedWolf : RoleBase, IStandardRole
+internal class CursedWolf : StandardRoleBase
 {
     public static bool On;
     private bool CanVent;
@@ -14,9 +14,8 @@ internal class CursedWolf : RoleBase, IStandardRole
     private float KillCooldown;
     public override bool IsEnable => On;
 
-    public Team Faction => Team.Impostor;
-    public RoleOptionType? Alignment => RoleOptionType.Impostor_Miscellaneous;
-    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
+    public override Team Faction => Team.Impostor;
+    public override RoleOptionType? Alignment => RoleOptionType.Impostor_Miscellaneous;
 
     public override void SetupCustomOption()
     {

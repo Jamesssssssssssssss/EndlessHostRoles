@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace EHR.Roles;
 
-public class Car : RoleBase, IStandardRole
+public class Car : StandardRoleBase
 {
     public static bool On;
 
@@ -19,9 +19,8 @@ public class Car : RoleBase, IStandardRole
 
     public override bool IsEnable => On;
 
-    public Team Faction => Team.Crewmate;
-    public RoleOptionType? Alignment => RoleOptionType.Crewmate_Chaos;
-    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
+    public override Team Faction => Team.Crewmate;
+    public override RoleOptionType? Alignment => RoleOptionType.Crewmate_Chaos;
 
     public override void SetupCustomOption()
     {

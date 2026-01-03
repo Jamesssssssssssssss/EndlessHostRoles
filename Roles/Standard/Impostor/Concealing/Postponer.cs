@@ -3,7 +3,7 @@ using EHR.Modules;
 
 namespace EHR.Roles;
 
-public class Postponer : RoleBase, IStandardRole
+public class Postponer : StandardRoleBase
 {
     public static bool On;
 
@@ -12,9 +12,8 @@ public class Postponer : RoleBase, IStandardRole
     private static OptionItem KillCooldown;
     private static OptionItem BodyDelay;
 
-    public Team Faction => Team.Impostor;
-    public RoleOptionType? Alignment => RoleOptionType.Impostor_Concealing;
-    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
+    public override Team Faction => Team.Impostor;
+    public override RoleOptionType? Alignment => RoleOptionType.Impostor_Concealing;
 
     public override void SetupCustomOption()
     {

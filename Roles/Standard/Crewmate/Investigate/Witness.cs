@@ -4,16 +4,15 @@ using static EHR.Options;
 
 namespace EHR.Roles;
 
-internal class Witness : RoleBase, IStandardRole
+internal class Witness : StandardRoleBase
 {
     public static Dictionary<byte, long> AllKillers = [];
 
     public static bool On;
     public override bool IsEnable => On;
 
-    public Team Faction => Team.Crewmate;
-    public RoleOptionType? Alignment => RoleOptionType.Crewmate_Investigate;
-    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
+    public override Team Faction => Team.Crewmate;
+    public override RoleOptionType? Alignment => RoleOptionType.Crewmate_Investigate;
 
     public override void SetupCustomOption()
     {

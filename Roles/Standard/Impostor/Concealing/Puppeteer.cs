@@ -7,7 +7,7 @@ using static EHR.Options;
 
 namespace EHR.Roles;
 
-internal class Puppeteer : RoleBase, IStandardRole
+internal class Puppeteer : StandardRoleBase
 {
     public static Dictionary<byte, byte> PuppeteerList = [];
     public static Dictionary<byte, long> PuppeteerDelayList = [];
@@ -33,9 +33,8 @@ internal class Puppeteer : RoleBase, IStandardRole
     
     public override bool IsEnable => On;
 
-    public Team Faction => Team.Impostor;
-    public RoleOptionType? Alignment => RoleOptionType.Impostor_Concealing;
-    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
+    public override Team Faction => Team.Impostor;
+    public override RoleOptionType? Alignment => RoleOptionType.Impostor_Concealing;
 
     public override void SetupCustomOption()
     {

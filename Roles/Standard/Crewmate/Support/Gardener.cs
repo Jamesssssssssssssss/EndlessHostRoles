@@ -2,7 +2,7 @@
 
 namespace EHR.Roles;
 
-public class Gardener : RoleBase, IStandardRole
+public class Gardener : StandardRoleBase
 {
     public static bool On;
 
@@ -16,9 +16,8 @@ public class Gardener : RoleBase, IStandardRole
 
     private static List<Plant> Plants = [];
 
-    public Team Faction => Team.Crewmate;
-    public RoleOptionType? Alignment => RoleOptionType.Crewmate_Support;
-    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
+    public override Team Faction => Team.Crewmate;
+    public override RoleOptionType? Alignment => RoleOptionType.Crewmate_Support;
 
     public override void SetupCustomOption()
     {

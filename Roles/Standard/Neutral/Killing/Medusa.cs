@@ -3,7 +3,7 @@ using static EHR.Options;
 
 namespace EHR.Roles;
 
-public class Medusa : RoleBase, IStandardRole
+public class Medusa : StandardRoleBase
 {
     private const int Id = 12400;
 
@@ -15,9 +15,8 @@ public class Medusa : RoleBase, IStandardRole
 
     public override bool IsEnable => false;
 
-    public Team Faction => Team.Neutral;
-    public RoleOptionType? Alignment => RoleOptionType.Neutral_Killing;
-    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
+    public override Team Faction => Team.Neutral;
+    public override RoleOptionType? Alignment => RoleOptionType.Neutral_Killing;
 
     public override void SetupCustomOption()
     {

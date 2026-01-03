@@ -6,7 +6,7 @@ using HarmonyLib;
 
 namespace EHR.Roles;
 
-internal class Sentry : RoleBase, IStandardRole
+internal class Sentry : StandardRoleBase
 {
     public static bool On;
 
@@ -35,9 +35,8 @@ internal class Sentry : RoleBase, IStandardRole
     private HashSet<byte> UsingDevice = [];
     public override bool IsEnable => On;
 
-    public Team Faction => Team.Crewmate;
-    public RoleOptionType? Alignment => RoleOptionType.Crewmate_Investigate;
-    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
+    public override Team Faction => Team.Crewmate;
+    public override RoleOptionType? Alignment => RoleOptionType.Crewmate_Investigate;
 
     public override void SetupCustomOption()
     {

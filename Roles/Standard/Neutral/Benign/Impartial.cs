@@ -5,7 +5,7 @@ using Hazel;
 
 namespace EHR.Roles;
 
-internal class Impartial : RoleBase, IStandardRole
+internal class Impartial : StandardRoleBase
 {
     public static bool On;
 
@@ -41,9 +41,8 @@ internal class Impartial : RoleBase, IStandardRole
         }
     }
 
-    public Team Faction => Team.Neutral;
-    public RoleOptionType? Alignment => RoleOptionType.Neutral_Benign;
-    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
+    public override Team Faction => Team.Neutral;
+    public override RoleOptionType? Alignment => RoleOptionType.Neutral_Benign;
 
     public override void SetupCustomOption()
     {

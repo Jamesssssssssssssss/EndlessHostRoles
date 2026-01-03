@@ -9,7 +9,7 @@ namespace EHR.Roles;
 using static Options;
 using static Translator;
 
-public class Alchemist : RoleBase, IStandardRole
+public class Alchemist : StandardRoleBase
 {
     private const int Id = 5250;
     private static List<byte> PlayerIdList = [];
@@ -38,9 +38,8 @@ public class Alchemist : RoleBase, IStandardRole
     public override bool IsEnable => PlayerIdList.Count > 0;
     private bool IsInvis => InvisTime != -10;
 
-    public Team Faction => Team.Crewmate;
-    public RoleOptionType? Alignment => RoleOptionType.Crewmate_Power;
-    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
+    public override Team Faction => Team.Crewmate;
+    public override RoleOptionType? Alignment => RoleOptionType.Crewmate_Power;
 
     public override void SetupCustomOption()
     {

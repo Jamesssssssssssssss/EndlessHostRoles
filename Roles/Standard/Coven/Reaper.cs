@@ -5,7 +5,7 @@ using Hazel;
 
 namespace EHR.Roles;
 
-public class Reaper : CovenBase, IStandardRole
+public class Reaper : CovenBase
 {
     public static bool On;
     private static List<Reaper> Instances = [];
@@ -24,9 +24,8 @@ public class Reaper : CovenBase, IStandardRole
 
     public override bool IsEnable => On;
 
-    public Team Faction => Team.Coven;
-    public RoleOptionType? Alignment => RoleOptionType.Coven_Miscellaneous;
-    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
+    public override Team Faction => Team.Coven;
+    public override RoleOptionType? Alignment => RoleOptionType.Coven_Miscellaneous;
 
     public override void SetupCustomOption()
     {
@@ -111,7 +110,7 @@ public class Reaper : CovenBase, IStandardRole
     }
 }
 
-public class Death : CovenBase, IStandardRole
+public class Death : CovenBase
 {
     public static bool On;
 
@@ -119,9 +118,8 @@ public class Death : CovenBase, IStandardRole
 
     public override bool IsEnable => On;
 
-    public Team Faction => Team.Coven;
-    public RoleOptionType? Alignment => RoleOptionType.Coven_Miscellaneous;
-    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
+    public override Team Faction => Team.Coven;
+    public override RoleOptionType? Alignment => RoleOptionType.Coven_Miscellaneous;
 
     public override void SetupCustomOption() { }
 

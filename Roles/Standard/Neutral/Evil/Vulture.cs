@@ -8,7 +8,7 @@ using static EHR.Translator;
 
 namespace EHR.Roles;
 
-public class Vulture : RoleBase, IStandardRole
+public class Vulture : StandardRoleBase
 {
     private const int Id = 11600;
     private static List<byte> PlayerIdList = [];
@@ -46,9 +46,8 @@ public class Vulture : RoleBase, IStandardRole
 
     public override bool SeesArrowsToDeadBodies => ArrowsPointingToDeadBody.GetBool();
 
-    public Team Faction => Team.Neutral;
-    public RoleOptionType? Alignment => RoleOptionType.Neutral_Evil;
-    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
+    public override Team Faction => Team.Neutral;
+    public override RoleOptionType? Alignment => RoleOptionType.Neutral_Evil;
 
     public override void SetupCustomOption()
     {

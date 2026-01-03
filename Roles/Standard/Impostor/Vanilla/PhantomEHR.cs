@@ -3,15 +3,14 @@ using AmongUs.GameOptions;
 
 namespace EHR.Roles;
 
-public class PhantomEHR : RoleBase, IStandardRole
+public class PhantomEHR : StandardRoleBase
 {
     public static bool On;
 
     public override bool IsEnable => On;
 
-    public Team Faction => Team.Impostor;
-    public RoleOptionType? Alignment => null;
-    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
+    public override Team Faction => Team.Impostor;
+    public override RoleOptionType? Alignment => null;
 
     public override void SetupCustomOption() { }
 

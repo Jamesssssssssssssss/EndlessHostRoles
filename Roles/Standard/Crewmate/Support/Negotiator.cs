@@ -6,7 +6,7 @@ using EHR.Modules;
 
 namespace EHR.Roles;
 
-public class Negotiator : RoleBase, IStandardRole
+public class Negotiator : StandardRoleBase
 {
     public static bool On;
     private static List<Negotiator> Instances = [];
@@ -26,9 +26,8 @@ public class Negotiator : RoleBase, IStandardRole
 
     public override bool IsEnable => On;
 
-    public Team Faction => Team.Crewmate;
-    public RoleOptionType? Alignment => RoleOptionType.Crewmate_Support;
-    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
+    public override Team Faction => Team.Crewmate;
+    public override RoleOptionType? Alignment => RoleOptionType.Crewmate_Support;
 
     public override void SetupCustomOption()
     {

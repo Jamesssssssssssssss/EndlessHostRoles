@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace EHR.Roles;
 
-public class Ambusher : RoleBase, IStandardRole
+public class Ambusher : StandardRoleBase
 {
     public static bool On;
 
@@ -32,9 +32,8 @@ public class Ambusher : RoleBase, IStandardRole
 
     public static Dictionary<byte, long> FragilePlayers = [];
 
-    public Team Faction => Team.Impostor;
-    public RoleOptionType? Alignment => RoleOptionType.Impostor_Concealing;
-    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
+    public override Team Faction => Team.Impostor;
+    public override RoleOptionType? Alignment => RoleOptionType.Impostor_Concealing;
 
     public override void SetupCustomOption()
     {

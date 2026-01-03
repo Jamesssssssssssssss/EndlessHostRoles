@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace EHR.Roles;
 
-public class Starspawn : RoleBase, IStandardRole
+public class Starspawn : StandardRoleBase
 {
     public static bool On;
     private static List<Starspawn> Instances = [];
@@ -23,9 +23,8 @@ public class Starspawn : RoleBase, IStandardRole
 
     public override bool IsEnable => On;
 
-    public Team Faction => Team.Neutral;
-    public RoleOptionType? Alignment => RoleOptionType.Neutral_Pariah;
-    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
+    public override Team Faction => Team.Neutral;
+    public override RoleOptionType? Alignment => RoleOptionType.Neutral_Pariah;
 
     public override void SetupCustomOption()
     {

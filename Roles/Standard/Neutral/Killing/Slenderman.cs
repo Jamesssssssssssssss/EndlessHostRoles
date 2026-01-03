@@ -5,7 +5,7 @@ using Hazel;
 
 namespace EHR.Roles;
 
-public class Slenderman : RoleBase, IStandardRole
+public class Slenderman : StandardRoleBase
 {
     public static bool On;
     private static List<Slenderman> Instances = [];
@@ -22,9 +22,8 @@ public class Slenderman : RoleBase, IStandardRole
     private PlayerControl SlendermanPC;
     private long MeetingCooldownEndTS;
 
-    public Team Faction => Team.Neutral;
-    public RoleOptionType? Alignment => RoleOptionType.Neutral_Killing;
-    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
+    public override Team Faction => Team.Neutral;
+    public override RoleOptionType? Alignment => RoleOptionType.Neutral_Killing;
 
     public override void SetupCustomOption()
     {

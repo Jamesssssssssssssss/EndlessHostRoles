@@ -5,7 +5,7 @@ using static EHR.Options;
 
 namespace EHR.Roles;
 
-public class Chronomancer : RoleBase, IStandardRole
+public class Chronomancer : StandardRoleBase
 {
     private const int Id = 642100;
     public static List<byte> PlayerIdList = [];
@@ -22,9 +22,8 @@ public class Chronomancer : RoleBase, IStandardRole
     
     public override bool IsEnable => PlayerIdList.Count > 0;
 
-    public Team Faction => Team.Impostor;
-    public RoleOptionType? Alignment => RoleOptionType.Impostor_Killing;
-    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
+    public override Team Faction => Team.Impostor;
+    public override RoleOptionType? Alignment => RoleOptionType.Impostor_Killing;
 
     public override void SetupCustomOption()
     {

@@ -4,7 +4,7 @@ using static EHR.Options;
 
 namespace EHR.Roles;
 
-internal class Mayor : RoleBase, IStandardRole
+internal class Mayor : StandardRoleBase
 {
     public static bool On;
     public static Dictionary<byte, int> MayorUsedButtonCount = [];
@@ -101,9 +101,8 @@ internal class Mayor : RoleBase, IStandardRole
             TaskVotes = maxVotes;
     }
 
-    public Team Faction => Team.Crewmate;
-    public RoleOptionType? Alignment => RoleOptionType.Crewmate_Power;
-    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
+    public override Team Faction => Team.Crewmate;
+    public override RoleOptionType? Alignment => RoleOptionType.Crewmate_Power;
 
     public override void SetupCustomOption()
     {

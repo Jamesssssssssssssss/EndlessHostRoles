@@ -10,7 +10,7 @@ using static EHR.Utils;
 
 namespace EHR.Roles;
 
-internal class SoulHunter : RoleBase, IStandardRole
+internal class SoulHunter : StandardRoleBase
 {
     public static OptionItem CanVent;
     private static OptionItem HasImpostorVision;
@@ -31,9 +31,8 @@ internal class SoulHunter : RoleBase, IStandardRole
 
     private bool IsTargetBlocked => IsEnable && CurrentTarget.ID != byte.MaxValue && CurrentTarget.StartTimeStamp != 0;
 
-    public Team Faction => Team.Neutral;
-    public RoleOptionType? Alignment => RoleOptionType.Neutral_Benign;
-    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
+    public override Team Faction => Team.Neutral;
+    public override RoleOptionType? Alignment => RoleOptionType.Neutral_Benign;
 
     public override void SetupCustomOption()
     {

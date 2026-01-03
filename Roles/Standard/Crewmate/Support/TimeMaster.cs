@@ -10,7 +10,7 @@ using static EHR.Options;
 
 namespace EHR.Roles;
 
-internal class TimeMaster : RoleBase, IStandardRole
+internal class TimeMaster : StandardRoleBase
 {
     public static bool On;
 
@@ -28,9 +28,8 @@ internal class TimeMaster : RoleBase, IStandardRole
 
     private bool DesyncCommsActive;
 
-    public Team Faction => Team.Crewmate;
-    public RoleOptionType? Alignment => RoleOptionType.Crewmate_Support;
-    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
+    public override Team Faction => Team.Crewmate;
+    public override RoleOptionType? Alignment => RoleOptionType.Crewmate_Support;
 
     public override void SetupCustomOption()
     {

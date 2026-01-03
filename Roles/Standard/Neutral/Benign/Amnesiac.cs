@@ -9,7 +9,7 @@ using static EHR.Translator;
 
 namespace EHR.Roles;
 
-public class Amnesiac : RoleBase, IStandardRole
+public class Amnesiac : StandardRoleBase
 {
     private const int Id = 35000;
     private static List<Amnesiac> Instances = [];
@@ -45,9 +45,8 @@ public class Amnesiac : RoleBase, IStandardRole
 
     public override bool IsEnable => Instances.Count > 0;
 
-    public Team Faction => Team.Neutral;
-    public RoleOptionType? Alignment => RoleOptionType.Neutral_Benign;
-    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
+    public override Team Faction => Team.Neutral;
+    public override RoleOptionType? Alignment => RoleOptionType.Neutral_Benign;
 
     public override void SetupCustomOption()
     {

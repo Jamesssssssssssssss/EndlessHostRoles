@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace EHR.Roles;
 
-public class Ventriloquist : RoleBase, IStandardRole
+public class Ventriloquist : StandardRoleBase
 {
     public static bool On;
 
@@ -17,9 +17,8 @@ public class Ventriloquist : RoleBase, IStandardRole
     public byte Target;
     public override bool IsEnable => On;
 
-    public Team Faction => Team.Impostor;
-    public RoleOptionType? Alignment => RoleOptionType.Impostor_Support;
-    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
+    public override Team Faction => Team.Impostor;
+    public override RoleOptionType? Alignment => RoleOptionType.Impostor_Support;
 
     public override void SetupCustomOption()
     {

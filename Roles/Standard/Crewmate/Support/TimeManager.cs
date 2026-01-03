@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 namespace EHR.Roles;
 
-public class TimeManager : RoleBase, IStandardRole
+public class TimeManager : StandardRoleBase
 {
     private const int Id = 8200;
     public static List<byte> PlayerIdList = [];
@@ -12,9 +12,8 @@ public class TimeManager : RoleBase, IStandardRole
 
     public override bool IsEnable => PlayerIdList.Count > 0;
 
-    public Team Faction => Team.Crewmate;
-    public RoleOptionType? Alignment => RoleOptionType.Crewmate_Support;
-    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
+    public override Team Faction => Team.Crewmate;
+    public override RoleOptionType? Alignment => RoleOptionType.Crewmate_Support;
 
     public override void SetupCustomOption()
     {

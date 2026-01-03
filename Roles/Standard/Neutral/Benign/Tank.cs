@@ -4,7 +4,7 @@ using AmongUs.GameOptions;
 
 namespace EHR.Roles;
 
-public class Tank : RoleBase, IStandardRole
+public class Tank : StandardRoleBase
 {
     public static bool On;
 
@@ -20,9 +20,8 @@ public class Tank : RoleBase, IStandardRole
     public override bool IsEnable => On;
     public bool IsWon => EnteredVents.Count >= AllVents.Count;
 
-    public Team Faction => Team.Neutral;
-    public RoleOptionType? Alignment => RoleOptionType.Neutral_Benign;
-    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
+    public override Team Faction => Team.Neutral;
+    public override RoleOptionType? Alignment => RoleOptionType.Neutral_Benign;
 
     public override void SetupCustomOption()
     {

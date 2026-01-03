@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace EHR.Roles;
 
-public class Technician : RoleBase, IStandardRole
+public class Technician : StandardRoleBase
 {
     public static bool On;
 
@@ -25,9 +25,8 @@ public class Technician : RoleBase, IStandardRole
 
     public override bool IsEnable => On;
 
-    public Team Faction => Team.Neutral;
-    public RoleOptionType? Alignment => RoleOptionType.Neutral_Benign;
-    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
+    public override Team Faction => Team.Neutral;
+    public override RoleOptionType? Alignment => RoleOptionType.Neutral_Benign;
 
     public override void SetupCustomOption()
     {

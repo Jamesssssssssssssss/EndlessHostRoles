@@ -399,7 +399,7 @@ internal static class EffectExtenstions
     }
 }
 
-internal class Randomizer : RoleBase, IStandardRole
+internal class Randomizer : StandardRoleBase
 {
     public enum Effect
     {
@@ -494,9 +494,8 @@ internal class Randomizer : RoleBase, IStandardRole
         return CurrentEffects.TryGetValue(pc.PlayerId, out Dictionary<Effect, (long StartTimeStamp, int Duration)> effects) && (effects.ContainsKey(Effect.BlindnessForRandomPlayer) || effects.ContainsKey(Effect.BlindnessForAll));
     }
 
-    public Team Faction => Team.Crewmate;
-    public RoleOptionType? Alignment => RoleOptionType.Crewmate_Chaos;
-    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
+    public override Team Faction => Team.Crewmate;
+    public override RoleOptionType? Alignment => RoleOptionType.Crewmate_Chaos;
 
     public override void SetupCustomOption()
     {

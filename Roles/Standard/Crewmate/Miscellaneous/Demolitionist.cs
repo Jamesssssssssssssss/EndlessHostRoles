@@ -5,13 +5,12 @@ using static EHR.Options;
 
 namespace EHR.Roles;
 
-internal class Demolitionist : RoleBase, IStandardRole
+internal class Demolitionist : StandardRoleBase
 {
     public override bool IsEnable => false;
 
-    public Team Faction => Team.Crewmate;
-    public RoleOptionType? Alignment => RoleOptionType.Crewmate_Miscellaneous;
-    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
+    public override Team Faction => Team.Crewmate;
+    public override RoleOptionType? Alignment => RoleOptionType.Crewmate_Miscellaneous;
 
     public override void SetupCustomOption()
     {

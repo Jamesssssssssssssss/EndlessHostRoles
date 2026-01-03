@@ -8,7 +8,7 @@ using static EHR.Utils;
 
 namespace EHR.Roles;
 
-internal class Bubble : RoleBase, IStandardRole
+internal class Bubble : StandardRoleBase
 {
     private static OptionItem KillCooldown;
     private static OptionItem HasImpostorVision;
@@ -27,9 +27,8 @@ internal class Bubble : RoleBase, IStandardRole
 
     public override bool IsEnable => BubbleId != byte.MaxValue;
 
-    public Team Faction => Team.Neutral;
-    public RoleOptionType? Alignment => RoleOptionType.Neutral_Killing;
-    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
+    public override Team Faction => Team.Neutral;
+    public override RoleOptionType? Alignment => RoleOptionType.Neutral_Killing;
 
     public override void SetupCustomOption()
     {

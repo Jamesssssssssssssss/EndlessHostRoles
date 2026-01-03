@@ -7,7 +7,7 @@ using static EHR.Utils;
 
 namespace EHR.Roles;
 
-internal class Sprayer : RoleBase, IStandardRole
+internal class Sprayer : StandardRoleBase
 {
     private static byte SprayerId = byte.MaxValue;
 
@@ -31,9 +31,8 @@ internal class Sprayer : RoleBase, IStandardRole
 
     public override bool IsEnable => SprayerId != byte.MaxValue;
 
-    public Team Faction => Team.Neutral;
-    public RoleOptionType? Alignment => RoleOptionType.Neutral_Killing;
-    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
+    public override Team Faction => Team.Neutral;
+    public override RoleOptionType? Alignment => RoleOptionType.Neutral_Killing;
 
     public override void SetupCustomOption()
     {

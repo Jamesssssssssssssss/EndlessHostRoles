@@ -2,7 +2,7 @@
 
 namespace EHR.Roles;
 
-internal class Guardian : RoleBase, IStandardRole
+internal class Guardian : StandardRoleBase
 {
     public static bool On;
     public override bool IsEnable => On;
@@ -22,9 +22,8 @@ internal class Guardian : RoleBase, IStandardRole
         return !target.AllTasksCompleted();
     }
 
-    public Team Faction => Team.Crewmate;
-    public RoleOptionType? Alignment => RoleOptionType.Crewmate_Power;
-    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
+    public override Team Faction => Team.Crewmate;
+    public override RoleOptionType? Alignment => RoleOptionType.Crewmate_Power;
 
     public override void SetupCustomOption()
     {

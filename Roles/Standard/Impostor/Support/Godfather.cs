@@ -2,15 +2,14 @@
 
 namespace EHR.Roles;
 
-internal class Godfather : RoleBase, IStandardRole
+internal class Godfather : StandardRoleBase
 {
     public static byte GodfatherTarget = byte.MaxValue;
     public static bool On;
     public override bool IsEnable => On;
 
-    public Team Faction => Team.Impostor;
-    public RoleOptionType? Alignment => RoleOptionType.Impostor_Support;
-    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
+    public override Team Faction => Team.Impostor;
+    public override RoleOptionType? Alignment => RoleOptionType.Impostor_Support;
 
     public override void SetupCustomOption()
     {

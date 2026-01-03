@@ -5,7 +5,7 @@ using Hazel;
 
 namespace EHR.Roles;
 
-public class PotionMaster : CovenBase, IStandardRole
+public class PotionMaster : CovenBase
 {
     public static bool On;
     private static List<PotionMaster> Instances = [];
@@ -25,9 +25,8 @@ public class PotionMaster : CovenBase, IStandardRole
 
     public override bool IsEnable => On;
 
-    public Team Faction => Team.Coven;
-    public RoleOptionType? Alignment => RoleOptionType.Coven_Miscellaneous;
-    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
+    public override Team Faction => Team.Coven;
+    public override RoleOptionType? Alignment => RoleOptionType.Coven_Miscellaneous;
 
     public override void SetupCustomOption()
     {

@@ -5,15 +5,14 @@ using Il2CppSystem;
 
 namespace EHR.Roles;
 
-public class Helper : RoleBase, IStandardRole
+public class Helper : StandardRoleBase
 {
     public static bool On;
 
     public override bool IsEnable => On;
 
-    public Team Faction => Team.Crewmate;
-    public RoleOptionType? Alignment => RoleOptionType.Crewmate_Support;
-    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
+    public override Team Faction => Team.Crewmate;
+    public override RoleOptionType? Alignment => RoleOptionType.Crewmate_Support;
 
     public override void SetupCustomOption()
     {

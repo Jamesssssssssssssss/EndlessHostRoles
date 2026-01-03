@@ -4,7 +4,7 @@ using EHR.Modules;
 
 namespace EHR.Roles;
 
-public class Fabricator : RoleBase, IStandardRole
+public class Fabricator : StandardRoleBase
 {
     public static bool On;
 
@@ -15,9 +15,8 @@ public class Fabricator : RoleBase, IStandardRole
 
     public PlayerState.DeathReason NextDeathReason;
 
-    public Team Faction => Team.Impostor;
-    public RoleOptionType? Alignment => RoleOptionType.Impostor_Concealing;
-    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
+    public override Team Faction => Team.Impostor;
+    public override RoleOptionType? Alignment => RoleOptionType.Impostor_Concealing;
 
     public override void SetupCustomOption()
     {

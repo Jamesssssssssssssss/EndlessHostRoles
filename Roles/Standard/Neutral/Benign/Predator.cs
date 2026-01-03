@@ -8,7 +8,7 @@ using Hazel;
 
 namespace EHR.Roles;
 
-internal class Predator : RoleBase, IStandardRole
+internal class Predator : StandardRoleBase
 {
     private const int Id = 643540;
     public static bool On;
@@ -22,9 +22,8 @@ internal class Predator : RoleBase, IStandardRole
     private List<CustomRoles> RolesToKill = [];
     public override bool IsEnable => On;
 
-    public Team Faction => Team.Neutral;
-    public RoleOptionType? Alignment => RoleOptionType.Neutral_Benign;
-    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
+    public override Team Faction => Team.Neutral;
+    public override RoleOptionType? Alignment => RoleOptionType.Neutral_Benign;
 
     public override void SetupCustomOption()
     {

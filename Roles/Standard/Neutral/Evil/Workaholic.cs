@@ -7,7 +7,7 @@ using static EHR.Options;
 // From: TOH_Y
 namespace EHR.Roles;
 
-internal class Workaholic : RoleBase, IStandardRole
+internal class Workaholic : StandardRoleBase
 {
     public static bool On;
 
@@ -21,9 +21,8 @@ internal class Workaholic : RoleBase, IStandardRole
     public static OptionItem WorkaholicSpeed;
     public override bool IsEnable => On;
 
-    public Team Faction => Team.Neutral;
-    public RoleOptionType? Alignment => RoleOptionType.Neutral_Evil;
-    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
+    public override Team Faction => Team.Neutral;
+    public override RoleOptionType? Alignment => RoleOptionType.Neutral_Evil;
 
     public override void SetupCustomOption()
     {

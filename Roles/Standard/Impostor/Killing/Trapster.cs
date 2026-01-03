@@ -5,7 +5,7 @@ using static EHR.Options;
 
 namespace EHR.Roles;
 
-internal class Trapster : RoleBase, IStandardRole
+internal class Trapster : StandardRoleBase
 {
     private static List<byte> TrapsterBody = [];
     private static Dictionary<byte, byte> KillerOfTrapsterBody = [];
@@ -20,9 +20,8 @@ internal class Trapster : RoleBase, IStandardRole
 
     public override bool IsEnable => On;
 
-    public Team Faction => Team.Impostor;
-    public RoleOptionType? Alignment => RoleOptionType.Impostor_Killing;
-    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
+    public override Team Faction => Team.Impostor;
+    public override RoleOptionType? Alignment => RoleOptionType.Impostor_Killing;
 
     public override void SetupCustomOption()
     {

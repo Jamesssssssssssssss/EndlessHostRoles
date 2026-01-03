@@ -6,7 +6,7 @@ using static EHR.Translator;
 
 namespace EHR.Roles;
 
-internal class Spiritualist : RoleBase, IStandardRole
+internal class Spiritualist : StandardRoleBase
 {
     private const int Id = 8100;
 
@@ -39,9 +39,8 @@ internal class Spiritualist : RoleBase, IStandardRole
         }
     }
 
-    public Team Faction => Team.Crewmate;
-    public RoleOptionType? Alignment => RoleOptionType.Crewmate_Investigate;
-    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
+    public override Team Faction => Team.Crewmate;
+    public override RoleOptionType? Alignment => RoleOptionType.Crewmate_Investigate;
 
     public override void SetupCustomOption()
     {

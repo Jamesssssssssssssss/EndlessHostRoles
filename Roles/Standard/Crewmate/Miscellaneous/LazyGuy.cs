@@ -2,13 +2,12 @@
 
 namespace EHR.Roles;
 
-internal class LazyGuy : RoleBase, IStandardRole
+internal class LazyGuy : StandardRoleBase
 {
     public override bool IsEnable => false;
 
-    public Team Faction => Team.Crewmate;
-    public RoleOptionType? Alignment => RoleOptionType.Crewmate_Miscellaneous;
-    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
+    public override Team Faction => Team.Crewmate;
+    public override RoleOptionType? Alignment => RoleOptionType.Crewmate_Miscellaneous;
 
     public override void SetupCustomOption()
     {

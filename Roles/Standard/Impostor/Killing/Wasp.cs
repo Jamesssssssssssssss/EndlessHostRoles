@@ -8,7 +8,7 @@ using Hazel;
 
 namespace EHR.Roles;
 
-public class Wasp : RoleBase, IStandardRole
+public class Wasp : StandardRoleBase
 {
     public static bool On;
     private static List<Wasp> Instances = [];
@@ -32,9 +32,8 @@ public class Wasp : RoleBase, IStandardRole
 
     public override bool IsEnable => On;
 
-    public Team Faction => Team.Impostor;
-    public RoleOptionType? Alignment => RoleOptionType.Impostor_Killing;
-    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
+    public override Team Faction => Team.Impostor;
+    public override RoleOptionType? Alignment => RoleOptionType.Impostor_Killing;
 
     public override void SetupCustomOption()
     {

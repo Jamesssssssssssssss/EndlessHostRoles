@@ -2,7 +2,7 @@
 
 namespace EHR.Roles;
 
-public class Battery : RoleBase, IStandardRole
+public class Battery : StandardRoleBase
 {
     public static bool On;
 
@@ -12,9 +12,8 @@ public class Battery : RoleBase, IStandardRole
     private static OptionItem AbilityUseGainWithEachTaskCompleted;
     private static OptionItem AbilityChargesWhenFinishedTasks;
 
-    public Team Faction => Team.Crewmate;
-    public RoleOptionType? Alignment => RoleOptionType.Crewmate_Support;
-    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
+    public override Team Faction => Team.Crewmate;
+    public override RoleOptionType? Alignment => RoleOptionType.Crewmate_Support;
 
     public override void SetupCustomOption()
     {

@@ -2,15 +2,14 @@
 
 namespace EHR.Roles;
 
-internal class Dictator : RoleBase, IStandardRole
+internal class Dictator : StandardRoleBase
 {
     public override bool IsEnable => false;
 
     public static OptionItem MinTasksToDictate;
 
-    public Team Faction => Team.Crewmate;
-    public RoleOptionType? Alignment => RoleOptionType.Crewmate_Power;
-    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
+    public override Team Faction => Team.Crewmate;
+    public override RoleOptionType? Alignment => RoleOptionType.Crewmate_Power;
 
     public override void SetupCustomOption()
     {

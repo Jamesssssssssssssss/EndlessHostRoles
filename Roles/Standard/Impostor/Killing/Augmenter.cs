@@ -2,16 +2,15 @@
 
 namespace EHR.Roles;
 
-public class Augmenter : RoleBase, IStandardRole
+public class Augmenter : StandardRoleBase
 {
     public static bool On;
 
     public byte Target;
     public override bool IsEnable => On;
 
-    public Team Faction => Team.Impostor;
-    public RoleOptionType? Alignment => RoleOptionType.Impostor_Killing;
-    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
+    public override Team Faction => Team.Impostor;
+    public override RoleOptionType? Alignment => RoleOptionType.Impostor_Killing;
 
     public override void SetupCustomOption()
     {

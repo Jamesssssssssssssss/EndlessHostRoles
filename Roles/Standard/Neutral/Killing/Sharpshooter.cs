@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace EHR.Roles;
 
-public class Sharpshooter : RoleBase, IStandardRole
+public class Sharpshooter : StandardRoleBase
 {
     public static bool On;
 
@@ -22,9 +22,8 @@ public class Sharpshooter : RoleBase, IStandardRole
     private Vector2 RealPosition;
     private byte SharpshooterId;
 
-    public Team Faction => Team.Neutral;
-    public RoleOptionType? Alignment => RoleOptionType.Neutral_Killing;
-    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
+    public override Team Faction => Team.Neutral;
+    public override RoleOptionType? Alignment => RoleOptionType.Neutral_Killing;
 
     public override void SetupCustomOption()
     {

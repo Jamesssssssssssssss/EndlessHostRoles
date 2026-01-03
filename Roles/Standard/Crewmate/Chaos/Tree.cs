@@ -4,7 +4,7 @@ using EHR.Modules;
 
 namespace EHR.Roles;
 
-public class Tree : RoleBase, IStandardRole
+public class Tree : StandardRoleBase
 {
     public static bool On;
 
@@ -24,9 +24,8 @@ public class Tree : RoleBase, IStandardRole
 
     public bool TreeSpriteActive;
 
-    public Team Faction => Team.Crewmate;
-    public RoleOptionType? Alignment => RoleOptionType.Crewmate_Chaos;
-    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
+    public override Team Faction => Team.Crewmate;
+    public override RoleOptionType? Alignment => RoleOptionType.Crewmate_Chaos;
 
     public override void SetupCustomOption()
     {

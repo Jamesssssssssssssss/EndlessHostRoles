@@ -7,7 +7,7 @@ using static EHR.Options;
 
 namespace EHR.Roles;
 
-internal class Arsonist : RoleBase, IStandardRole
+internal class Arsonist : StandardRoleBase
 {
     public static Dictionary<byte, (PlayerControl Player, float Timer)> ArsonistTimer = [];
     public static Dictionary<(byte, byte), bool> IsDoused = [];
@@ -25,9 +25,8 @@ internal class Arsonist : RoleBase, IStandardRole
     public static bool On;
     public override bool IsEnable => On;
 
-    public Team Faction => Team.Neutral;
-    public RoleOptionType? Alignment => RoleOptionType.Neutral_Evil;
-    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
+    public override Team Faction => Team.Neutral;
+    public override RoleOptionType? Alignment => RoleOptionType.Neutral_Evil;
 
     public override void SetupCustomOption()
     {

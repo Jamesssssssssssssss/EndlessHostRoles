@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace EHR.Roles;
 
-public class Imitator : RoleBase, IStandardRole
+public class Imitator : StandardRoleBase
 {
     public static bool On;
     public static List<byte> PlayerIdList = [];
@@ -16,9 +16,8 @@ public class Imitator : RoleBase, IStandardRole
     public override bool IsEnable => On;
 
 
-    public Team Faction => Team.Crewmate;
-    public RoleOptionType? Alignment => RoleOptionType.Crewmate_Investigate;
-    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
+    public override Team Faction => Team.Crewmate;
+    public override RoleOptionType? Alignment => RoleOptionType.Crewmate_Investigate;
 
     public override void SetupCustomOption()
     {

@@ -3,7 +3,7 @@ using EHR.Modules;
 
 namespace EHR.Roles;
 
-public class Occultist : RoleBase, IStandardRole
+public class Occultist : StandardRoleBase
 {
     public static bool On;
 
@@ -33,9 +33,8 @@ public class Occultist : RoleBase, IStandardRole
 
     public override bool SeesArrowsToDeadBodies => ArrowsToBodies.GetBool();
 
-    public Team Faction => Team.Impostor;
-    public RoleOptionType? Alignment => RoleOptionType.Impostor_Support;
-    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
+    public override Team Faction => Team.Impostor;
+    public override RoleOptionType? Alignment => RoleOptionType.Impostor_Support;
 
     public override void SetupCustomOption()
     {

@@ -4,7 +4,7 @@ using EHR.Patches;
 
 namespace EHR.Roles;
 
-internal class Cherokious : RoleBase, IStandardRole
+internal class Cherokious : StandardRoleBase
 {
     public static bool On;
 
@@ -12,9 +12,8 @@ internal class Cherokious : RoleBase, IStandardRole
     public static OptionItem ImpostorVision;
     public override bool IsEnable => On;
 
-    public Team Faction => Team.Neutral;
-    public RoleOptionType? Alignment => RoleOptionType.Neutral_Killing;
-    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
+    public override Team Faction => Team.Neutral;
+    public override RoleOptionType? Alignment => RoleOptionType.Neutral_Killing;
 
     public override void SetupCustomOption()
     {

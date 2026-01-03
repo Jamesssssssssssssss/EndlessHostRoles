@@ -6,7 +6,7 @@ using static EHR.Utils;
 
 namespace EHR.Roles;
 
-internal class Enderman : RoleBase, IStandardRole
+internal class Enderman : StandardRoleBase
 {
     private static OptionItem KillCooldown;
     private static OptionItem CanVent;
@@ -21,9 +21,8 @@ internal class Enderman : RoleBase, IStandardRole
 
     public override bool IsEnable => EndermanId != byte.MaxValue;
 
-    public Team Faction => Team.Neutral;
-    public RoleOptionType? Alignment => RoleOptionType.Neutral_Killing;
-    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
+    public override Team Faction => Team.Neutral;
+    public override RoleOptionType? Alignment => RoleOptionType.Neutral_Killing;
 
     public override void SetupCustomOption()
     {

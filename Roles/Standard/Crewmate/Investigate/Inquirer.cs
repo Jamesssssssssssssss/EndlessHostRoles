@@ -2,7 +2,7 @@
 
 namespace EHR.Roles;
 
-public class Inquirer : RoleBase, IStandardRole
+public class Inquirer : StandardRoleBase
 {
     public static OptionItem FailChance;
     private static OptionItem AbilityUseLimit;
@@ -11,9 +11,8 @@ public class Inquirer : RoleBase, IStandardRole
 
     public override bool IsEnable => false;
 
-    public Team Faction => Team.Crewmate;
-    public RoleOptionType? Alignment => RoleOptionType.Crewmate_Investigate;
-    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
+    public override Team Faction => Team.Crewmate;
+    public override RoleOptionType? Alignment => RoleOptionType.Crewmate_Investigate;
 
     public override void SetupCustomOption()
     {

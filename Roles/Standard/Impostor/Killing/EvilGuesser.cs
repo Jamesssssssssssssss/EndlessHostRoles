@@ -4,13 +4,12 @@ using static EHR.Options;
 
 namespace EHR.Roles;
 
-internal class EvilGuesser : RoleBase, IStandardRole
+internal class EvilGuesser : StandardRoleBase
 {
     public override bool IsEnable => false;
 
-    public Team Faction => Team.Impostor;
-    public RoleOptionType? Alignment => RoleOptionType.Impostor_Killing;
-    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
+    public override Team Faction => Team.Impostor;
+    public override RoleOptionType? Alignment => RoleOptionType.Impostor_Killing;
 
     public override void SetupCustomOption()
     {

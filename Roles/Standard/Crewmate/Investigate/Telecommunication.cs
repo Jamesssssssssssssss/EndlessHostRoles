@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 namespace EHR.Roles;
 
-internal class Telecommunication : RoleBase, IStandardRole
+internal class Telecommunication : StandardRoleBase
 {
     private const int Id = 2350;
 
@@ -28,9 +28,8 @@ internal class Telecommunication : RoleBase, IStandardRole
         playerId.SetAbilityUseLimit(UseLimitOpt.GetFloat());
     }
 
-    public Team Faction => Team.Crewmate;
-    public RoleOptionType? Alignment => RoleOptionType.Crewmate_Investigate;
-    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
+    public override Team Faction => Team.Crewmate;
+    public override RoleOptionType? Alignment => RoleOptionType.Crewmate_Investigate;
 
     public override void SetupCustomOption()
     {

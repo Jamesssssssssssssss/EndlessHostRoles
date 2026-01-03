@@ -7,7 +7,7 @@ namespace EHR.Roles;
 using static Options;
 using static Translator;
 
-public class Coroner : RoleBase, IStandardRole
+public class Coroner : StandardRoleBase
 {
     private const int Id = 6400;
     private static List<byte> PlayerIdList = [];
@@ -28,9 +28,8 @@ public class Coroner : RoleBase, IStandardRole
 
     public override bool SeesArrowsToDeadBodies => ArrowsPointingToDeadBody.GetBool();
 
-    public Team Faction => Team.Crewmate;
-    public RoleOptionType? Alignment => RoleOptionType.Crewmate_Investigate;
-    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
+    public override Team Faction => Team.Crewmate;
+    public override RoleOptionType? Alignment => RoleOptionType.Crewmate_Investigate;
 
     public override void SetupCustomOption()
     {

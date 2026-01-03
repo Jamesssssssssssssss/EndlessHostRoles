@@ -4,7 +4,7 @@ using EHR.Modules;
 
 namespace EHR.Roles;
 
-internal class Freezer : RoleBase, IStandardRole
+internal class Freezer : StandardRoleBase
 {
     private const int Id = 643530;
     public static bool On;
@@ -13,9 +13,8 @@ internal class Freezer : RoleBase, IStandardRole
     private static OptionItem FreezeDuration;
     public override bool IsEnable => On;
 
-    public Team Faction => Team.Impostor;
-    public RoleOptionType? Alignment => RoleOptionType.Impostor_Support;
-    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
+    public override Team Faction => Team.Impostor;
+    public override RoleOptionType? Alignment => RoleOptionType.Impostor_Support;
 
     public override void SetupCustomOption()
     {

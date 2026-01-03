@@ -2,7 +2,7 @@
 
 namespace EHR.Roles;
 
-public class Pulse : RoleBase, IStandardRole
+public class Pulse : StandardRoleBase
 {
     private const int Id = 11950;
 
@@ -14,9 +14,8 @@ public class Pulse : RoleBase, IStandardRole
 
     public override bool IsEnable => false;
 
-    public Team Faction => Team.Neutral;
-    public RoleOptionType? Alignment => RoleOptionType.Neutral_Killing;
-    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
+    public override Team Faction => Team.Neutral;
+    public override RoleOptionType? Alignment => RoleOptionType.Neutral_Killing;
 
     public override void SetupCustomOption()
     {

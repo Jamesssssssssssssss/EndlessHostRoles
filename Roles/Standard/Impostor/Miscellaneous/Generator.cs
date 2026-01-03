@@ -28,7 +28,7 @@ internal static class GeneratorStatic
         Sabotage
     }
 
-    internal class Generator : RoleBase, IStandardRole
+    internal class Generator : StandardRoleBase
     {
         public static bool On;
 
@@ -46,9 +46,8 @@ internal static class GeneratorStatic
         private long LastUpdate;
         public override bool IsEnable => On;
 
-        public Team Faction => Team.Impostor;
-    public RoleOptionType? Alignment => RoleOptionType.Impostor_Miscellaneous;
-    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
+        public override Team Faction => Team.Impostor;
+    public override RoleOptionType? Alignment => RoleOptionType.Impostor_Miscellaneous;
 
     public override void SetupCustomOption()
         {

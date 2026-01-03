@@ -6,7 +6,7 @@ using static EHR.Utils;
 
 namespace EHR.Roles;
 
-public class YinYanger : RoleBase, IStandardRole
+public class YinYanger : StandardRoleBase
 {
     private const int Id = 642870;
 
@@ -20,9 +20,8 @@ public class YinYanger : RoleBase, IStandardRole
 
     public override bool IsEnable => YinYangerId != byte.MaxValue;
 
-    public Team Faction => Team.Impostor;
-    public RoleOptionType? Alignment => RoleOptionType.Impostor_Support;
-    public IReadOnlyList<CustomRoles> IncompatibleRoles => [];
+    public override Team Faction => Team.Impostor;
+    public override RoleOptionType? Alignment => RoleOptionType.Impostor_Support;
 
     public override void SetupCustomOption()
     {

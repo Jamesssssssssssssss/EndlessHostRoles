@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using AmongUs.GameOptions;
 using EHR.Modules;
+using EHR.Roles;
 using UnityEngine;
 using static EHR.Translator;
 
@@ -127,7 +128,7 @@ internal class StopAndGoPlayerData(Counter[] counters, float positionX, float po
     }
 }
 
-internal static class StopAndGo
+internal class StopAndGo : GamemodeBase
 {
     public enum Events
     {
@@ -139,6 +140,7 @@ internal static class StopAndGo
         CommsSabotage
     }
 
+    public override CustomRoles? GamemodeRole => CustomRoles.Tasker;
     private static Dictionary<byte, StopAndGoPlayerData> AllPlayerTimers = [];
 
     private static OptionItem GameTime;

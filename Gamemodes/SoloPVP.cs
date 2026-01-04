@@ -2,14 +2,18 @@
 using System.Collections.Generic;
 using System.Linq;
 using EHR.Modules;
+using EHR.Roles;
 using Hazel;
 using UnityEngine;
 using static EHR.RandomSpawn;
 
 namespace EHR.Gamemodes;
 
-internal static class SoloPVP
+internal class SoloPVP : GamemodeBase
 {
+    public override CustomRoles? GamemodeRole => CustomRoles.Challenger;
+    internal static bool IsAliveInSoloPVP(PlayerControl pc) { return PlayerHP.TryGetValue(pc.PlayerId, out float hp) && hp > 0f; }
+
     private static Dictionary<byte, float> PlayerHPMax = [];
     private static Dictionary<byte, float> PlayerHP = [];
     public static Dictionary<byte, float> PlayerHPReco = [];
@@ -26,11 +30,6 @@ internal static class SoloPVP
     private static Dictionary<byte, long> LastCountdownTime = [];
 
     public static bool CanVent => SoloPVP_CanVent.GetBool();
-
-    public static bool SoloAlive(this PlayerControl pc)
-    {
-        return PlayerHP.TryGetValue(pc.PlayerId, out float hp) && hp > 0f;
-    }
 
     public static void SetupCustomOption()
     {
@@ -115,7 +114,7 @@ internal static class SoloPVP
 
     public static string GetDisplayHealth(PlayerControl pc, bool self)
     {
-        return (pc.SoloAlive() ? Utils.ColorString(GetHealthColor(pc), $"{(int)PlayerHP[pc.PlayerId]}/{(int)PlayerHPMax[pc.PlayerId]}") : string.Empty) + (self ? GetStatsForVanilla(pc) : string.Empty);
+        return (IsAliveInSoloPVP(pc) ? Utils.ColorString(GetHealthColor(pc), $"{(int)PlayerHP[pc.PlayerId]}/{(int)PlayerHPMax[pc.PlayerId]}") : string.Empty) + (self ? GetStatsForVanilla(pc) : string.Empty);
     }
 
     private static Color32 GetHealthColor(PlayerControl pc)
@@ -209,12 +208,12 @@ internal static class SoloPVP
     {
         if (killer == null || target == null || Options.CurrentGameMode != CustomGameMode.SoloPVP || !Main.IntroDestroyed) return;
 
-        if (!killer.SoloAlive() || !target.SoloAlive() || target.inVent || target.MyPhysics.Animations.IsPlayingEnterVentAnimation()) return;
+        if (!IsAliveInSoloPVP(killer) || !IsAliveInSoloPVP(target) || target.inVent || target.MyPhysics.Animations.IsPlayingEnterVentAnimation()) return;
 
         float dmg = PlayerATK[killer.PlayerId] - PlayerDF[target.PlayerId];
         PlayerHP[target.PlayerId] = Math.Max(0f, PlayerHP[target.PlayerId] - dmg);
 
-        if (!target.SoloAlive())
+        if (!IsAliveInSoloPVP(target))
         {
             Main.Instance.StartCoroutine(OnPlayerDead(target));
             OnPlayerKill(killer);
@@ -309,7 +308,7 @@ internal static class SoloPVP
             if (LastCountdownTime[id] == now) return;
             LastCountdownTime[id] = now;
 
-            if (LastHurt[id] + SoloPVP_RecoverAfterSecond.GetInt() < now && PlayerHP[id] < PlayerHPMax[id] && __instance.SoloAlive() && !__instance.inVent)
+            if (LastHurt[id] + SoloPVP_RecoverAfterSecond.GetInt() < now && PlayerHP[id] < PlayerHPMax[id] && IsAliveInSoloPVP(__instance) && !__instance.inVent)
             {
                 PlayerHP[id] += PlayerHPReco[id];
                 PlayerHP[id] = Math.Min(PlayerHPMax[id], PlayerHP[id]);

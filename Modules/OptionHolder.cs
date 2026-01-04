@@ -1165,8 +1165,8 @@ public static class Options
         GroupedAddons = Assembly
             .GetExecutingAssembly()
             .GetTypes()
-            .Where(x => x.GetInterfaces().ToList().Contains(typeof(IAddon)))
-            .Select(x => (IAddon)Activator.CreateInstance(x))
+            .Where(x => x.GetInterfaces().ToList().Contains(typeof(AddonBase)))
+            .Select(x => (AddonBase)Activator.CreateInstance(x))
             .Where(x => x != null)
             .GroupBy(x => x.Type)
             .ToDictionary(x => x.Key, x => x.Select(y => Enum.Parse<CustomRoles>(y.GetType().Name, true)).ToList());
@@ -1491,21 +1491,21 @@ public static class Options
         LoadingPercentage = 5;
         MainLoadingText = "Building Add-on Settings";
 
-        Type IAddonType = typeof(IAddon);
+        Type AddonBaseType = typeof(AddonBase);
 
         Type[] assemblyTypes = Assembly
             .GetExecutingAssembly()
             .GetTypes();
 
-        Dictionary<AddonTypes, IAddon[]> addonTypes = assemblyTypes
-            .Where(t => IAddonType.IsAssignableFrom(t) && !t.IsInterface)
+        Dictionary<AddonTypes, AddonBase[]> addonTypes = assemblyTypes
+            .Where(t => AddonBaseType.IsAssignableFrom(t) && !t.IsInterface)
             .OrderBy(t => Translator.GetString(t.Name))
-            .Select(type => (IAddon)Activator.CreateInstance(type))
+            .Select(type => (AddonBase)Activator.CreateInstance(type))
             .Where(x => x != null)
             .GroupBy(x => x.Type)
             .ToDictionary(x => x.Key, x => x.ToArray());
 
-        foreach (KeyValuePair<AddonTypes, IAddon[]> addonType in addonTypes)
+        foreach (KeyValuePair<AddonTypes, AddonBase[]> addonType in addonTypes)
         {
             MainLoadingText = $"Building Add-on Settings ({addonType.Key})";
             var index = 0;
@@ -1517,7 +1517,7 @@ public static class Options
 
             titleId += 10;
 
-            foreach (IAddon addon in addonType.Value)
+            foreach (AddonBase addon in addonType.Value)
             {
                 index++;
                 RoleLoadingText = $"{addon.GetType().Name} ({index}/{addonType.Value.Length})";

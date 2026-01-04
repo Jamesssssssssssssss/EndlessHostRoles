@@ -3,13 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using AmongUs.GameOptions;
 using EHR.Modules;
+using EHR.Roles;
 using Hazel;
 using UnityEngine;
 
 namespace EHR.Gamemodes;
 
-internal static class HotPotato
+internal class HotPotato : GamemodeBase
 {
+    public override CustomRoles? GamemodeRole => CustomRoles.Potato;
     private static OptionItem Time;
     private static OptionItem HolderSpeed;
     private static OptionItem Range;

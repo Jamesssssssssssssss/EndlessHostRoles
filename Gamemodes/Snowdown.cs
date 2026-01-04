@@ -7,13 +7,14 @@ using UnityEngine;
 
 namespace EHR.Gamemodes;
 
-public static class Snowdown
+internal class Snowdown : GamemodeBase
 {
     // Kill: Give the target a snowball
     // Vanish: Throw snowball in movement direction / Cycle to next powerup while in shop
     // Sabotage: Enter/Exit shop
     // Pet: Buy the selected powerup in the shop
 
+    public override CustomRoles? GamemodeRole => CustomRoles.SnowdownPlayer;
     public static float SnowballThrowSpeed = 4f;
     private static int SnowballGainFrequency = 5;
     private static int MaxSnowballsInHand = 5;
@@ -434,51 +435,5 @@ public static class Snowdown
         FillUp,
         IncreaseCapacity,
         FasterPickup
-    }
-}
-
-internal class SnowdownPlayer : RoleBase
-{
-    public static bool On;
-
-    public override bool IsEnable => On;
-
-    public override void SetupCustomOption() { }
-
-    public override void Init()
-    {
-        On = false;
-    }
-
-    public override void Add(byte playerId)
-    {
-        On = true;
-    }
-
-    public override bool CanUseSabotage(PlayerControl pc)
-    {
-        return pc.IsAlive();
-    }
-
-    public override bool OnSabotage(PlayerControl pc)
-    {
-        if (Snowdown.Data.TryGetValue(pc.PlayerId, out Snowdown.PlayerData data))
-            data.OnSabotage(pc);
-        
-        return false;
-    }
-
-    public override bool OnVanish(PlayerControl pc)
-    {
-        if (Snowdown.Data.TryGetValue(pc.PlayerId, out Snowdown.PlayerData data))
-            data.OnVanish(pc);
-        
-        return false;
-    }
-
-    public override void OnPet(PlayerControl pc)
-    {
-        if (Snowdown.Data.TryGetValue(pc.PlayerId, out Snowdown.PlayerData data))
-            data.OnPet(pc);
     }
 }

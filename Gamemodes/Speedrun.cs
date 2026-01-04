@@ -7,8 +7,9 @@ using UnityEngine;
 
 namespace EHR.Gamemodes;
 
-public static class Speedrun
+internal class Speedrun : GamemodeBase
 {
+    public override CustomRoles? GamemodeRole => CustomRoles.Runner;
     private static OptionItem TaskFinishWins;
     private static OptionItem TimeStacksUp;
     private static OptionItem TimeLimit;
@@ -216,21 +217,5 @@ public static class Speedrun
 
             Utils.NotifyRoles();
         }
-    }
-}
-
-public class Runner : RoleBase
-{
-    public override bool IsEnable => false;
-
-    public override void Init() { }
-
-    public override void Add(byte playerId) { }
-
-    public override void SetupCustomOption() { }
-
-    public override bool CanUseVent(PlayerControl pc, int ventId)
-    {
-        return !IsThisRole(pc);
     }
 }

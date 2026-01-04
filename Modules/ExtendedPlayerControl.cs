@@ -1399,7 +1399,7 @@ internal static class ExtendedPlayerControl
         return pc.GetCustomRole() switch
         {
             // Solo PVP
-            CustomRoles.Challenger => pc.SoloAlive(),
+            CustomRoles.Challenger => SoloPVP.IsAliveInSoloPVP(pc),
             // FFA
             CustomRoles.Killer => pc.IsAlive(),
             // Stop And Go

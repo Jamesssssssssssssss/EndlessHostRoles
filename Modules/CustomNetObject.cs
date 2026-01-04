@@ -911,9 +911,9 @@ namespace EHR
 
     public sealed class DeathracePowerUp : CustomNetObject
     {
-        public readonly Deathrace.PowerUp PowerUp;
+        internal readonly Deathrace.PowerUp PowerUp;
         
-        public DeathracePowerUp(Vector2 position, Deathrace.PowerUp powerUp)
+        internal DeathracePowerUp(Vector2 position, Deathrace.PowerUp powerUp)
         {
             PowerUp = powerUp;
             

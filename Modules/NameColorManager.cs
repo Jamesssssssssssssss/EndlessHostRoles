@@ -73,7 +73,7 @@ public static class NameColorManager
             case CustomGameMode.Quiz:
                 return Quiz.KnowTargetRoleColor(target, ref color);
             case CustomGameMode.BedWars:
-                color = BedWars.GetNameColor(target);
+                color = BedWars.GetTeam(target.PlayerId)?.NameColor;
                 return true;
             case CustomGameMode.Deathrace:
                 return Deathrace.KnowRoleColor(seer, target, out color);

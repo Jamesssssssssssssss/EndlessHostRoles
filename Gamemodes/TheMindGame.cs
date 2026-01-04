@@ -10,8 +10,10 @@ using UnityEngine;
 
 namespace EHR.Gamemodes;
 
-public static class TheMindGame
+internal class TheMindGame : GamemodeBase
 {
+    public override CustomRoles? GamemodeRole => CustomRoles.TMGPlayer;
+
     private static Dictionary<byte, int> Points = [];
     private static Dictionary<byte, int> SuperPoints = [];
     private static Dictionary<PlayerControl, int> DefaultColorIds = [];
@@ -68,6 +70,24 @@ public static class TheMindGame
     private static readonly Dictionary<Item, OptionItem> ItemCostsOptions = [];
 
     private static bool Stop => GameStates.IsMeeting || ExileController.Instance || !GameStates.InGame || GameStates.IsLobby || GameStates.IsEnded;
+
+    internal sealed class MindGameGroupInfo(TheMindGame.Group id, byte colorId)
+    {
+        public Group Id { get; } = id;
+        public byte ColorId { get; } = colorId;
+    }
+
+    internal static readonly Dictionary<Group, MindGameGroupInfo> TMGGroups =
+    new()
+    {
+        { Group.Red,    new MindGameGroupInfo(Group.Red,    0) },
+        { Group.Yellow, new MindGameGroupInfo(Group.Yellow, 5) },
+        { Group.Blue,   new MindGameGroupInfo(Group.Blue,  10) },
+        { Group.Green,  new MindGameGroupInfo(Group.Green, 11) },
+        { Group.Tan,    new MindGameGroupInfo(Group.Tan,   16) },
+        { Group.Rose,   new MindGameGroupInfo(Group.Rose,  13) },
+        { Group.Orange, new MindGameGroupInfo(Group.Orange, 4) }
+    };
 
     public static void SetupCustomOption()
     {
@@ -315,7 +335,7 @@ public static class TheMindGame
             IEnumerable<IEnumerable<PlayerControl>> groups = aapc.Partition(NumGroupsForRound1);
             RandomSpawn.SpawnMap map = RandomSpawn.SpawnMap.GetSpawnMap();
             GroupRooms = [];
-            Group group = default(Group);
+            Group group = default;
 
             foreach (IEnumerable<PlayerControl> players in groups)
             {
@@ -326,7 +346,7 @@ public static class TheMindGame
                 foreach (PlayerControl pc in players)
                 {
                     Groups[pc.PlayerId] = group;
-                    pc.RpcSetColor(group.GetColorId());
+                    pc.RpcSetColor(TMGGroups[group].ColorId);
                     pc.TP(location);
                     ids.Add(pc.PlayerId);
                 }
@@ -437,7 +457,7 @@ public static class TheMindGame
 
             Main.AllAlivePlayerControls.Do(x => Points[x.PlayerId] -= Pick[x.PlayerId]);
             int highestBid = Pick.Values.Max();
-            List<byte> auctionWinners = Pick.Where(x => x.Value == highestBid).Select(x => x.Key).ToList();
+            List<byte> auctionWinners = [.. Pick.Where(x => x.Value == highestBid).Select(x => x.Key)];
             auctionWinners.ForEach(x => SuperPoints[x] += AuctionValue);
 
             yield return NotifyEveryone("TMG.Notify.AuctionEnd", 4, highestBid, string.Join(" & ", auctionWinners.ConvertAll(x => x.ColoredPlayerName())), AuctionValue);
@@ -451,7 +471,7 @@ public static class TheMindGame
         if (Stop) yield break;
 
         Item[] items = Enum.GetValues<Item>();
-        int[] itemIds = items.Select(x => (int)x).ToArray();
+        int[] itemIds = [.. items.Select(x => (int)x)];
 
         foreach (PlayerControl pc in Main.AllAlivePlayerControls)
             ItemIds[pc.PlayerId] = items.Zip(itemIds.Shuffle()).ToDictionary(x => x.First, x => x.Second);
@@ -665,7 +685,7 @@ public static class TheMindGame
 
         PreventGameEnd = false;
         int highestPoints = Points.Values.Max();
-        HashSet<byte> winners = Points.Where(x => x.Value == highestPoints).Select(x => x.Key).ToHashSet();
+        HashSet<byte> winners = [.. Points.Where(x => x.Value == highestPoints).Select(x => x.Key)];
         CustomWinnerHolder.WinnerIds = winners;
     }
 
@@ -719,135 +739,135 @@ public static class TheMindGame
             switch (text[0])
             {
                 case 'b':
-                {
-                    if (CannotPurchase.Contains(pc.PlayerId))
                     {
-                        Utils.SendMessage(Translator.GetString("TMG.Message.CannotPurchase"), pc.PlayerId, "<#ff0000>X</color>");
+                        if (CannotPurchase.Contains(pc.PlayerId))
+                        {
+                            Utils.SendMessage(Translator.GetString("TMG.Message.CannotPurchase"), pc.PlayerId, "<#ff0000>X</color>");
+                            break;
+                        }
+
+                        var item = FindItemFromText();
+                        if (!item.HasValue) break;
+
+                        int superPoints = SuperPoints[pc.PlayerId];
+                        int cost = ItemCosts[item.Value];
+                        string itemName = Translator.GetString($"TMG.Item.{item.Value}");
+
+                        if (cost > superPoints)
+                        {
+                            Utils.SendMessage(string.Format(Translator.GetString("TMG.Message.NotEnoughSuperPoints"), itemName, cost, superPoints), pc.PlayerId, "<#ff0000>X</color>");
+                            break;
+                        }
+
+                        if (item.Value == Item.DoubleModifier) DoubleModifierActive.Add(pc.PlayerId);
+
+                        SuperPoints[pc.PlayerId] -= cost;
+                        PlayerItems[pc.PlayerId].Add(item.Value);
+                        Utils.SendMessage(string.Format(Translator.GetString("TMG.Message.ItemPurchased"), itemName, cost, superPoints), pc.PlayerId, "<#00ff00>✓</color>");
+
+                        Utils.NotifyRoles(SpecifySeer: pc, SpecifyTarget: pc);
                         break;
                     }
-
-                    var item = FindItemFromText();
-                    if (!item.HasValue) break;
-
-                    int superPoints = SuperPoints[pc.PlayerId];
-                    int cost = ItemCosts[item.Value];
-                    string itemName = Translator.GetString($"TMG.Item.{item.Value}");
-
-                    if (cost > superPoints)
-                    {
-                        Utils.SendMessage(string.Format(Translator.GetString("TMG.Message.NotEnoughSuperPoints"), itemName, cost, superPoints), pc.PlayerId, "<#ff0000>X</color>");
-                        break;
-                    }
-
-                    if (item.Value == Item.DoubleModifier) DoubleModifierActive.Add(pc.PlayerId);
-
-                    SuperPoints[pc.PlayerId] -= cost;
-                    PlayerItems[pc.PlayerId].Add(item.Value);
-                    Utils.SendMessage(string.Format(Translator.GetString("TMG.Message.ItemPurchased"), itemName, cost, superPoints), pc.PlayerId, "<#00ff00>✓</color>");
-
-                    Utils.NotifyRoles(SpecifySeer: pc, SpecifyTarget: pc);
-                    break;
-                }
                 case 'u':
-                {
-                    var item = FindItemFromText();
-                    if (!item.HasValue || !PlayerItems[pc.PlayerId].Remove(item.Value)) break;
-
-                    switch (item.Value)
                     {
-                        case Item.BlindingGas:
+                        var item = FindItemFromText();
+                        if (!item.HasValue || !PlayerItems[pc.PlayerId].Remove(item.Value)) break;
+
+                        switch (item.Value)
                         {
-                            byte id = FindTargetIdFromText();
-                            if (id == byte.MaxValue) break;
-                            HiddenPoints.Add(id);
-                            PlayerControl target = id.GetPlayer();
-                            Utils.NotifyRoles(SpecifySeer: target, SpecifyTarget: target);
-                            Utils.SendMessage(string.Format(Translator.GetString("TMG.Message.ItemUsed"), Translator.GetString($"TMG.Item.{item.Value}")), pc.PlayerId, "<#00ff00>✓</color>");
-                            break;
+                            case Item.BlindingGas:
+                                {
+                                    byte id = FindTargetIdFromText();
+                                    if (id == byte.MaxValue) break;
+                                    HiddenPoints.Add(id);
+                                    PlayerControl target = id.GetPlayer();
+                                    Utils.NotifyRoles(SpecifySeer: target, SpecifyTarget: target);
+                                    Utils.SendMessage(string.Format(Translator.GetString("TMG.Message.ItemUsed"), Translator.GetString($"TMG.Item.{item.Value}")), pc.PlayerId, "<#00ff00>✓</color>");
+                                    break;
+                                }
+                            case Item.MerchantDise:
+                                {
+                                    byte id = FindTargetIdFromText();
+                                    if (id == byte.MaxValue) break;
+                                    CannotPurchase.Add(id);
+                                    Utils.SendMessage(string.Format(Translator.GetString("TMG.Message.ItemUsed"), Translator.GetString($"TMG.Item.{item.Value}")), pc.PlayerId, "<#00ff00>✓</color>");
+                                    break;
+                                }
+                            case Item.Lasso:
+                                {
+                                    if (Round != 4 || !GameStates.IsMeeting)
+                                    {
+                                        Utils.SendMessage(Translator.GetString("TMG.Message.LassoOnlyInRound4"), pc.PlayerId, "<#ff0000>X</color>");
+                                        break;
+                                    }
+
+                                    byte id = FindTargetIdFromText();
+                                    if (id == byte.MaxValue) break;
+
+                                    if (!pc.AmOwner) ChatManager.SendPreviousMessagesToAll();
+
+                                    if (id == WinningBriefcaseHolderId)
+                                    {
+                                        WinningBriefcaseLastHolderId = id;
+                                        WinningBriefcaseHolderId = pc.PlayerId;
+                                        Utils.SendMessage(string.Format(Translator.GetString("TMG.Message.LassoedWinningBriefcaseSelf"), id.ColoredPlayerName()), pc.PlayerId, "<#00ff00>✓</color>");
+                                        Utils.SendMessage(Translator.GetString("TMG.Message.LassoedWinningBriefcase"), id, "<#ffff00>⚠</color>");
+                                    }
+                                    else
+                                        Utils.SendMessage(string.Format(Translator.GetString("TMG.Message.LassoedEmptyBriefcase"), id.ColoredPlayerName()), pc.PlayerId, "<#ffa500>-</color>");
+
+                                    break;
+                                }
+                            case Item.Fool:
+                                {
+                                    byte id = FindTargetIdFromText();
+                                    if (id == byte.MaxValue) break;
+                                    Points[id] -= FoolNumPointsLost;
+                                    break;
+                                }
+                            case Item.MindDetective:
+                                {
+                                    byte id = FindTargetIdFromText();
+                                    if (id == byte.MaxValue) break;
+
+                                    int pick = Pick[id];
+
+                                    if (IRandom.Instance.Next(100) < MindDetectiveFailChance)
+                                        pick = IRandom.Instance.Next(1, Main.AllAlivePlayerControls.Length + 1);
+
+                                    Utils.SendMessage(string.Format(Translator.GetString("TMG.Message.MindDetective"), id.ColoredPlayerName(), pick), pc.PlayerId, "<#00ff00>✓</color>");
+                                    break;
+                                }
                         }
-                        case Item.MerchantDise:
-                        {
-                            byte id = FindTargetIdFromText();
-                            if (id == byte.MaxValue) break;
-                            CannotPurchase.Add(id);
-                            Utils.SendMessage(string.Format(Translator.GetString("TMG.Message.ItemUsed"), Translator.GetString($"TMG.Item.{item.Value}")), pc.PlayerId, "<#00ff00>✓</color>");
-                            break;
-                        }
-                        case Item.Lasso:
-                        {
-                            if (Round != 4 || !GameStates.IsMeeting)
-                            {
-                                Utils.SendMessage(Translator.GetString("TMG.Message.LassoOnlyInRound4"), pc.PlayerId, "<#ff0000>X</color>");
-                                break;
-                            }
 
-                            byte id = FindTargetIdFromText();
-                            if (id == byte.MaxValue) break;
-
-                            if (!pc.AmOwner) ChatManager.SendPreviousMessagesToAll();
-
-                            if (id == WinningBriefcaseHolderId)
-                            {
-                                WinningBriefcaseLastHolderId = id;
-                                WinningBriefcaseHolderId = pc.PlayerId;
-                                Utils.SendMessage(string.Format(Translator.GetString("TMG.Message.LassoedWinningBriefcaseSelf"), id.ColoredPlayerName()), pc.PlayerId, "<#00ff00>✓</color>");
-                                Utils.SendMessage(Translator.GetString("TMG.Message.LassoedWinningBriefcase"), id, "<#ffff00>⚠</color>");
-                            }
-                            else
-                                Utils.SendMessage(string.Format(Translator.GetString("TMG.Message.LassoedEmptyBriefcase"), id.ColoredPlayerName()), pc.PlayerId, "<#ffa500>-</color>");
-
-                            break;
-                        }
-                        case Item.Fool:
-                        {
-                            byte id = FindTargetIdFromText();
-                            if (id == byte.MaxValue) break;
-                            Points[id] -= FoolNumPointsLost;
-                            break;
-                        }
-                        case Item.MindDetective:
-                        {
-                            byte id = FindTargetIdFromText();
-                            if (id == byte.MaxValue) break;
-
-                            int pick = Pick[id];
-
-                            if (IRandom.Instance.Next(100) < MindDetectiveFailChance)
-                                pick = IRandom.Instance.Next(1, Main.AllAlivePlayerControls.Length + 1);
-
-                            Utils.SendMessage(string.Format(Translator.GetString("TMG.Message.MindDetective"), id.ColoredPlayerName(), pick), pc.PlayerId, "<#00ff00>✓</color>");
-                            break;
-                        }
-                    }
-
-                    break;
-                }
-                case 's':
-                {
-                    if (WinningBriefcaseLastHolderId != pc.PlayerId)
-                    {
-                        if (Round == 4) Utils.SendMessage(Translator.GetString("TMG.Message.StealBackNotLastHolder"), pc.PlayerId, "<#ff0000>X</color>");
                         break;
                     }
-
-                    byte id = FindTargetIdFromText(false);
-                    if (id == byte.MaxValue) break;
-
-                    if (id == WinningBriefcaseHolderId)
+                case 's':
                     {
-                        WinningBriefcaseHolderId = pc.PlayerId;
-                        WinningBriefcaseLastHolderId = byte.MaxValue;
-                        Utils.SendMessage(string.Format(Translator.GetString("TMG.Message.StealBackWinningBriefcaseSelf"), id.ColoredPlayerName()), pc.PlayerId, "<#00ff00>✓</color>");
-                        Utils.SendMessage(string.Format(Translator.GetString("TMG.Message.StealBackWinningBriefcase"), pc.PlayerId.ColoredPlayerName()), id, "<#ffff00>⚠</color>");
-                    }
-                    else
-                    {
-                        WinningBriefcaseLastHolderId = byte.MaxValue;
-                        Utils.SendMessage(string.Format(Translator.GetString("TMG.Message.StealBackEmptyBriefcase"), id.ColoredPlayerName()), pc.PlayerId, "<#ffa500>-</color>");
-                    }
+                        if (WinningBriefcaseLastHolderId != pc.PlayerId)
+                        {
+                            if (Round == 4) Utils.SendMessage(Translator.GetString("TMG.Message.StealBackNotLastHolder"), pc.PlayerId, "<#ff0000>X</color>");
+                            break;
+                        }
 
-                    break;
-                }
+                        byte id = FindTargetIdFromText(false);
+                        if (id == byte.MaxValue) break;
+
+                        if (id == WinningBriefcaseHolderId)
+                        {
+                            WinningBriefcaseHolderId = pc.PlayerId;
+                            WinningBriefcaseLastHolderId = byte.MaxValue;
+                            Utils.SendMessage(string.Format(Translator.GetString("TMG.Message.StealBackWinningBriefcaseSelf"), id.ColoredPlayerName()), pc.PlayerId, "<#00ff00>✓</color>");
+                            Utils.SendMessage(string.Format(Translator.GetString("TMG.Message.StealBackWinningBriefcase"), pc.PlayerId.ColoredPlayerName()), id, "<#ffff00>⚠</color>");
+                        }
+                        else
+                        {
+                            WinningBriefcaseLastHolderId = byte.MaxValue;
+                            Utils.SendMessage(string.Format(Translator.GetString("TMG.Message.StealBackEmptyBriefcase"), id.ColoredPlayerName()), pc.PlayerId, "<#ffa500>-</color>");
+                        }
+
+                        break;
+                    }
             }
         }
         catch (Exception e) { Utils.ThrowException(e); }
@@ -900,28 +920,28 @@ public static class TheMindGame
         switch (Round)
         {
             case 1:
-            {
-                Pick[player.PlayerId]++;
-                if (Pick[player.PlayerId] > 3) Pick[player.PlayerId] = 1;
-                break;
-            }
+                {
+                    Pick[player.PlayerId]++;
+                    if (Pick[player.PlayerId] > 3) Pick[player.PlayerId] = 1;
+                    break;
+                }
             case 2 when AuctionValue == 0:
-            {
-                AmReady.Add(player.PlayerId);
-                break;
-            }
+                {
+                    AmReady.Add(player.PlayerId);
+                    break;
+                }
             case 2:
-            {
-                Pick[player.PlayerId]++;
-                if (Pick[player.PlayerId] > Points[player.PlayerId]) Pick[player.PlayerId] = 0;
-                break;
-            }
+                {
+                    Pick[player.PlayerId]++;
+                    if (Pick[player.PlayerId] > Points[player.PlayerId]) Pick[player.PlayerId] = 0;
+                    break;
+                }
             case 3:
-            {
-                Pick[player.PlayerId]++;
-                if (Pick[player.PlayerId] > Main.AllAlivePlayerControls.Length) Pick[player.PlayerId] = 1;
-                break;
-            }
+                {
+                    Pick[player.PlayerId]++;
+                    if (Pick[player.PlayerId] > Main.AllAlivePlayerControls.Length) Pick[player.PlayerId] = 1;
+                    break;
+                }
         }
 
         Utils.NotifyRoles(SpecifySeer: player, SpecifyTarget: player);
@@ -932,40 +952,25 @@ public static class TheMindGame
         switch (reader.ReadPackedInt32(), AmongUsClient.Instance.AmHost)
         {
             case (1, true):
-            {
-                OnChat(reader.ReadNetObject<PlayerControl>(), reader.ReadString());
-                break;
-            }
-            case (2, false):
-            {
-                Points = [];
-                int count = reader.ReadPackedInt32();
-
-                for (int i = 0; i < count; i++)
                 {
-                    byte key = reader.ReadByte();
-                    int value = reader.ReadPackedInt32();
-                    Points[key] = value;
+                    OnChat(reader.ReadNetObject<PlayerControl>(), reader.ReadString());
+                    break;
                 }
+            case (2, false):
+                {
+                    Points = [];
+                    int count = reader.ReadPackedInt32();
 
-                break;
-            }
+                    for (int i = 0; i < count; i++)
+                    {
+                        byte key = reader.ReadByte();
+                        int value = reader.ReadPackedInt32();
+                        Points[key] = value;
+                    }
+
+                    break;
+                }
         }
-    }
-
-    private static byte GetColorId(this Group group)
-    {
-        return group switch
-        {
-            Group.Red => 0,
-            Group.Yellow => 5,
-            Group.Blue => 10,
-            Group.Green => 11,
-            Group.Tan => 16,
-            Group.Rose => 13,
-            Group.Orange => 4,
-            _ => 7
-        };
     }
 
     public static bool CheckForGameEnd(out GameOverReason reason)
@@ -994,7 +999,7 @@ public static class TheMindGame
         return false;
     }
 
-    enum Item
+    internal enum Item
     {
         BlindingGas,
         MerchantDise,
@@ -1004,7 +1009,7 @@ public static class TheMindGame
         MindDetective
     }
 
-    private enum Group
+    internal enum Group
     {
         Red,
         Yellow,
@@ -1013,30 +1018,5 @@ public static class TheMindGame
         Tan,
         Rose,
         Orange
-    }
-}
-
-public class TMGPlayer : RoleBase
-{
-    private static bool On;
-
-    public override bool IsEnable => On;
-
-    public override void SetupCustomOption() { }
-
-    public override void Init()
-    {
-        On = false;
-    }
-
-    public override void Add(byte playerId)
-    {
-        On = true;
-    }
-
-    public override bool OnVanish(PlayerControl pc)
-    {
-        TheMindGame.OnVanish(pc);
-        return false;
     }
 }

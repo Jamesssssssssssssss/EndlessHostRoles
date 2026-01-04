@@ -11,8 +11,10 @@ using static EHR.Translator;
 
 namespace EHR.Gamemodes;
 
-public static class Quiz
+internal class Quiz : GamemodeBase
 {
+    public override CustomRoles? GamemodeRole => CustomRoles.QuizPlayer;
+
     public static readonly HashSet<string> HasPlayedFriendCodes = [];
 
     private static readonly Dictionary<Difficulty, HashSet<int>> AskedQuestions = new()

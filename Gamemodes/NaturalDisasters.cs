@@ -17,8 +17,9 @@ namespace EHR.Gamemodes;
 [SuppressMessage("ReSharper", "ClassNeverInstantiated.Local")]
 [SuppressMessage("ReSharper", "ClassNeverInstantiated.Global")]
 [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
-public static class NaturalDisasters
+internal class NaturalDisasters : GamemodeBase
 {
+    public override CustomRoles? GamemodeRole => CustomRoles.NDPlayer;
     private const float Range = 1.5f;
     private static List<Type> AllDisasters = [];
     private static readonly List<Disaster> ActiveDisasters = [];

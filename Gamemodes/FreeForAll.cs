@@ -9,8 +9,9 @@ using static EHR.Translator;
 
 namespace EHR.Gamemodes;
 
-internal static class FreeForAll
+internal class FreeForAll : GamemodeBase
 {
+    public override CustomRoles? GamemodeRole => CustomRoles.Killer;
     private static Dictionary<byte, long> FFAShieldedList = [];
     private static Dictionary<byte, long> FFAIncreasedSpeedList = [];
     private static Dictionary<byte, long> FFADecreasedSpeedList = [];

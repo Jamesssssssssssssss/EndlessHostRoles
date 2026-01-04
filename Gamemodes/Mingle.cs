@@ -7,8 +7,9 @@ using UnityEngine;
 
 namespace EHR.Gamemodes;
 
-public static class Mingle
+internal class Mingle : GamemodeBase
 {
+    public override CustomRoles? GamemodeRole => CustomRoles.MinglePlayer;
     public static readonly HashSet<string> HasPlayedFCs = [];
 
     public static bool GameGoing;

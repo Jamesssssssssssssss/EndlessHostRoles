@@ -10,7 +10,7 @@ using UnityEngine;
 
 namespace EHR.Gamemodes;
 
-internal static class CustomHnS
+internal class CustomHnS : GamemodeBase
 {
     public static int TimeLeft;
     private static long LastUpdate;

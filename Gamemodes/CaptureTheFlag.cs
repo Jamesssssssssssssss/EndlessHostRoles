@@ -10,8 +10,57 @@ using UnityEngine;
 
 namespace EHR.Gamemodes;
 
-public static class CaptureTheFlag
+internal class CaptureTheFlag : GamemodeBase
 {
+    internal sealed class CTFTeamInfo(
+        CaptureTheFlag.CTFTeam id,
+        string name,
+        Color color,
+        (Vector2 Position, string RoomName) flagBase)
+    {
+        public CTFTeam Id { get; } = id;
+        public string Name { get; } = name;
+        public Color Color { get; } = color;
+        public (Vector2 Position, string RoomName) FlagBase { get; } = flagBase;
+    }
+
+    internal static readonly Dictionary<CTFTeam, CTFTeamInfo> Teams =
+        new()
+        {
+        {
+            CTFTeam.Blue,
+            new CTFTeamInfo(
+                CTFTeam.Blue,
+                Translator.GetString("CTF_BlueTeamWins"),
+                Color.blue,
+                BlueFlagBase
+            )
+        },
+        {
+            CTFTeam.Yellow,
+            new CTFTeamInfo(
+                CTFTeam.Yellow,
+                Translator.GetString("CTF_YellowTeamWins"),
+                Color.yellow,
+                YellowFlagBase
+            )
+        }
+    };
+
+
+    internal static CTFTeam OtherTeam(CTFTeam team)
+    {
+        return team == CTFTeam.Blue ? CTFTeam.Yellow : CTFTeam.Blue;
+    }
+
+
+    internal enum CTFTeam
+    {
+        Blue,
+        Yellow
+    }
+
+    public override CustomRoles? GamemodeRole => CustomRoles.CTFPlayer;
     private static OptionItem AlertTeamMembersOfFlagTaken;
     private static OptionItem ArrowToEnemyFlagCarrier;
     private static OptionItem AlertTeamMembersOfEnemyFlagTaken;
@@ -66,7 +115,7 @@ public static class CaptureTheFlag
     public static bool IsCarrier(byte id)
     {
         if (!ValidTag || !PlayerTeams.TryGetValue(id, out CTFTeam team)) return false;
-        return TeamData[team.GetOppositeTeam()].FlagCarrier == id;
+        return TeamData[OtherTeam(team)].FlagCarrier == id;
     }
 
     private static (Vector2 Position, string RoomName) BlueFlagBase => Main.CurrentMap switch
@@ -210,7 +259,7 @@ public static class CaptureTheFlag
             str += $"{string.Format(Translator.GetString("CTF_BackIn"), timeLeft)}\n";
         }
 
-        return str + string.Join("<#ffffff> | </color>", TeamData.Select(x => Utils.ColorString(x.Key.GetTeamColor(), x.Value.RoundsWon.ToString())));
+        return str + string.Join("<#ffffff> | </color>", TeamData.Select(x => Utils.ColorString(Teams[x.Key].Color, x.Value.RoundsWon.ToString())));
     }
 
     public static string GetStatistics(byte id)
@@ -298,7 +347,8 @@ public static class CaptureTheFlag
     public static IEnumerator OnGameStart()
     {
         yield return new WaitForSeconds(0.2f);
-        
+
+
         Main.AllPlayerKillCooldown.SetAllValues(TagCooldown.GetFloat());
 
         yield return new WaitForSecondsRealtime(3f);
@@ -368,7 +418,8 @@ public static class CaptureTheFlag
         }
 
         yield return new WaitForSeconds(0.2f);
-        
+
+
         try
         {
             foreach (CTFTeamData data in TeamData.Values)
@@ -401,7 +452,8 @@ public static class CaptureTheFlag
                                 }
                                 catch (Exception e) { Utils.ThrowException(e); }
                             }
-                            
+
+
                             sender.SendMessage();
                         }
                         catch (Exception e) { Utils.ThrowException(e); }
@@ -421,15 +473,17 @@ public static class CaptureTheFlag
     private static void Restart()
     {
         Logger.Info("Restarting Capture The Flag game", "CTF");
-        
+
+
         foreach ((CTFTeam team, CTFTeamData data) in TeamData)
         {
-            Vector2 flagBase = team.GetFlagBase().Position;
+            Vector2 flagBase = Teams[team].FlagBase.Position;
             data.DropFlag();
             data.Flag.TP(flagBase);
             data.Players.ToValidPlayers().MassTP(flagBase);
         }
-        
+
+
         Main.AllPlayerControls.Do(x => TargetArrow.RemoveAllTarget(x.PlayerId));
     }
 
@@ -442,13 +496,13 @@ public static class CaptureTheFlag
         if (TeamData.FindFirst(x => x.Value.FlagCarrier == target.PlayerId, out KeyValuePair<CTFTeam, CTFTeamData> kvp))
         {
             kvp.Value.DropFlag();
-            if (WhenFlagCarrierGetsTagged.GetValue() == 1) kvp.Value.Flag.TP(kvp.Key.GetFlagBase().Position);
+            if (WhenFlagCarrierGetsTagged.GetValue() == 1) kvp.Value.Flag.TP(Teams[kvp.Key].FlagBase.Position);
         }
 
         switch (TaggedPlayersGet.GetValue())
         {
             case 0:
-                target.TP(targetTeam.GetFlagBase().Position);
+                target.TP(Teams[targetTeam].FlagBase.Position);
                 Main.AllPlayerSpeed[target.PlayerId] = Main.RealOptionsData.GetFloat(FloatOptionNames.PlayerSpeedMod);
                 target.MarkDirtySettings();
                 break;
@@ -479,7 +533,7 @@ public static class CaptureTheFlag
         Logger.Info($"Received flag pickup request from {pc.GetRealName()}", "CTF");
         // If the player is near the enemy's flag, pick it up
         Vector2 pos = pc.Pos();
-        CTFTeamData enemy = TeamData[PlayerTeams[pc.PlayerId].GetOppositeTeam()];
+        CTFTeamData enemy = TeamData[OtherTeam(PlayerTeams[pc.PlayerId])];
         if (enemy.IsNearFlag(pos)) enemy.PickUpFlag(pc.PlayerId);
     }
 
@@ -534,52 +588,6 @@ public static class CaptureTheFlag
         }
     }
 
-    private static Color GetTeamColor(this CTFTeam team)
-    {
-        return team switch
-        {
-            CTFTeam.Blue => Color.blue,
-            CTFTeam.Yellow => Color.yellow,
-            _ => Color.white
-        };
-    }
-
-    private static string GetTeamName(this CTFTeam team)
-    {
-        return team switch
-        {
-            CTFTeam.Blue => Translator.GetString("CTF_BlueTeamWins"),
-            CTFTeam.Yellow => Translator.GetString("CTF_YellowTeamWins"),
-            _ => string.Empty
-        };
-    }
-
-    private static CTFTeam GetOppositeTeam(this CTFTeam team)
-    {
-        return team switch
-        {
-            CTFTeam.Blue => CTFTeam.Yellow,
-            CTFTeam.Yellow => CTFTeam.Blue,
-            _ => CTFTeam.Blue
-        };
-    }
-
-    private static (Vector2 Position, string RoomName) GetFlagBase(this CTFTeam team)
-    {
-        return team switch
-        {
-            CTFTeam.Blue => BlueFlagBase,
-            CTFTeam.Yellow => YellowFlagBase,
-            _ => (Vector2.zero, string.Empty)
-        };
-    }
-
-    private enum CTFTeam
-    {
-        Blue,
-        Yellow
-    }
-
     private class CTFTeamData(CTFTeam team, CustomNetObject flag, HashSet<byte> players, byte flagCarrier)
     {
         public CustomNetObject Flag { get; } = flag;
@@ -589,7 +597,7 @@ public static class CaptureTheFlag
 
         public void SetAsWinner()
         {
-            WinnerData = (team.GetTeamColor(), team.GetTeamName());
+            WinnerData = (Teams[team].Color, Teams[team].Name);
             CustomWinnerHolder.WinnerIds = Players;
             Logger.Info($"{team} team wins", "CTF");
             SendRPC();
@@ -612,9 +620,9 @@ public static class CaptureTheFlag
                 Flag.TP(flagCarrierPc.Pos());
                 if (PlayerData.TryGetValue(FlagCarrier, out CTFPlayerData data)) data.FlagTime += Time.fixedDeltaTime;
 
-                CTFTeam enemy = team.GetOppositeTeam();
+                CTFTeam enemy = OtherTeam(team);
 
-                if (Vector2.Distance(Flag.Position, enemy.GetFlagBase().Position) <= 2f)
+                if (Vector2.Distance(Flag.Position, Teams[enemy].FlagBase.Position) <= 2f)
                 {
                     Main.AllPlayerControls.NotifyPlayers(Translator.GetString($"CTF_{enemy}TeamWonThisRound"));
                     CTFTeamData enemyTeam = TeamData[enemy];
@@ -632,7 +640,8 @@ public static class CaptureTheFlag
                         return;
                     }
 
-                    
+
+
                     Restart();
                 }
             }
@@ -668,7 +677,7 @@ public static class CaptureTheFlag
             {
                 bool arrow = ArrowToOwnFlagCarrier.GetBool();
 
-                TeamData[team.GetOppositeTeam()].Players
+                TeamData[OtherTeam(team)].Players
                     .ToValidPlayers()
                     .Do(x =>
                     {
@@ -725,16 +734,16 @@ public static class CaptureTheFlag
                     switch (timeLeft)
                     {
                         case <= 1 when TeamData.Count == 2 && TeamData[CTFTeam.Blue].RoundsWon != TeamData[CTFTeam.Yellow].RoundsWon:
-                        {
-                            CTFTeamData winner = TeamData.Values.MaxBy(x => x.RoundsWon);
-                            winner.SetAsWinner();
-                            return;
-                        }
+                            {
+                                CTFTeamData winner = TeamData.Values.MaxBy(x => x.RoundsWon);
+                                winner.SetAsWinner();
+                                return;
+                            }
                         case >= -1:
-                        {
-                            Utils.NotifyRoles(SendOption: SendOption.None);
-                            break;
-                        }
+                            {
+                                Utils.NotifyRoles(SendOption: SendOption.None);
+                                break;
+                            }
                     }
                 }
             }
@@ -761,7 +770,7 @@ public static class CaptureTheFlag
                 {
                     TemporarilyOutPlayers.Remove(__instance.PlayerId);
                     __instance.ReviveFromTemporaryExile();
-                    __instance.TP(team.GetFlagBase().Position);
+                    __instance.TP(Teams[team].FlagBase.Position);
                     RPC.PlaySoundRPC(__instance.PlayerId, Sounds.SpawnSound);
                     Utils.NotifyRoles(SpecifySeer: __instance, SpecifyTarget: __instance, SendOption: SendOption.None);
                 }
@@ -769,30 +778,5 @@ public static class CaptureTheFlag
                     Utils.NotifyRoles(SpecifySeer: __instance, SpecifyTarget: __instance, SendOption: SendOption.None);
             }
         }
-    }
-}
-
-public class CTFPlayer : RoleBase
-{
-    public static bool On;
-
-    public override bool IsEnable => On;
-
-    public override void SetupCustomOption() { }
-
-    public override void Init()
-    {
-        On = false;
-    }
-
-    public override void Add(byte playerId)
-    {
-        On = true;
-    }
-
-    public override bool OnVanish(PlayerControl pc)
-    {
-        CaptureTheFlag.TryPickUpFlag(pc);
-        return false;
     }
 }

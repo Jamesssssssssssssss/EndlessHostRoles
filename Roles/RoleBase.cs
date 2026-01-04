@@ -11,13 +11,19 @@ using System;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using AmongUs.GameOptions;
-
+using EHR.Modules.RoleSelector;
 
 namespace EHR.Roles;
 
 public abstract class RoleBase : IComparable<RoleBase>
 {
     public abstract bool IsEnable { get; }
+
+    public virtual CustomRoles RoleId => ResolveRoleId();
+    public virtual IReadOnlyList<CustomRoles> IncompatibleRoles => [];
+    public virtual void PreAnyRolesSelected(RoleSelectionContext ctx) { }
+    public virtual void PreEachRoleSelection(RoleSelectionContext ctx) { }
+    public virtual void PostAllRolesSelected(RoleSelectionContext ctx) { }
 
     public virtual bool SeesArrowsToDeadBodies => false;
 
@@ -239,7 +245,7 @@ public class OptionSetupHandler(int id, TabGroup tab, CustomRoles role)
     private readonly OptionItem Parent = Options.CustomRoleSpawnChances[role];
     private int _id = id;
 
-    public OptionSetupHandler AutoSetupOption(ref OptionItem field, object defaultValue, object valueRule = null, OptionFormat format = OptionFormat.None, [CallerArgumentExpression("field")] string fieldName = "", string overrideName = "", OptionItem overrideParent = null, bool noTranslation = false)
+    public OptionSetupHandler AutoSetupOption(ref OptionItem field, object defaultValue, object valueRule = null, OptionFormat format = OptionFormat.None, [CallerArgumentExpression(nameof(field))] string fieldName = "", string overrideName = "", OptionItem overrideParent = null, bool noTranslation = false)
     {
         try
         {

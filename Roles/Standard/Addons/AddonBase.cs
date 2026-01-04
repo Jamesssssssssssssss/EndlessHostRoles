@@ -12,7 +12,7 @@ public abstract class AddonBase
     public virtual IReadOnlyList<CustomRoles> IncompatibleRoles => [];
     public virtual IReadOnlyList<CustomRoles> IncompatibleAddons => [];
 
-    public virtual void PreAnythingSelected(RoleSelectionContext ctx) { }
+    public virtual void PreAnyRolesSelected(RoleSelectionContext ctx) { }
 
     private CustomRoles ResolveRoleId()
     {

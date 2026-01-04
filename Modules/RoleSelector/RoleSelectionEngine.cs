@@ -26,7 +26,7 @@ public sealed class RoleSelectionEngine
 
         // Validation before any role is selected
         foreach (var entry in ctx.AvailableRoles)
-            entry.Role.PreAnythingSelected(ctx);
+            entry.Role.PreAnyRolesSelected(ctx);
 
         // 2. Select each role
         SelectRoles(ctx);

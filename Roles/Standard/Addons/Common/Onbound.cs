@@ -1,11 +1,11 @@
 ﻿namespace EHR.Roles;
 
-public class Onbound : IAddon
+public class Onbound : AddonBase
 {
     public static OptionItem GuesserSuicides;
-    public AddonTypes Type => AddonTypes.Mixed;
+    public override AddonTypes Type => AddonTypes.Mixed;
 
-    public void SetupCustomOption()
+    public override void SetupCustomOption()
     {
         Options.SetupAdtRoleOptions(14500, CustomRoles.Onbound, canSetNum: true, teamSpawnOptions: true);
 

@@ -1,12 +1,12 @@
 ﻿namespace EHR.Roles;
 
-public class Noisy : IAddon
+public class Noisy : AddonBase
 {
     public static OptionItem NoisyImpostorAlert;
     public static OptionItem NoisyAlertDuration;
-    public AddonTypes Type => AddonTypes.Helpful;
+    public override AddonTypes Type => AddonTypes.Helpful;
 
-    public void SetupCustomOption()
+    public override void SetupCustomOption()
     {
         Options.SetupAdtRoleOptions(15670, CustomRoles.Noisy, canSetNum: true);
 

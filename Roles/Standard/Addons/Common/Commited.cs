@@ -2,9 +2,9 @@
 using System.Linq;
 namespace EHR.Roles;
 
-public class Commited : IAddon
+public class Commited : AddonBase
 {
-    public AddonTypes Type => AddonTypes.Helpful;
+    public override AddonTypes Type => AddonTypes.Helpful;
 
     private static OptionItem PermanentReduction;
     private static OptionItem Reduction;
@@ -13,7 +13,7 @@ public class Commited : IAddon
     private static Dictionary<byte, byte> Target = [];
     public static Dictionary<byte, float> ReduceKCD = [];
 
-    public void SetupCustomOption()
+    public override void SetupCustomOption()
     {
         Options.SetupAdtRoleOptions(653600, CustomRoles.Commited, canSetNum: true, teamSpawnOptions: true);
 

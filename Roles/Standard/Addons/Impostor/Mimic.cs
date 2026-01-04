@@ -1,10 +1,10 @@
 ﻿namespace EHR.Roles;
 
-internal class Mimic : IAddon
+internal class Mimic : AddonBase
 {
-    public AddonTypes Type => AddonTypes.ImpOnly;
+    public override AddonTypes Type => AddonTypes.ImpOnly;
 
-    public void SetupCustomOption()
+    public override void SetupCustomOption()
     {
         Options.SetupAdtRoleOptions(16000, CustomRoles.Mimic, canSetNum: true, tab: TabGroup.Addons);
 

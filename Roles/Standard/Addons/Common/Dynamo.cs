@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace EHR.Roles;
 
-public class Dynamo : IAddon
+public class Dynamo : AddonBase
 {
     private static OptionItem MinSpeed;
     private static OptionItem Modulator;
@@ -14,9 +14,9 @@ public class Dynamo : IAddon
     private static readonly Dictionary<byte, int> LastNum = [];
     private static readonly Dictionary<byte, long> LastUpdate = [];
 
-    public AddonTypes Type => AddonTypes.Helpful;
+    public override AddonTypes Type => AddonTypes.Helpful;
 
-    public void SetupCustomOption()
+    public override void SetupCustomOption()
     {
         const int id = 19390;
         Options.SetupAdtRoleOptions(id, CustomRoles.Dynamo, canSetNum: true, teamSpawnOptions: true);

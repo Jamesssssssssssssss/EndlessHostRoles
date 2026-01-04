@@ -2,11 +2,11 @@
 
 namespace EHR.Roles;
 
-internal class Disregarded : IAddon
+internal class Disregarded : AddonBase
 {
-    public AddonTypes Type => AddonTypes.Harmful;
+    public override AddonTypes Type => AddonTypes.Harmful;
 
-    public void SetupCustomOption()
+    public override void SetupCustomOption()
     {
         SetupAdtRoleOptions(15300, CustomRoles.Disregarded, canSetNum: true, teamSpawnOptions: true);
     }

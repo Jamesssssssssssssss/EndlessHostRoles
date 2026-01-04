@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
 namespace EHR.Roles;
 
-internal class Stained : IAddon
+internal class Stained : AddonBase
 {
     public static readonly List<byte> VioletNameList = [];
-    public AddonTypes Type => AddonTypes.Mixed;
+    public override AddonTypes Type => AddonTypes.Mixed;
 
-    public void SetupCustomOption()
+    public override void SetupCustomOption()
     {
         Options.SetupAdtRoleOptions(15180, CustomRoles.Stained, canSetNum: true, teamSpawnOptions: true);
     }

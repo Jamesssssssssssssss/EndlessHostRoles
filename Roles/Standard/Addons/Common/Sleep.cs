@@ -2,11 +2,11 @@
 using EHR.Modules;
 namespace EHR.Roles;
 
-public class Sleep : IAddon
+public class Sleep : AddonBase
 {
-    public AddonTypes Type => AddonTypes.Harmful;
+    public override AddonTypes Type => AddonTypes.Harmful;
 
-    public void SetupCustomOption()
+    public override void SetupCustomOption()
     {
         Options.SetupAdtRoleOptions(644292, CustomRoles.Sleep, canSetNum: true, teamSpawnOptions: true);
     }

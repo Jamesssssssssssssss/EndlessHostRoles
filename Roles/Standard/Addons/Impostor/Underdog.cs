@@ -1,13 +1,13 @@
 ﻿namespace EHR.Roles;
 
-public class Underdog : IAddon
+public class Underdog : AddonBase
 {
     public static OptionItem UnderdogMaximumPlayersNeededToKill;
     public static OptionItem UnderdogKillCooldownWithMorePlayersAlive;
     public static OptionItem UnderdogKillCooldownWithLessPlayersAlive;
-    public AddonTypes Type => AddonTypes.ImpOnly;
+    public override AddonTypes Type => AddonTypes.ImpOnly;
 
-    public void SetupCustomOption()
+    public override void SetupCustomOption()
     {
         Options.SetupAdtRoleOptions(651080, CustomRoles.Underdog, canSetNum: true);
 

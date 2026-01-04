@@ -2,13 +2,13 @@
 
 namespace EHR.Roles;
 
-internal class Nimble : IAddon
+internal class Nimble : AddonBase
 {
     public static OptionItem NimbleCD;
     public static OptionItem NimbleInVentTime;
-    public AddonTypes Type => AddonTypes.Helpful;
+    public override AddonTypes Type => AddonTypes.Helpful;
 
-    public void SetupCustomOption()
+    public override void SetupCustomOption()
     {
         SetupAdtRoleOptions(15640, CustomRoles.Nimble, canSetNum: true);
 

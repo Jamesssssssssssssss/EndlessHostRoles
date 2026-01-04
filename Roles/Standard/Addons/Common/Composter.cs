@@ -1,12 +1,12 @@
 ﻿namespace EHR.Roles;
 
-public class Composter : IAddon
+public class Composter : AddonBase
 {
-    public AddonTypes Type => AddonTypes.Helpful;
+    public override AddonTypes Type => AddonTypes.Helpful;
 
     public static OptionItem AbilityUseGainMultiplier;
 
-    public void SetupCustomOption()
+    public override void SetupCustomOption()
     {
         Options.SetupAdtRoleOptions(656000, CustomRoles.Composter, canSetNum: true, teamSpawnOptions: true);
 

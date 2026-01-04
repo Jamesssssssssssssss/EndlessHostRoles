@@ -2,11 +2,11 @@
 
 namespace EHR.Roles;
 
-internal class Necroview : IAddon
+internal class Necroview : AddonBase
 {
-    public AddonTypes Type => AddonTypes.Helpful;
+    public override AddonTypes Type => AddonTypes.Helpful;
 
-    public void SetupCustomOption()
+    public override void SetupCustomOption()
     {
         SetupAdtRoleOptions(14400, CustomRoles.Necroview, canSetNum: true, teamSpawnOptions: true);
     }

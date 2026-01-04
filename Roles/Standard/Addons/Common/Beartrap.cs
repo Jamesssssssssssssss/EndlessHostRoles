@@ -2,11 +2,11 @@
 
 namespace EHR.Roles;
 
-internal class Beartrap : IAddon
+internal class Beartrap : AddonBase
 {
-    public AddonTypes Type => AddonTypes.Mixed;
+    public override AddonTypes Type => AddonTypes.Mixed;
 
-    public void SetupCustomOption()
+    public override void SetupCustomOption()
     {
         SetupAdtRoleOptions(13800, CustomRoles.Beartrap, canSetNum: true, teamSpawnOptions: true);
 

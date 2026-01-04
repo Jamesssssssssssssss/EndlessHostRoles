@@ -1,10 +1,10 @@
 ﻿namespace EHR.Roles;
 
-public class AntiTP : IAddon
+public class AntiTP : AddonBase
 {
-    public AddonTypes Type => AddonTypes.Mixed;
+    public override AddonTypes Type => AddonTypes.Mixed;
 
-    public void SetupCustomOption()
+    public override void SetupCustomOption()
     {
         Options.SetupAdtRoleOptions(16892, CustomRoles.AntiTP, canSetNum: true, teamSpawnOptions: true);
     }

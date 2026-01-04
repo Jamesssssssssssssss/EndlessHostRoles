@@ -1,10 +1,10 @@
 ﻿namespace EHR.Roles;
 
-public class Rookie : IAddon
+public class Rookie : AddonBase
 {
-    public AddonTypes Type => AddonTypes.Harmful;
+    public override AddonTypes Type => AddonTypes.Harmful;
 
-    public void SetupCustomOption()
+    public override void SetupCustomOption()
     {
         Options.SetupAdtRoleOptions(649592, CustomRoles.Rookie, canSetNum: true, teamSpawnOptions: true);
     }

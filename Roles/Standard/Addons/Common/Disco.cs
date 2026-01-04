@@ -3,12 +3,12 @@ using static EHR.Options;
 
 namespace EHR.Roles;
 
-internal class Disco : IAddon
+internal class Disco : AddonBase
 {
     private static readonly Dictionary<byte, long> LastChange = [];
-    public AddonTypes Type => AddonTypes.Mixed;
+    public override AddonTypes Type => AddonTypes.Mixed;
 
-    public void SetupCustomOption()
+    public override void SetupCustomOption()
     {
         SetupAdtRoleOptions(652000, CustomRoles.Disco, canSetNum: true, teamSpawnOptions: true);
 

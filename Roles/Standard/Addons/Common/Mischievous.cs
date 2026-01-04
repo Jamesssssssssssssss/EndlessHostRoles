@@ -1,10 +1,10 @@
 ﻿namespace EHR.Roles;
 
-internal class Mischievous : IAddon
+internal class Mischievous : AddonBase
 {
-    public AddonTypes Type => AddonTypes.Helpful;
+    public override AddonTypes Type => AddonTypes.Helpful;
 
-    public void SetupCustomOption()
+    public override void SetupCustomOption()
     {
         Options.SetupAdtRoleOptions(15160, CustomRoles.Mischievous, canSetNum: true);
     }

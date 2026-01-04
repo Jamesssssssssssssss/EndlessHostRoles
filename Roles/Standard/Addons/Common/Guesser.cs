@@ -3,13 +3,13 @@ using static EHR.Options;
 
 namespace EHR.Roles;
 
-internal class Guesser : IAddon
+internal class Guesser : AddonBase
 {
     public static OptionItem GCanGuessAdt;
     public static OptionItem GTryHideMsg;
-    public AddonTypes Type => AddonTypes.Helpful;
+    public override AddonTypes Type => AddonTypes.Helpful;
 
-    public void SetupCustomOption()
+    public override void SetupCustomOption()
     {
         SetupAdtRoleOptions(19100, CustomRoles.Guesser, canSetNum: true, tab: TabGroup.Addons, teamSpawnOptions: true);
 

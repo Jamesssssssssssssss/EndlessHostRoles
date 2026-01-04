@@ -2,11 +2,11 @@
 
 namespace EHR.Roles;
 
-internal class Sunglasses : IAddon
+internal class Sunglasses : AddonBase
 {
-    public AddonTypes Type => AddonTypes.Harmful;
+    public override AddonTypes Type => AddonTypes.Harmful;
 
-    public void SetupCustomOption()
+    public override void SetupCustomOption()
     {
         SetupAdtRoleOptions(15450, CustomRoles.Sunglasses, canSetNum: true, teamSpawnOptions: true);
 

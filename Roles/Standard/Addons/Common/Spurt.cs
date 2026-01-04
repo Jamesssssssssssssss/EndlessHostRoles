@@ -5,7 +5,7 @@ using static EHR.Options;
 
 namespace EHR.Roles;
 
-internal class Spurt : IAddon
+internal class Spurt : AddonBase
 {
     private static OptionItem MinSpeed;
     private static OptionItem Modulator;
@@ -18,9 +18,9 @@ internal class Spurt : IAddon
     public static readonly Dictionary<byte, float> StartingSpeed = [];
     private static readonly Dictionary<byte, int> LastNum = [];
     private static readonly Dictionary<byte, long> LastUpdate = [];
-    public AddonTypes Type => AddonTypes.Helpful;
+    public override AddonTypes Type => AddonTypes.Helpful;
 
-    public void SetupCustomOption()
+    public override void SetupCustomOption()
     {
         const int id = 648950;
         SetupAdtRoleOptions(id, CustomRoles.Spurt, canSetNum: true, teamSpawnOptions: true);

@@ -1,10 +1,10 @@
 ﻿namespace EHR.Roles;
 
-public class Looter : IAddon
+public class Looter : AddonBase
 {
-    public AddonTypes Type => AddonTypes.Mixed;
+    public override AddonTypes Type => AddonTypes.Mixed;
 
-    public void SetupCustomOption()
+    public override void SetupCustomOption()
     {
         Options.SetupAdtRoleOptions(656500, CustomRoles.Looter, canSetNum: true, teamSpawnOptions: true);
     }

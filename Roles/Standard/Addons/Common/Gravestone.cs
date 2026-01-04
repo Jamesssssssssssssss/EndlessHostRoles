@@ -2,11 +2,11 @@
 
 namespace EHR.Roles;
 
-internal class Gravestone : IAddon
+internal class Gravestone : AddonBase
 {
-    public AddonTypes Type => AddonTypes.Helpful;
+    public override AddonTypes Type => AddonTypes.Helpful;
 
-    public void SetupCustomOption()
+    public override void SetupCustomOption()
     {
         SetupAdtRoleOptions(14000, CustomRoles.Gravestone, canSetNum: true, teamSpawnOptions: true);
     }

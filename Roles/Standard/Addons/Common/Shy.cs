@@ -1,10 +1,10 @@
 ﻿namespace EHR.Roles;
 
-public class Shy : IAddon
+public class Shy : AddonBase
 {
-    public AddonTypes Type => AddonTypes.Harmful;
+    public override AddonTypes Type => AddonTypes.Harmful;
 
-    public void SetupCustomOption()
+    public override void SetupCustomOption()
     {
         Options.SetupAdtRoleOptions(645890, CustomRoles.Shy, canSetNum: true, teamSpawnOptions: true);
     }

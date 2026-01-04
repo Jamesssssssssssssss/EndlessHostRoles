@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 namespace EHR.Roles;
 
-public class Tired : IAddon
+public class Tired : AddonBase
 {
-    public AddonTypes Type => AddonTypes.ImpOnly;
+    public override AddonTypes Type => AddonTypes.ImpOnly;
 
     public static Dictionary<byte, int> KillsThisRound = [];
 
     private static OptionItem MaxKillsPerRound;
     
-    public void SetupCustomOption()
+    public override void SetupCustomOption()
     {
         Options.SetupAdtRoleOptions(656300, CustomRoles.Tired, canSetNum: true);
         

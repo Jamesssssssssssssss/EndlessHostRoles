@@ -4,11 +4,11 @@ using Exception = System.Exception;
 
 namespace EHR.Roles;
 
-public class TaskMaster : IAddon
+public class TaskMaster : AddonBase
 {
-    public AddonTypes Type => AddonTypes.Helpful;
+    public override AddonTypes Type => AddonTypes.Helpful;
 
-    public void SetupCustomOption()
+    public override void SetupCustomOption()
     {
         Options.SetupAdtRoleOptions(655500, CustomRoles.TaskMaster, canSetNum: true);
     }

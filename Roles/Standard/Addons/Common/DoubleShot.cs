@@ -4,15 +4,15 @@ using static EHR.Options;
 
 namespace EHR.Roles;
 
-public class DoubleShot : IAddon
+public class DoubleShot : AddonBase
 {
     public static Dictionary<byte, int> Tries = [];
 
     private static OptionItem MaxTries;
 
-    public AddonTypes Type => AddonTypes.Helpful;
+    public override AddonTypes Type => AddonTypes.Helpful;
 
-    public void SetupCustomOption()
+    public override void SetupCustomOption()
     {
         SetupAdtRoleOptions(13900, CustomRoles.DoubleShot, canSetNum: true, teamSpawnOptions: true);
 

@@ -7,7 +7,7 @@ using static EHR.Translator;
 
 namespace EHR.Roles;
 
-public class Stressed : IAddon
+public class Stressed : AddonBase
 {
     private const int Id = 14686;
 
@@ -35,9 +35,9 @@ public class Stressed : IAddon
     public static bool CountRepairSabotage;
 
     private static bool IsEnable => Timers.Count > 0;
-    public AddonTypes Type => AddonTypes.Harmful;
+    public override AddonTypes Type => AddonTypes.Harmful;
 
-    public void SetupCustomOption()
+    public override void SetupCustomOption()
     {
         SetupAdtRoleOptions(Id, CustomRoles.Stressed, canSetNum: true);
 

@@ -2,11 +2,11 @@
 
 namespace EHR.Roles;
 
-internal class Diseased : IAddon
+internal class Diseased : AddonBase
 {
-    public AddonTypes Type => AddonTypes.Mixed;
+    public override AddonTypes Type => AddonTypes.Mixed;
 
-    public void SetupCustomOption()
+    public override void SetupCustomOption()
     {
         const int id = 648600;
         SetupAdtRoleOptions(id, CustomRoles.Diseased, canSetNum: true, teamSpawnOptions: true);

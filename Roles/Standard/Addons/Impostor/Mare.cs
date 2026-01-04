@@ -2,11 +2,11 @@
 
 namespace EHR.Roles;
 
-internal class Mare : IAddon
+internal class Mare : AddonBase
 {
-    public AddonTypes Type => AddonTypes.ImpOnly;
+    public override AddonTypes Type => AddonTypes.ImpOnly;
 
-    public void SetupCustomOption()
+    public override void SetupCustomOption()
     {
         SetupAdtRoleOptions(1600, CustomRoles.Mare, canSetNum: true, tab: TabGroup.Addons);
 

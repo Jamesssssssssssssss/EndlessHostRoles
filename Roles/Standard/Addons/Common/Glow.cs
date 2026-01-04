@@ -2,11 +2,11 @@
 
 namespace EHR.Roles;
 
-internal class Glow : IAddon
+internal class Glow : AddonBase
 {
-    public AddonTypes Type => AddonTypes.Mixed;
+    public override AddonTypes Type => AddonTypes.Mixed;
 
-    public void SetupCustomOption()
+    public override void SetupCustomOption()
     {
         SetupAdtRoleOptions(14020, CustomRoles.Glow, canSetNum: true, teamSpawnOptions: true);
     }

@@ -2,11 +2,11 @@
 
 namespace EHR.Roles;
 
-internal class Torch : IAddon
+internal class Torch : AddonBase
 {
-    public AddonTypes Type => AddonTypes.Helpful;
+    public override AddonTypes Type => AddonTypes.Helpful;
 
-    public void SetupCustomOption()
+    public override void SetupCustomOption()
     {
         SetupAdtRoleOptions(14200, CustomRoles.Torch, canSetNum: true, teamSpawnOptions: true);
 

@@ -2,11 +2,11 @@
 
 namespace EHR.Roles;
 
-internal class Antidote : IAddon
+internal class Antidote : AddonBase
 {
-    public AddonTypes Type => AddonTypes.Mixed;
+    public override AddonTypes Type => AddonTypes.Mixed;
 
-    public void SetupCustomOption()
+    public override void SetupCustomOption()
     {
         const int id = 648500;
         SetupAdtRoleOptions(id, CustomRoles.Antidote, canSetNum: true, teamSpawnOptions: true);

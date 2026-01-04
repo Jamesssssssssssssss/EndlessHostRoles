@@ -1,15 +1,15 @@
 ﻿namespace EHR.Roles;
 
-public class Listener : IAddon
+public class Listener : AddonBase
 {
-    public AddonTypes Type => AddonTypes.Helpful;
+    public override AddonTypes Type => AddonTypes.Helpful;
 
     public static OptionItem WhisperHearChance;
     public static OptionItem FullMessageHearChance;
 
     public static int LocalPlayerHeardMessagesThisMeeting;
 
-    public void SetupCustomOption()
+    public override void SetupCustomOption()
     {
         Options.SetupAdtRoleOptions(653800, CustomRoles.Listener, canSetNum: true, teamSpawnOptions: true);
         

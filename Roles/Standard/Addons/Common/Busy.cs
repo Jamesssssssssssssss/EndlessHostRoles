@@ -2,11 +2,11 @@
 
 namespace EHR.Roles;
 
-internal class Busy : IAddon
+internal class Busy : AddonBase
 {
-    public AddonTypes Type => AddonTypes.Harmful;
+    public override AddonTypes Type => AddonTypes.Harmful;
 
-    public void SetupCustomOption()
+    public override void SetupCustomOption()
     {
         SetupAdtRoleOptions(15290, CustomRoles.Busy, canSetNum: true, teamSpawnOptions: true);
 

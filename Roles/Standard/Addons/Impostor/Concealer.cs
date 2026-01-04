@@ -1,10 +1,10 @@
 ﻿namespace EHR.Roles;
 
-public class Concealer : IAddon
+public class Concealer : AddonBase
 {
-    public AddonTypes Type => AddonTypes.ImpOnly;
+    public override AddonTypes Type => AddonTypes.ImpOnly;
 
-    public void SetupCustomOption()
+    public override void SetupCustomOption()
     {
         Options.SetupAdtRoleOptions(656200, CustomRoles.Concealer, canSetNum: true);
     }

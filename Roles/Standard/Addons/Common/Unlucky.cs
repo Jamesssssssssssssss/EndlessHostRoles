@@ -2,11 +2,11 @@
 
 namespace EHR.Roles;
 
-internal class Unlucky : IAddon
+internal class Unlucky : AddonBase
 {
-    public AddonTypes Type => AddonTypes.Harmful;
+    public override AddonTypes Type => AddonTypes.Harmful;
 
-    public void SetupCustomOption()
+    public override void SetupCustomOption()
     {
         SetupAdtRoleOptions(14350, CustomRoles.Unlucky, canSetNum: true, teamSpawnOptions: true);
 

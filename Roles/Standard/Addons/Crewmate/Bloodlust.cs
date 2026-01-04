@@ -2,15 +2,15 @@
 
 namespace EHR.Roles;
 
-internal class Bloodlust : IAddon
+internal class Bloodlust : AddonBase
 {
     private const int Id = 15790;
     public static OptionItem KCD;
     public static OptionItem CanVent;
     public static OptionItem HasImpVision;
-    public AddonTypes Type => AddonTypes.Mixed;
+    public override AddonTypes Type => AddonTypes.Mixed;
 
-    public void SetupCustomOption()
+    public override void SetupCustomOption()
     {
         SetupAdtRoleOptions(Id, CustomRoles.Bloodlust);
 

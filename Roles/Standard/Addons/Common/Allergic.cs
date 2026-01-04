@@ -5,16 +5,16 @@ using Hazel;
 
 namespace EHR.Roles;
 
-public class Allergic : IAddon
+public class Allergic : AddonBase
 {
     private static OptionItem Time;
     private static OptionItem Range;
 
     private static Dictionary<byte, byte> AllergicPlayers = [];
     private static Dictionary<byte, long> AllergyMaxTS = [];
-    public AddonTypes Type => AddonTypes.Harmful;
+    public override AddonTypes Type => AddonTypes.Harmful;
 
-    public void SetupCustomOption()
+    public override void SetupCustomOption()
     {
         Options.SetupAdtRoleOptions(645940, CustomRoles.Allergic, canSetNum: true, teamSpawnOptions: true);
 

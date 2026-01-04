@@ -1,10 +1,10 @@
 ﻿namespace EHR.Roles;
 
-internal class Swift : IAddon
+internal class Swift : AddonBase
 {
-    public AddonTypes Type => AddonTypes.ImpOnly;
+    public override AddonTypes Type => AddonTypes.ImpOnly;
 
-    public void SetupCustomOption()
+    public override void SetupCustomOption()
     {
         Options.SetupAdtRoleOptions(16050, CustomRoles.Swift, canSetNum: true, tab: TabGroup.Addons);
     }

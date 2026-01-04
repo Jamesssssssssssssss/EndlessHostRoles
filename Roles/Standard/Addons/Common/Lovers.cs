@@ -5,7 +5,7 @@ using static EHR.Options;
 
 namespace EHR.Roles;
 
-internal class Lovers : IAddon
+internal class Lovers : AddonBase
 {
     public static OptionItem LoverSpawnChances;
     public static OptionItem LoverKnowRoles;
@@ -52,9 +52,9 @@ internal class Lovers : IAddon
 
     public static CustomRoles LovingImpostorRole;
 
-    public AddonTypes Type => AddonTypes.Mixed;
+    public override AddonTypes Type => AddonTypes.Mixed;
 
-    public void SetupCustomOption()
+    public override void SetupCustomOption()
     {
         const CustomRoles role = CustomRoles.Lovers;
         const int id = 16200;

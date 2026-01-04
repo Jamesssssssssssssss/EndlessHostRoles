@@ -2,15 +2,15 @@ using Hazel;
 
 namespace EHR.Roles;
 
-public class LastImpostor : IAddon
+public class LastImpostor : AddonBase
 {
     private const int Id = 15900;
     public static byte CurrentId = byte.MaxValue;
 
     private static OptionItem Reduction;
-    public AddonTypes Type => AddonTypes.ImpOnly;
+    public override AddonTypes Type => AddonTypes.ImpOnly;
 
-    public void SetupCustomOption()
+    public override void SetupCustomOption()
     {
         Options.SetupSingleRoleOptions(Id, TabGroup.Addons, CustomRoles.LastImpostor, zeroOne: true);
 

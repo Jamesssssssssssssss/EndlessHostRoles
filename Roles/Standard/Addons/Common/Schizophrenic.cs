@@ -2,11 +2,11 @@
 
 namespace EHR.Roles;
 
-internal class Schizophrenic : IAddon
+internal class Schizophrenic : AddonBase
 {
-    public AddonTypes Type => AddonTypes.Mixed;
+    public override AddonTypes Type => AddonTypes.Mixed;
 
-    public void SetupCustomOption()
+    public override void SetupCustomOption()
     {
         SetupAdtRoleOptions(14700, CustomRoles.Schizophrenic, canSetNum: true, teamSpawnOptions: true);
 

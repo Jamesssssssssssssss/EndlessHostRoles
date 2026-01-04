@@ -2,12 +2,12 @@
 using System.Linq;
 namespace EHR.Roles;
 
-public class Sonar : IAddon
+public class Sonar : AddonBase
 {
     private static readonly Dictionary<byte, byte> Target = [];
-    public AddonTypes Type => AddonTypes.Helpful;
+    public override AddonTypes Type => AddonTypes.Helpful;
 
-    public void SetupCustomOption()
+    public override void SetupCustomOption()
     {
         Options.SetupAdtRoleOptions(13642, CustomRoles.Sonar, canSetNum: true, teamSpawnOptions: true);
     }

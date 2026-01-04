@@ -1,10 +1,10 @@
 ﻿namespace EHR.Roles;
 
-public class Anchor : IAddon
+public class Anchor : AddonBase
 {
-    public AddonTypes Type => AddonTypes.Harmful;
+    public override AddonTypes Type => AddonTypes.Harmful;
 
-    public void SetupCustomOption()
+    public override void SetupCustomOption()
     {
         Options.SetupAdtRoleOptions(649092, CustomRoles.Anchor, canSetNum: true, teamSpawnOptions: true);
     }

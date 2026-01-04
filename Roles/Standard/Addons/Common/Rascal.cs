@@ -2,11 +2,11 @@
 
 namespace EHR.Roles;
 
-internal class Rascal : IAddon
+internal class Rascal : AddonBase
 {
-    public AddonTypes Type => AddonTypes.Harmful;
+    public override AddonTypes Type => AddonTypes.Harmful;
 
-    public void SetupCustomOption()
+    public override void SetupCustomOption()
     {
         SetupAdtRoleOptions(15600, CustomRoles.Rascal, canSetNum: true, tab: TabGroup.Addons, teamSpawnOptions: true);
 

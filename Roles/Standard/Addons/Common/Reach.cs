@@ -1,10 +1,10 @@
 ﻿namespace EHR.Roles;
 
-internal class Reach : IAddon
+internal class Reach : AddonBase
 {
-    public AddonTypes Type => AddonTypes.Helpful;
+    public override AddonTypes Type => AddonTypes.Helpful;
 
-    public void SetupCustomOption()
+    public override void SetupCustomOption()
     {
         Options.SetupAdtRoleOptions(14600, CustomRoles.Reach, canSetNum: true, teamSpawnOptions: true);
     }

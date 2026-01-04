@@ -1,14 +1,14 @@
 ﻿using System.Collections.Generic;
 namespace EHR.Roles;
 
-public class Deadlined : IAddon
+public class Deadlined : AddonBase
 {
     private static HashSet<byte> DidTask = [];
     private static long MeetingEndTS;
     private static OptionItem InactiveTime;
-    public AddonTypes Type => AddonTypes.Harmful;
+    public override AddonTypes Type => AddonTypes.Harmful;
 
-    public void SetupCustomOption()
+    public override void SetupCustomOption()
     {
         Options.SetupAdtRoleOptions(649291, CustomRoles.Deadlined, canSetNum: true, teamSpawnOptions: true);
 

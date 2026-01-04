@@ -1,13 +1,13 @@
 ﻿namespace EHR.Roles;
 
-public class Finder : IAddon
+public class Finder : AddonBase
 {
     public static OptionItem FinderCD;
     public static OptionItem FinderDuration;
     public static OptionItem FinderDelay;
-    public AddonTypes Type => AddonTypes.Helpful;
+    public override AddonTypes Type => AddonTypes.Helpful;
 
-    public void SetupCustomOption()
+    public override void SetupCustomOption()
     {
         Options.SetupAdtRoleOptions(15660, CustomRoles.Finder, canSetNum: true);
 

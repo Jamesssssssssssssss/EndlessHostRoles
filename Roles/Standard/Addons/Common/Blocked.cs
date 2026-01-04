@@ -1,10 +1,10 @@
 ﻿namespace EHR.Roles;
 
-public class Blocked : IAddon
+public class Blocked : AddonBase
 {
-    public AddonTypes Type => AddonTypes.Harmful;
+    public override AddonTypes Type => AddonTypes.Harmful;
 
-    public void SetupCustomOption()
+    public override void SetupCustomOption()
     {
         Options.SetupAdtRoleOptions(646100, CustomRoles.Blocked, canSetNum: true, teamSpawnOptions: true);
     }

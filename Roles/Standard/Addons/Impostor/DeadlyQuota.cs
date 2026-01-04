@@ -1,10 +1,10 @@
 ﻿namespace EHR.Roles;
 
-internal class DeadlyQuota : IAddon
+internal class DeadlyQuota : AddonBase
 {
-    public AddonTypes Type => AddonTypes.ImpOnly;
+    public override AddonTypes Type => AddonTypes.ImpOnly;
 
-    public void SetupCustomOption()
+    public override void SetupCustomOption()
     {
         Options.SetupAdtRoleOptions(14650, CustomRoles.DeadlyQuota, canSetNum: true);
 

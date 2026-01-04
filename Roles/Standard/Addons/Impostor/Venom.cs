@@ -1,12 +1,12 @@
 ﻿namespace EHR.Roles;
 
-public class Venom : IAddon
+public class Venom : AddonBase
 {
-    public AddonTypes Type => AddonTypes.ImpOnly;
+    public override AddonTypes Type => AddonTypes.ImpOnly;
 
     public static OptionItem VenomDissolveTime;
 
-    public void SetupCustomOption()
+    public override void SetupCustomOption()
     {
         Options.SetupAdtRoleOptions(654500, CustomRoles.Venom, canSetNum: true);
         

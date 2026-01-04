@@ -1,10 +1,10 @@
 ﻿namespace EHR.Roles;
 
-public class Energetic : IAddon
+public class Energetic : AddonBase
 {
-    public AddonTypes Type => AddonTypes.Helpful;
+    public override AddonTypes Type => AddonTypes.Helpful;
 
-    public void SetupCustomOption()
+    public override void SetupCustomOption()
     {
         Options.SetupAdtRoleOptions(644592, CustomRoles.Energetic, canSetNum: true, teamSpawnOptions: true);
     }

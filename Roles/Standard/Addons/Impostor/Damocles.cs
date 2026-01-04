@@ -7,7 +7,7 @@ using static EHR.Translator;
 
 namespace EHR.Roles;
 
-public class Damocles : IAddon
+public class Damocles : AddonBase
 {
     private const int Id = 14670;
 
@@ -25,9 +25,9 @@ public class Damocles : IAddon
     public static Dictionary<byte, List<int>> PreviouslyEnteredVents;
 
     public static bool CountRepairSabotage;
-    public AddonTypes Type => AddonTypes.ImpOnly;
+    public override AddonTypes Type => AddonTypes.ImpOnly;
 
-    public void SetupCustomOption()
+    public override void SetupCustomOption()
     {
         SetupAdtRoleOptions(Id, CustomRoles.Damocles, canSetNum: true);
 

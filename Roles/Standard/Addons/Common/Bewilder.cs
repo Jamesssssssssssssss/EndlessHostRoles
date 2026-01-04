@@ -2,11 +2,11 @@
 
 namespace EHR.Roles;
 
-internal class Bewilder : IAddon
+internal class Bewilder : AddonBase
 {
-    public AddonTypes Type => AddonTypes.Harmful;
+    public override AddonTypes Type => AddonTypes.Harmful;
 
-    public void SetupCustomOption()
+    public override void SetupCustomOption()
     {
         SetupAdtRoleOptions(15200, CustomRoles.Bewilder, canSetNum: true, teamSpawnOptions: true);
 

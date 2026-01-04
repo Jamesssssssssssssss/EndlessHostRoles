@@ -2,11 +2,11 @@
 
 namespace EHR.Roles;
 
-internal class Oblivious : IAddon
+internal class Oblivious : AddonBase
 {
-    public AddonTypes Type => AddonTypes.Harmful;
+    public override AddonTypes Type => AddonTypes.Harmful;
 
-    public void SetupCustomOption()
+    public override void SetupCustomOption()
     {
         SetupAdtRoleOptions(15400, CustomRoles.Oblivious, canSetNum: true, teamSpawnOptions: true);
 

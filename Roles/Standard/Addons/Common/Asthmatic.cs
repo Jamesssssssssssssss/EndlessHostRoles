@@ -8,7 +8,7 @@ using static EHR.Options;
 
 namespace EHR.Roles;
 
-internal class Asthmatic : IAddon
+internal class Asthmatic : AddonBase
 {
     private static readonly Dictionary<byte, Counter> Timers = [];
     private static readonly Dictionary<byte, string> LastSuffix = [];
@@ -19,9 +19,9 @@ internal class Asthmatic : IAddon
     private static int MaxGreenTime;
 
     public static bool RunChecks = true;
-    public AddonTypes Type => AddonTypes.Harmful;
+    public override AddonTypes Type => AddonTypes.Harmful;
 
-    public void SetupCustomOption()
+    public override void SetupCustomOption()
     {
         SetupAdtRoleOptions(15419, CustomRoles.Asthmatic, canSetNum: true, teamSpawnOptions: true);
 

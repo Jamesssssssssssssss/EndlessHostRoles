@@ -3,12 +3,12 @@ using static EHR.Options;
 
 namespace EHR.Roles;
 
-internal class Lazy : IAddon
+internal class Lazy : AddonBase
 {
     public static Dictionary<byte, Vector2> BeforeMeetingPositions = [];
-    public AddonTypes Type => AddonTypes.Helpful;
+    public override AddonTypes Type => AddonTypes.Helpful;
 
-    public void SetupCustomOption()
+    public override void SetupCustomOption()
     {
         SetupAdtRoleOptions(14100, CustomRoles.Lazy, canSetNum: true);
     }

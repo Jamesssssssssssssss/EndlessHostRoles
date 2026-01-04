@@ -2,11 +2,11 @@
 
 namespace EHR.Roles;
 
-internal class Bait : IAddon
+internal class Bait : AddonBase
 {
-    public AddonTypes Type => AddonTypes.Mixed;
+    public override AddonTypes Type => AddonTypes.Mixed;
 
-    public void SetupCustomOption()
+    public override void SetupCustomOption()
     {
         SetupAdtRoleOptions(13700, CustomRoles.Bait, canSetNum: true, teamSpawnOptions: true);
 

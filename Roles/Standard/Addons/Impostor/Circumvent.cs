@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 namespace EHR.Roles;
 
-internal class Circumvent : IAddon
+internal class Circumvent : AddonBase
 {
     private static Dictionary<byte, int> Limits = [];
 
@@ -15,9 +15,9 @@ internal class Circumvent : IAddon
         "LimitPerRounds"
     ];
 
-    public AddonTypes Type => AddonTypes.ImpOnly;
+    public override AddonTypes Type => AddonTypes.ImpOnly;
 
-    public void SetupCustomOption()
+    public override void SetupCustomOption()
     {
         const int id = 14680;
         Options.SetupAdtRoleOptions(id, CustomRoles.Circumvent, canSetNum: true);

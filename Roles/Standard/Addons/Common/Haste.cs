@@ -1,10 +1,10 @@
 ﻿namespace EHR.Roles;
 
-internal class Haste : IAddon
+internal class Haste : AddonBase
 {
-    public AddonTypes Type => AddonTypes.Helpful;
+    public override AddonTypes Type => AddonTypes.Helpful;
 
-    public void SetupCustomOption()
+    public override void SetupCustomOption()
     {
         Options.SetupAdtRoleOptions(14550, CustomRoles.Haste, canSetNum: true, teamSpawnOptions: true);
     }

@@ -1,12 +1,12 @@
 ﻿namespace EHR.Roles;
 
-public class Examiner : IAddon
+public class Examiner : AddonBase
 {
-    public AddonTypes Type => AddonTypes.Helpful;
+    public override AddonTypes Type => AddonTypes.Helpful;
 
     public static OptionItem ExaminerSuspectLimit;
     
-    public void SetupCustomOption()
+    public override void SetupCustomOption()
     {
         Options.SetupAdtRoleOptions(654400, CustomRoles.Examiner, canSetNum: true);
         

@@ -1,10 +1,10 @@
 ﻿namespace EHR.Roles;
 
-public class BananaMan : IAddon
+public class BananaMan : AddonBase
 {
-    public AddonTypes Type => AddonTypes.Mixed;
+    public override AddonTypes Type => AddonTypes.Mixed;
 
-    public void SetupCustomOption()
+    public override void SetupCustomOption()
     {
         Options.SetupAdtRoleOptions(652700, CustomRoles.BananaMan, canSetNum: true, teamSpawnOptions: true);
     }

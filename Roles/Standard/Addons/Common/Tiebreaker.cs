@@ -2,11 +2,11 @@
 
 namespace EHR.Roles;
 
-internal class Tiebreaker : IAddon
+internal class Tiebreaker : AddonBase
 {
-    public AddonTypes Type => AddonTypes.Mixed;
+    public override AddonTypes Type => AddonTypes.Mixed;
 
-    public void SetupCustomOption()
+    public override void SetupCustomOption()
     {
         SetupAdtRoleOptions(14900, CustomRoles.Tiebreaker, canSetNum: true, teamSpawnOptions: true);
     }

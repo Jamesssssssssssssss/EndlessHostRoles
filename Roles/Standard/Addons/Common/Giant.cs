@@ -1,10 +1,10 @@
 ﻿namespace EHR.Roles;
 
-internal class Giant : IAddon
+internal class Giant : AddonBase
 {
-    public AddonTypes Type => AddonTypes.Harmful;
+    public override AddonTypes Type => AddonTypes.Harmful;
 
-    public void SetupCustomOption()
+    public override void SetupCustomOption()
     {
         Options.SetupAdtRoleOptions(18750, CustomRoles.Giant, canSetNum: true, tab: TabGroup.Addons, teamSpawnOptions: true);
 

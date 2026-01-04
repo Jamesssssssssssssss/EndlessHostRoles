@@ -2,13 +2,13 @@
 
 namespace EHR.Roles;
 
-internal class Physicist : IAddon
+internal class Physicist : AddonBase
 {
     public static OptionItem PhysicistCD;
     public static OptionItem PhysicistViewDuration;
-    public AddonTypes Type => AddonTypes.Helpful;
+    public override AddonTypes Type => AddonTypes.Helpful;
 
-    public void SetupCustomOption()
+    public override void SetupCustomOption()
     {
         SetupAdtRoleOptions(15650, CustomRoles.Physicist, canSetNum: true);
 

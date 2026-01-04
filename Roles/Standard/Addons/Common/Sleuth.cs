@@ -1,10 +1,10 @@
 ﻿namespace EHR.Roles;
 
-internal class Sleuth : IAddon
+internal class Sleuth : AddonBase
 {
-    public AddonTypes Type => AddonTypes.Helpful;
+    public override AddonTypes Type => AddonTypes.Helpful;
 
-    public void SetupCustomOption()
+    public override void SetupCustomOption()
     {
         Options.SetupAdtRoleOptions(15150, CustomRoles.Sleuth, canSetNum: true, teamSpawnOptions: true);
     }

@@ -5,15 +5,15 @@ using Hazel;
 
 namespace EHR.Roles;
 
-public class Introvert : IAddon
+public class Introvert : AddonBase
 {
     private static OptionItem Radius;
     private static OptionItem Time;
 
     public static Dictionary<byte, long> TeleportAwayDelays = [];
-    public AddonTypes Type => AddonTypes.Mixed;
+    public override AddonTypes Type => AddonTypes.Mixed;
 
-    public void SetupCustomOption()
+    public override void SetupCustomOption()
     {
         Options.SetupAdtRoleOptions(645740, CustomRoles.Introvert, canSetNum: true, teamSpawnOptions: true);
 

@@ -1,10 +1,10 @@
 ﻿namespace EHR.Roles;
 
-public class Blind : IAddon
+public class Blind : AddonBase
 {
-    public AddonTypes Type => AddonTypes.Harmful;
+    public override AddonTypes Type => AddonTypes.Harmful;
 
-    public void SetupCustomOption()
+    public override void SetupCustomOption()
     {
         Options.SetupAdtRoleOptions(651600, CustomRoles.Blind, canSetNum: true, teamSpawnOptions: true);
     }

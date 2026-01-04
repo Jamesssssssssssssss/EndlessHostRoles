@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using EHR.Roles;
@@ -6,61 +7,89 @@ namespace EHR.Modules.RoleSelector;
 
 public sealed class RoleSelectionEngine
 {
-    public List<AssignedRoleResult> Run(RoleLimits limits, List<PlayerControl> players)
+    public List<AssignedResult> Run()
     {
         var ctx = new RoleSelectionContext
         {
-            AvailableRoles = [.. RoleRegistry.AllRoles.Where(r => r.RoleId.GetMode() > 0)],
-            Assigned = [],
-            Limits = limits,
-            Players = players
+            AvailableRoles = [.. RoleRegistry.AllRoles.Where(e => e.SpawnChance > 0)],
+            AvailableAddons = [.. RoleRegistry.AllAddons.Where(e => e.SpawnChance > 0)],
+            SelectedRoles = [],
+            SelectedAddons = [],
+            AssignedResult = [],
+            AllPlayers = [.. Main.AllAlivePlayerControls],
+            Limits = new RoleLimits(),
+            XORPairs = Main.XORRoles
+            // TODO XNorPairs
         };
 
-        // 1. Pre-any-assignment
-        foreach (var role in ctx.AvailableRoles.ToList())
-            role.PreAnyAssignment(ctx);
+        AssignGameMasters(ctx);
 
-        // 2. Assignment loop
-        foreach (var player in players)
-            AssignRoleToPlayer(player, ctx);
+        // Validation before any role is selected
+        foreach (var entry in ctx.AvailableRoles)
+            entry.Role.PreAnythingSelected(ctx);
 
-        // 3. Post-all-roles
-        foreach (var role in RoleRegistry.AllRoles)
-            role.PostAllRoles(ctx);
+        // 2. Select each role
+        SelectRoles(ctx);
 
-        return ctx.Assigned;
+        // 3. Validation after all roles are selected
+        foreach (var entry in ctx.SelectedRoles)
+            entry.Role.PostAllRolesSelected(ctx);
+
+        return ctx.AssignedResult;
     }
 
-    private void AssignRoleToPlayer(PlayerControl player, RoleSelectionContext ctx)
+    private void AssignGameMasters(RoleSelectionContext ctx)
     {
-        foreach (var candidate in ctx.AvailableRoles.ToList())
+        var localPlayer = PlayerControl.LocalPlayer;
+        // Players on the EAC banned list will be assigned as GM when opening rooms
+        if (BanManager.CheckEACList(localPlayer.FriendCode, localPlayer.GetClient().GetHashedPuid()))
         {
-            // Run pre-each-role checks
-            foreach (var role in RoleRegistry.AllRoles)
-                role.PreEachRoleCheck(ctx with { Candidate = candidate });
-
-            // If candidate was removed by a role, skip it
-            if (!ctx.AvailableRoles.Contains(candidate))
-                continue;
-
-            // Assign it
-            ctx.Assigned.Add(new AssignedRoleResult
-            {
-                PlayerId = player.PlayerId,
-                Role = candidate.RoleId,
-                Addons = []
-            });
-
-            ctx.AvailableRoles.Remove(candidate);
-            return;
+            Logger.Warn("Host is dennab backwards", "RoleSelectionEngine => AssignGameMasters");
+            AssignRoleToPlayer(ctx, localPlayer.PlayerId, CustomRoles.GM);
+            ctx.AllPlayers.Remove(localPlayer);
         }
 
-        // Fallback: vanilla crewmate
-        ctx.Assigned.Add(new AssignedRoleResult
+        if (Main.GM.Value)
         {
-            PlayerId = player.PlayerId,
-            Role = CustomRoles.Crewmate,
-            Addons = []
-        });
+            Logger.Warn("Host: GM", "RoleSelectionEngine => AssignGameMasters");
+            AssignRoleToPlayer(ctx, localPlayer.PlayerId, CustomRoles.GM);
+            ctx.AllPlayers.RemoveAll(x => x.IsHost());
+        }
+
+        var spectators = ChatCommands.Spectators;
+        ctx.AllPlayers.RemoveAll(x => spectators.Contains(x.PlayerId));
+        foreach (var spectator in spectators) AssignRoleToPlayer(ctx, spectator, CustomRoles.GM);
     }
+
+
+    private void AssignRoleToPlayer(RoleSelectionContext ctx, byte playerId, CustomRoles role, AddonBase addons = null)
+    {
+        ctx.AssignedResult.Add(AssignedResult.Create(playerId, role));
+    }
+
+    private void SelectRoles(RoleSelectionContext ctx)
+    {
+        var guaranteed = ctx.AvailableRoles
+            .Where(r => r.SpawnChance >= 100)
+            .Shuffle()
+            .ToList();
+
+        var nonGuaranteed = ctx.AvailableRoles
+            .Where(r => r.SpawnChance < 100)
+            .Shuffle()
+            .ToList();
+
+        var rolePool = guaranteed.Concat(nonGuaranteed).ToList();
+        var rng = IRandom.Instance;
+
+        foreach (var entry in rolePool)
+        {
+            ctx.Candidate = entry.Role;
+
+            entry.Role.PreEachRoleSelection(ctx);
+
+
+        }
+    }
+
 }

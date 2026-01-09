@@ -181,7 +181,7 @@ namespace EHR
             
             Logger.Info($" Create Custom Net Object {GetType().Name} (ID {MaxId + 1}) at {position} - Time since game start: {Utils.TimeStamp - IntroCutsceneDestroyPatch.IntroDestroyTS}s", "CNO.CreateNetObject");
 
-            if (Options.CurrentGameMode == CustomGameMode.Standard && (!GameStates.InGame || !Main.IntroDestroyed || Utils.TimeStamp - IntroCutsceneDestroyPatch.IntroDestroyTS < 10))
+            if (Options.CurrentGameMode == CustomGamemodes.Standard && (!GameStates.InGame || !Main.IntroDestroyed || Utils.TimeStamp - IntroCutsceneDestroyPatch.IntroDestroyTS < 10))
             {
                 if (GameStates.InGame && (!Main.IntroDestroyed || Utils.TimeStamp - IntroCutsceneDestroyPatch.IntroDestroyTS < 10))
                 {
@@ -835,7 +835,7 @@ namespace EHR
         protected override void OnFixedUpdate()
         {
             base.OnFixedUpdate();
-            if (Options.CurrentGameMode != CustomGameMode.BedWars) return;
+            if (Options.CurrentGameMode != CustomGamemodes.BedWars) return;
             timer -= Time.fixedDeltaTime;
 
             if (timer <= 0f)

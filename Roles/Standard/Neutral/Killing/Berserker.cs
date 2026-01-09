@@ -21,6 +21,8 @@ public class Berserker : StandardRoleBase
     private byte BerserkerId;
     public int Form;
 
+    public override CustomGamemodes GamemodeId => CustomGamemodes.Standard;
+    public override CustomRoles RoleId => CustomRoles.Berserker;
     public override Team Faction => Team.Neutral;
     public override RoleOptionType? Alignment => RoleOptionType.Neutral_Killing;
 

@@ -23,6 +23,8 @@ internal class Commander : StandardRoleBase
     public byte MarkedPlayer;
     public override bool IsEnable => On;
 
+    public override CustomGamemodes GamemodeId => CustomGamemodes.Standard;
+    public override CustomRoles RoleId => CustomRoles.Commander;
     public override Team Faction => Team.Impostor;
     public override RoleOptionType? Alignment => RoleOptionType.Impostor_Support;
 

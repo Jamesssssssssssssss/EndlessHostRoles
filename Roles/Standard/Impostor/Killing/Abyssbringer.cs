@@ -28,6 +28,8 @@ public class Abyssbringer : StandardRoleBase
     public override bool IsEnable => On;
     public static bool ShouldDespawnCNOOnMeeting => (DespawnMode)BlackHoleDespawnMode.GetValue() == DespawnMode.AfterMeeting;
 
+    public override CustomGamemodes GamemodeId => CustomGamemodes.Standard;
+    public override CustomRoles RoleId => CustomRoles.Abyssbringer;
     public override Team Faction => Team.Impostor;
     public override RoleOptionType? Alignment => RoleOptionType.Impostor_Killing;
 

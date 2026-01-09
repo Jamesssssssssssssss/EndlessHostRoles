@@ -20,6 +20,8 @@ public class Explosivist : StandardRoleBase
     private long ExplodeTS;
     private byte ExplosivistId;
 
+    public override CustomGamemodes GamemodeId => CustomGamemodes.Standard;
+    public override CustomRoles RoleId => CustomRoles.Explosivist;
     public override Team Faction => Team.Neutral;
     public override RoleOptionType? Alignment => RoleOptionType.Neutral_Killing;
 

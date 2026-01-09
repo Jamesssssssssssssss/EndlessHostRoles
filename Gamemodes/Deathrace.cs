@@ -118,7 +118,7 @@ internal class Deathrace : GamemodeBase
     {
         var id = 69_223_001;
         Color color = Utils.GetRoleColor(CustomRoles.Racer);
-        const CustomGameMode gameMode = CustomGameMode.Deathrace;
+        const CustomGamemodes gameMode = CustomGamemodes.Deathrace;
         const TabGroup tab = TabGroup.GameSettings;
         
         ClockwiseOption = new BooleanOptionItem(id++, "Deathrace.ClockwiseOption", true, tab)

@@ -93,7 +93,7 @@ internal class TheMindGame : GamemodeBase
     {
         var id = 69_221_001;
         var color = Color.yellow;
-        const CustomGameMode gameMode = CustomGameMode.TheMindGame;
+        const CustomGamemodes gameMode = CustomGamemodes.TheMindGame;
         const TabGroup tab = TabGroup.GameSettings;
 
         PlayersCanSeeOthersPointsOption = new BooleanOptionItem(id++, "TMG.Setting.PlayersCanSeeOthersPoints", true, tab)

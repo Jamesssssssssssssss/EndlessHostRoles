@@ -53,7 +53,7 @@ internal class Snowdown : GamemodeBase
     {
         var id = 69_225_001;
         Color color = Utils.GetRoleColor(CustomRoles.SnowdownPlayer);
-        const CustomGameMode gameMode = CustomGameMode.Snowdown;
+        const CustomGamemodes gameMode = CustomGamemodes.Snowdown;
         const TabGroup tab = TabGroup.GameSettings;
         
         SnowballThrowSpeedOption = new FloatOptionItem(id++, "Snowdown.SnowballThrowSpeedOption", new(0.25f, 10f, 0.25f), 4f, tab)
@@ -256,7 +256,7 @@ internal class Snowdown : GamemodeBase
     {
         public static void Postfix(PlayerControl __instance)
         {
-            if (!AmongUsClient.Instance.AmHost || !GameStates.IsInTask || ExileController.Instance || AntiBlackout.SkipTasks || Options.CurrentGameMode != CustomGameMode.Snowdown || !Main.IntroDestroyed) return;
+            if (!AmongUsClient.Instance.AmHost || !GameStates.IsInTask || ExileController.Instance || AntiBlackout.SkipTasks || Options.CurrentGameMode != CustomGamemodes.Snowdown || !Main.IntroDestroyed) return;
             if (!__instance.IsAlive() || !Data.TryGetValue(__instance.PlayerId, out PlayerData data)) return;
 
             long now = Utils.TimeStamp;
@@ -305,7 +305,7 @@ internal class Snowdown : GamemodeBase
         public void OnSabotage(PlayerControl pc)
         {
             InShop = (SnowballsReady != MaxSnowballsReady || MaxSnowballsReady < 20 || MaxCoins < 10 || SnowballGainInterval > 1) && !InShop;
-            ShowHelp = !Main.HasPlayedGM[CustomGameMode.Snowdown].Contains(pc.FriendCode);
+            ShowHelp = !Main.HasPlayedGM[CustomGamemodes.Snowdown].Contains(pc.FriendCode);
             if (pc.AmOwner) HudSpritePatch.ForceUpdate = true;
         }
         

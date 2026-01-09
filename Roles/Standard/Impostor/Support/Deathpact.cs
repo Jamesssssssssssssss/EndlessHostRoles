@@ -31,6 +31,8 @@ public class Deathpact : StandardRoleBase
 
     public override bool IsEnable => Instances.Count > 0 || Randomizer.Exists;
 
+    public override CustomGamemodes GamemodeId => CustomGamemodes.Standard;
+    public override CustomRoles RoleId => CustomRoles.Deathpact;
     public override Team Faction => Team.Impostor;
     public override RoleOptionType? Alignment => RoleOptionType.Impostor_Support;
 

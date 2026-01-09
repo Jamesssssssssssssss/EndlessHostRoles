@@ -118,7 +118,7 @@ internal static class ExternalRpcPetPatch
             )
             return;
 
-        if (Options.CurrentGameMode == CustomGameMode.CaptureTheFlag)
+        if (Options.CurrentGameMode == CustomGamemodes.CaptureTheFlag)
         {
             CaptureTheFlag.TryPickUpFlag(pc);
             return;
@@ -152,7 +152,7 @@ internal static class ExternalRpcPetPatch
 
         CustomRoles role = pc.GetCustomRole();
         
-        if (Options.CurrentGameMode == CustomGameMode.Standard && Options.UsePhantomBasis.GetBool() && (!role.IsNK() || Options.UsePhantomBasisForNKs.GetBool()) && role.SimpleAbilityTrigger()) return;
+        if (Options.CurrentGameMode == CustomGamemodes.Standard && Options.UsePhantomBasis.GetBool() && (!role.IsNK() || Options.UsePhantomBasisForNKs.GetBool()) && role.SimpleAbilityTrigger()) return;
         
         bool alwaysPetRole = role is CustomRoles.Necromancer or CustomRoles.Deathknight or CustomRoles.Renegade or CustomRoles.Sidekick;
 
@@ -163,7 +163,7 @@ internal static class ExternalRpcPetPatch
 
         if (role.UsesPetInsteadOfKill() && hasKillTarget && (pc.Data.RoleType != RoleTypes.Impostor || alwaysPetRole))
         {
-            if (Options.CurrentGameMode != CustomGameMode.Speedrun)
+            if (Options.CurrentGameMode != CustomGamemodes.Speedrun)
                 pc.AddKCDAsAbilityCD();
 
             if (target.Is(CustomRoles.Spy) && !Spy.OnKillAttempt(pc, target)) goto Skip;

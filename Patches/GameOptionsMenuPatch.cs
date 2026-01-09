@@ -482,8 +482,8 @@ public static class ToggleOptionPatch
         {
             OptionItem item = OptionItem.AllOptions[index];
 
-            CustomGameMode gm = Options.CurrentGameMode;
-            Color32 color = gm == CustomGameMode.Standard ? (TabGroup)(ModGameOptionsMenu.TabIndex - 3) switch
+            CustomGamemodes gm = Options.CurrentGameMode;
+            Color32 color = gm == CustomGamemodes.Standard ? (TabGroup)(ModGameOptionsMenu.TabIndex - 3) switch
             {
                 TabGroup.ImpostorRoles => new Color32(255, 25, 25, 255),
                 TabGroup.CrewmateRoles => new Color32(140, 255, 255, 255),
@@ -997,8 +997,8 @@ public static class GameSettingMenuPatch
 
         tabGroups = Options.CurrentGameMode switch
         {
-            CustomGameMode.Standard => tabGroups,
-            CustomGameMode.HideAndSeek => tabGroups[..6],
+            CustomGamemodes.Standard => tabGroups,
+            CustomGamemodes.HideAndSeek => tabGroups[..6],
             _ => tabGroups[..3]
         };
 
@@ -1170,8 +1170,8 @@ public static class GameSettingMenuPatch
 
         Vector3 gameSettingsLabelPos = gameSettingsLabel.transform.localPosition;
 
-        CustomGameMode[] gms = Enum.GetValues<CustomGameMode>()[..^1];
-        gms = gms.Without(CustomGameMode.TheMindGame).ToArray();
+        CustomGamemodes[] gms = Enum.GetValues<CustomGamemodes>()[..^1];
+        gms = gms.Without(CustomGamemodes.TheMindGame).ToArray();
         if (SubmergedCompatibility.Loaded && Main.NormalOptions.MapId == 6) gms = gms.Where(SubmergedCompatibility.IsSupported).ToArray();
         int totalCols = Mathf.Max(1, Mathf.CeilToInt(gms.Length / 7f));
 
@@ -1179,7 +1179,7 @@ public static class GameSettingMenuPatch
 
         for (var index = 0; index < gms.Length; index++)
         {
-            CustomGameMode gm = gms[index];
+            CustomGamemodes gm = gms[index];
 
             var gmButton = Object.Instantiate(gMinus, gameSettingsLabel.transform, true);
             gmButton.transform.localPosition = new Vector3((((index / 8) - ((totalCols - 1) / 2f)) * 1.4f) + 0.86f, gameSettingsLabelPos.y - 1.9f - (0.22f * (index % 8)), -1f);

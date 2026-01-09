@@ -82,13 +82,13 @@ internal static class ExtendedPlayerControl
         
         switch (Options.CurrentGameMode)
         {
-            case CustomGameMode.RoomRush:
+            case CustomGamemodes.RoomRush:
                 return true;
-            case CustomGameMode.Standard when Options.DisableVentingOn1v1.GetBool() && Main.AllAlivePlayerControls.Length == 2 && player.GetRoleTypes() != RoleTypes.Engineer:
+            case CustomGamemodes.Standard when Options.DisableVentingOn1v1.GetBool() && Main.AllAlivePlayerControls.Length == 2 && player.GetRoleTypes() != RoleTypes.Engineer:
                 return false;
-            case CustomGameMode.StopAndGo:
+            case CustomGamemodes.StopAndGo:
                 return StopAndGo.IsEventActive && StopAndGo.Event.Type == StopAndGo.Events.VentAccess;
-            case CustomGameMode.Deathrace:
+            case CustomGamemodes.Deathrace:
                 return Deathrace.CanUseVent(player, ventId);
         }
 
@@ -350,12 +350,12 @@ internal static class ExtendedPlayerControl
 
             RoleTypes newRoleType = state.MainRole.GetRoleTypes();
 
-            if (Options.CurrentGameMode is CustomGameMode.SoloPVP or CustomGameMode.FFA or CustomGameMode.CaptureTheFlag or CustomGameMode.KingOfTheZones or CustomGameMode.BedWars or CustomGameMode.Snowdown)
+            if (Options.CurrentGameMode is CustomGamemodes.SoloPVP or CustomGamemodes.FFA or CustomGamemodes.CaptureTheFlag or CustomGamemodes.KingOfTheZones or CustomGamemodes.BedWars or CustomGamemodes.Snowdown)
                 hasValue |= sender.RpcSetRole(player, newRoleType, player.OwnerId);
 
             player.ResetKillCooldown();
 
-            if (Options.CurrentGameMode != CustomGameMode.KingOfTheZones)
+            if (Options.CurrentGameMode != CustomGamemodes.KingOfTheZones)
                 LateTask.New(() => player.SetKillCooldown(), 0.2f, log: false);
 
             if (newRoleType is not (RoleTypes.Crewmate or RoleTypes.Impostor or RoleTypes.Noisemaker))
@@ -455,7 +455,7 @@ internal static class ExtendedPlayerControl
         state.IsDead = false;
         state.deathReason = PlayerState.DeathReason.etc;
         TempExiled.Remove(player.PlayerId);
-        if (Options.CurrentGameMode == CustomGameMode.Standard) state.Role.OnRevived(player);
+        if (Options.CurrentGameMode == CustomGamemodes.Standard) state.Role.OnRevived(player);
         var sender = CustomRpcSender.Create("RpcRevive", SendOption.Reliable);
         player.RpcChangeRoleBasis(player.GetCustomRole());
         player.ResetKillCooldown();
@@ -511,8 +511,8 @@ internal static class ExtendedPlayerControl
         {
             newRoleType = Options.CurrentGameMode switch
             {
-                CustomGameMode.Speedrun when newCustomRole == CustomRoles.Runner => Speedrun.CanKill.Contains(player.PlayerId) ? RoleTypes.Impostor : RoleTypes.Crewmate,
-                CustomGameMode.Standard when StartGameHostPatch.BasisChangingAddons.FindFirst(x => x.Value.Contains(player.PlayerId), out KeyValuePair<CustomRoles, List<byte>> kvp) => kvp.Key switch
+                CustomGamemodes.Speedrun when newCustomRole == CustomRoles.Runner => Speedrun.CanKill.Contains(player.PlayerId) ? RoleTypes.Impostor : RoleTypes.Crewmate,
+                CustomGamemodes.Standard when StartGameHostPatch.BasisChangingAddons.FindFirst(x => x.Value.Contains(player.PlayerId), out KeyValuePair<CustomRoles, List<byte>> kvp) => kvp.Key switch
                 {
                     CustomRoles.Bloodlust when newRoleType is RoleTypes.Crewmate or RoleTypes.Engineer or RoleTypes.Scientist or RoleTypes.Tracker or RoleTypes.Noisemaker => RoleTypes.Impostor,
                     CustomRoles.Nimble when newRoleType is RoleTypes.Crewmate or RoleTypes.Scientist or RoleTypes.Noisemaker or RoleTypes.Tracker => RoleTypes.Engineer,
@@ -927,7 +927,7 @@ internal static class ExtendedPlayerControl
 
         pc.Kill(pc);
 
-        if (Options.CurrentGameMode == CustomGameMode.NaturalDisasters)
+        if (Options.CurrentGameMode == CustomGamemodes.NaturalDisasters)
             NaturalDisasters.RecordDeath(pc, deathReason);
     }
 
@@ -1094,7 +1094,7 @@ internal static class ExtendedPlayerControl
     {
         try
         {
-            bool addRoleName = GameStates.IsInGame && Options.CurrentGameMode is not CustomGameMode.FFA and not CustomGameMode.StopAndGo and not CustomGameMode.HotPotato and not CustomGameMode.Speedrun and not CustomGameMode.CaptureTheFlag and not CustomGameMode.NaturalDisasters and not CustomGameMode.RoomRush and not CustomGameMode.Quiz and not CustomGameMode.TheMindGame and not CustomGameMode.BedWars and not CustomGameMode.Deathrace and not CustomGameMode.Mingle and not CustomGameMode.Snowdown;
+            bool addRoleName = GameStates.IsInGame && Options.CurrentGameMode is not CustomGamemodes.FFA and not CustomGamemodes.StopAndGo and not CustomGamemodes.HotPotato and not CustomGamemodes.Speedrun and not CustomGamemodes.CaptureTheFlag and not CustomGamemodes.NaturalDisasters and not CustomGamemodes.RoomRush and not CustomGamemodes.Quiz and not CustomGamemodes.TheMindGame and not CustomGamemodes.BedWars and not CustomGamemodes.Deathrace and not CustomGamemodes.Mingle and not CustomGamemodes.Snowdown;
             return $"{player?.Data?.PlayerName}" + (addRoleName ? $" ({player?.GetAllRoleName(forUser).RemoveHtmlTags().Replace('\n', ' ')})" : string.Empty);
         }
         catch (Exception e)
@@ -1375,18 +1375,18 @@ internal static class ExtendedPlayerControl
 
         switch (Options.CurrentGameMode)
         {
-            case CustomGameMode.StopAndGo or CustomGameMode.NaturalDisasters or CustomGameMode.RoomRush or CustomGameMode.TheMindGame or CustomGameMode.Mingle:
-            case CustomGameMode.Speedrun when !Speedrun.CanKill.Contains(pc.PlayerId):
+            case CustomGamemodes.StopAndGo or CustomGamemodes.NaturalDisasters or CustomGamemodes.RoomRush or CustomGamemodes.TheMindGame or CustomGamemodes.Mingle:
+            case CustomGamemodes.Speedrun when !Speedrun.CanKill.Contains(pc.PlayerId):
                 return false;
-            case CustomGameMode.HotPotato:
+            case CustomGamemodes.HotPotato:
                 return HotPotato.CanPassViaKillButton && HotPotato.GetState().HolderID == pc.PlayerId;
-            case CustomGameMode.Quiz:
+            case CustomGamemodes.Quiz:
                 return Quiz.AllowKills;
-            case CustomGameMode.KingOfTheZones:
-            case CustomGameMode.CaptureTheFlag:
-            case CustomGameMode.BedWars:
-            case CustomGameMode.Deathrace:
-            case CustomGameMode.Snowdown:
+            case CustomGamemodes.KingOfTheZones:
+            case CustomGamemodes.CaptureTheFlag:
+            case CustomGamemodes.BedWars:
+            case CustomGamemodes.Deathrace:
+            case CustomGamemodes.Snowdown:
                 return true;
         }
 
@@ -1436,23 +1436,23 @@ internal static class ExtendedPlayerControl
 
         return Options.CurrentGameMode switch
         {
-            CustomGameMode.SoloPVP => SoloPVP.CanVent,
-            CustomGameMode.FFA => true,
-            CustomGameMode.StopAndGo => false,
-            CustomGameMode.HotPotato => false,
-            CustomGameMode.Speedrun => false,
-            CustomGameMode.CaptureTheFlag => false,
-            CustomGameMode.NaturalDisasters => false,
-            CustomGameMode.RoomRush => false,
-            CustomGameMode.Quiz => false,
-            CustomGameMode.TheMindGame => false,
-            CustomGameMode.Mingle => false,
-            CustomGameMode.Snowdown => true,
-            CustomGameMode.Deathrace => Deathrace.CanUseVent(pc, pc.GetClosestVent().Id),
+            CustomGamemodes.SoloPVP => SoloPVP.CanVent,
+            CustomGamemodes.FFA => true,
+            CustomGamemodes.StopAndGo => false,
+            CustomGamemodes.HotPotato => false,
+            CustomGamemodes.Speedrun => false,
+            CustomGamemodes.CaptureTheFlag => false,
+            CustomGamemodes.NaturalDisasters => false,
+            CustomGamemodes.RoomRush => false,
+            CustomGamemodes.Quiz => false,
+            CustomGamemodes.TheMindGame => false,
+            CustomGamemodes.Mingle => false,
+            CustomGamemodes.Snowdown => true,
+            CustomGamemodes.Deathrace => Deathrace.CanUseVent(pc, pc.GetClosestVent().Id),
 
-            CustomGameMode.Standard when CopyCat.PlayerIdList.Contains(pc.PlayerId) => true,
-            CustomGameMode.Standard when pc.Is(CustomRoles.Nimble) || Options.EveryoneCanVent.GetBool() => true,
-            CustomGameMode.Standard when pc.Is(CustomRoles.Bloodlust) || pc.Is(CustomRoles.Renegade) => true,
+            CustomGamemodes.Standard when CopyCat.PlayerIdList.Contains(pc.PlayerId) => true,
+            CustomGamemodes.Standard when pc.Is(CustomRoles.Nimble) || Options.EveryoneCanVent.GetBool() => true,
+            CustomGamemodes.Standard when pc.Is(CustomRoles.Bloodlust) || pc.Is(CustomRoles.Renegade) => true,
 
             _ => Main.PlayerStates.TryGetValue(pc.PlayerId, out PlayerState state) && state.Role.CanUseImpostorVentButton(pc)
         };
@@ -1508,7 +1508,7 @@ internal static class ExtendedPlayerControl
     {
         if (!AmongUsClient.Instance.AmHost) return;
         if (!Main.Invisible.Add(player.PlayerId)) return;
-        if (phantom && Options.CurrentGameMode != CustomGameMode.Standard) return;
+        if (phantom && Options.CurrentGameMode != CustomGamemodes.Standard) return;
         
         player.RpcSetPet("");
         
@@ -1557,7 +1557,7 @@ internal static class ExtendedPlayerControl
     {
         if (!AmongUsClient.Instance.AmHost) return;
         if (!Main.Invisible.Remove(player.PlayerId)) return;
-        if (phantom && Options.CurrentGameMode != CustomGameMode.Standard) return;
+        if (phantom && Options.CurrentGameMode != CustomGamemodes.Standard) return;
         
         if (Options.UsePets.GetBool()) PetsHelper.SetPet(player, PetsHelper.GetPetId());
         
@@ -1610,7 +1610,7 @@ internal static class ExtendedPlayerControl
     {
         if (!AmongUsClient.Instance.AmHost) return;
         if (!Main.Invisible.Contains(player.PlayerId)) return;
-        if (phantom && Options.CurrentGameMode != CustomGameMode.Standard) return;
+        if (phantom && Options.CurrentGameMode != CustomGamemodes.Standard) return;
 
         foreach (PlayerControl pc in PlayerControl.AllPlayerControls)
         {
@@ -1896,7 +1896,7 @@ internal static class ExtendedPlayerControl
             return;
         }
         
-        if (Options.CurrentGameMode == CustomGameMode.SoloPVP || GameStates.IsLobby || !GameStates.InGame || !Main.IntroDestroyed) return;
+        if (Options.CurrentGameMode == CustomGamemodes.SoloPVP || GameStates.IsLobby || !GameStates.InGame || !Main.IntroDestroyed) return;
 
         if (target == null) target = killer;
 
@@ -1927,7 +1927,7 @@ internal static class ExtendedPlayerControl
 
         Main.DiedThisRound.Add(target.PlayerId);
 
-        if (killer.AmOwner && !killer.HasKillButton() && killer.PlayerId != target.PlayerId && Options.CurrentGameMode == CustomGameMode.Standard)
+        if (killer.AmOwner && !killer.HasKillButton() && killer.PlayerId != target.PlayerId && Options.CurrentGameMode == CustomGamemodes.Standard)
             Achievements.Type.InnocentKiller.Complete();
 
         if (Options.AnonymousBodies.GetBool() || realKiller.Is(CustomRoles.Concealer) || target.Is(CustomRoles.Hidden))

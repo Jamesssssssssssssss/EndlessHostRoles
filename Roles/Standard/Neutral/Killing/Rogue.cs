@@ -34,6 +34,8 @@ public class Rogue : StandardRoleBase
     public override bool IsEnable => On;
     public bool DisableDevices => GotRewards.Contains(Reward.DisableDevices);
 
+    public override CustomGamemodes GamemodeId => CustomGamemodes.Standard;
+    public override CustomRoles RoleId => CustomRoles.Rogue;
     public override Team Faction => Team.Neutral;
     public override RoleOptionType? Alignment => RoleOptionType.Neutral_Killing;
 

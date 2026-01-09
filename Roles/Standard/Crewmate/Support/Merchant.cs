@@ -39,6 +39,8 @@ internal class Merchant : StandardRoleBase
         return (AddonsSold[playerId] * OptionMoneyPerSell.GetInt()) - (BribedKiller[playerId].Count * OptionMoneyRequiredToBribe.GetInt());
     }
 
+    public override CustomGamemodes GamemodeId => CustomGamemodes.Standard;
+    public override CustomRoles RoleId => CustomRoles.Merchant;
     public override Team Faction => Team.Crewmate;
     public override RoleOptionType? Alignment => RoleOptionType.Crewmate_Support;
 

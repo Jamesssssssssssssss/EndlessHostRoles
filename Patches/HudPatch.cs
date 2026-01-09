@@ -169,7 +169,7 @@ internal static class HudManagerPatch
                     __instance.SabotageButton
                 }.Do(x => x?.Hide());
             }
-            else if (Options.CurrentGameMode != CustomGameMode.Standard) __instance.ReportButton?.Hide();
+            else if (Options.CurrentGameMode != CustomGamemodes.Standard) __instance.ReportButton?.Hide();
 
             // The following will not be executed unless the game is in progress
             if (!AmongUsClient.Instance.IsGameStarted) return;
@@ -178,7 +178,7 @@ internal static class HudManagerPatch
 
             if (SetHudActivePatch.IsActive)
             {
-                if (player.IsAlive() || Options.CurrentGameMode != CustomGameMode.Standard)
+                if (player.IsAlive() || Options.CurrentGameMode != CustomGamemodes.Standard)
                 {
                     if (player.Data.Role is ShapeshifterRole ssrole && !player.shapeshifting)
                     {
@@ -254,7 +254,7 @@ internal static class HudManagerPatch
                             break;
                     }
 
-                    if (role.PetActivatedAbility() && Options.CurrentGameMode == CustomGameMode.Standard && player.GetRoleTypes() != RoleTypes.Engineer && !role.OnlySpawnsWithPets() && !role.AlwaysUsesPhantomBase() && !player.GetCustomSubRoles().Any(StartGameHostPatch.BasisChangingAddons.ContainsKey) && role is not CustomRoles.Changeling and not CustomRoles.Ninja and not CustomRoles.Duality and not CustomRoles.Witch and not CustomRoles.Silencer && (!role.SimpleAbilityTrigger() || !Options.UsePhantomBasis.GetBool() || !(player.IsNeutralKiller() && Options.UsePhantomBasisForNKs.GetBool())) && !(Options.UseMeetingShapeshift.GetBool() && player.UsesMeetingShapeshift()) && !role.ToString().EndsWith("EHR") && !role.IsVanilla())
+                    if (role.PetActivatedAbility() && Options.CurrentGameMode == CustomGamemodes.Standard && player.GetRoleTypes() != RoleTypes.Engineer && !role.OnlySpawnsWithPets() && !role.AlwaysUsesPhantomBase() && !player.GetCustomSubRoles().Any(StartGameHostPatch.BasisChangingAddons.ContainsKey) && role is not CustomRoles.Changeling and not CustomRoles.Ninja and not CustomRoles.Duality and not CustomRoles.Witch and not CustomRoles.Silencer && (!role.SimpleAbilityTrigger() || !Options.UsePhantomBasis.GetBool() || !(player.IsNeutralKiller() && Options.UsePhantomBasisForNKs.GetBool())) && !(Options.UseMeetingShapeshift.GetBool() && player.UsesMeetingShapeshift()) && !role.ToString().EndsWith("EHR") && !role.IsVanilla())
                         __instance.AbilityButton?.Hide();
 
                     if (LowerInfoText == null)
@@ -270,15 +270,15 @@ internal static class HudManagerPatch
 
                     LowerInfoText.text = Options.CurrentGameMode switch
                     {
-                        CustomGameMode.SoloPVP => SoloPVP.GetHudText(),
-                        CustomGameMode.FFA => FreeForAll.GetHudText(),
-                        CustomGameMode.StopAndGo => StopAndGo.GetHudText(),
-                        CustomGameMode.HotPotato => HotPotato.GetSuffixText(player.PlayerId, true),
-                        CustomGameMode.HideAndSeek when player.IsHost() => CustomHnS.GetSuffixText(player, player, true),
-                        CustomGameMode.NaturalDisasters => NaturalDisasters.SuffixText(),
-                        CustomGameMode.Deathrace => Deathrace.GetSuffix(player, player, true),
-                        CustomGameMode.Snowdown => Snowdown.GetHudText(),
-                        CustomGameMode.Standard => state.Role.GetSuffix(player, player, true, GameStates.IsMeeting) + GetAddonSuffixes(),
+                        CustomGamemodes.SoloPVP => SoloPVP.GetHudText(),
+                        CustomGamemodes.FFA => FreeForAll.GetHudText(),
+                        CustomGamemodes.StopAndGo => StopAndGo.GetHudText(),
+                        CustomGamemodes.HotPotato => HotPotato.GetSuffixText(player.PlayerId, true),
+                        CustomGamemodes.HideAndSeek when player.IsHost() => CustomHnS.GetSuffixText(player, player, true),
+                        CustomGamemodes.NaturalDisasters => NaturalDisasters.SuffixText(),
+                        CustomGamemodes.Deathrace => Deathrace.GetSuffix(player, player, true),
+                        CustomGamemodes.Snowdown => Snowdown.GetHudText(),
+                        CustomGamemodes.Standard => state.Role.GetSuffix(player, player, true, GameStates.IsMeeting) + GetAddonSuffixes(),
                         _ => string.Empty
                     };
 
@@ -337,7 +337,7 @@ internal static class HudManagerPatch
                         __instance.KillButton?.ToggleVisible(false);
                     }
 
-                    if (Options.CurrentGameMode != CustomGameMode.Standard)
+                    if (Options.CurrentGameMode != CustomGamemodes.Standard)
                         __instance.ReportButton.Hide();
 
                     __instance.ImpostorVentButton?.ToggleVisible((player.CanUseImpostorVentButton() || (player.inVent && player.GetRoleTypes() != RoleTypes.Engineer)) && GameStates.IsInTask);
@@ -440,12 +440,12 @@ internal static class HudManagerPatch
     {
         bool includesRandomChoice = Options.AutoGMRotationSlots.Exists(x => x.Slot.GetValue() == 2);
         int index = Options.AutoGMRotationIndex;
-        List<CustomGameMode> list = Options.AutoGMRotationCompiled;
+        List<CustomGamemodes> list = Options.AutoGMRotationCompiled;
 
-        CustomGameMode previousGM = index == 0 ? list[^1] : list[index - 1];
-        CustomGameMode currentGM = list[index];
-        CustomGameMode nextGM = index == list.Count - 1 ? list[0] : list[index + 1];
-        CustomGameMode nextNextGM = index >= list.Count - 2 ? list[1] : list[index + 2];
+        CustomGamemodes previousGM = index == 0 ? list[^1] : list[index - 1];
+        CustomGamemodes currentGM = list[index];
+        CustomGamemodes nextGM = index == list.Count - 1 ? list[0] : list[index + 1];
+        CustomGamemodes nextNextGM = index >= list.Count - 2 ? list[1] : list[index + 2];
 
         var sb = new StringBuilder();
         if (!chatMessage) sb.AppendLine(GetString("AutoGMRotationStatusText"));
@@ -464,7 +464,7 @@ internal static class HudManagerPatch
 
         return sb.ToString().Trim();
 
-        string ToString(CustomGameMode gm) => gm == CustomGameMode.All
+        string ToString(CustomGamemodes gm) => gm == CustomGamemodes.All
             ? GetString("AutoGMRotationStatusText.GMPoll")
             : Utils.ColorString(Main.GameModeColors[gm], GetString(gm.ToString()));
     }
@@ -578,7 +578,7 @@ internal static class SetHudActivePatch
 
         switch (Options.CurrentGameMode)
         {
-            case CustomGameMode.Snowdown:
+            case CustomGamemodes.Snowdown:
                 __instance.AbilityButton?.ToggleVisible(true);
                 __instance.ReportButton?.ToggleVisible(false);
                 __instance.KillButton?.ToggleVisible(true);
@@ -586,53 +586,53 @@ internal static class SetHudActivePatch
                 __instance.SabotageButton?.ToggleVisible(true);
                 __instance.PetButton?.ToggleVisible(true);
                 return;
-            case CustomGameMode.BedWars:
+            case CustomGamemodes.BedWars:
                 __instance.AbilityButton?.ToggleVisible(true);
                 __instance.ReportButton?.ToggleVisible(false);
                 __instance.KillButton?.ToggleVisible(true);
                 __instance.ImpostorVentButton?.ToggleVisible(true);
                 __instance.SabotageButton?.ToggleVisible(false);
                 return;
-            case CustomGameMode.Quiz:
+            case CustomGamemodes.Quiz:
                 __instance.KillButton.ToggleVisible(Quiz.AllowKills);
-                goto case CustomGameMode.StopAndGo;
-            case CustomGameMode.StopAndGo:
-            case CustomGameMode.HotPotato:
-            case CustomGameMode.Speedrun:
-            case CustomGameMode.TheMindGame:
-            case CustomGameMode.NaturalDisasters:
+                goto case CustomGamemodes.StopAndGo;
+            case CustomGamemodes.StopAndGo:
+            case CustomGamemodes.HotPotato:
+            case CustomGamemodes.Speedrun:
+            case CustomGamemodes.TheMindGame:
+            case CustomGamemodes.NaturalDisasters:
                 __instance.ReportButton?.ToggleVisible(false);
                 __instance.SabotageButton?.ToggleVisible(false);
                 __instance.ImpostorVentButton?.ToggleVisible(false);
                 return;
-            case CustomGameMode.FFA:
+            case CustomGamemodes.FFA:
                 __instance.AbilityButton?.ToggleVisible(false);
-                goto case CustomGameMode.HideAndSeek;
-            case CustomGameMode.RoomRush:
+                goto case CustomGamemodes.HideAndSeek;
+            case CustomGamemodes.RoomRush:
                 __instance.ImpostorVentButton?.ToggleVisible(false);
-                goto case CustomGameMode.HideAndSeek;
-            case CustomGameMode.KingOfTheZones:
+                goto case CustomGamemodes.HideAndSeek;
+            case CustomGamemodes.KingOfTheZones:
                 __instance.ReportButton?.ToggleVisible(false);
                 __instance.SabotageButton?.ToggleVisible(false);
                 __instance.AbilityButton?.ToggleVisible(false);
                 __instance.KillButton?.ToggleVisible(true);
                 __instance.ImpostorVentButton?.ToggleVisible(false);
                 return;
-            case CustomGameMode.CaptureTheFlag:
+            case CustomGamemodes.CaptureTheFlag:
                 __instance.ReportButton?.ToggleVisible(false);
                 __instance.SabotageButton?.ToggleVisible(false);
                 __instance.AbilityButton?.ToggleVisible(true);
                 return;
-            case CustomGameMode.HideAndSeek:
+            case CustomGamemodes.HideAndSeek:
                 __instance.ReportButton?.ToggleVisible(false);
                 __instance.SabotageButton?.ToggleVisible(false);
                 return;
-            case CustomGameMode.SoloPVP:
+            case CustomGamemodes.SoloPVP:
                 __instance.ImpostorVentButton?.ToggleVisible(SoloPVP.CanVent);
                 __instance.KillButton?.ToggleVisible(true);
                 __instance.SabotageButton?.ToggleVisible(false);
                 return;
-            case CustomGameMode.Mingle:
+            case CustomGamemodes.Mingle:
                 __instance.ReportButton?.ToggleVisible(false);
                 return;
         }
@@ -969,7 +969,7 @@ internal static class TaskPanelBehaviourPatch
     {
         var tabText = panel.tab.gameObject.GetComponentInChildren<TextMeshPro>();
         var ogPanel = HudManager.Instance.TaskStuff.transform.FindChild("TaskPanel").gameObject.GetComponent<TaskPanelBehaviour>();
-        string panelName = GetString(Options.CurrentGameMode != CustomGameMode.Standard ? "GameInfo" : "RoleInfo");
+        string panelName = GetString(Options.CurrentGameMode != CustomGamemodes.Standard ? "GameInfo" : "RoleInfo");
         if (tabText.text != panelName) tabText.text = panelName;
 
         bool taskingGm = Utils.IsTaskingGameMode();
@@ -989,7 +989,7 @@ internal static class TaskPanelBehaviourPatch
         string roleInfo = player.GetRoleInfo();
         var roleWithInfo = $"<b>{role.ToColoredString()}</b>:\r\n{roleInfo}";
 
-        if (Options.CurrentGameMode != CustomGameMode.Standard)
+        if (Options.CurrentGameMode != CustomGamemodes.Standard)
         {
             string[] splitted = roleInfo.Split(' ');
 
@@ -1008,7 +1008,7 @@ internal static class TaskPanelBehaviourPatch
 
         switch (Options.CurrentGameMode)
         {
-            case CustomGameMode.Standard:
+            case CustomGamemodes.Standard:
             {
                 List<CustomRoles> subRoles = player.GetCustomSubRoles();
 
@@ -1024,7 +1024,7 @@ internal static class TaskPanelBehaviourPatch
                 finalText += $"\r\n\r\n</color><size=90%>{GetString("PressF1ShowMainRoleDes")}";
                 break;
             }
-            case CustomGameMode.SoloPVP:
+            case CustomGamemodes.SoloPVP:
             {
                 PlayerControl lpc = PlayerControl.LocalPlayer;
 
@@ -1039,14 +1039,14 @@ internal static class TaskPanelBehaviourPatch
                 finalText += "</size>";
                 break;
             }
-            case CustomGameMode.FFA:
+            case CustomGamemodes.FFA:
             {
                 finalText += Main.PlayerStates.Keys.OrderBy(FreeForAll.GetRankFromScore).Aggregate("<size=80%>", (s, x) => $"{s}\r\n{FreeForAll.GetRankFromScore(x)}. {x.ColoredPlayerName()} -{string.Format(GetString("KillCount"), FreeForAll.KillCount.GetValueOrDefault(x, 0))}");
                 finalText += "</size>";
                 break;
             }
 
-            case CustomGameMode.StopAndGo:
+            case CustomGamemodes.StopAndGo:
             {
                 Dictionary<byte, string> SummaryText3 = [];
 
@@ -1073,24 +1073,24 @@ internal static class TaskPanelBehaviourPatch
 
                 break;
             }
-            case CustomGameMode.HotPotato:
+            case CustomGamemodes.HotPotato:
             {
                 List<string> SummaryText4 = [];
                 SummaryText4.AddRange(from pc in Main.AllPlayerControls let alive = pc.IsAlive() select $"{(!alive ? "<size=90%><#777777>" : "<size=90%>")}{HotPotato.GetIndicator(pc.PlayerId)}{pc.PlayerId.ColoredPlayerName()}{(!alive ? $"</color>  <#ff0000>{GetString("Dead")}</color></size>" : "</size>")}");
                 finalText += $"\r\n\r\n{string.Join('\n', SummaryText4)}";
                 break;
             }
-            case CustomGameMode.HideAndSeek when AmongUsClient.Instance.AmHost:
+            case CustomGamemodes.HideAndSeek when AmongUsClient.Instance.AmHost:
             {
                 finalText += $"\r\n\r\n{CustomHnS.GetTaskBarText()}";
                 break;
             }
-            case CustomGameMode.Speedrun:
+            case CustomGamemodes.Speedrun:
             {
                 finalText += $"\r\n<size=90%>{Speedrun.GetTaskBarText()}</size>";
                 break;
             }
-            case CustomGameMode.NaturalDisasters:
+            case CustomGamemodes.NaturalDisasters:
             {
                 finalText += Main.AllPlayerControls
                     .Select(x => (pc: x, alive: x.IsAlive(), time: NaturalDisasters.SurvivalTime(x.PlayerId)))
@@ -1101,7 +1101,7 @@ internal static class TaskPanelBehaviourPatch
                 finalText += "</size>";
                 break;
             }
-            case CustomGameMode.RoomRush:
+            case CustomGamemodes.RoomRush:
             {
                 if (!RoomRush.PointsSystem)
                 {
@@ -1122,35 +1122,35 @@ internal static class TaskPanelBehaviourPatch
                 finalText += "</size>";
                 break;
             }
-            case CustomGameMode.Quiz when AmongUsClient.Instance.AmHost:
+            case CustomGamemodes.Quiz when AmongUsClient.Instance.AmHost:
             {
                 finalText += "\r\n\r\n<size=70%>";
                 finalText += Quiz.GetTaskBarText();
                 finalText += "</size>";
                 break;
             }
-            case CustomGameMode.TheMindGame when AmongUsClient.Instance.AmHost:
+            case CustomGamemodes.TheMindGame when AmongUsClient.Instance.AmHost:
             {
                 finalText += "\r\n\r\n\r\n<size=70%>";
                 finalText += TheMindGame.GetTaskBarText();
                 finalText += "</size>";
                 break;
             }
-            case CustomGameMode.BedWars when AmongUsClient.Instance.AmHost:
+            case CustomGamemodes.BedWars when AmongUsClient.Instance.AmHost:
             {
                 finalText += "\r\n\r\n<size=80%>";
                 finalText += BedWars.GetHudText();
                 finalText += "</size>";
                 break;
             }
-            case CustomGameMode.Deathrace:
+            case CustomGamemodes.Deathrace:
             {
                 finalText += "\r\n\r\n<size=80%>";
                 finalText += Deathrace.GetTaskBarText();
                 finalText += "</size>";
                 break;
             }
-            case CustomGameMode.Mingle:
+            case CustomGamemodes.Mingle:
             {
                 finalText += "\r\n\r\n<size=80%>";
                 finalText += Mingle.GetTaskBarText();
@@ -1170,7 +1170,7 @@ internal static class TaskPanelBehaviourPatch
             if (Utils.IsTaskingGameMode())
             {
                 var tabText = __instance.tab.transform.FindChild("TabText_TMP").GetComponent<TextMeshPro>();
-                bool fakeTasks = Options.CurrentGameMode is CustomGameMode.Standard or CustomGameMode.HideAndSeek && !Utils.HasTasks(PlayerControl.LocalPlayer.Data, forRecompute: false);
+                bool fakeTasks = Options.CurrentGameMode is CustomGamemodes.Standard or CustomGamemodes.HideAndSeek && !Utils.HasTasks(PlayerControl.LocalPlayer.Data, forRecompute: false);
                 string sideText = TranslationController.Instance.GetString(fakeTasks ? StringNames.FakeTasks : StringNames.Tasks);
                 if (fakeTasks) sideText = Utils.ColorString(Utils.GetRoleColor(CustomRoles.ImpostorEHR), sideText.TrimEnd(':'));
                 tabText.SetText($"{sideText}{Utils.GetTaskCount(PlayerControl.LocalPlayer.PlayerId, Utils.IsActive(SystemTypes.Comms))}");

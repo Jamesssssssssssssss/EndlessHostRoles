@@ -26,6 +26,8 @@ public class Sapper : StandardRoleBase
 
     private long LastNotify;
 
+    public override CustomGamemodes GamemodeId => CustomGamemodes.Standard;
+    public override CustomRoles RoleId => CustomRoles.Sapper;
     public override Team Faction => Team.Impostor;
     public override RoleOptionType? Alignment => RoleOptionType.Impostor_Killing;
 

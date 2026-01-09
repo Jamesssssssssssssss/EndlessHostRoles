@@ -4,6 +4,9 @@ namespace EHR.Roles;
 
 internal class CTFPlayer : RoleBase
 {
+    public override CustomGamemodes GamemodeId => CustomGamemodes.CaptureTheFlag;
+    public override CustomRoles RoleId => CustomRoles.CTFPlayer;
+
     public static bool On;
 
     public override bool IsEnable => On;

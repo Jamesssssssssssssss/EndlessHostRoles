@@ -18,6 +18,8 @@ public class Medium : StandardRoleBase
 
     public override bool IsEnable => PlayerIdList.Count > 0;
 
+    public override CustomGamemodes GamemodeId => CustomGamemodes.Standard;
+    public override CustomRoles RoleId => CustomRoles.Medium;
     public override Team Faction => Team.Crewmate;
     public override RoleOptionType? Alignment => RoleOptionType.Crewmate_Investigate;
 

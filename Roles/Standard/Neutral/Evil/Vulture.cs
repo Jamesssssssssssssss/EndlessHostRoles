@@ -46,6 +46,8 @@ public class Vulture : StandardRoleBase
 
     public override bool SeesArrowsToDeadBodies => ArrowsPointingToDeadBody.GetBool();
 
+    public override CustomGamemodes GamemodeId => CustomGamemodes.Standard;
+    public override CustomRoles RoleId => CustomRoles.Vulture;
     public override Team Faction => Team.Neutral;
     public override RoleOptionType? Alignment => RoleOptionType.Neutral_Evil;
 

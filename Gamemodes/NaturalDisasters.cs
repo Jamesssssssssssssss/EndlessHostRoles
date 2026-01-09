@@ -59,7 +59,7 @@ internal class NaturalDisasters : GamemodeBase
     {
         var id = 69_216_001;
         Color color = Utils.GetRoleColor(CustomRoles.NDPlayer);
-        const CustomGameMode gameMode = CustomGameMode.NaturalDisasters;
+        const CustomGamemodes gameMode = CustomGamemodes.NaturalDisasters;
 
         DisasterFrequency = new IntegerOptionItem(id++, "ND_DisasterFrequency", new(1, 20, 1), 2, TabGroup.GameSettings)
             .SetHeader(true)
@@ -121,7 +121,7 @@ internal class NaturalDisasters : GamemodeBase
         BuildingCollapse.CollapsedRooms.Clear();
         BuildingCollapse.LastPosition.Clear();
 
-        if (Options.CurrentGameMode != CustomGameMode.NaturalDisasters && !Options.IntegrateNaturalDisasters.GetBool()) return;
+        if (Options.CurrentGameMode != CustomGamemodes.NaturalDisasters && !Options.IntegrateNaturalDisasters.GetBool()) return;
 
         Dictionary<SystemTypes, Vector2>.ValueCollection rooms = RandomSpawn.SpawnMap.GetSpawnMap().Positions?.Values;
         if (rooms == null) return;
@@ -203,18 +203,18 @@ internal class NaturalDisasters : GamemodeBase
 
         public static void Postfix( /*PlayerControl __instance*/)
         {
-            if (!AmongUsClient.Instance.AmHost || !GameStates.IsInTask || ExileController.Instance || AntiBlackout.SkipTasks || (Options.CurrentGameMode != CustomGameMode.NaturalDisasters && !Options.IntegrateNaturalDisasters.GetBool()) || !Main.IntroDestroyed || Main.HasJustStarted || IntroCutsceneDestroyPatch.IntroDestroyTS + 5 > Utils.TimeStamp /* || __instance.PlayerId >= 254 || !__instance.IsHost()*/) return;
+            if (!AmongUsClient.Instance.AmHost || !GameStates.IsInTask || ExileController.Instance || AntiBlackout.SkipTasks || (Options.CurrentGameMode != CustomGamemodes.NaturalDisasters && !Options.IntegrateNaturalDisasters.GetBool()) || !Main.IntroDestroyed || Main.HasJustStarted || IntroCutsceneDestroyPatch.IntroDestroyTS + 5 > Utils.TimeStamp /* || __instance.PlayerId >= 254 || !__instance.IsHost()*/) return;
 
-            if (Options.CurrentGameMode != CustomGameMode.NaturalDisasters)
+            if (Options.CurrentGameMode != CustomGamemodes.NaturalDisasters)
             {
                 (int minimumWaitTime, bool shouldWait) = Options.CurrentGameMode switch
                 {
-                    CustomGameMode.BedWars => (30, BedWars.IsGracePeriod),
-                    CustomGameMode.HideAndSeek => (0, CustomHnS.IsBlindTime),
-                    CustomGameMode.KingOfTheZones => (0, !KingOfTheZones.GameGoing),
-                    CustomGameMode.RoomRush => (40, false),
-                    CustomGameMode.Deathrace => (0, !Deathrace.GameGoing),
-                    CustomGameMode.Mingle => (60, !Mingle.GameGoing),
+                    CustomGamemodes.BedWars => (30, BedWars.IsGracePeriod),
+                    CustomGamemodes.HideAndSeek => (0, CustomHnS.IsBlindTime),
+                    CustomGamemodes.KingOfTheZones => (0, !KingOfTheZones.GameGoing),
+                    CustomGamemodes.RoomRush => (40, false),
+                    CustomGamemodes.Deathrace => (0, !Deathrace.GameGoing),
+                    CustomGamemodes.Mingle => (60, !Mingle.GameGoing),
                     _ => (0, false)
                 };
 
@@ -281,7 +281,7 @@ internal class NaturalDisasters : GamemodeBase
                 {
                     "BuildingCollapse" => roomKvp.Value,
                     "Thunderstorm" => Pelican.GetBlackRoomPS(),
-                    _ => IRandom.Instance.Next(2) == 0 && Options.CurrentGameMode == CustomGameMode.NaturalDisasters
+                    _ => IRandom.Instance.Next(2) == 0 && Options.CurrentGameMode == CustomGamemodes.NaturalDisasters
                         ? Main.AllAlivePlayerControls.RandomElement().Pos()
                         : new(Random.Range(MapBounds.X.Left, MapBounds.X.Right), Random.Range(MapBounds.Y.Top, MapBounds.Y.Bottom))
                 };
@@ -292,7 +292,7 @@ internal class NaturalDisasters : GamemodeBase
 
             if (now - LastSync >= 15)
             {
-                if (Options.CurrentGameMode != CustomGameMode.NaturalDisasters)
+                if (Options.CurrentGameMode != CustomGamemodes.NaturalDisasters)
                 {
                     BuildingCollapse.CollapsedRooms.Clear();
                     Sinkhole.RemoveRandomSinkhole();
@@ -388,12 +388,12 @@ internal class NaturalDisasters : GamemodeBase
 
             DurationOpt = new IntegerOptionItem(id, "ND_Earthquake.DurationOpt", new(1, 120, 1), 30, TabGroup.GameSettings)
                 .SetHeader(true)
-                .SetGameMode(CustomGameMode.NaturalDisasters)
+                .SetGameMode(CustomGamemodes.NaturalDisasters)
                 .SetColor(color)
                 .SetValueFormat(OptionFormat.Seconds);
 
             Speed = new FloatOptionItem(id + 1, "ND_Earthquake.Speed", new(0.05f, 2f, 0.05f), 0.2f, TabGroup.GameSettings)
-                .SetGameMode(CustomGameMode.NaturalDisasters)
+                .SetGameMode(CustomGamemodes.NaturalDisasters)
                 .SetColor(color)
                 .SetValueFormat(OptionFormat.Multiplier);
         }
@@ -483,12 +483,12 @@ internal class NaturalDisasters : GamemodeBase
 
             FlowStepDelay = new FloatOptionItem(id, "ND_VolcanoEruption.FlowStepDelay", new(0.5f, 5f, 0.5f), 1f, TabGroup.GameSettings)
                 .SetHeader(true)
-                .SetGameMode(CustomGameMode.NaturalDisasters)
+                .SetGameMode(CustomGamemodes.NaturalDisasters)
                 .SetColor(color)
                 .SetValueFormat(OptionFormat.Seconds);
 
             DurationAfterFlowComplete = new IntegerOptionItem(id + 1, "ND_VolcanoEruption.DurationAfterFlowComplete", new(1, 120, 1), 5, TabGroup.GameSettings)
-                .SetGameMode(CustomGameMode.NaturalDisasters)
+                .SetGameMode(CustomGamemodes.NaturalDisasters)
                 .SetColor(color)
                 .SetValueFormat(OptionFormat.Seconds);
         }
@@ -548,21 +548,21 @@ internal class NaturalDisasters : GamemodeBase
 
             DurationOpt = new IntegerOptionItem(id, "ND_Tornado.DurationOpt", new(1, 120, 1), 20, TabGroup.GameSettings)
                 .SetHeader(true)
-                .SetGameMode(CustomGameMode.NaturalDisasters)
+                .SetGameMode(CustomGamemodes.NaturalDisasters)
                 .SetColor(color)
                 .SetValueFormat(OptionFormat.Seconds);
 
             GoesThroughWalls = new BooleanOptionItem(id + 1, "ND_Tornado.GoesThroughWalls", false, TabGroup.GameSettings)
-                .SetGameMode(CustomGameMode.NaturalDisasters)
+                .SetGameMode(CustomGamemodes.NaturalDisasters)
                 .SetColor(color);
 
             MovingSpeed = new FloatOptionItem(id + 2, "ND_Tornado.MovingSpeed", new(0f, 10f, 0.25f), 2f, TabGroup.GameSettings)
-                .SetGameMode(CustomGameMode.NaturalDisasters)
+                .SetGameMode(CustomGamemodes.NaturalDisasters)
                 .SetColor(color)
                 .SetValueFormat(OptionFormat.Multiplier);
 
             AngleChangeFrequency = new IntegerOptionItem(id + 3, "ND_Tornado.AngleChangeFrequency", new(1, 30, 1), 5, TabGroup.GameSettings)
-                .SetGameMode(CustomGameMode.NaturalDisasters)
+                .SetGameMode(CustomGamemodes.NaturalDisasters)
                 .SetColor(color)
                 .SetValueFormat(OptionFormat.Seconds);
         }
@@ -653,12 +653,12 @@ internal class NaturalDisasters : GamemodeBase
 
             DurationOpt = new IntegerOptionItem(id, "ND_Thunderstorm.DurationOpt", new(1, 120, 1), 20, TabGroup.GameSettings)
                 .SetHeader(true)
-                .SetGameMode(CustomGameMode.NaturalDisasters)
+                .SetGameMode(CustomGamemodes.NaturalDisasters)
                 .SetColor(color)
                 .SetValueFormat(OptionFormat.Seconds);
 
             HitFrequency = new IntegerOptionItem(id + 1, "ND_Thunderstorm.HitFrequency", new(1, 20, 1), 3, TabGroup.GameSettings)
-                .SetGameMode(CustomGameMode.NaturalDisasters)
+                .SetGameMode(CustomGamemodes.NaturalDisasters)
                 .SetColor(color)
                 .SetValueFormat(OptionFormat.Seconds);
         }
@@ -725,12 +725,12 @@ internal class NaturalDisasters : GamemodeBase
 
             DurationOpt = new IntegerOptionItem(id, "ND_SandStorm.DurationOpt", new(1, 120, 1), 30, TabGroup.GameSettings)
                 .SetHeader(true)
-                .SetGameMode(CustomGameMode.NaturalDisasters)
+                .SetGameMode(CustomGamemodes.NaturalDisasters)
                 .SetColor(color)
                 .SetValueFormat(OptionFormat.Seconds);
 
             Vision = new FloatOptionItem(id + 1, "ND_SandStorm.Vision", new(0f, 1f, 0.05f), 0.2f, TabGroup.GameSettings)
-                .SetGameMode(CustomGameMode.NaturalDisasters)
+                .SetGameMode(CustomGamemodes.NaturalDisasters)
                 .SetColor(color)
                 .SetValueFormat(OptionFormat.Multiplier);
         }
@@ -808,7 +808,7 @@ internal class NaturalDisasters : GamemodeBase
 
             MovingSpeed = new FloatOptionItem(id, "ND_Tsunami.MovingSpeed", new(0.25f, 10f, 0.25f), 2f, TabGroup.GameSettings)
                 .SetHeader(true)
-                .SetGameMode(CustomGameMode.NaturalDisasters)
+                .SetGameMode(CustomGamemodes.NaturalDisasters)
                 .SetColor(color)
                 .SetValueFormat(OptionFormat.Multiplier);
         }

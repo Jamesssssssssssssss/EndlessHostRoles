@@ -75,7 +75,7 @@ internal static class CmdCheckMurderPatch
     {
         if (AmongUsClient.Instance.AmHost)
             __instance.CheckMurder(target);
-        else if (Options.CurrentGameMode != CustomGameMode.FFA)
+        else if (Options.CurrentGameMode != CustomGamemodes.FFA)
         {
             MessageWriter messageWriter = AmongUsClient.Instance.StartRpcImmediately(__instance.NetId, (byte)RpcCalls.CheckMurder, SendOption.Reliable);
             messageWriter.WriteNetObject(target);
@@ -213,46 +213,46 @@ internal static class CheckMurderPatch
 
             switch (Options.CurrentGameMode)
             {
-                case CustomGameMode.SoloPVP:
+                case CustomGamemodes.SoloPVP:
                     SoloPVP.OnPlayerAttack(killer, target);
                     return false;
-                case CustomGameMode.FFA:
+                case CustomGamemodes.FFA:
                     FreeForAll.OnPlayerAttack(killer, target);
                     return false;
-                case CustomGameMode.HotPotato:
+                case CustomGamemodes.HotPotato:
                     (byte holderID, byte lastHolderID) = HotPotato.GetState();
                     if (HotPotato.CanPassViaKillButton && holderID == killer.PlayerId && (lastHolderID != target.PlayerId || Main.AllAlivePlayerControls.Length <= 2))
                         HotPotato.FixedUpdatePatch.PassHotPotato(target, false);
                     return false;
-                case CustomGameMode.Mingle:
-                case CustomGameMode.TheMindGame:
-                case CustomGameMode.StopAndGo:
-                case CustomGameMode.RoomRush:
-                case CustomGameMode.NaturalDisasters:
-                case CustomGameMode.Speedrun when !Speedrun.OnCheckMurder(killer, target):
+                case CustomGamemodes.Mingle:
+                case CustomGamemodes.TheMindGame:
+                case CustomGamemodes.StopAndGo:
+                case CustomGamemodes.RoomRush:
+                case CustomGamemodes.NaturalDisasters:
+                case CustomGamemodes.Speedrun when !Speedrun.OnCheckMurder(killer, target):
                     return false;
-                case CustomGameMode.Quiz:
+                case CustomGamemodes.Quiz:
                     if (Quiz.AllowKills) killer.Kill(target);
                     return false;
-                case CustomGameMode.Speedrun:
+                case CustomGamemodes.Speedrun:
                     killer.Kill(target);
                     return false;
-                case CustomGameMode.HideAndSeek:
+                case CustomGamemodes.HideAndSeek:
                     CustomHnS.OnCheckMurder(killer, target);
                     return false;
-                case CustomGameMode.CaptureTheFlag:
+                case CustomGamemodes.CaptureTheFlag:
                     CaptureTheFlag.OnCheckMurder(killer, target);
                     return false;
-                case CustomGameMode.KingOfTheZones:
+                case CustomGamemodes.KingOfTheZones:
                     KingOfTheZones.OnCheckMurder(killer, target);
                     return false;
-                case CustomGameMode.BedWars:
+                case CustomGamemodes.BedWars:
                     BedWars.OnCheckMurder(killer, target);
                     return false;
-                case CustomGameMode.Deathrace:
+                case CustomGamemodes.Deathrace:
                     Deathrace.OnCheckMurder(killer, target);
                     return false;
-                case CustomGameMode.Snowdown:
+                case CustomGamemodes.Snowdown:
                     Snowdown.OnCheckMurder(killer, target);
                     return false;
             }
@@ -722,7 +722,7 @@ internal static class MurderPlayerPatch
             
             Berserker.OnAnyoneMurder(killer);
 
-            if (Options.CurrentGameMode == CustomGameMode.Speedrun)
+            if (Options.CurrentGameMode == CustomGamemodes.Speedrun)
                 Speedrun.ResetTimer(killer);
 
             if (killer.Is(CustomRoles.Stealer) && killer.PlayerId != target.PlayerId)
@@ -966,7 +966,7 @@ internal static class ReportDeadBodyPatch
     {
         if (GameStates.IsMeeting || MeetingStarted) return false;
         if (Options.DisableMeeting.GetBool()) return false;
-        if (Options.CurrentGameMode != CustomGameMode.Standard) return false;
+        if (Options.CurrentGameMode != CustomGamemodes.Standard) return false;
         if (Options.DisableReportWhenCC.GetBool() && Camouflage.IsCamouflage) return false;
 
         if (!CanReport[__instance.PlayerId] || __instance.IsRoleBlocked())
@@ -1175,7 +1175,7 @@ internal static class ReportDeadBodyPatch
 
         try
         {
-            if (Options.CurrentGameMode == CustomGameMode.Standard)
+            if (Options.CurrentGameMode == CustomGamemodes.Standard)
             {
                 foreach (byte id in Main.DiedThisRound)
                 {
@@ -1446,7 +1446,7 @@ internal static class FixedUpdatePatch
                 GhostRolesManager.AssignGhostRole(__instance);
         }
 
-        if (GameStates.InGame && Options.DontUpdateDeadPlayers.GetBool() && !(__instance.IsHost() && __instance.AmOwner) && !__instance.IsAlive() && !__instance.GetCustomRole().NeedsUpdateAfterDeath() && Options.CurrentGameMode is not CustomGameMode.RoomRush and not CustomGameMode.Quiz)
+        if (GameStates.InGame && Options.DontUpdateDeadPlayers.GetBool() && !(__instance.IsHost() && __instance.AmOwner) && !__instance.IsAlive() && !__instance.GetCustomRole().NeedsUpdateAfterDeath() && Options.CurrentGameMode is not CustomGamemodes.RoomRush and not CustomGamemodes.Quiz)
         {
             int buffer = Options.DeepLowLoad.GetBool() ? 150 : 60;
             DeadBufferTime.TryAdd(id, buffer);
@@ -1503,7 +1503,7 @@ internal static class FixedUpdatePatch
             {
                 Camouflage.OnFixedUpdate(player);
 
-                if (self && Options.CurrentGameMode is CustomGameMode.Standard or CustomGameMode.FFA or CustomGameMode.CaptureTheFlag or CustomGameMode.NaturalDisasters or CustomGameMode.Snowdown && IntroCutsceneDestroyPatch.IntroDestroyTS + 20 == TimeStamp)
+                if (self && Options.CurrentGameMode is CustomGamemodes.Standard or CustomGamemodes.FFA or CustomGamemodes.CaptureTheFlag or CustomGamemodes.NaturalDisasters or CustomGamemodes.Snowdown && IntroCutsceneDestroyPatch.IntroDestroyTS + 20 == TimeStamp)
                     NotifyRoles();
             }
         }
@@ -1683,7 +1683,7 @@ internal static class FixedUpdatePatch
 
         if (GameStates.IsEnded || !Main.IntroDestroyed || GameStates.IsMeeting || ExileController.Instance || AntiBlackout.SkipTasks) return;
 
-        bool shouldUpdateRegardlessOfLowLoad = self && GameStates.InGame && PlayerControl.LocalPlayer.IsAlive() && ((PlayerControl.AllPlayerControls.Count > 30 && LastSelfNameUpdateTS != now && Options.CurrentGameMode is CustomGameMode.StopAndGo or CustomGameMode.HotPotato or CustomGameMode.Speedrun or CustomGameMode.RoomRush or CustomGameMode.KingOfTheZones or CustomGameMode.Quiz or CustomGameMode.Mingle) || DirtyName.Remove(lpId));
+        bool shouldUpdateRegardlessOfLowLoad = self && GameStates.InGame && PlayerControl.LocalPlayer.IsAlive() && ((PlayerControl.AllPlayerControls.Count > 30 && LastSelfNameUpdateTS != now && Options.CurrentGameMode is CustomGamemodes.StopAndGo or CustomGamemodes.HotPotato or CustomGamemodes.Speedrun or CustomGamemodes.RoomRush or CustomGamemodes.KingOfTheZones or CustomGamemodes.Quiz or CustomGamemodes.Mingle) || DirtyName.Remove(lpId));
 
         if (player == null || (lowLoad && !shouldUpdateRegardlessOfLowLoad)) return;
 
@@ -1706,7 +1706,7 @@ internal static class FixedUpdatePatch
 
         if (GameStates.IsInGame)
         {
-            if (!AmongUsClient.Instance.AmHost && Options.CurrentGameMode != CustomGameMode.Standard) return;
+            if (!AmongUsClient.Instance.AmHost && Options.CurrentGameMode != CustomGamemodes.Standard) return;
 
             bool shouldSeeTargetAddons = self || new[] { PlayerControl.LocalPlayer, player }.All(x => x.Is(Team.Impostor));
 
@@ -1714,7 +1714,7 @@ internal static class FixedUpdatePatch
             string roleText;
             bool hideRoleText = false;
 
-            if (Options.CurrentGameMode is not CustomGameMode.Standard and not CustomGameMode.HideAndSeek || !IsRoleTextEnabled(player))
+            if (Options.CurrentGameMode is not CustomGamemodes.Standard and not CustomGamemodes.HideAndSeek || !IsRoleTextEnabled(player))
             {
                 roleText = string.Empty;
                 hideRoleText = true;
@@ -1736,7 +1736,7 @@ internal static class FixedUpdatePatch
             if (progressText.RemoveHtmlTags().Length > 25 && Main.VisibleTasksCount)
                 progressText = $"\n{progressText}";
 
-            bool stopandgo = Options.CurrentGameMode == CustomGameMode.StopAndGo;
+            bool stopandgo = Options.CurrentGameMode == CustomGamemodes.StopAndGo;
 
             if (!hideRoleText && Main.VisibleTasksCount)
             {
@@ -1783,18 +1783,18 @@ internal static class FixedUpdatePatch
 
                 switch (Options.CurrentGameMode)
                 {
-                    case CustomGameMode.SoloPVP:
+                    case CustomGamemodes.SoloPVP:
                         SoloPVP.GetNameNotify(target, ref realName);
                         break;
-                    case CustomGameMode.BedWars when self:
-                    case CustomGameMode.Quiz when self:
+                    case CustomGamemodes.BedWars when self:
+                    case CustomGamemodes.Quiz when self:
                         realName = string.Empty;
                         break;
                 }
 
                 if (Deathpact.IsInActiveDeathpact(seer)) realName = Deathpact.GetDeathpactString(seer);
 
-                if (Options.CurrentGameMode != CustomGameMode.BedWars && NameNotifyManager.GetNameNotify(target, out string name) && name.Length > 0)
+                if (Options.CurrentGameMode != CustomGamemodes.BedWars && NameNotifyManager.GetNameNotify(target, out string name) && name.Length > 0)
                     realName = name;
             }
 
@@ -1809,7 +1809,7 @@ internal static class FixedUpdatePatch
 
             additionalSuffixes.Add(AFKDetector.GetSuffix(seer, target));
             
-            if (!GameStates.IsMeeting && Options.CurrentGameMode == CustomGameMode.Standard && Main.Invisible.Contains(target.PlayerId) && ((self && target.GetCustomRole() is not (CustomRoles.Swooper or CustomRoles.Wraith or CustomRoles.Chameleon)) || (seer.IsImpostor() && target.IsImpostor())))
+            if (!GameStates.IsMeeting && Options.CurrentGameMode == CustomGamemodes.Standard && Main.Invisible.Contains(target.PlayerId) && ((self && target.GetCustomRole() is not (CustomRoles.Swooper or CustomRoles.Wraith or CustomRoles.Chameleon)) || (seer.IsImpostor() && target.IsImpostor())))
                 additionalSuffixes.Add(ColorString(Palette.White_75Alpha, "\n" + GetString("Invisible")));
 
             switch (target.GetCustomRole())
@@ -1930,51 +1930,51 @@ internal static class FixedUpdatePatch
 
             switch (Options.CurrentGameMode)
             {
-                case CustomGameMode.SoloPVP:
+                case CustomGamemodes.SoloPVP:
                     additionalSuffixes.Add(SoloPVP.GetDisplayHealth(target, self));
                     break;
-                case CustomGameMode.FFA:
+                case CustomGamemodes.FFA:
                     additionalSuffixes.Add(FreeForAll.GetPlayerArrow(seer, target));
                     break;
-                case CustomGameMode.StopAndGo when self:
+                case CustomGamemodes.StopAndGo when self:
                     additionalSuffixes.Add(StopAndGo.GetSuffixText(seer));
                     break;
-                case CustomGameMode.Speedrun when self:
+                case CustomGamemodes.Speedrun when self:
                     additionalSuffixes.Add(Speedrun.GetSuffixText(seer));
                     break;
-                case CustomGameMode.HideAndSeek:
+                case CustomGamemodes.HideAndSeek:
                     additionalSuffixes.Add(CustomHnS.GetSuffixText(seer, target));
                     break;
-                case CustomGameMode.CaptureTheFlag:
+                case CustomGamemodes.CaptureTheFlag:
                     additionalSuffixes.Add(CaptureTheFlag.GetSuffixText(seer, target));
                     break;
-                case CustomGameMode.RoomRush when self:
+                case CustomGamemodes.RoomRush when self:
                     additionalSuffixes.Add(RoomRush.GetSuffix(seer));
                     break;
-                case CustomGameMode.KingOfTheZones when self:
+                case CustomGamemodes.KingOfTheZones when self:
                     additionalSuffixes.Add(KingOfTheZones.GetSuffix(seer));
                     break;
-                case CustomGameMode.Quiz when self:
+                case CustomGamemodes.Quiz when self:
                     additionalSuffixes.Add(Quiz.GetSuffix(seer));
                     break;
-                case CustomGameMode.TheMindGame:
+                case CustomGamemodes.TheMindGame:
                     additionalSuffixes.Add(TheMindGame.GetSuffix(seer, target));
                     break;
-                case CustomGameMode.BedWars:
+                case CustomGamemodes.BedWars:
                     additionalSuffixes.Add(BedWars.GetSuffix(seer, target));
                     break;
-                case CustomGameMode.Deathrace:
+                case CustomGamemodes.Deathrace:
                     additionalSuffixes.Add(Deathrace.GetSuffix(seer, target, false));
                     break;
-                case CustomGameMode.Mingle when self:
+                case CustomGamemodes.Mingle when self:
                     additionalSuffixes.Add(Mingle.GetSuffix(seer));
                     break;
-                case CustomGameMode.Snowdown:
+                case CustomGamemodes.Snowdown:
                     additionalSuffixes.Add(Snowdown.GetSuffix(seer, target));
                     break;
             }
 
-            if (MeetingStates.FirstMeeting && Main.ShieldPlayer == target.FriendCode && !string.IsNullOrWhiteSpace(target.FriendCode) && !self && Options.CurrentGameMode is CustomGameMode.Standard or CustomGameMode.SoloPVP or CustomGameMode.FFA)
+            if (MeetingStates.FirstMeeting && Main.ShieldPlayer == target.FriendCode && !string.IsNullOrWhiteSpace(target.FriendCode) && !self && Options.CurrentGameMode is CustomGamemodes.Standard or CustomGamemodes.SoloPVP or CustomGamemodes.FFA)
                 additionalSuffixes.Add(GetString("DiedR1Warning"));
 
             List<string> addSuff = additionalSuffixes.FindAll(x => !string.IsNullOrWhiteSpace(x));
@@ -1994,7 +1994,7 @@ internal static class FixedUpdatePatch
             if (Devourer.HideNameOfConsumedPlayer.GetBool() && Devourer.PlayerIdList.Any(x => Main.PlayerStates[x].Role is Devourer { IsEnable: true } dv && dv.PlayerSkinsCosumed.Contains(target.PlayerId)))
                 realName = GetString("DevouredName");
 
-            if (!self && Options.CurrentGameMode == CustomGameMode.KingOfTheZones && Main.IntroDestroyed && !KingOfTheZones.GameGoing)
+            if (!self && Options.CurrentGameMode == CustomGamemodes.KingOfTheZones && Main.IntroDestroyed && !KingOfTheZones.GameGoing)
                 realName = EmptyMessage;
 
             if (!hideRoleText)
@@ -2008,7 +2008,7 @@ internal static class FixedUpdatePatch
                 roleText = string.Empty;
             
             string suffix = Suffix.ToString().Trim();
-            string newLineBeforeSuffix = !(Options.CurrentGameMode == CustomGameMode.BedWars && !self && GameStates.InGame) ? "\n" : " - ";
+            string newLineBeforeSuffix = !(Options.CurrentGameMode == CustomGamemodes.BedWars && !self && GameStates.InGame) ? "\n" : " - ";
             string deathReason = !seer.IsAlive() && seer.KnowDeathReason(target) ? $"{newLineBeforeSuffix}<size=1.5>『{ColorString(GetRoleColor(CustomRoles.Doctor), GetVitalText(target.PlayerId))}』</size>" : string.Empty;
             
             target.cosmetics.nameText.text = $"{roleText}{realName}{deathReason}{Mark}{newLineBeforeSuffix}{suffix}";
@@ -2034,7 +2034,7 @@ internal static class FixedUpdatePatch
 
     public static void LoversSuicide(byte deathId = 0x7f, bool exile = false, bool force = false, bool guess = false)
     {
-        if (Main.LoversPlayers.Count == 0 || Options.CurrentGameMode != CustomGameMode.Standard) return;
+        if (Main.LoversPlayers.Count == 0 || Options.CurrentGameMode != CustomGamemodes.Standard) return;
         if (Lovers.LoverDieConsequence.GetValue() == 0 || Main.IsLoversDead || (Main.LoversPlayers.FindAll(x => x.IsAlive()).Count != 1 && !force)) return;
 
         PlayerControl partnerPlayer = Main.LoversPlayers.FirstOrDefault(player => player.PlayerId != deathId && player.IsAlive());
@@ -2093,7 +2093,7 @@ internal static class EnterVentPatch
 
         if (pc.AmOwner) LateTask.New(() => HudManager.Instance.SetHudActive(pc, pc.Data.Role, true), 0.1f, log: false);
 
-        if (AmongUsClient.Instance.AmHost && !pc.CanUseVent(__instance.Id) && Options.CurrentGameMode is CustomGameMode.Standard or CustomGameMode.HideAndSeek && !pc.Is(CustomRoles.Nimble) && !pc.Is(CustomRoles.Bloodlust))
+        if (AmongUsClient.Instance.AmHost && !pc.CanUseVent(__instance.Id) && Options.CurrentGameMode is CustomGamemodes.Standard or CustomGamemodes.HideAndSeek && !pc.Is(CustomRoles.Nimble) && !pc.Is(CustomRoles.Bloodlust))
         {
             pc.MyPhysics?.RpcBootFromVent(__instance.Id);
             return;
@@ -2123,22 +2123,22 @@ internal static class EnterVentPatch
 
         switch (Options.CurrentGameMode)
         {
-            case CustomGameMode.FFA when FreeForAll.FFADisableVentingWhenTwoPlayersAlive.GetBool() && Main.AllAlivePlayerControls.Length <= 2:
+            case CustomGamemodes.FFA when FreeForAll.FFADisableVentingWhenTwoPlayersAlive.GetBool() && Main.AllAlivePlayerControls.Length <= 2:
                 pc.Notify(GetString("FFA-NoVentingBecauseTwoPlayers"), 7f);
                 pc.MyPhysics?.RpcBootFromVent(__instance.Id);
                 break;
-            case CustomGameMode.FFA when FreeForAll.FFADisableVentingWhenKcdIsUp.GetBool() && Main.KillTimers[pc.PlayerId] <= 0:
+            case CustomGamemodes.FFA when FreeForAll.FFADisableVentingWhenKcdIsUp.GetBool() && Main.KillTimers[pc.PlayerId] <= 0:
                 pc.Notify(GetString("FFA-NoVentingBecauseKCDIsUP"), 7f);
                 pc.MyPhysics?.RpcExitVent(__instance.Id);
                 break;
-            case CustomGameMode.HotPotato:
-            case CustomGameMode.Speedrun:
-            case CustomGameMode.CaptureTheFlag:
-            case CustomGameMode.NaturalDisasters:
-            case CustomGameMode.KingOfTheZones:
-            case CustomGameMode.TheMindGame:
-            case CustomGameMode.Quiz:
-            case CustomGameMode.SoloPVP when !SoloPVP.CanVent:
+            case CustomGamemodes.HotPotato:
+            case CustomGamemodes.Speedrun:
+            case CustomGamemodes.CaptureTheFlag:
+            case CustomGamemodes.NaturalDisasters:
+            case CustomGamemodes.KingOfTheZones:
+            case CustomGamemodes.TheMindGame:
+            case CustomGamemodes.Quiz:
+            case CustomGamemodes.SoloPVP when !SoloPVP.CanVent:
                 pc.MyPhysics?.RpcBootFromVent(__instance.Id);
                 break;
         }
@@ -2189,7 +2189,7 @@ internal static class EnterVentPatch
         if (pc.Is(CustomRoles.Circumvent))
             Circumvent.OnEnterVent(pc, __instance);
 
-        if (!pc.CanUseVent(__instance.Id) && Options.CurrentGameMode is CustomGameMode.Standard or CustomGameMode.HideAndSeek && !pc.Is(CustomRoles.Nimble) && !pc.Is(CustomRoles.Bloodlust))
+        if (!pc.CanUseVent(__instance.Id) && Options.CurrentGameMode is CustomGamemodes.Standard or CustomGamemodes.HideAndSeek && !pc.Is(CustomRoles.Nimble) && !pc.Is(CustomRoles.Bloodlust))
             pc.MyPhysics?.RpcExitVent(__instance.Id);
 
         if (pc.Is(CustomRoles.Unlucky))
@@ -2216,7 +2216,7 @@ internal static class GameDataCompleteTaskPatch
     {
         if (MeetingHud.Instance && MeetingHud.Instance.state != MeetingHud.VoteStates.Animating) return;
 
-        if (Options.CurrentGameMode == CustomGameMode.HideAndSeek && CustomHnS.PlayerRoles[pc.PlayerId].Interface.Team == Team.Crewmate && pc.IsAlive())
+        if (Options.CurrentGameMode == CustomGamemodes.HideAndSeek && CustomHnS.PlayerRoles[pc.PlayerId].Interface.Team == Team.Crewmate && pc.IsAlive())
         {
             var task = pc.myTasks.Find((Il2CppSystem.Predicate<PlayerTask>)(x => taskId == x.Id));
             Hider.OnSpecificTaskComplete(pc, task);
@@ -2316,7 +2316,7 @@ public static class PlayerControlCheckUseZiplinePatch
 
         Logger.Info($"{__instance.GetNameWithRole()}, target: {target.GetNameWithRole()}, {(fromTop ? $"from Top, travel time: {ziplineBehaviour.downTravelTime}s" : $"from Bottom, travel time: {ziplineBehaviour.upTravelTime}s")}", "Zipline Use");
 
-        if (Options.CurrentGameMode == CustomGameMode.Deathrace) return true;
+        if (Options.CurrentGameMode == CustomGamemodes.Deathrace) return true;
         
         if (AmongUsClient.Instance.AmHost)
         {

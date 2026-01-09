@@ -8,6 +8,8 @@ internal class Doctor : StandardRoleBase
     public static bool On;
     public override bool IsEnable => On;
 
+    public override CustomGamemodes GamemodeId => CustomGamemodes.Standard;
+    public override CustomRoles RoleId => CustomRoles.Doctor;
     public override Team Faction => Team.Crewmate;
     public override RoleOptionType? Alignment => RoleOptionType.Crewmate_Investigate;
 

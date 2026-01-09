@@ -28,6 +28,8 @@ public class Spiritcaller : StandardRoleBase
 
     public override bool IsEnable => PlayerIdList.Count > 0;
 
+    public override CustomGamemodes GamemodeId => CustomGamemodes.Standard;
+    public override CustomRoles RoleId => CustomRoles.Spiritcaller;
     public override Team Faction => Team.Neutral;
     public override RoleOptionType? Alignment => RoleOptionType.Neutral_Killing;
 

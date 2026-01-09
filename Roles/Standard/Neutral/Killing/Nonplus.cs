@@ -14,6 +14,8 @@ public class Nonplus : StandardRoleBase
     public static OptionItem ImpostorVision;
     public override bool IsEnable => On;
 
+    public override CustomGamemodes GamemodeId => CustomGamemodes.Standard;
+    public override CustomRoles RoleId => CustomRoles.Nonplus;
     public override Team Faction => Team.Neutral;
     public override RoleOptionType? Alignment => RoleOptionType.Neutral_Killing;
 

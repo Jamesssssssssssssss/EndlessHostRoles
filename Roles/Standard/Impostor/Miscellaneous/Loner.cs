@@ -15,6 +15,8 @@ public class Loner : StandardRoleBase
     public CustomRoles PickedRole;
     public bool Done;
 
+    public override CustomGamemodes GamemodeId => CustomGamemodes.Standard;
+    public override CustomRoles RoleId => CustomRoles.Loner;
     public override Team Faction => Team.Impostor;
     public override RoleOptionType? Alignment => RoleOptionType.Impostor_Miscellaneous;
 

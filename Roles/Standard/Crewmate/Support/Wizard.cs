@@ -59,6 +59,8 @@ public class Wizard : StandardRoleBase
 
     public override bool IsEnable => On;
 
+    public override CustomGamemodes GamemodeId => CustomGamemodes.Standard;
+    public override CustomRoles RoleId => CustomRoles.Wizard;
     public override Team Faction => Team.Crewmate;
     public override RoleOptionType? Alignment => RoleOptionType.Crewmate_Support;
 

@@ -21,6 +21,8 @@ public class Maverick : StandardRoleBase
 
     public override bool IsEnable => MaverickId != byte.MaxValue;
 
+    public override CustomGamemodes GamemodeId => CustomGamemodes.Standard;
+    public override CustomRoles RoleId => CustomRoles.Maverick;
     public override Team Faction => Team.Neutral;
     public override RoleOptionType? Alignment => RoleOptionType.Neutral_Benign;
 

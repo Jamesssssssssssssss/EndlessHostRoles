@@ -14,6 +14,8 @@ internal class Terrorist : StandardRoleBase
     public static OptionItem VentCooldown;
     public static OptionItem MaxInVentTime;
 
+    public override CustomGamemodes GamemodeId => CustomGamemodes.Standard;
+    public override CustomRoles RoleId => CustomRoles.Terrorist;
     public override Team Faction => Team.Neutral;
     public override RoleOptionType? Alignment => RoleOptionType.Neutral_Evil;
 

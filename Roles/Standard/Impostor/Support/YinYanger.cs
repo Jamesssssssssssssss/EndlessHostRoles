@@ -20,6 +20,8 @@ public class YinYanger : StandardRoleBase
 
     public override bool IsEnable => YinYangerId != byte.MaxValue;
 
+    public override CustomGamemodes GamemodeId => CustomGamemodes.Standard;
+    public override CustomRoles RoleId => CustomRoles.YinYanger;
     public override Team Faction => Team.Impostor;
     public override RoleOptionType? Alignment => RoleOptionType.Impostor_Support;
 

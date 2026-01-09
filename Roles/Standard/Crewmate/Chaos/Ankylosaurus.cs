@@ -17,6 +17,8 @@ public class Ankylosaurus : StandardRoleBase
 
     public override bool IsEnable => On;
 
+    public override CustomGamemodes GamemodeId => CustomGamemodes.Standard;
+    public override CustomRoles RoleId => CustomRoles.Ankylosaurus;
     public override Team Faction => Team.Crewmate;
     public override RoleOptionType? Alignment => RoleOptionType.Crewmate_Chaos;
 

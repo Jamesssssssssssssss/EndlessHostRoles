@@ -36,37 +36,37 @@ internal class HotPotato : GamemodeBase
     {
         Time = new IntegerOptionItem(69_213_001, "HotPotato_Time", new(1, 90, 1), 20, TabGroup.GameSettings)
             .SetHeader(true)
-            .SetGameMode(CustomGameMode.HotPotato)
+            .SetGameMode(CustomGamemodes.HotPotato)
             .SetValueFormat(OptionFormat.Seconds)
             .SetColor(new Color32(232, 205, 70, byte.MaxValue));
 
         HolderSpeed = new FloatOptionItem(69_213_002, "HotPotato_HolderSpeed", new(0.1f, 5f, 0.1f), 2f, TabGroup.GameSettings)
-            .SetGameMode(CustomGameMode.HotPotato)
+            .SetGameMode(CustomGamemodes.HotPotato)
             .SetValueFormat(OptionFormat.Multiplier)
             .SetColor(new Color32(232, 205, 70, byte.MaxValue));
 
         Range = new FloatOptionItem(69_213_004, "HotPotato_Range", new(0.25f, 5f, 0.25f), 1f, TabGroup.GameSettings)
-            .SetGameMode(CustomGameMode.HotPotato)
+            .SetGameMode(CustomGamemodes.HotPotato)
             .SetValueFormat(OptionFormat.Multiplier)
             .SetColor(new Color32(232, 205, 70, byte.MaxValue));
 
         HolderCanPassViaKillButton = new BooleanOptionItem(69_213_003, "HotPotato_HolderCanPassViaKillButton", true, TabGroup.GameSettings)
-            .SetGameMode(CustomGameMode.HotPotato)
+            .SetGameMode(CustomGamemodes.HotPotato)
             .SetColor(new Color32(232, 205, 70, byte.MaxValue))
             .SetHeader(true);
 
         ExtraTimeOnAirship = new IntegerOptionItem(69_213_005, "HotPotato_ExtraTimeOnAirship", new(0, 60, 1), 15, TabGroup.GameSettings)
-            .SetGameMode(CustomGameMode.HotPotato)
+            .SetGameMode(CustomGamemodes.HotPotato)
             .SetValueFormat(OptionFormat.Seconds)
             .SetColor(new Color32(232, 205, 70, byte.MaxValue));
 
         ExtraTimeOnFungle = new IntegerOptionItem(69_213_006, "HotPotato_ExtraTimeOnFungle", new(0, 60, 1), 10, TabGroup.GameSettings)
-            .SetGameMode(CustomGameMode.HotPotato)
+            .SetGameMode(CustomGamemodes.HotPotato)
             .SetValueFormat(OptionFormat.Seconds)
             .SetColor(new Color32(232, 205, 70, byte.MaxValue));
 
         HolderHasArrowToNearestPlayerIfPlayersLessThan = new IntegerOptionItem(69_213_007, "HotPotato_HolderHasArrowToNearestPlayerIfPlayersLessThan", new(2, 15, 1), 5, TabGroup.GameSettings)
-            .SetGameMode(CustomGameMode.HotPotato)
+            .SetGameMode(CustomGamemodes.HotPotato)
             .SetValueFormat(OptionFormat.Players)
             .SetColor(new Color32(232, 205, 70, byte.MaxValue));
     }
@@ -138,7 +138,7 @@ internal class HotPotato : GamemodeBase
 
         public static void Postfix(PlayerControl __instance)
         {
-            if (Options.CurrentGameMode != CustomGameMode.HotPotato || !Main.IntroDestroyed || !AmongUsClient.Instance.AmHost || !GameStates.IsInTask || ExileController.Instance || __instance.PlayerId >= 254 || IntroCutsceneDestroyPatch.IntroDestroyTS + 5 > Utils.TimeStamp) return;
+            if (Options.CurrentGameMode != CustomGamemodes.HotPotato || !Main.IntroDestroyed || !AmongUsClient.Instance.AmHost || !GameStates.IsInTask || ExileController.Instance || __instance.PlayerId >= 254 || IntroCutsceneDestroyPatch.IntroDestroyTS + 5 > Utils.TimeStamp) return;
 
             PlayerControl holder = Utils.GetPlayerById(HotPotatoState.HolderID);
 

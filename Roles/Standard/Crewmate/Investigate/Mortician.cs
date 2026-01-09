@@ -20,6 +20,8 @@ public class Mortician : StandardRoleBase
 
     public override bool SeesArrowsToDeadBodies => ShowArrows.GetBool();
 
+    public override CustomGamemodes GamemodeId => CustomGamemodes.Standard;
+    public override CustomRoles RoleId => CustomRoles.Mortician;
     public override Team Faction => Team.Crewmate;
     public override RoleOptionType? Alignment => RoleOptionType.Crewmate_Investigate;
 

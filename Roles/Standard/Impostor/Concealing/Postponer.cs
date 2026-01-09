@@ -12,6 +12,8 @@ public class Postponer : StandardRoleBase
     private static OptionItem KillCooldown;
     private static OptionItem BodyDelay;
 
+    public override CustomGamemodes GamemodeId => CustomGamemodes.Standard;
+    public override CustomRoles RoleId => CustomRoles.Postponer;
     public override Team Faction => Team.Impostor;
     public override RoleOptionType? Alignment => RoleOptionType.Impostor_Concealing;
 

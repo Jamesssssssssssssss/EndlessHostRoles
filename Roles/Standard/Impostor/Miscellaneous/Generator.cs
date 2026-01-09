@@ -46,10 +46,12 @@ internal static class GeneratorStatic
         private long LastUpdate;
         public override bool IsEnable => On;
 
+        public override CustomGamemodes GamemodeId => CustomGamemodes.Standard;
+        public override CustomRoles RoleId => CustomRoles.Generator;
         public override Team Faction => Team.Impostor;
-    public override RoleOptionType? Alignment => RoleOptionType.Impostor_Miscellaneous;
+        public override RoleOptionType? Alignment => RoleOptionType.Impostor_Miscellaneous;
 
-    public override void SetupCustomOption()
+        public override void SetupCustomOption()
         {
             const int id = 651000;
             Options.SetupRoleOptions(id, TabGroup.ImpostorRoles, CustomRoles.Generator);

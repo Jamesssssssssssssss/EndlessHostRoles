@@ -14,6 +14,8 @@ internal class Transporter : StandardRoleBase
 
     private static OptionItem AbilityCooldown;
 
+    public override CustomGamemodes GamemodeId => CustomGamemodes.Standard;
+    public override CustomRoles RoleId => CustomRoles.Transporter;
     public override Team Faction => Team.Crewmate;
     public override RoleOptionType? Alignment => RoleOptionType.Crewmate_Support;
 

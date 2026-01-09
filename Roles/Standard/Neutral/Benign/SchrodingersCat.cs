@@ -11,6 +11,8 @@ internal class SchrodingersCat : StandardRoleBase
     public static OptionItem StealsExactImpostorRole;
     public override bool IsEnable => On;
 
+    public override CustomGamemodes GamemodeId => CustomGamemodes.Standard;
+    public override CustomRoles RoleId => CustomRoles.SchrodingersCat;
     public override Team Faction => Team.Neutral;
     public override RoleOptionType? Alignment => RoleOptionType.Neutral_Benign;
 

@@ -28,6 +28,8 @@ internal class Tornado : StandardRoleBase
 
     public override bool IsEnable => PlayerIdList.Count > 0 || Randomizer.Exists;
 
+    public override CustomGamemodes GamemodeId => CustomGamemodes.Standard;
+    public override CustomRoles RoleId => CustomRoles.Tornado;
     public override Team Faction => Team.Crewmate;
     public override RoleOptionType? Alignment => RoleOptionType.Crewmate_Chaos;
 

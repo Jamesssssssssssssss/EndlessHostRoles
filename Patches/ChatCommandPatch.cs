@@ -106,7 +106,7 @@ internal static class ChatCommands
     private static readonly Dictionary<char, string> PollAnswers = [];
     private static readonly List<byte> PollVoted = [];
     private static float PollTimer = 45f;
-    private static List<CustomGameMode> GMPollGameModes = [];
+    private static List<CustomGamemodes> GMPollGameModes = [];
     private static List<MapNames> MPollMaps = [];
 
     public static readonly Dictionary<byte, (long MuteTimeStamp, int Duration)> MutedPlayers = [];
@@ -357,16 +357,16 @@ internal static class ChatCommands
 
         switch (Options.CurrentGameMode)
         {
-            case CustomGameMode.TheMindGame when AmongUsClient.Instance.AmHost:
+            case CustomGamemodes.TheMindGame when AmongUsClient.Instance.AmHost:
                 TheMindGame.OnChat(PlayerControl.LocalPlayer, text.ToLower());
                 break;
-            case CustomGameMode.TheMindGame:
+            case CustomGamemodes.TheMindGame:
                 MessageWriter w = AmongUsClient.Instance.StartRpcImmediately(PlayerControl.LocalPlayer.NetId, (byte)CustomRPC.TMGSync, SendOption.Reliable, AmongUsClient.Instance.HostId);
                 w.WriteNetObject(PlayerControl.LocalPlayer);
                 w.Write(text);
                 AmongUsClient.Instance.FinishRpcImmediately(w);
                 break;
-            case CustomGameMode.BedWars when AmongUsClient.Instance.AmHost:
+            case CustomGamemodes.BedWars when AmongUsClient.Instance.AmHost:
                 BedWars.OnChat(PlayerControl.LocalPlayer, text);
                 break;
         }
@@ -974,7 +974,7 @@ internal static class ChatCommands
             return;
         }
 
-        GMPollGameModes = Enum.GetValues<CustomGameMode>()[..^1].Where(x => Options.GMPollGameModesSettings[x].GetBool()).ToList();
+        GMPollGameModes = Enum.GetValues<CustomGamemodes>()[..^1].Where(x => Options.GMPollGameModesSettings[x].GetBool()).ToList();
         string gmNames = string.Join(' ', GMPollGameModes.Select(x => GetString(x.ToString()).Replace(' ', '_')));
         var msg = $"/poll {GetString("GameModePoll.Question").TrimEnd('?')}? {gmNames}";
         PollCommand(player, "Command.Poll", msg, msg.Split(' '));
@@ -1002,8 +1002,8 @@ internal static class ChatCommands
             return;
         }
 
-        string info = string.Join("\n\n", Enum.GetValues<CustomGameMode>()[1..^1]
-            .Select(x => (GameMode: x, Color: Main.RoleColors.GetValueOrDefault(CustomRoleSelector.GameModeRoles.TryGetValue(x, out CustomRoles role) ? role : x == CustomGameMode.HideAndSeek ? CustomRoles.Hider : CustomRoles.Witness, "#000000")))
+        string info = string.Join("\n\n", Enum.GetValues<CustomGamemodes>()[1..^1]
+            .Select(x => (GameMode: x, Color: Main.RoleColors.GetValueOrDefault(CustomRoleSelector.GameModeRoles.TryGetValue(x, out CustomRoles role) ? role : x == CustomGamemodes.HideAndSeek ? CustomRoles.Hider : CustomRoles.Witness, "#000000")))
             .Select(x => $"<{x.Color}><u><b>{GetString($"{x.GameMode}")}</b></u></color><size=75%>\n{GetString($"ModeDescribe.{x.GameMode}").Split("\n\n")[0]}</size>"));
 
         Utils.SendMessage(info, player.PlayerId, GetString("GameModeListTitle"));
@@ -1390,7 +1390,7 @@ internal static class ChatCommands
 
     public static void DraftStartCommand(PlayerControl player, string commandKey, string text, string[] args)
     {
-        if (Options.CurrentGameMode != CustomGameMode.Standard) return;
+        if (Options.CurrentGameMode != CustomGamemodes.Standard) return;
 
         if (!AmongUsClient.Instance.AmHost)
         {
@@ -3477,11 +3477,11 @@ internal static class ChatCommands
 
     private static void SendRolesInfo(string role, byte playerId, bool isDev = false, bool isUp = false)
     {
-        if (Options.CurrentGameMode != CustomGameMode.Standard)
+        if (Options.CurrentGameMode != CustomGamemodes.Standard)
         {
             string text = GetString($"ModeDescribe.{Options.CurrentGameMode}");
             Utils.SendMessage(text, playerId, sendOption: SendOption.None);
-            if (Options.CurrentGameMode != CustomGameMode.HideAndSeek) return;
+            if (Options.CurrentGameMode != CustomGamemodes.HideAndSeek) return;
         }
 
         role = role.Trim().ToLower();
@@ -3547,7 +3547,7 @@ internal static class ChatCommands
             }
         }
 
-        foreach (CustomGameMode gameMode in Enum.GetValues<CustomGameMode>())
+        foreach (CustomGamemodes gameMode in Enum.GetValues<CustomGamemodes>())
         {
             string gmString = GetString(gameMode.ToString());
             string match = gmString.ToLower().Trim().TrimStart('*').Replace(" ", string.Empty);
@@ -3590,10 +3590,10 @@ internal static class ChatCommands
 
         switch (Options.CurrentGameMode)
         {
-            case CustomGameMode.TheMindGame when !player.IsModdedClient():
+            case CustomGamemodes.TheMindGame when !player.IsModdedClient():
                 TheMindGame.OnChat(player, text.ToLower());
                 break;
-            case CustomGameMode.BedWars:
+            case CustomGamemodes.BedWars:
                 BedWars.OnChat(player, text);
                 break;
         }

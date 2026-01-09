@@ -31,6 +31,8 @@ public class WeaponMaster : StandardRoleBase
      * 3 = 1-Time Shield / Can't Kill (Shield)
      */
 
+    public override CustomGamemodes GamemodeId => CustomGamemodes.Standard;
+    public override CustomRoles RoleId => CustomRoles.WeaponMaster;
     public override Team Faction => Team.Neutral;
     public override RoleOptionType? Alignment => RoleOptionType.Neutral_Killing;
 

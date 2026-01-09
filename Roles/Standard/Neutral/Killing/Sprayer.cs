@@ -31,6 +31,8 @@ internal class Sprayer : StandardRoleBase
 
     public override bool IsEnable => SprayerId != byte.MaxValue;
 
+    public override CustomGamemodes GamemodeId => CustomGamemodes.Standard;
+    public override CustomRoles RoleId => CustomRoles.Sprayer;
     public override Team Faction => Team.Neutral;
     public override RoleOptionType? Alignment => RoleOptionType.Neutral_Killing;
 

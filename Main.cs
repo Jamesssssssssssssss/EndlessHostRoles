@@ -129,20 +129,20 @@ public class Main : BasePlugin
     public static readonly HashSet<byte> Invisible = [];
     public static readonly Dictionary<string, Options.UserData> UserData = [];
 
-    public static readonly Dictionary<CustomGameMode, HashSet<string>> HasPlayedGM = new()
+    public static readonly Dictionary<CustomGamemodes, HashSet<string>> HasPlayedGM = new()
     {
-        [CustomGameMode.SoloPVP] = [],
-        [CustomGameMode.FFA] = [],
-        [CustomGameMode.HotPotato] = [],
-        [CustomGameMode.HideAndSeek] = [],
-        [CustomGameMode.Speedrun] = [],
-        [CustomGameMode.CaptureTheFlag] = [],
-        [CustomGameMode.NaturalDisasters] = [],
-        [CustomGameMode.Snowdown] = []
+        [CustomGamemodes.SoloPVP] = [],
+        [CustomGamemodes.FFA] = [],
+        [CustomGamemodes.HotPotato] = [],
+        [CustomGamemodes.HideAndSeek] = [],
+        [CustomGamemodes.Speedrun] = [],
+        [CustomGamemodes.CaptureTheFlag] = [],
+        [CustomGamemodes.NaturalDisasters] = [],
+        [CustomGamemodes.Snowdown] = []
     };
 
-    public static Dictionary<CustomGameMode, Color> GameModeColors = [];
-    public static readonly Dictionary<CustomGameMode, Dictionary<string, int>> NumWinsPerGM = [];
+    public static Dictionary<CustomGamemodes, Color> GameModeColors = [];
+    public static readonly Dictionary<CustomGamemodes, Dictionary<string, int>> NumWinsPerGM = [];
     public static HashSet<byte> DiedThisRound = [];
     public static List<PlayerControl> LoversPlayers = [];
     public static bool IsLoversDead = true;
@@ -850,23 +850,23 @@ public class Main : BasePlugin
 
         GameModeColors = new()
         {
-            [CustomGameMode.Standard] = Color.white,
-            [CustomGameMode.SoloPVP] = ColorUtility.TryParseHtmlString("#f55252", out Color c) ? c : Color.white,
-            [CustomGameMode.FFA] = Color.cyan,
-            [CustomGameMode.StopAndGo] = ColorUtility.TryParseHtmlString("#00ffa5", out c) ? c : Color.white,
-            [CustomGameMode.HotPotato] = ColorUtility.TryParseHtmlString("#e8cd46", out c) ? c : Color.white,
-            [CustomGameMode.HideAndSeek] = ColorUtility.TryParseHtmlString("#345eeb", out c) ? c : Color.white,
-            [CustomGameMode.Speedrun] = Utils.GetRoleColor(CustomRoles.Speedrunner),
-            [CustomGameMode.CaptureTheFlag] = ColorUtility.TryParseHtmlString("#1313c2", out c) ? c : Color.white,
-            [CustomGameMode.NaturalDisasters] = ColorUtility.TryParseHtmlString("#03fc4a", out c) ? c : Color.white,
-            [CustomGameMode.RoomRush] = Team.Neutral.GetColor(),
-            [CustomGameMode.KingOfTheZones] = Color.red,
-            [CustomGameMode.Quiz] = Utils.GetRoleColor(CustomRoles.QuizMaster),
-            [CustomGameMode.TheMindGame] = Color.yellow,
-            [CustomGameMode.BedWars] = Utils.GetRoleColor(CustomRoles.BedWarsPlayer),
-            [CustomGameMode.Deathrace] = Utils.GetRoleColor(CustomRoles.Racer),
-            [CustomGameMode.Mingle] = Utils.GetRoleColor(CustomRoles.MinglePlayer),
-            [CustomGameMode.Snowdown] = Utils.GetRoleColor(CustomRoles.SnowdownPlayer)
+            [CustomGamemodes.Standard] = Color.white,
+            [CustomGamemodes.SoloPVP] = ColorUtility.TryParseHtmlString("#f55252", out Color c) ? c : Color.white,
+            [CustomGamemodes.FFA] = Color.cyan,
+            [CustomGamemodes.StopAndGo] = ColorUtility.TryParseHtmlString("#00ffa5", out c) ? c : Color.white,
+            [CustomGamemodes.HotPotato] = ColorUtility.TryParseHtmlString("#e8cd46", out c) ? c : Color.white,
+            [CustomGamemodes.HideAndSeek] = ColorUtility.TryParseHtmlString("#345eeb", out c) ? c : Color.white,
+            [CustomGamemodes.Speedrun] = Utils.GetRoleColor(CustomRoles.Speedrunner),
+            [CustomGamemodes.CaptureTheFlag] = ColorUtility.TryParseHtmlString("#1313c2", out c) ? c : Color.white,
+            [CustomGamemodes.NaturalDisasters] = ColorUtility.TryParseHtmlString("#03fc4a", out c) ? c : Color.white,
+            [CustomGamemodes.RoomRush] = Team.Neutral.GetColor(),
+            [CustomGamemodes.KingOfTheZones] = Color.red,
+            [CustomGamemodes.Quiz] = Utils.GetRoleColor(CustomRoles.QuizMaster),
+            [CustomGamemodes.TheMindGame] = Color.yellow,
+            [CustomGamemodes.BedWars] = Utils.GetRoleColor(CustomRoles.BedWarsPlayer),
+            [CustomGamemodes.Deathrace] = Utils.GetRoleColor(CustomRoles.Racer),
+            [CustomGamemodes.Mingle] = Utils.GetRoleColor(CustomRoles.MinglePlayer),
+            [CustomGamemodes.Snowdown] = Utils.GetRoleColor(CustomRoles.SnowdownPlayer)
         };
 
         IL2CPPChainloader.Instance.Finished += () =>

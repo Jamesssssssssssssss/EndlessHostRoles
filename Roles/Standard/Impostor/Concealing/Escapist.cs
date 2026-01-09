@@ -15,6 +15,8 @@ internal class Escapist : StandardRoleBase
     public Vector2? EscapistLocation;
     public override bool IsEnable => On;
 
+    public override CustomGamemodes GamemodeId => CustomGamemodes.Standard;
+    public override CustomRoles RoleId => CustomRoles.Escapist;
     public override Team Faction => Team.Impostor;
     public override RoleOptionType? Alignment => RoleOptionType.Impostor_Concealing;
 

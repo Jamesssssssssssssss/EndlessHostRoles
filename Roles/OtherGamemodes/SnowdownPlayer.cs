@@ -4,6 +4,8 @@ namespace EHR.Roles;
 
 internal class SnowdownPlayer : RoleBase
 {
+    public override CustomGamemodes GamemodeId => CustomGamemodes.Snowdown;
+    public override CustomRoles RoleId => CustomRoles.SnowdownPlayer;
     public static bool On;
 
     public override bool IsEnable => On;

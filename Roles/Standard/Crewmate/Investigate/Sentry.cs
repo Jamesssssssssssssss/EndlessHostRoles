@@ -35,6 +35,8 @@ internal class Sentry : StandardRoleBase
     private HashSet<byte> UsingDevice = [];
     public override bool IsEnable => On;
 
+    public override CustomGamemodes GamemodeId => CustomGamemodes.Standard;
+    public override CustomRoles RoleId => CustomRoles.Sentry;
     public override Team Faction => Team.Crewmate;
     public override RoleOptionType? Alignment => RoleOptionType.Crewmate_Investigate;
 

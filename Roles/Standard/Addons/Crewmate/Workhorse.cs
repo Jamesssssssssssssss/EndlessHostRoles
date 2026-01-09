@@ -83,7 +83,7 @@ public class Workhorse : AddonBase
     {
         if (!CustomRoles.Workhorse.IsEnable() || PlayerIdList.Count >= CustomRoles.Workhorse.GetCount()) return false;
 
-        if (CurrentGameMode != CustomGameMode.Standard) return false;
+        if (CurrentGameMode != CustomGamemodes.Standard) return false;
 
         if (pc.Is(CustomRoles.Snitch) && !OptionSnitchCanBeWorkhorse.GetBool()) return false;
 

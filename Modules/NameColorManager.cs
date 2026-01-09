@@ -38,19 +38,19 @@ public static class NameColorManager
 
         switch (Options.CurrentGameMode)
         {
-            case CustomGameMode.FFA when FreeForAll.FFATeamMode.GetBool():
+            case CustomGamemodes.FFA when FreeForAll.FFATeamMode.GetBool():
                 if (FreeForAll.PlayerTeams.TryGetValue(target.PlayerId, out int team))
                     color = FreeForAll.TeamColors.GetValueOrDefault(team, "#00ffff");
                 return true;
-            case CustomGameMode.Snowdown:
-            case CustomGameMode.Mingle:
-            case CustomGameMode.RoomRush:
-            case CustomGameMode.NaturalDisasters:
-            case CustomGameMode.StopAndGo:
-            case CustomGameMode.TheMindGame:
+            case CustomGamemodes.Snowdown:
+            case CustomGamemodes.Mingle:
+            case CustomGamemodes.RoomRush:
+            case CustomGamemodes.NaturalDisasters:
+            case CustomGamemodes.StopAndGo:
+            case CustomGamemodes.TheMindGame:
                 color = "#ffffff";
                 return true;
-            case CustomGameMode.HotPotato:
+            case CustomGamemodes.HotPotato:
                 (byte holderID, byte lastHolderID) = HotPotato.GetState();
 
                 if (target.PlayerId == holderID)
@@ -61,21 +61,21 @@ public static class NameColorManager
                     color = "#ffffff";
 
                 return true;
-            case CustomGameMode.HideAndSeek:
+            case CustomGamemodes.HideAndSeek:
                 return CustomHnS.KnowTargetRoleColor(seer, target, ref color);
-            case CustomGameMode.Speedrun when Speedrun.CanKill.Contains(target.PlayerId):
+            case CustomGamemodes.Speedrun when Speedrun.CanKill.Contains(target.PlayerId):
                 color = Main.ImpostorColor;
                 return true;
-            case CustomGameMode.CaptureTheFlag:
+            case CustomGamemodes.CaptureTheFlag:
                 return CaptureTheFlag.KnowTargetRoleColor(target, ref color);
-            case CustomGameMode.KingOfTheZones:
+            case CustomGamemodes.KingOfTheZones:
                 return KingOfTheZones.GetNameColor(target, ref color);
-            case CustomGameMode.Quiz:
+            case CustomGamemodes.Quiz:
                 return Quiz.KnowTargetRoleColor(target, ref color);
-            case CustomGameMode.BedWars:
+            case CustomGamemodes.BedWars:
                 color = BedWars.GetTeam(target.PlayerId)?.NameColor;
                 return true;
-            case CustomGameMode.Deathrace:
+            case CustomGamemodes.Deathrace:
                 return Deathrace.KnowRoleColor(seer, target, out color);
         }
 
@@ -237,7 +237,7 @@ public static class NameColorManager
 
         if (seer == target
             || (Main.GodMode.Value && seer.AmOwner)
-            || Options.CurrentGameMode is CustomGameMode.FFA or CustomGameMode.StopAndGo
+            || Options.CurrentGameMode is CustomGamemodes.FFA or CustomGamemodes.StopAndGo
             || (seer.Data.IsDead && !seer.IsAlive() && Options.GhostCanSeeOtherRoles.GetBool() && (!Utils.IsRevivingRoleAlive() || !Main.DiedThisRound.Contains(seer.PlayerId)))
             || (seer.Is(CustomRoles.Mimic) && target.Data.IsDead && !target.IsAlive() && Options.MimicCanSeeDeadRoles.GetBool())
             || target.Is(CustomRoles.GM)

@@ -13,6 +13,8 @@ internal class Markseeker : StandardRoleBase
     public bool TargetRevealed;
     public override bool IsEnable => On;
 
+    public override CustomGamemodes GamemodeId => CustomGamemodes.Standard;
+    public override CustomRoles RoleId => CustomRoles.Markseeker;
     public override Team Faction => Team.Crewmate;
     public override RoleOptionType? Alignment => RoleOptionType.Crewmate_Investigate;
 

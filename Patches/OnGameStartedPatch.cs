@@ -150,7 +150,7 @@ internal static class ChangeRoleSettings
 
         try
         {
-            if (Options.CurrentGameMode == CustomGameMode.BedWars)
+            if (Options.CurrentGameMode == CustomGamemodes.BedWars)
                 Options.UsePets.SetValue(1);
         }
         catch (Exception e) { Utils.ThrowException(e); }
@@ -705,7 +705,7 @@ internal static class StartGameHostPatch
 
             var random = IRandom.Instance;
 
-            if (Options.CurrentGameMode == CustomGameMode.Standard)
+            if (Options.CurrentGameMode == CustomGamemodes.Standard)
             {
                 bool bloodlustSpawn = random.Next(100) < (Options.CustomAdtRoleSpawnRate.TryGetValue(CustomRoles.Bloodlust, out IntegerOptionItem option0) ? option0.GetFloat() : 0) && CustomRoles.Bloodlust.IsEnable() && Options.RoleSubCategoryLimits[RoleOptionType.Neutral_Killing][2].GetInt() > 0;
                 bool physicistSpawn = random.Next(100) < (Options.CustomAdtRoleSpawnRate.TryGetValue(CustomRoles.Physicist, out IntegerOptionItem option1) ? option1.GetFloat() : 0) && CustomRoles.Physicist.IsEnable();
@@ -888,7 +888,7 @@ internal static class StartGameHostPatch
                 Main.PlayerStates[kv.Key].SetMainRole(kv.Value);
             }
 
-            if (Options.CurrentGameMode != CustomGameMode.Standard)
+            if (Options.CurrentGameMode != CustomGamemodes.Standard)
             {
                 foreach (KeyValuePair<byte, PlayerState> pair in Main.PlayerStates)
                     ExtendedPlayerControl.RpcSetCustomRole(pair.Key, pair.Value.MainRole);
@@ -1027,32 +1027,32 @@ internal static class StartGameHostPatch
 
             switch (Options.CurrentGameMode)
             {
-                case CustomGameMode.HideAndSeek:
+                case CustomGamemodes.HideAndSeek:
                     CustomHnS.StartSeekerBlindTime();
                     goto default;
-                case CustomGameMode.CaptureTheFlag:
+                case CustomGamemodes.CaptureTheFlag:
                     CaptureTheFlag.Init();
                     goto default;
-                case CustomGameMode.NaturalDisasters:
+                case CustomGamemodes.NaturalDisasters:
                     NaturalDisasters.OnGameStart();
                     break;
-                case CustomGameMode.KingOfTheZones:
+                case CustomGamemodes.KingOfTheZones:
                     KingOfTheZones.Init();
                     goto default;
-                case CustomGameMode.Quiz:
+                case CustomGamemodes.Quiz:
                     Quiz.Init();
                     goto default;
-                case CustomGameMode.BedWars:
+                case CustomGamemodes.BedWars:
                     BedWars.Initialize();
                     goto default;
-                case CustomGameMode.Deathrace:
+                case CustomGamemodes.Deathrace:
                     Deathrace.Init();
                     goto default;
-                case CustomGameMode.Snowdown:
+                case CustomGamemodes.Snowdown:
                     Snowdown.Init();
                     goto default;
                 default:
-                    if (Options.IntegrateNaturalDisasters.GetBool()) goto case CustomGameMode.NaturalDisasters;
+                    if (Options.IntegrateNaturalDisasters.GetBool()) goto case CustomGamemodes.NaturalDisasters;
                     break;
             }
 
@@ -1072,55 +1072,55 @@ internal static class StartGameHostPatch
 
             switch (Options.CurrentGameMode)
             {
-                case CustomGameMode.Standard:
+                case CustomGamemodes.Standard:
                     GameEndChecker.SetPredicateToNormal();
                     break;
-                case CustomGameMode.SoloPVP:
+                case CustomGamemodes.SoloPVP:
                     GameEndChecker.SetPredicateToSoloPVP();
                     break;
-                case CustomGameMode.FFA:
+                case CustomGamemodes.FFA:
                     GameEndChecker.SetPredicateToFFA();
                     break;
-                case CustomGameMode.StopAndGo:
+                case CustomGamemodes.StopAndGo:
                     GameEndChecker.SetPredicateToStopAndGo();
                     break;
-                case CustomGameMode.HotPotato:
+                case CustomGamemodes.HotPotato:
                     GameEndChecker.SetPredicateToHotPotato();
                     break;
-                case CustomGameMode.Speedrun:
+                case CustomGamemodes.Speedrun:
                     GameEndChecker.SetPredicateToSpeedrun();
                     break;
-                case CustomGameMode.HideAndSeek:
+                case CustomGamemodes.HideAndSeek:
                     GameEndChecker.SetPredicateToHideAndSeek();
                     break;
-                case CustomGameMode.CaptureTheFlag:
+                case CustomGamemodes.CaptureTheFlag:
                     GameEndChecker.SetPredicateToCaptureTheFlag();
                     break;
-                case CustomGameMode.NaturalDisasters:
+                case CustomGamemodes.NaturalDisasters:
                     GameEndChecker.SetPredicateToNaturalDisasters();
                     break;
-                case CustomGameMode.RoomRush:
+                case CustomGamemodes.RoomRush:
                     GameEndChecker.SetPredicateToRoomRush();
                     break;
-                case CustomGameMode.KingOfTheZones:
+                case CustomGamemodes.KingOfTheZones:
                     GameEndChecker.SetPredicateToKingOfTheZones();
                     break;
-                case CustomGameMode.Quiz:
+                case CustomGamemodes.Quiz:
                     GameEndChecker.SetPredicateToQuiz();
                     break;
-                case CustomGameMode.TheMindGame:
+                case CustomGamemodes.TheMindGame:
                     GameEndChecker.SetPredicateToTheMindGame();
                     break;
-                case CustomGameMode.BedWars:
+                case CustomGamemodes.BedWars:
                     GameEndChecker.SetPredicateToBedWars();
                     break;
-                case CustomGameMode.Deathrace:
+                case CustomGamemodes.Deathrace:
                     GameEndChecker.SetPredicateToDeathrace();
                     break;
-                case CustomGameMode.Mingle:
+                case CustomGamemodes.Mingle:
                     GameEndChecker.SetPredicateToMingle();
                     break;
-                case CustomGameMode.Snowdown:
+                case CustomGamemodes.Snowdown:
                     GameEndChecker.SetPredicateToSnowdown();
                     break;
             }
@@ -1287,7 +1287,7 @@ internal static class StartGameHostPatch
 
             RoleTypes displayRole = roleType;
 
-            if (Options.CurrentGameMode == CustomGameMode.Standard)
+            if (Options.CurrentGameMode == CustomGamemodes.Standard)
             {
                 if (target.Is(Team.Crewmate) && roleType is not (RoleTypes.Crewmate or RoleTypes.Scientist or RoleTypes.Engineer or RoleTypes.Noisemaker or RoleTypes.Tracker or RoleTypes.Detective or RoleTypes.CrewmateGhost or RoleTypes.GuardianAngel))
                     displayRole = RoleTypes.Crewmate;
@@ -1420,7 +1420,7 @@ internal static class StartGameHostPatch
 
             return;
 
-            bool ForceImp(byte id) => IsBasisChangingPlayer(id, CustomRoles.Bloodlust) || (Options.CurrentGameMode == CustomGameMode.Speedrun && Speedrun.CanKill.Contains(id));
+            bool ForceImp(byte id) => IsBasisChangingPlayer(id, CustomRoles.Bloodlust) || (Options.CurrentGameMode == CustomGamemodes.Speedrun && Speedrun.CanKill.Contains(id));
         }
 
         public static void SendRpcForDesync()
@@ -1444,7 +1444,7 @@ internal static class StartGameHostPatch
                             PlayerControl player = Utils.GetPlayerById(playerId);
                             if (player == null || role.IsDesyncRole()) continue;
 
-                            if (Options.CurrentGameMode == CustomGameMode.Speedrun && Speedrun.CanKill.Contains(playerId)) continue;
+                            if (Options.CurrentGameMode == CustomGamemodes.Speedrun && Speedrun.CanKill.Contains(playerId)) continue;
 
                             RoleTypes roleType = role.GetRoleTypes();
 

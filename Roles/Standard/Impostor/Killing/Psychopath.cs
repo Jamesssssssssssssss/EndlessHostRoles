@@ -15,6 +15,8 @@ public class Psychopath : StandardRoleBase
 
     private int Count;
 
+    public override CustomGamemodes GamemodeId => CustomGamemodes.Standard;
+    public override CustomRoles RoleId => CustomRoles.Psychopath;
     public override Team Faction => Team.Impostor;
     public override RoleOptionType? Alignment => RoleOptionType.Impostor_Killing;
 

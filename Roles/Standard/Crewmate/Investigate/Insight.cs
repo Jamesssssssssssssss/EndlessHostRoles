@@ -11,6 +11,8 @@ internal class Insight : StandardRoleBase
     private List<CustomRoles> RolesKnownThisRound = [];
     public override bool IsEnable => On;
 
+    public override CustomGamemodes GamemodeId => CustomGamemodes.Standard;
+    public override CustomRoles RoleId => CustomRoles.Insight;
     public override Team Faction => Team.Crewmate;
     public override RoleOptionType? Alignment => RoleOptionType.Crewmate_Investigate;
 

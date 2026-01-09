@@ -20,23 +20,23 @@ internal static class CustomRoleSelector
     public static int AddViperNum;
     public static int AddDetectiveNum;
 
-    public static readonly Dictionary<CustomGameMode, CustomRoles> GameModeRoles = new()
+    public static readonly Dictionary<CustomGamemodes, CustomRoles> GameModeRoles = new()
     {
-        { CustomGameMode.SoloPVP, CustomRoles.Challenger },
-        { CustomGameMode.FFA, CustomRoles.Killer },
-        { CustomGameMode.StopAndGo, CustomRoles.Tasker },
-        { CustomGameMode.HotPotato, CustomRoles.Potato },
-        { CustomGameMode.Speedrun, CustomRoles.Runner },
-        { CustomGameMode.CaptureTheFlag, CustomRoles.CTFPlayer },
-        { CustomGameMode.NaturalDisasters, CustomRoles.NDPlayer },
-        { CustomGameMode.RoomRush, CustomRoles.RRPlayer },
-        { CustomGameMode.KingOfTheZones, CustomRoles.KOTZPlayer },
-        { CustomGameMode.Quiz, CustomRoles.QuizPlayer },
-        { CustomGameMode.TheMindGame, CustomRoles.TMGPlayer },
-        { CustomGameMode.BedWars, CustomRoles.BedWarsPlayer },
-        { CustomGameMode.Deathrace, CustomRoles.Racer },
-        { CustomGameMode.Mingle, CustomRoles.MinglePlayer },
-        { CustomGameMode.Snowdown, CustomRoles.SnowdownPlayer }
+        { CustomGamemodes.SoloPVP, CustomRoles.Challenger },
+        { CustomGamemodes.FFA, CustomRoles.Killer },
+        { CustomGamemodes.StopAndGo, CustomRoles.Tasker },
+        { CustomGamemodes.HotPotato, CustomRoles.Potato },
+        { CustomGamemodes.Speedrun, CustomRoles.Runner },
+        { CustomGamemodes.CaptureTheFlag, CustomRoles.CTFPlayer },
+        { CustomGamemodes.NaturalDisasters, CustomRoles.NDPlayer },
+        { CustomGamemodes.RoomRush, CustomRoles.RRPlayer },
+        { CustomGamemodes.KingOfTheZones, CustomRoles.KOTZPlayer },
+        { CustomGamemodes.Quiz, CustomRoles.QuizPlayer },
+        { CustomGamemodes.TheMindGame, CustomRoles.TMGPlayer },
+        { CustomGamemodes.BedWars, CustomRoles.BedWarsPlayer },
+        { CustomGamemodes.Deathrace, CustomRoles.Racer },
+        { CustomGamemodes.Mingle, CustomRoles.MinglePlayer },
+        { CustomGamemodes.Snowdown, CustomRoles.SnowdownPlayer }
     };
 
     public static void SelectCustomRoles()
@@ -45,7 +45,7 @@ internal static class CustomRoleSelector
 
         if (Main.GM.Value && Main.AllPlayerControls.Length == 1) return;
 
-        if (Options.CurrentGameMode != CustomGameMode.Standard)
+        if (Options.CurrentGameMode != CustomGamemodes.Standard)
         {
             if (GameModeRoles.TryGetValue(Options.CurrentGameMode, out CustomRoles role))
             {
@@ -53,7 +53,7 @@ internal static class CustomRoleSelector
                 return;
             }
 
-            bool hns = Options.CurrentGameMode == CustomGameMode.HideAndSeek;
+            bool hns = Options.CurrentGameMode == CustomGamemodes.HideAndSeek;
 
             if (hns)
             {
@@ -556,7 +556,7 @@ internal static class CustomRoleSelector
 
     public static void SelectAddonRoles()
     {
-        if (Options.CurrentGameMode != CustomGameMode.Standard) return;
+        if (Options.CurrentGameMode != CustomGamemodes.Standard) return;
 
         foreach (byte id in Main.SetAddOns.Keys.Where(id => Utils.GetPlayerById(id) == null).ToArray()) Main.SetAddOns.Remove(id);
 

@@ -17,6 +17,8 @@ public class Backstabber : StandardRoleBase
 
     public override bool IsEnable => On;
 
+    public override CustomGamemodes GamemodeId => CustomGamemodes.Standard;
+    public override CustomRoles RoleId => CustomRoles.Backstabber;
     public override Team Faction => EHR.Team.Neutral;
     public override RoleOptionType? Alignment => RoleOptionType.Neutral_Benign;
 

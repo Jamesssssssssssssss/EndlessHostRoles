@@ -148,49 +148,49 @@ internal class CaptureTheFlag : GamemodeBase
         Color color = new Color32(0, 165, 255, 255);
 
         AlertTeamMembersOfFlagTaken = new BooleanOptionItem(id, "CTF_AlertTeamMembersOfFlagTaken", true, TabGroup.GameSettings)
-            .SetGameMode(CustomGameMode.CaptureTheFlag)
+            .SetGameMode(CustomGamemodes.CaptureTheFlag)
             .SetColor(color);
 
         ArrowToEnemyFlagCarrier = new BooleanOptionItem(id + 1, "CTF_ArrowToEnemyFlagCarrier", false, TabGroup.GameSettings)
-            .SetGameMode(CustomGameMode.CaptureTheFlag)
+            .SetGameMode(CustomGamemodes.CaptureTheFlag)
             .SetParent(AlertTeamMembersOfFlagTaken)
             .SetColor(color);
 
         AlertTeamMembersOfEnemyFlagTaken = new BooleanOptionItem(id + 2, "CTF_AlertTeamMembersOfEnemyFlagTaken", false, TabGroup.GameSettings)
-            .SetGameMode(CustomGameMode.CaptureTheFlag)
+            .SetGameMode(CustomGamemodes.CaptureTheFlag)
             .SetColor(color);
 
         ArrowToOwnFlagCarrier = new BooleanOptionItem(id + 3, "CTF_ArrowToOwnFlagCarrier", false, TabGroup.GameSettings)
-            .SetGameMode(CustomGameMode.CaptureTheFlag)
+            .SetGameMode(CustomGamemodes.CaptureTheFlag)
             .SetParent(AlertTeamMembersOfEnemyFlagTaken)
             .SetColor(color);
 
         TaggedPlayersGet = new StringOptionItem(id + 4, "CTF_TaggedPlayersGet", TaggedPlayersGetOptions, 2, TabGroup.GameSettings)
-            .SetGameMode(CustomGameMode.CaptureTheFlag)
+            .SetGameMode(CustomGamemodes.CaptureTheFlag)
             .SetColor(color);
 
         BackTime = new IntegerOptionItem(id + 20, "CTF_BackTime", new(1, 30, 1), 5, TabGroup.GameSettings)
             .SetParent(TaggedPlayersGet)
-            .SetGameMode(CustomGameMode.CaptureTheFlag)
+            .SetGameMode(CustomGamemodes.CaptureTheFlag)
             .SetValueFormat(OptionFormat.Seconds)
             .SetColor(color);
 
         WhenFlagCarrierGetsTagged = new StringOptionItem(id + 5, "CTF_WhenFlagCarrierGetsTagged", WhenFlagCarrierGetsTaggedOptions, 0, TabGroup.GameSettings)
-            .SetGameMode(CustomGameMode.CaptureTheFlag)
+            .SetGameMode(CustomGamemodes.CaptureTheFlag)
             .SetColor(color);
 
         SpeedReductionForFlagCarrier = new FloatOptionItem(id + 6, "CTF_SpeedReductionForFlagCarrier", new(0f, 1f, 0.05f), 0.25f, TabGroup.GameSettings)
-            .SetGameMode(CustomGameMode.CaptureTheFlag)
+            .SetGameMode(CustomGamemodes.CaptureTheFlag)
             .SetValueFormat(OptionFormat.Multiplier)
             .SetColor(color);
 
         TagCooldown = new FloatOptionItem(id + 7, "CTF_TagCooldown", new(0f, 30f, 0.5f), 4.5f, TabGroup.GameSettings)
-            .SetGameMode(CustomGameMode.CaptureTheFlag)
+            .SetGameMode(CustomGamemodes.CaptureTheFlag)
             .SetValueFormat(OptionFormat.Seconds)
             .SetColor(color);
 
         GameEndCriteria = new StringOptionItem(id + 8, "CTF_GameEndCriteria", GameEndCriteriaOptions, 0, TabGroup.GameSettings)
-            .SetGameMode(CustomGameMode.CaptureTheFlag)
+            .SetGameMode(CustomGamemodes.CaptureTheFlag)
             .SetColor(color)
             .RegisterUpdateValueEvent((_, _, currentValue) =>
             {
@@ -202,22 +202,22 @@ internal class CaptureTheFlag : GamemodeBase
 
         RoundsToPlay = new IntegerOptionItem(id + 9, "CTF_RoundsToPlay", new(1, 10, 1), 3, TabGroup.GameSettings)
             .SetParent(GameEndCriteria)
-            .SetGameMode(CustomGameMode.CaptureTheFlag)
+            .SetGameMode(CustomGamemodes.CaptureTheFlag)
             .SetColor(color);
 
         PointsToWin = new IntegerOptionItem(id + 10, "CTF_PointsToWin", new(1, 10, 1), 3, TabGroup.GameSettings)
             .SetParent(GameEndCriteria)
-            .SetGameMode(CustomGameMode.CaptureTheFlag)
+            .SetGameMode(CustomGamemodes.CaptureTheFlag)
             .SetColor(color);
 
         TimeLimit = new IntegerOptionItem(id + 11, "CTF_TimeLimit", new(10, 900, 10), 300, TabGroup.GameSettings)
             .SetParent(GameEndCriteria)
-            .SetGameMode(CustomGameMode.CaptureTheFlag)
+            .SetGameMode(CustomGamemodes.CaptureTheFlag)
             .SetValueFormat(OptionFormat.Seconds)
             .SetColor(color);
 
         FlagPickupRange = new FloatOptionItem(id + 12, "CTF_FlagPickupRange", new(0.25f, 5f, 0.25f), 1.5f, TabGroup.GameSettings)
-            .SetGameMode(CustomGameMode.CaptureTheFlag)
+            .SetGameMode(CustomGamemodes.CaptureTheFlag)
             .SetValueFormat(OptionFormat.Multiplier)
             .SetColor(color);
     }
@@ -721,7 +721,7 @@ internal class CaptureTheFlag : GamemodeBase
     {
         public static void Postfix(PlayerControl __instance)
         {
-            if (!AmongUsClient.Instance.AmHost || !GameStates.IsInTask || ExileController.Instance || Options.CurrentGameMode != CustomGameMode.CaptureTheFlag || !Main.IntroDestroyed || __instance.PlayerId >= 254 || WinnerData.Team != "No one wins" || IntroCutsceneDestroyPatch.IntroDestroyTS + 5 > Utils.TimeStamp) return;
+            if (!AmongUsClient.Instance.AmHost || !GameStates.IsInTask || ExileController.Instance || Options.CurrentGameMode != CustomGamemodes.CaptureTheFlag || !Main.IntroDestroyed || __instance.PlayerId >= 254 || WinnerData.Team != "No one wins" || IntroCutsceneDestroyPatch.IntroDestroyTS + 5 > Utils.TimeStamp) return;
 
             if (__instance.IsHost())
             {

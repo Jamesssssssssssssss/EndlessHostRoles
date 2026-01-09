@@ -46,6 +46,8 @@ public class Siren : CovenBase
 
     public override bool IsEnable => On;
 
+    public override CustomGamemodes GamemodeId => CustomGamemodes.Standard;
+    public override CustomRoles RoleId => CustomRoles.Siren;
     public override Team Faction => Team.Coven;
     public override RoleOptionType? Alignment => RoleOptionType.Coven_Miscellaneous;
 

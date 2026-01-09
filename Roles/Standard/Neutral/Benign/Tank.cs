@@ -20,6 +20,8 @@ public class Tank : StandardRoleBase
     public override bool IsEnable => On;
     public bool IsWon => EnteredVents.Count >= AllVents.Count;
 
+    public override CustomGamemodes GamemodeId => CustomGamemodes.Standard;
+    public override CustomRoles RoleId => CustomRoles.Tank;
     public override Team Faction => Team.Neutral;
     public override RoleOptionType? Alignment => RoleOptionType.Neutral_Benign;
 

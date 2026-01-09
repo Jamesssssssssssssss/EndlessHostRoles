@@ -8,6 +8,8 @@ internal class Dictator : StandardRoleBase
 
     public static OptionItem MinTasksToDictate;
 
+    public override CustomGamemodes GamemodeId => CustomGamemodes.Standard;
+    public override CustomRoles RoleId => CustomRoles.Dictator;
     public override Team Faction => Team.Crewmate;
     public override RoleOptionType? Alignment => RoleOptionType.Crewmate_Power;
 

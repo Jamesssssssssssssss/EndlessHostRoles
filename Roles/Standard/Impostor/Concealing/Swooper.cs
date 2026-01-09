@@ -41,6 +41,8 @@ public class Swooper : StandardRoleBase
     private bool CanGoInvis => GameStates.IsInTask && InvisTime == -10 && lastTime == -10;
     private bool IsInvis => InvisTime != -10;
 
+    public override CustomGamemodes GamemodeId => CustomGamemodes.Standard;
+    public override CustomRoles RoleId => CustomRoles.Swooper;
     public override Team Faction => Team.Impostor;
     public override RoleOptionType? Alignment => RoleOptionType.Impostor_Concealing;
 

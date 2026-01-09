@@ -27,6 +27,8 @@ public class Greedy : StandardRoleBase // Also used for Pulse as the NK version 
 
     public override bool IsEnable => PlayerIdList.Count > 0;
 
+    public override CustomGamemodes GamemodeId => CustomGamemodes.Standard;
+    public override CustomRoles RoleId => CustomRoles.Greedy;
     public override Team Faction => Team.Impostor;
     public override RoleOptionType? Alignment => RoleOptionType.Impostor_Killing;
 

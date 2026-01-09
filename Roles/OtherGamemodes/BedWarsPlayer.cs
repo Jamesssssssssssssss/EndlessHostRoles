@@ -5,6 +5,9 @@ namespace EHR.Roles;
 
 internal class BedWarsPlayer : RoleBase
 {
+    public override CustomGamemodes GamemodeId => CustomGamemodes.BedWars;
+    public override CustomRoles RoleId => CustomRoles.BedWarsPlayer;
+
     private static bool On;
 
     public override bool IsEnable => On;

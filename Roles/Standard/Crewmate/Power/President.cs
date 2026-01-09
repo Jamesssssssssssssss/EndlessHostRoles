@@ -53,6 +53,8 @@ public class President : StandardRoleBase
 
     public bool IsRevealed => UsedDecrees.Contains(Decree.Reveal);
 
+    public override CustomGamemodes GamemodeId => CustomGamemodes.Standard;
+    public override CustomRoles RoleId => CustomRoles.President;
     public override Team Faction => Team.Crewmate;
     public override RoleOptionType? Alignment => RoleOptionType.Crewmate_Power;
 

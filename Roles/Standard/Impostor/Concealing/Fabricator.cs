@@ -15,6 +15,8 @@ public class Fabricator : StandardRoleBase
 
     public PlayerState.DeathReason NextDeathReason;
 
+    public override CustomGamemodes GamemodeId => CustomGamemodes.Standard;
+    public override CustomRoles RoleId => CustomRoles.Fabricator;
     public override Team Faction => Team.Impostor;
     public override RoleOptionType? Alignment => RoleOptionType.Impostor_Concealing;
 

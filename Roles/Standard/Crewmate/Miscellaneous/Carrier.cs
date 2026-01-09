@@ -18,6 +18,8 @@ public class Carrier : StandardRoleBase
     private bool TaskMode;
     private int Count;
 
+    public override CustomGamemodes GamemodeId => CustomGamemodes.Standard;
+    public override CustomRoles RoleId => CustomRoles.Carrier;
     public override Team Faction => Team.Crewmate;
     public override RoleOptionType? Alignment => RoleOptionType.Crewmate_Miscellaneous;
 

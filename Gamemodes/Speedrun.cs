@@ -29,25 +29,25 @@ internal class Speedrun : GamemodeBase
         Color color = Utils.GetRoleColor(CustomRoles.Speedrunner);
 
         TaskFinishWins = new BooleanOptionItem(id, "Speedrun_TaskFinishWins", false, TabGroup.GameSettings)
-            .SetGameMode(CustomGameMode.Speedrun)
+            .SetGameMode(CustomGamemodes.Speedrun)
             .SetColor(color);
 
         TimeStacksUp = new BooleanOptionItem(id + 1, "Speedrun_TimeStacksUp", true, TabGroup.GameSettings)
-            .SetGameMode(CustomGameMode.Speedrun)
+            .SetGameMode(CustomGamemodes.Speedrun)
             .SetColor(color);
 
         TimeLimit = new IntegerOptionItem(id + 2, "Speedrun_TimeLimit", new(1, 90, 1), 20, TabGroup.GameSettings)
-            .SetGameMode(CustomGameMode.Speedrun)
+            .SetGameMode(CustomGamemodes.Speedrun)
             .SetValueFormat(OptionFormat.Seconds)
             .SetColor(color);
 
         KillCooldown = new IntegerOptionItem(id + 3, "KillCooldown", new(0, 60, 1), 10, TabGroup.GameSettings)
-            .SetGameMode(CustomGameMode.Speedrun)
+            .SetGameMode(CustomGamemodes.Speedrun)
             .SetValueFormat(OptionFormat.Seconds)
             .SetColor(color);
 
         KillersCanKillTaskingPlayers = new BooleanOptionItem(id + 4, "Speedrun_KillersCanKillTaskingPlayers", true, TabGroup.GameSettings)
-            .SetGameMode(CustomGameMode.Speedrun)
+            .SetGameMode(CustomGamemodes.Speedrun)
             .SetColor(color);
     }
 
@@ -171,7 +171,7 @@ internal class Speedrun : GamemodeBase
 
         public static void Postfix(PlayerControl __instance)
         {
-            if (!AmongUsClient.Instance.AmHost || !GameStates.IsInTask || ExileController.Instance || Options.CurrentGameMode != CustomGameMode.Speedrun || Main.HasJustStarted || __instance.Is(CustomRoles.Killer) || __instance.PlayerId >= 254) return;
+            if (!AmongUsClient.Instance.AmHost || !GameStates.IsInTask || ExileController.Instance || Options.CurrentGameMode != CustomGamemodes.Speedrun || Main.HasJustStarted || __instance.Is(CustomRoles.Killer) || __instance.PlayerId >= 254) return;
 
             if (__instance.IsAlive() && Timers[__instance.PlayerId] <= 0)
             {

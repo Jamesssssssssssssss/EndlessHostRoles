@@ -34,7 +34,7 @@ public static class Statistics
 
             bool won = CustomWinnerHolder.WinnerIds.Contains(lp.PlayerId) || CustomWinnerHolder.WinnerRoles.Contains(role) || (CustomWinnerHolder.WinnerTeam == CustomWinner.Bloodlust && addons.Contains(CustomRoles.Bloodlust));
 
-            CustomGameMode gm = Options.CurrentGameMode;
+            CustomGamemodes gm = Options.CurrentGameMode;
 
             if (GameStates.CurrentServerType is not GameStates.ServerType.Modded and not GameStates.ServerType.Niko)
             {
@@ -69,28 +69,28 @@ public static class Statistics
 
             switch (gm)
             {
-                case CustomGameMode.FFA when won:
+                case CustomGamemodes.FFA when won:
                     Achievements.Type.SerialKiller.CompleteAfterGameEnd();
                     return;
-                case CustomGameMode.SoloPVP when won:
+                case CustomGamemodes.SoloPVP when won:
                     Achievements.Type.PVPMaster.CompleteAfterGameEnd();
                     return;
-                case CustomGameMode.StopAndGo when won:
+                case CustomGamemodes.StopAndGo when won:
                     Achievements.Type.HarderThanDrivingThroughTrafficLightsRight.CompleteAfterGameEnd();
                     return;
-                case CustomGameMode.Speedrun when won:
+                case CustomGamemodes.Speedrun when won:
                     Achievements.Type.TwoFast4You.CompleteAfterGameEnd();
                     return;
-                case CustomGameMode.HotPotato when won:
+                case CustomGamemodes.HotPotato when won:
                     Achievements.Type.TooHotForMe.CompleteAfterGameEnd();
                     return;
-                case CustomGameMode.HideAndSeek when won:
+                case CustomGamemodes.HideAndSeek when won:
                     Achievements.Type.SeekAndHide.CompleteAfterGameEnd();
                     return;
-                case CustomGameMode.NaturalDisasters when won:
+                case CustomGamemodes.NaturalDisasters when won:
                     Achievements.Type.Two012.CompleteAfterGameEnd();
                     return;
-                case CustomGameMode.CaptureTheFlag:
+                case CustomGamemodes.CaptureTheFlag:
                     if (won) Achievements.Type.YourFlagIsMine.CompleteAfterGameEnd();
 
                     if (apc.Select(x => (pc: x, time: CaptureTheFlag.GetFlagTime(x.PlayerId))).MaxBy(x => x.time).pc.PlayerId == lp.PlayerId)
@@ -100,19 +100,19 @@ public static class Statistics
                         Achievements.Type.Tag.CompleteAfterGameEnd();
 
                     return;
-                case CustomGameMode.RoomRush when won:
+                case CustomGamemodes.RoomRush when won:
                     Achievements.Type.BestReactionTime.CompleteAfterGameEnd();
                     return;
-                case CustomGameMode.Deathrace when won:
+                case CustomGamemodes.Deathrace when won:
                     Achievements.Type.FastestRunner.CompleteAfterGameEnd();
                     return;
-                case CustomGameMode.Mingle when won:
+                case CustomGamemodes.Mingle when won:
                     Achievements.Type.ThisAintSquidGames.CompleteAfterGameEnd();
                     return;
-                case CustomGameMode.KingOfTheZones when won:
+                case CustomGamemodes.KingOfTheZones when won:
                     Achievements.Type.YourZoneIsMine.CompleteAfterGameEnd();
                     return;
-                case CustomGameMode.Standard:
+                case CustomGamemodes.Standard:
                     Reset();
                     break;
             }
@@ -227,7 +227,7 @@ public static class Statistics
     {
         try
         {
-            if (Options.CurrentGameMode != CustomGameMode.Standard || Main.AllPlayerControls.Length <= MinPlayers) return;
+            if (Options.CurrentGameMode != CustomGamemodes.Standard || Main.AllPlayerControls.Length <= MinPlayers) return;
 
             PlayerControl lp = PlayerControl.LocalPlayer;
 
@@ -309,7 +309,7 @@ public static class Statistics
     {
         try
         {
-            if (Options.CurrentGameMode != CustomGameMode.Standard || killer.PlayerId == target.PlayerId || Main.AllPlayerControls.Length <= MinPlayers) return;
+            if (Options.CurrentGameMode != CustomGamemodes.Standard || killer.PlayerId == target.PlayerId || Main.AllPlayerControls.Length <= MinPlayers) return;
 
             if (killer.AmOwner)
             {
@@ -367,7 +367,7 @@ public static class Statistics
     {
         try
         {
-            if (Options.CurrentGameMode != CustomGameMode.Standard || Main.AllPlayerControls.Length <= MinPlayers) return;
+            if (Options.CurrentGameMode != CustomGamemodes.Standard || Main.AllPlayerControls.Length <= MinPlayers) return;
 
             if (shapeshifter.AmOwner && shapeshifting && animated)
             {

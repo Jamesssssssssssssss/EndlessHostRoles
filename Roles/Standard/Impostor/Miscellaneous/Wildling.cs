@@ -35,6 +35,8 @@ public class Wildling : StandardRoleBase
 
     private bool InProtect => TimeStamp > Utils.TimeStamp;
 
+    public override CustomGamemodes GamemodeId => CustomGamemodes.Standard;
+    public override CustomRoles RoleId => CustomRoles.Wildling;
     public override Team Faction => Team.Impostor;
     public override RoleOptionType? Alignment => RoleOptionType.Impostor_Miscellaneous;
 

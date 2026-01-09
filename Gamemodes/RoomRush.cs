@@ -125,7 +125,7 @@ internal class RoomRush : GamemodeBase
     {
         var id = 69_217_001;
         Color color = Utils.GetRoleColor(CustomRoles.RRPlayer);
-        const CustomGameMode gameMode = CustomGameMode.RoomRush;
+        const CustomGamemodes gameMode = CustomGamemodes.RoomRush;
 
         GlobalTimeMultiplier = new FloatOptionItem(id++, "RR_GlobalTimeMultiplier", new(0.05f, 3f, 0.05f), 1f, TabGroup.GameSettings)
             .SetHeader(true)
@@ -494,7 +494,7 @@ internal class RoomRush : GamemodeBase
 
         public static void Postfix( /*PlayerControl __instance*/)
         {
-            if (!GameGoing || Main.HasJustStarted || Options.CurrentGameMode != CustomGameMode.RoomRush || !AmongUsClient.Instance.AmHost || !GameStates.IsInTask || ExileController.Instance || GameStates.IsEnded || !Main.IntroDestroyed) return;
+            if (!GameGoing || Main.HasJustStarted || Options.CurrentGameMode != CustomGamemodes.RoomRush || !AmongUsClient.Instance.AmHost || !GameStates.IsInTask || ExileController.Instance || GameStates.IsEnded || !Main.IntroDestroyed) return;
 
             long now = Utils.TimeStamp;
             PlayerControl[] aapc = Main.AllAlivePlayerControls;

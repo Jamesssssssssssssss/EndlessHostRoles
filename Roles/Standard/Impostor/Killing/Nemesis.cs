@@ -17,6 +17,8 @@ internal class Nemesis : StandardRoleBase
     public static Dictionary<byte, int> NemesisRevenged = [];
     public override bool IsEnable => On;
 
+    public override CustomGamemodes GamemodeId => CustomGamemodes.Standard;
+    public override CustomRoles RoleId => CustomRoles.Nemesis;
     public override Team Faction => Team.Impostor;
     public override RoleOptionType? Alignment => RoleOptionType.Impostor_Killing;
 

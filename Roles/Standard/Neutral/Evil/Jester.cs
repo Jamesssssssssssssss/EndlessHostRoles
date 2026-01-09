@@ -17,6 +17,8 @@ internal class Jester : StandardRoleBase
     public static OptionItem BlockVentMovement;
     public override bool IsEnable => On;
 
+    public override CustomGamemodes GamemodeId => CustomGamemodes.Standard;
+    public override CustomRoles RoleId => CustomRoles.Jester;
     public override Team Faction => Team.Neutral;
     public override RoleOptionType? Alignment => RoleOptionType.Neutral_Evil;
 

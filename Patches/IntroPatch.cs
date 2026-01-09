@@ -161,7 +161,7 @@ internal static class SetUpRoleTextPatch
 
         switch (Options.CurrentGameMode)
         {
-            case CustomGameMode.SoloPVP:
+            case CustomGamemodes.SoloPVP:
             {
                 Color color = ColorUtility.TryParseHtmlString("#f55252", out Color c) ? c : new(255, 255, 255, 255);
                 __instance.YouAreText.transform.gameObject.SetActive(false);
@@ -171,7 +171,7 @@ internal static class SetUpRoleTextPatch
                 __instance.RoleBlurbText.text = lp.GetRoleInfo();
                 break;
             }
-            case CustomGameMode.FFA:
+            case CustomGamemodes.FFA:
             {
                 Color color = ColorUtility.TryParseHtmlString("#00ffff", out Color c) ? c : new(255, 255, 255, 255);
                 __instance.YouAreText.transform.gameObject.SetActive(false);
@@ -181,7 +181,7 @@ internal static class SetUpRoleTextPatch
                 __instance.RoleBlurbText.text = GetString("KillerInfo");
                 break;
             }
-            case CustomGameMode.StopAndGo:
+            case CustomGamemodes.StopAndGo:
             {
                 Color color = ColorUtility.TryParseHtmlString("#00ffa5", out Color c) ? c : new(255, 255, 255, 255);
                 __instance.YouAreText.transform.gameObject.SetActive(false);
@@ -191,7 +191,7 @@ internal static class SetUpRoleTextPatch
                 __instance.RoleBlurbText.text = GetString("TaskerInfo");
                 break;
             }
-            case CustomGameMode.HotPotato:
+            case CustomGamemodes.HotPotato:
             {
                 Color color = ColorUtility.TryParseHtmlString("#e8cd46", out Color c) ? c : new(255, 255, 255, 255);
                 __instance.YouAreText.transform.gameObject.SetActive(false);
@@ -201,7 +201,7 @@ internal static class SetUpRoleTextPatch
                 __instance.RoleBlurbText.text = GetString("PotatoInfo");
                 break;
             }
-            case CustomGameMode.Speedrun:
+            case CustomGamemodes.Speedrun:
             {
                 Color color = Utils.GetRoleColor(CustomRoles.Speedrunner);
                 __instance.YouAreText.transform.gameObject.SetActive(false);
@@ -211,7 +211,7 @@ internal static class SetUpRoleTextPatch
                 __instance.RoleBlurbText.text = GetString("RunnerInfo");
                 break;
             }
-            case CustomGameMode.CaptureTheFlag:
+            case CustomGamemodes.CaptureTheFlag:
             {
                 Color color = ColorUtility.TryParseHtmlString("#1313c2", out Color c) ? c : new(255, 255, 255, 255);
                 __instance.YouAreText.transform.gameObject.SetActive(false);
@@ -221,7 +221,7 @@ internal static class SetUpRoleTextPatch
                 __instance.RoleBlurbText.text = GetString("CTFPlayerInfo");
                 break;
             }
-            case CustomGameMode.NaturalDisasters:
+            case CustomGamemodes.NaturalDisasters:
             {
                 Color color = ColorUtility.TryParseHtmlString("#03fc4a", out Color c) ? c : new(255, 255, 255, 255);
                 __instance.YouAreText.transform.gameObject.SetActive(false);
@@ -231,7 +231,7 @@ internal static class SetUpRoleTextPatch
                 __instance.RoleBlurbText.text = GetString("NDPlayerInfo");
                 break;
             }
-            case CustomGameMode.RoomRush:
+            case CustomGamemodes.RoomRush:
             {
                 Color color = ColorUtility.TryParseHtmlString("#ffab1b", out Color c) ? c : new(255, 255, 255, 255);
                 __instance.YouAreText.transform.gameObject.SetActive(false);
@@ -241,7 +241,7 @@ internal static class SetUpRoleTextPatch
                 __instance.RoleBlurbText.text = GetString("RRPlayerInfo");
                 break;
             }
-            case CustomGameMode.KingOfTheZones:
+            case CustomGamemodes.KingOfTheZones:
             {
                 Color color = ColorUtility.TryParseHtmlString("#ff0000", out Color c) ? c : new(255, 255, 255, 255);
                 __instance.YouAreText.transform.gameObject.SetActive(false);
@@ -251,7 +251,7 @@ internal static class SetUpRoleTextPatch
                 __instance.RoleBlurbText.text = GetString("KOTZPlayerInfo");
                 break;
             }
-            case CustomGameMode.Quiz:
+            case CustomGamemodes.Quiz:
             {
                 Color color = Utils.GetRoleColor(CustomRoles.QuizMaster);
                 __instance.YouAreText.transform.gameObject.SetActive(false);
@@ -261,7 +261,7 @@ internal static class SetUpRoleTextPatch
                 __instance.RoleBlurbText.text = GetString("QuizPlayerInfo");
                 break;
             }
-            case CustomGameMode.TheMindGame:
+            case CustomGamemodes.TheMindGame:
             {
                 Color color = Color.yellow;
                 __instance.YouAreText.transform.gameObject.SetActive(false);
@@ -271,7 +271,7 @@ internal static class SetUpRoleTextPatch
                 __instance.RoleBlurbText.text = GetString("TMGPlayerInfo");
                 break;
             }
-            case CustomGameMode.BedWars:
+            case CustomGamemodes.BedWars:
             {
                 Color color = Utils.GetRoleColor(CustomRoles.BedWarsPlayer);
                 __instance.YouAreText.transform.gameObject.SetActive(false);
@@ -281,7 +281,7 @@ internal static class SetUpRoleTextPatch
                 __instance.RoleBlurbText.text = GetString("BedWarsPlayerInfo");
                 break;
             }
-            case CustomGameMode.Deathrace:
+            case CustomGamemodes.Deathrace:
             {
                 Color color = Utils.GetRoleColor(CustomRoles.Racer);
                 __instance.YouAreText.transform.gameObject.SetActive(false);
@@ -291,7 +291,7 @@ internal static class SetUpRoleTextPatch
                 __instance.RoleBlurbText.text = GetString("RacerInfo");
                 break;
             }
-            case CustomGameMode.Mingle:
+            case CustomGamemodes.Mingle:
             {
                 Color color = Utils.GetRoleColor(CustomRoles.MinglePlayer);
                 __instance.YouAreText.transform.gameObject.SetActive(false);
@@ -301,7 +301,7 @@ internal static class SetUpRoleTextPatch
                 __instance.RoleBlurbText.text = GetString("MinglePlayerInfo");
                 break;
             }
-            case CustomGameMode.Snowdown:
+            case CustomGamemodes.Snowdown:
             {
                 Color color = Utils.GetRoleColor(CustomRoles.SnowdownPlayer);
                 __instance.YouAreText.transform.gameObject.SetActive(false);
@@ -509,7 +509,7 @@ internal static class BeginCrewmatePatch
             }
         }
 
-        if (Options.CurrentGameMode == CustomGameMode.FFA && FreeForAll.FFATeamMode.GetBool() && FreeForAll.PlayerTeams.TryGetValue(PlayerControl.LocalPlayer.PlayerId, out int ffaTeam))
+        if (Options.CurrentGameMode == CustomGamemodes.FFA && FreeForAll.FFATeamMode.GetBool() && FreeForAll.PlayerTeams.TryGetValue(PlayerControl.LocalPlayer.PlayerId, out int ffaTeam))
         {
             teamToDisplay = new();
 
@@ -873,7 +873,7 @@ internal static class BeginCrewmatePatch
 
         switch (Options.CurrentGameMode)
         {
-            case CustomGameMode.SoloPVP:
+            case CustomGamemodes.SoloPVP:
             {
                 __instance.TeamTitle.text = GetString("Challenger");
                 __instance.TeamTitle.color = __instance.BackgroundBar.material.color = new Color32(245, 82, 82, byte.MaxValue);
@@ -882,7 +882,7 @@ internal static class BeginCrewmatePatch
                 __instance.ImpostorText.text = GetString("ChallengerInfo");
                 break;
             }
-            case CustomGameMode.FFA:
+            case CustomGamemodes.FFA:
             {
                 __instance.TeamTitle.text = GetString("Killer");
                 Color color = FreeForAll.PlayerTeams.TryGetValue(PlayerControl.LocalPlayer.PlayerId, out int team) && FreeForAll.TeamColors.TryGetValue(team, out var teamColorHex) && ColorUtility.TryParseHtmlString(teamColorHex, out Color teamColor) ? teamColor : new(0, 255, 255, byte.MaxValue);
@@ -892,7 +892,7 @@ internal static class BeginCrewmatePatch
                 __instance.ImpostorText.text = GetString("KillerInfo");
                 break;
             }
-            case CustomGameMode.StopAndGo:
+            case CustomGamemodes.StopAndGo:
             {
                 __instance.TeamTitle.text = GetString("StopAndGo");
                 __instance.TeamTitle.color = __instance.BackgroundBar.material.color = new Color32(0, 255, 165, byte.MaxValue);
@@ -901,7 +901,7 @@ internal static class BeginCrewmatePatch
                 __instance.ImpostorText.text = GetString("TaskerInfo");
                 break;
             }
-            case CustomGameMode.HotPotato:
+            case CustomGamemodes.HotPotato:
             {
                 __instance.TeamTitle.text = GetString("HotPotato");
                 __instance.TeamTitle.color = __instance.BackgroundBar.material.color = new Color32(232, 205, 70, byte.MaxValue);
@@ -910,7 +910,7 @@ internal static class BeginCrewmatePatch
                 __instance.ImpostorText.text = GetString("PotatoInfo");
                 break;
             }
-            case CustomGameMode.Speedrun:
+            case CustomGamemodes.Speedrun:
             {
                 __instance.TeamTitle.text = GetString("Runner");
                 __instance.TeamTitle.color = __instance.BackgroundBar.material.color = Utils.GetRoleColor(CustomRoles.Speedrunner);
@@ -919,7 +919,7 @@ internal static class BeginCrewmatePatch
                 __instance.ImpostorText.text = GetString("RunnerInfo");
                 break;
             }
-            case CustomGameMode.HideAndSeek:
+            case CustomGamemodes.HideAndSeek:
             {
                 __instance.TeamTitle.text = GetString("HideAndSeek");
                 __instance.TeamTitle.color = __instance.BackgroundBar.material.color = new Color32(52, 94, 235, byte.MaxValue);
@@ -928,7 +928,7 @@ internal static class BeginCrewmatePatch
                 __instance.ImpostorText.text = GetString("SubText.HideAndSeek");
                 break;
             }
-            case CustomGameMode.CaptureTheFlag:
+            case CustomGamemodes.CaptureTheFlag:
             {
                 __instance.TeamTitle.text = $"<size=70%>{GetString("CTFPlayer")}</size>";
                 __instance.TeamTitle.color = __instance.BackgroundBar.material.color = new Color32(19, 19, 194, byte.MaxValue);
@@ -937,7 +937,7 @@ internal static class BeginCrewmatePatch
                 __instance.ImpostorText.text = GetString("CTFPlayerInfo");
                 break;
             }
-            case CustomGameMode.NaturalDisasters:
+            case CustomGamemodes.NaturalDisasters:
             {
                 __instance.TeamTitle.text = $"<size=70%>{GetString("NDPlayer")}</size>";
                 __instance.TeamTitle.color = __instance.BackgroundBar.material.color = new Color32(3, 252, 74, byte.MaxValue);
@@ -946,7 +946,7 @@ internal static class BeginCrewmatePatch
                 __instance.ImpostorText.text = GetString("NDPlayerInfo");
                 break;
             }
-            case CustomGameMode.RoomRush:
+            case CustomGamemodes.RoomRush:
             {
                 __instance.TeamTitle.text = GetString("RRPlayer");
                 __instance.TeamTitle.color = __instance.BackgroundBar.material.color = new Color32(255, 171, 27, byte.MaxValue);
@@ -955,7 +955,7 @@ internal static class BeginCrewmatePatch
                 __instance.ImpostorText.text = GetString("RRPlayerInfo");
                 break;
             }
-            case CustomGameMode.KingOfTheZones:
+            case CustomGamemodes.KingOfTheZones:
             {
                 __instance.TeamTitle.text = $"<size=70%>{GetString("KOTZPlayer")}</size>";
                 __instance.TeamTitle.color = __instance.BackgroundBar.material.color = new Color32(255, 0, 0, byte.MaxValue);
@@ -964,7 +964,7 @@ internal static class BeginCrewmatePatch
                 __instance.ImpostorText.text = GetString("KOTZPlayerInfo");
                 break;
             }
-            case CustomGameMode.Quiz:
+            case CustomGamemodes.Quiz:
             {
                 __instance.TeamTitle.text = GetString("QuizPlayer");
                 __instance.TeamTitle.color = __instance.BackgroundBar.material.color = Utils.GetRoleColor(CustomRoles.QuizMaster);
@@ -973,7 +973,7 @@ internal static class BeginCrewmatePatch
                 __instance.ImpostorText.text = GetString("QuizPlayerInfo");
                 break;
             }
-            case CustomGameMode.TheMindGame:
+            case CustomGamemodes.TheMindGame:
             {
                 __instance.TeamTitle.text = GetString("TMGPlayer");
                 __instance.TeamTitle.color = __instance.BackgroundBar.material.color = Color.yellow;
@@ -982,7 +982,7 @@ internal static class BeginCrewmatePatch
                 __instance.ImpostorText.text = GetString("TMGPlayerInfo");
                 break;
             }
-            case CustomGameMode.BedWars:
+            case CustomGamemodes.BedWars:
             {
                 __instance.TeamTitle.text = GetString("BedWarsPlayer");
                 __instance.TeamTitle.color = __instance.BackgroundBar.material.color = Utils.GetRoleColor(CustomRoles.BedWarsPlayer);
@@ -991,7 +991,7 @@ internal static class BeginCrewmatePatch
                 __instance.ImpostorText.text = GetString("BedWarsPlayerInfo");
                 break;
             }
-            case CustomGameMode.Deathrace:
+            case CustomGamemodes.Deathrace:
             {
                 __instance.TeamTitle.text = GetString("Racer");
                 __instance.TeamTitle.color = __instance.BackgroundBar.material.color = Utils.GetRoleColor(CustomRoles.Racer);
@@ -1000,7 +1000,7 @@ internal static class BeginCrewmatePatch
                 __instance.ImpostorText.text = GetString("RacerInfo");
                 break;
             }
-            case CustomGameMode.Mingle:
+            case CustomGamemodes.Mingle:
             {
                 __instance.TeamTitle.text = GetString("MinglePlayer");
                 __instance.TeamTitle.color = __instance.BackgroundBar.material.color = Utils.GetRoleColor(CustomRoles.MinglePlayer);
@@ -1009,7 +1009,7 @@ internal static class BeginCrewmatePatch
                 __instance.ImpostorText.text = GetString("MinglePlayerInfo");
                 break;
             }
-            case CustomGameMode.Snowdown:
+            case CustomGamemodes.Snowdown:
             {
                 __instance.TeamTitle.text = GetString("SnowdownPlayer");
                 __instance.TeamTitle.color = __instance.BackgroundBar.material.color = Utils.GetRoleColor(CustomRoles.SnowdownPlayer);
@@ -1146,7 +1146,7 @@ internal static class IntroCutsceneDestroyPatch
             
             if (Main.NormalOptions.MapId != 4)
             {
-                if (Options.CurrentGameMode == CustomGameMode.Standard)
+                if (Options.CurrentGameMode == CustomGamemodes.Standard)
                 {
                     if (Options.FixFirstKillCooldown.GetBool())
                     {
@@ -1171,8 +1171,8 @@ internal static class IntroCutsceneDestroyPatch
 
             switch (Options.CurrentGameMode)
             {
-                case CustomGameMode.FFA when FreeForAll.FFAChatDuringGame.GetBool():
-                case CustomGameMode.Quiz when Quiz.Chat:
+                case CustomGamemodes.FFA when FreeForAll.FFAChatDuringGame.GetBool():
+                case CustomGamemodes.Quiz when Quiz.Chat:
                     Utils.SetChatVisibleForAll();
                     break;
             }
@@ -1215,7 +1215,7 @@ internal static class IntroCutsceneDestroyPatch
                 }
             }, 0.1f, log: false);
 
-            if (Options.UsePets.GetBool() && Options.CurrentGameMode is CustomGameMode.Standard or CustomGameMode.HideAndSeek or CustomGameMode.CaptureTheFlag or CustomGameMode.BedWars or CustomGameMode.Snowdown)
+            if (Options.UsePets.GetBool() && Options.CurrentGameMode is CustomGamemodes.Standard or CustomGamemodes.HideAndSeek or CustomGamemodes.CaptureTheFlag or CustomGamemodes.BedWars or CustomGamemodes.Snowdown)
             {
                 void GrantPetForEveryone()
                 {
@@ -1277,7 +1277,7 @@ internal static class IntroCutsceneDestroyPatch
             }
             catch (Exception e) { Utils.ThrowException(e); }
 
-            if (Options.RandomSpawn.GetBool() && Main.CurrentMap != MapNames.Airship && AmongUsClient.Instance.AmHost && Options.CurrentGameMode is not CustomGameMode.CaptureTheFlag and not CustomGameMode.KingOfTheZones and not CustomGameMode.BedWars and not CustomGameMode.Deathrace)
+            if (Options.RandomSpawn.GetBool() && Main.CurrentMap != MapNames.Airship && AmongUsClient.Instance.AmHost && Options.CurrentGameMode is not CustomGamemodes.CaptureTheFlag and not CustomGamemodes.KingOfTheZones and not CustomGamemodes.BedWars and not CustomGamemodes.Deathrace)
             {
                 var map = RandomSpawn.SpawnMap.GetSpawnMap();
                 aapc.Do(map.RandomTeleport);
@@ -1308,37 +1308,37 @@ internal static class IntroCutsceneDestroyPatch
 
             switch (Options.CurrentGameMode)
             {
-                case CustomGameMode.KingOfTheZones:
+                case CustomGamemodes.KingOfTheZones:
                     Main.Instance.StartCoroutine(KingOfTheZones.GameStart());
                     break;
-                case CustomGameMode.HotPotato:
+                case CustomGamemodes.HotPotato:
                     HotPotato.OnGameStart();
                     break;
-                case CustomGameMode.Quiz:
+                case CustomGamemodes.Quiz:
                     Main.Instance.StartCoroutine(Quiz.OnGameStart());
                     break;
-                case CustomGameMode.StopAndGo:
+                case CustomGamemodes.StopAndGo:
                     StopAndGo.OnGameStart();
                     break;
-                case CustomGameMode.TheMindGame:
+                case CustomGamemodes.TheMindGame:
                     Main.Instance.StartCoroutine(TheMindGame.OnGameStart());
                     break;
-                case CustomGameMode.CaptureTheFlag:
+                case CustomGamemodes.CaptureTheFlag:
                     Main.Instance.StartCoroutine(CaptureTheFlag.OnGameStart());
                     break;
-                case CustomGameMode.RoomRush:
+                case CustomGamemodes.RoomRush:
                     Main.Instance.StartCoroutine(RoomRush.GameStartTasks());
                     break;
-                case CustomGameMode.BedWars:
+                case CustomGamemodes.BedWars:
                     Main.Instance.StartCoroutine(BedWars.OnGameStart());
                     break;
-                case CustomGameMode.Deathrace:
+                case CustomGamemodes.Deathrace:
                     Main.Instance.StartCoroutine(Deathrace.GameStart());
                     break;
-                case CustomGameMode.Mingle:
+                case CustomGamemodes.Mingle:
                     Main.Instance.StartCoroutine(Mingle.GameStart());
                     break;
-                case CustomGameMode.Snowdown:
+                case CustomGamemodes.Snowdown:
                     Snowdown.GameStart();
                     break;
             }
@@ -1355,7 +1355,7 @@ internal static class IntroCutsceneDestroyPatch
             foreach (PlayerControl player in Main.AllPlayerControls)
                 Main.PlayerStates[player.PlayerId].InitTask(player);
             
-            if (Options.CurrentGameMode == CustomGameMode.Snowdown)
+            if (Options.CurrentGameMode == CustomGamemodes.Snowdown)
                 Snowdown.GameStart();
         }
 
@@ -1385,7 +1385,7 @@ internal static class IntroCutsceneDestroyPatch
             
             hud.SetRolePanelOpen(true);
             
-            if (Options.CurrentGameMode is CustomGameMode.Standard or CustomGameMode.HideAndSeek && !Utils.HasTasks(PlayerControl.LocalPlayer.Data, forRecompute: false))
+            if (Options.CurrentGameMode is CustomGamemodes.Standard or CustomGamemodes.HideAndSeek && !Utils.HasTasks(PlayerControl.LocalPlayer.Data, forRecompute: false))
                 hud.TaskPanel.open = false;
             
             if (!AmongUsClient.Instance.AmHost || !Lovers.PrivateChat.GetBool()) return;

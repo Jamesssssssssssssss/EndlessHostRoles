@@ -27,6 +27,8 @@ public class Spider : StandardRoleBase
     private bool NameDirty;
     private byte SpiderId;
 
+    public override CustomGamemodes GamemodeId => CustomGamemodes.Standard;
+    public override CustomRoles RoleId => CustomRoles.Spider;
     public override Team Faction => Team.Neutral;
     public override RoleOptionType? Alignment => RoleOptionType.Neutral_Killing;
 

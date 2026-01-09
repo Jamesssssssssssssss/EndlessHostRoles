@@ -18,7 +18,7 @@ public class Altruist : StandardRoleBase
 
     private static HashSet<byte> RevivedPlayers = [];
 
-    private byte AlturistId;
+    private byte AltruistId;
 
     public long ReviveStartTS;
     private byte ReviveTarget;
@@ -28,6 +28,8 @@ public class Altruist : StandardRoleBase
 
     public override bool IsEnable => On;
 
+    public override CustomGamemodes GamemodeId => CustomGamemodes.Standard;
+    public override CustomRoles RoleId => CustomRoles.Altruist;
     public override Team Faction => Team.Crewmate;
     public override RoleOptionType? Alignment => RoleOptionType.Crewmate_Support;
 
@@ -52,7 +54,7 @@ public class Altruist : StandardRoleBase
         RevivingMode = true;
         ReviveTarget = byte.MaxValue;
         ReviveStartTS = 0;
-        AlturistId = playerId;
+        AltruistId = playerId;
         ReviveTargetPos = Vector2.zero;
         RevivedPlayers = [];
     }
@@ -160,7 +162,7 @@ public class Altruist : StandardRoleBase
 
     public override string GetSuffix(PlayerControl seer, PlayerControl target, bool hud = false, bool meeting = false)
     {
-        if (seer.PlayerId != target.PlayerId || seer.PlayerId != AlturistId || (seer.IsModdedClient() && !hud) || meeting) return string.Empty;
+        if (seer.PlayerId != target.PlayerId || seer.PlayerId != AltruistId || (seer.IsModdedClient() && !hud) || meeting) return string.Empty;
         if (ReviveStartTS != 0) return string.Format(Translator.GetString("AltruistSuffixRevive"), ReviveTime.GetInt() - (Utils.TimeStamp - ReviveStartTS));
         return string.Format(Translator.GetString("AltruistSuffix"), Translator.GetString(RevivingMode ? "AltruistReviveMode" : "AltruistReportMode"));
     }

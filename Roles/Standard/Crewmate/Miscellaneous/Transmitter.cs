@@ -18,6 +18,8 @@ public class Transmitter : StandardRoleBase
         On = false;
     }
 
+    public override CustomGamemodes GamemodeId => CustomGamemodes.Standard;
+    public override CustomRoles RoleId => CustomRoles.Transmitter;
     public override Team Faction => Team.Crewmate;
     public override RoleOptionType? Alignment => RoleOptionType.Crewmate_Miscellaneous;
 

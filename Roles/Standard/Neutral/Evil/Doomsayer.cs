@@ -33,6 +33,8 @@ public class Doomsayer : StandardRoleBase
 
     public override bool IsEnable => PlayerIdList.Count > 0;
 
+    public override CustomGamemodes GamemodeId => CustomGamemodes.Standard;
+    public override CustomRoles RoleId => CustomRoles.Doomsayer;
     public override Team Faction => Team.Neutral;
     public override RoleOptionType? Alignment => RoleOptionType.Neutral_Evil;
 

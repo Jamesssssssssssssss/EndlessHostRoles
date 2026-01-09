@@ -21,6 +21,8 @@ public class Retributionist : StandardRoleBase
     public bool Notified;
     private PlayerControl RetributionistPC;
 
+    public override CustomGamemodes GamemodeId => CustomGamemodes.Standard;
+    public override CustomRoles RoleId => CustomRoles.Retributionist;
     public override Team Faction => Team.Crewmate;
     public override RoleOptionType? Alignment => RoleOptionType.Crewmate_Killing;
 

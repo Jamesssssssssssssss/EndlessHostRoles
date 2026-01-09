@@ -204,7 +204,7 @@ public static class ChatManager
 
         switch (Options.CurrentGameMode)
         {
-            case CustomGameMode.FFA when GameStates.InGame && !message.StartsWith('/'):
+            case CustomGamemodes.FFA when GameStates.InGame && !message.StartsWith('/'):
                 FreeForAll.UpdateLastChatMessage(player.GetRealName(), message);
                 break;
         }

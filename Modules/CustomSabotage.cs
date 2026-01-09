@@ -53,7 +53,7 @@ public abstract class CustomSabotage
     
     public static string GetAllSuffix(PlayerControl seer, PlayerControl target, bool hud, bool meeting)
     {
-        if (!AmongUsClient.Instance.AmHost || Options.CurrentGameMode != CustomGameMode.Standard) return string.Empty;
+        if (!AmongUsClient.Instance.AmHost || Options.CurrentGameMode != CustomGamemodes.Standard) return string.Empty;
         
         StringBuilder suffix = new();
 

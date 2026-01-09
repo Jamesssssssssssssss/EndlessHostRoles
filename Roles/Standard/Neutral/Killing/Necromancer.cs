@@ -29,6 +29,8 @@ internal class Necromancer : StandardRoleBase
 
     public override bool IsEnable => NecromancerId != byte.MaxValue;
 
+    public override CustomGamemodes GamemodeId => CustomGamemodes.Standard;
+    public override CustomRoles RoleId => CustomRoles.Necromancer;
     public override Team Faction => Team.Neutral;
     public override RoleOptionType? Alignment => RoleOptionType.Neutral_Killing;
 
@@ -180,6 +182,8 @@ internal class Deathknight : StandardRoleBase
 
     public override bool IsEnable => DeathknightId != byte.MaxValue;
 
+    public override CustomGamemodes GamemodeId => CustomGamemodes.Standard;
+    public override CustomRoles RoleId => CustomRoles.Deathknight;
     public override Team Faction => Team.Neutral;
     public override RoleOptionType? Alignment => RoleOptionType.Neutral_Killing;
 

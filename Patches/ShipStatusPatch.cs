@@ -89,7 +89,7 @@ internal static class RepairSystemPatch
 
         if (!AmongUsClient.Instance.AmHost) return true; // Execute the following only on the host
 
-        if ((Options.CurrentGameMode is not (CustomGameMode.Standard or CustomGameMode.Snowdown) || Options.DisableSabotage.GetBool()) && systemType == SystemTypes.Sabotage) return false;
+        if ((Options.CurrentGameMode is not (CustomGamemodes.Standard or CustomGamemodes.Snowdown) || Options.DisableSabotage.GetBool()) && systemType == SystemTypes.Sabotage) return false;
         if (player.Is(CustomRoles.Fool) && systemType is SystemTypes.Comms or SystemTypes.Electrical) return false;
 
         if (SubmergedCompatibility.IsSubmerged() && systemType is not (SystemTypes.Electrical or SystemTypes.Comms)) return true;
@@ -251,7 +251,7 @@ internal static class CloseDoorsPatch
 {
     public static bool Prefix([HarmonyArgument(0)] SystemTypes room)
     {
-        bool allow = !Options.DisableSabotage.GetBool() && !AntiBlackout.SkipTasks && Options.CurrentGameMode is not CustomGameMode.SoloPVP and not CustomGameMode.FFA and not CustomGameMode.StopAndGo and not CustomGameMode.HotPotato and not CustomGameMode.Speedrun and not CustomGameMode.CaptureTheFlag and not CustomGameMode.NaturalDisasters and not CustomGameMode.RoomRush and not CustomGameMode.KingOfTheZones and not CustomGameMode.Quiz and not CustomGameMode.TheMindGame and not CustomGameMode.BedWars and not CustomGameMode.Deathrace and not CustomGameMode.Mingle and not CustomGameMode.Snowdown;
+        bool allow = !Options.DisableSabotage.GetBool() && !AntiBlackout.SkipTasks && Options.CurrentGameMode is not CustomGamemodes.SoloPVP and not CustomGamemodes.FFA and not CustomGamemodes.StopAndGo and not CustomGamemodes.HotPotato and not CustomGamemodes.Speedrun and not CustomGamemodes.CaptureTheFlag and not CustomGamemodes.NaturalDisasters and not CustomGamemodes.RoomRush and not CustomGamemodes.KingOfTheZones and not CustomGamemodes.Quiz and not CustomGamemodes.TheMindGame and not CustomGamemodes.BedWars and not CustomGamemodes.Deathrace and not CustomGamemodes.Mingle and not CustomGamemodes.Snowdown;
 
         if (Doorjammer.JammedRooms.Contains(room)) allow = false;
         if (SecurityGuard.BlockSabo.Count > 0) allow = false;
@@ -302,7 +302,7 @@ internal static class CheckTaskCompletionPatch
 {
     public static bool Prefix(ref bool __result)
     {
-        if (Options.DisableTaskWin.GetBool() || Options.NoGameEnd.GetBool() || TaskState.InitialTotalTasks == 0 || (Options.DisableTaskWinIfAllCrewsAreDead.GetBool() && !Main.AllAlivePlayerControls.Any(x => x.Is(CustomRoleTypes.Crewmate))) || (Options.DisableTaskWinIfAllCrewsAreConverted.GetBool() && Main.AllAlivePlayerControls.Where(x => x.Is(Team.Crewmate) && x.GetRoleTypes() is RoleTypes.Crewmate or RoleTypes.Engineer or RoleTypes.Scientist or RoleTypes.CrewmateGhost or RoleTypes.GuardianAngel).All(x => x.IsConverted())) || Options.CurrentGameMode != CustomGameMode.Standard)
+        if (Options.DisableTaskWin.GetBool() || Options.NoGameEnd.GetBool() || TaskState.InitialTotalTasks == 0 || (Options.DisableTaskWinIfAllCrewsAreDead.GetBool() && !Main.AllAlivePlayerControls.Any(x => x.Is(CustomRoleTypes.Crewmate))) || (Options.DisableTaskWinIfAllCrewsAreConverted.GetBool() && Main.AllAlivePlayerControls.Where(x => x.Is(Team.Crewmate) && x.GetRoleTypes() is RoleTypes.Crewmate or RoleTypes.Engineer or RoleTypes.Scientist or RoleTypes.CrewmateGhost or RoleTypes.GuardianAngel).All(x => x.IsConverted())) || Options.CurrentGameMode != CustomGamemodes.Standard)
         {
             __result = false;
             return false;
@@ -328,7 +328,7 @@ public static class HauntMenuMinigameSetHauntTargetPatch
 {
     public static bool Prefix(HauntMenuMinigame __instance, [HarmonyArgument(0)] PlayerControl target)
     {
-        if (Options.CurrentGameMode == CustomGameMode.Quiz && Quiz.AllowKills) return false;
+        if (Options.CurrentGameMode == CustomGamemodes.Quiz && Quiz.AllowKills) return false;
 
         if (target == null)
         {
@@ -482,7 +482,7 @@ internal static class ShipStatusSerializePatch
 
         var hudOverrideSystem = __instance.Systems[SystemTypes.Comms].TryCast<HudOverrideSystemType>();
 
-        if (Options.CurrentGameMode == CustomGameMode.Standard && hudOverrideSystem is { IsDirty: true })
+        if (Options.CurrentGameMode == CustomGamemodes.Standard && hudOverrideSystem is { IsDirty: true })
         {
             SerializeHudOverrideSystemV2(hudOverrideSystem);
             hudOverrideSystem.IsDirty = false;
@@ -490,7 +490,7 @@ internal static class ShipStatusSerializePatch
 
         var hqHudSystem = __instance.Systems[SystemTypes.Comms].TryCast<HqHudSystemType>();
 
-        if (Options.CurrentGameMode == CustomGameMode.Standard && hqHudSystem is { IsDirty: true })
+        if (Options.CurrentGameMode == CustomGamemodes.Standard && hqHudSystem is { IsDirty: true })
         {
             SerializeHqHudSystemV2(hqHudSystem);
             hqHudSystem.IsDirty = false;

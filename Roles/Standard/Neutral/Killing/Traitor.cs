@@ -19,6 +19,8 @@ public class Traitor : StandardRoleBase
     private static OptionItem TraitorShapeshiftDur;
     public override bool IsEnable => PlayerIdList.Count > 0;
 
+    public override CustomGamemodes GamemodeId => CustomGamemodes.Standard;
+    public override CustomRoles RoleId => CustomRoles.Traitor;
     public override Team Faction => Team.Neutral;
     public override RoleOptionType? Alignment => RoleOptionType.Neutral_Killing;
 

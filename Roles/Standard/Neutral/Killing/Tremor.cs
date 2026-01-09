@@ -29,6 +29,8 @@ public class Tremor : StandardRoleBase
     public override bool IsEnable => On;
     public bool IsDoom => Timer <= 0;
 
+    public override CustomGamemodes GamemodeId => CustomGamemodes.Standard;
+    public override CustomRoles RoleId => CustomRoles.Tremor;
     public override Team Faction => Team.Neutral;
     public override RoleOptionType? Alignment => RoleOptionType.Neutral_Killing;
 

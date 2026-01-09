@@ -176,7 +176,7 @@ public class PlayerState(byte playerId)
             if (role == CustomRoles.Sidekick && Jackal.Instances.FindFirst(x => x.SidekickId == byte.MaxValue || x.SidekickId.GetPlayer() == null, out Jackal jackal))
                 jackal.SidekickId = PlayerId;
 
-            if (Options.CurrentGameMode == CustomGameMode.Standard && GameStates.IsInTask && !AntiBlackout.SkipTasks)
+            if (Options.CurrentGameMode == CustomGamemodes.Standard && GameStates.IsInTask && !AntiBlackout.SkipTasks)
                 Player.Notify(string.Format(Translator.GetString("RoleChangedNotify"), role.ToColoredString()), 10f);
 
             if (Options.UsePets.GetBool() && Player.CurrentOutfit.PetId == "")
@@ -188,7 +188,7 @@ public class PlayerState(byte playerId)
 
         CheckMurderPatch.TimeSinceLastKill.Remove(PlayerId);
 
-        if (!Main.IntroDestroyed || PlayerControl.LocalPlayer.PlayerId != PlayerId || Options.CurrentGameMode != CustomGameMode.Standard) return;
+        if (!Main.IntroDestroyed || PlayerControl.LocalPlayer.PlayerId != PlayerId || Options.CurrentGameMode != CustomGamemodes.Standard) return;
 
         RoleChangeTimes++;
         if (RoleChangeTimes >= 4) Achievements.Type.Transformer.Complete();
@@ -411,7 +411,7 @@ public class TaskState
             GameData.Instance.RecomputeTaskCounts();
             Logger.Info($"TotalTaskCounts = {GameData.Instance.CompletedTasks}/{GameData.Instance.TotalTasks}", "TaskState.Update");
 
-            if (Options.CurrentGameMode is CustomGameMode.HotPotato or CustomGameMode.NaturalDisasters or CustomGameMode.RoomRush or CustomGameMode.Quiz or CustomGameMode.TheMindGame or CustomGameMode.Mingle)
+            if (Options.CurrentGameMode is CustomGamemodes.HotPotato or CustomGamemodes.NaturalDisasters or CustomGamemodes.RoomRush or CustomGamemodes.Quiz or CustomGamemodes.TheMindGame or CustomGamemodes.Mingle)
                 player.Notify(Translator.GetString("DoingTasksIsPointlessInThisGameMode"), 10f);
 
             if (AllTasksCount == -1) Init(player);
@@ -424,7 +424,7 @@ public class TaskState
                 
                 bool alive = player.IsAlive();
 
-                if (alive && Options.CurrentGameMode == CustomGameMode.Speedrun)
+                if (alive && Options.CurrentGameMode == CustomGamemodes.Speedrun)
                 {
                     if (CompletedTasksCount + 1 >= AllTasksCount)
                         Speedrun.OnTaskFinish(player);

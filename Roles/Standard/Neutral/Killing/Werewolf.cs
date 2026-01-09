@@ -34,6 +34,8 @@ public class Werewolf : StandardRoleBase
     private bool CanRampage => GameStates.IsInTask && RampageTime == -10 && lastTime == -10;
     private bool IsRampaging => RampageTime != -10;
 
+    public override CustomGamemodes GamemodeId => CustomGamemodes.Standard;
+    public override CustomRoles RoleId => CustomRoles.Werewolf;
     public override Team Faction => Team.Neutral;
     public override RoleOptionType? Alignment => RoleOptionType.Neutral_Killing;
 

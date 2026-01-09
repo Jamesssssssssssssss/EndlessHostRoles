@@ -56,81 +56,81 @@ internal class FreeForAll : GamemodeBase
     public static void SetupCustomOption()
     {
         FFAGameTime = new IntegerOptionItem(67_223_001, "FFA_GameTime", new(30, 600, 10), 300, TabGroup.GameSettings)
-            .SetGameMode(CustomGameMode.FFA)
+            .SetGameMode(CustomGamemodes.FFA)
             .SetColor(new Color32(0, 255, 165, byte.MaxValue))
             .SetValueFormat(OptionFormat.Seconds)
             .SetHeader(true);
 
         FFAKcd = new FloatOptionItem(67_223_002, "FFA_KCD", new(1f, 60f, 1f), 10f, TabGroup.GameSettings)
-            .SetGameMode(CustomGameMode.FFA)
+            .SetGameMode(CustomGamemodes.FFA)
             .SetColor(new Color32(0, 255, 165, byte.MaxValue))
             .SetValueFormat(OptionFormat.Seconds);
 
         FFADisableVentingWhenTwoPlayersAlive = new BooleanOptionItem(67_223_003, "FFA_DisableVentingWhenTwoPlayersAlive", true, TabGroup.GameSettings)
-            .SetGameMode(CustomGameMode.FFA)
+            .SetGameMode(CustomGamemodes.FFA)
             .SetColor(new Color32(0, 255, 165, byte.MaxValue));
 
         FFADisableVentingWhenKcdIsUp = new BooleanOptionItem(67_223_004, "FFA_DisableVentingWhenKCDIsUp", true, TabGroup.GameSettings)
-            .SetGameMode(CustomGameMode.FFA)
+            .SetGameMode(CustomGamemodes.FFA)
             .SetColor(new Color32(0, 255, 165, byte.MaxValue));
 
         FFAEnableRandomAbilities = new BooleanOptionItem(67_223_005, "FFA_EnableRandomAbilities", true, TabGroup.GameSettings)
-            .SetGameMode(CustomGameMode.FFA)
+            .SetGameMode(CustomGamemodes.FFA)
             .SetColor(new Color32(0, 255, 165, byte.MaxValue));
 
         FFAShieldDuration = new FloatOptionItem(67_223_006, "FFA_ShieldDuration", new(1f, 70f, 1f), 7f, TabGroup.GameSettings)
-            .SetGameMode(CustomGameMode.FFA)
+            .SetGameMode(CustomGamemodes.FFA)
             .SetColor(new Color32(0, 255, 165, byte.MaxValue))
             .SetValueFormat(OptionFormat.Seconds);
 
         FFAIncreasedSpeed = new FloatOptionItem(67_223_007, "FFA_IncreasedSpeed", new(0.1f, 5f, 0.1f), 1.5f, TabGroup.GameSettings)
-            .SetGameMode(CustomGameMode.FFA)
+            .SetGameMode(CustomGamemodes.FFA)
             .SetColor(new Color32(0, 255, 165, byte.MaxValue))
             .SetValueFormat(OptionFormat.Multiplier);
 
         FFADecreasedSpeed = new FloatOptionItem(67_223_008, "FFA_DecreasedSpeed", new(0.1f, 5f, 0.1f), 1f, TabGroup.GameSettings)
-            .SetGameMode(CustomGameMode.FFA)
+            .SetGameMode(CustomGamemodes.FFA)
             .SetColor(new Color32(0, 255, 165, byte.MaxValue))
             .SetValueFormat(OptionFormat.Multiplier);
 
         FFAModifiedSpeedDuration = new FloatOptionItem(67_223_009, "FFA_ModifiedSpeedDuration", new(1f, 60f, 1f), 10f, TabGroup.GameSettings)
-            .SetGameMode(CustomGameMode.FFA).SetColor(new Color32(0, 255, 165, byte.MaxValue))
+            .SetGameMode(CustomGamemodes.FFA).SetColor(new Color32(0, 255, 165, byte.MaxValue))
             .SetValueFormat(OptionFormat.Seconds);
 
         FFALowerVision = new FloatOptionItem(67_223_010, "FFA_LowerVision", new(0f, 1f, 0.05f), 0.5f, TabGroup.GameSettings)
-            .SetGameMode(CustomGameMode.FFA).SetColor(new Color32(0, 255, 165, byte.MaxValue))
+            .SetGameMode(CustomGamemodes.FFA).SetColor(new Color32(0, 255, 165, byte.MaxValue))
             .SetValueFormat(OptionFormat.Multiplier);
 
         FFAModifiedVisionDuration = new FloatOptionItem(67_223_011, "FFA_ModifiedVisionDuration", new(1f, 70f, 1f), 5f, TabGroup.GameSettings)
-            .SetGameMode(CustomGameMode.FFA).SetColor(new Color32(0, 255, 165, byte.MaxValue))
+            .SetGameMode(CustomGamemodes.FFA).SetColor(new Color32(0, 255, 165, byte.MaxValue))
             .SetValueFormat(OptionFormat.Seconds);
 
         FFAEnableRandomTwists = new BooleanOptionItem(67_223_012, "FFA_EnableRandomTwists", true, TabGroup.GameSettings)
-            .SetGameMode(CustomGameMode.FFA)
+            .SetGameMode(CustomGamemodes.FFA)
             .SetColor(new Color32(0, 255, 165, byte.MaxValue));
 
         FFAShieldIsOneTimeUse = new BooleanOptionItem(67_223_013, "FFA_ShieldIsOneTimeUse", true, TabGroup.GameSettings)
-            .SetGameMode(CustomGameMode.FFA)
+            .SetGameMode(CustomGamemodes.FFA)
             .SetColor(new Color32(0, 255, 165, byte.MaxValue));
 
         FFAChatDuringGame = new BooleanOptionItem(67_223_014, "FFA_ChatDuringGame", false, TabGroup.GameSettings)
-            .SetGameMode(CustomGameMode.FFA)
+            .SetGameMode(CustomGamemodes.FFA)
             .SetColor(new Color32(0, 255, 165, byte.MaxValue));
 
         FFATeamMode = new BooleanOptionItem(67_223_015, "FFA_TeamMode", false, TabGroup.GameSettings)
-            .SetGameMode(CustomGameMode.FFA)
+            .SetGameMode(CustomGamemodes.FFA)
             .SetHeader(true)
             .SetColor(new Color32(0, 255, 165, byte.MaxValue));
 
         FFATeamNumber = new IntegerOptionItem(67_223_016, "FFA_TeamNumber", new(2, 8, 1), 2, TabGroup.GameSettings)
             .SetParent(FFATeamMode)
-            .SetGameMode(CustomGameMode.FFA)
+            .SetGameMode(CustomGamemodes.FFA)
             .SetColor(new Color32(0, 255, 165, byte.MaxValue));
     }
 
     public static void Init()
     {
-        if (Options.CurrentGameMode != CustomGameMode.FFA) return;
+        if (Options.CurrentGameMode != CustomGamemodes.FFA) return;
 
         FFADecreasedSpeedList = [];
         FFAIncreasedSpeedList = [];
@@ -189,7 +189,7 @@ internal class FreeForAll : GamemodeBase
     {
         try
         {
-            if (killer == null || target == null || Options.CurrentGameMode != CustomGameMode.FFA) return;
+            if (killer == null || target == null || Options.CurrentGameMode != CustomGamemodes.FFA) return;
 
             if (target.inVent)
             {
@@ -378,7 +378,7 @@ internal class FreeForAll : GamemodeBase
 
         public static void Postfix()
         {
-            if (!Main.IntroDestroyed || !GameStates.IsInTask || ExileController.Instance || Options.CurrentGameMode != CustomGameMode.FFA || !AmongUsClient.Instance.AmHost) return;
+            if (!Main.IntroDestroyed || !GameStates.IsInTask || ExileController.Instance || Options.CurrentGameMode != CustomGamemodes.FFA || !AmongUsClient.Instance.AmHost) return;
 
             long now = Utils.TimeStamp;
             if (LastFixedUpdate == now) return;

@@ -22,6 +22,8 @@ public class Vacuum : StandardRoleBase
     private byte VacuumId;
     private long AbilityEndTS;
 
+    public override CustomGamemodes GamemodeId => CustomGamemodes.Standard;
+    public override CustomRoles RoleId => CustomRoles.Vacuum;
     public override Team Faction => Team.Crewmate;
     public override RoleOptionType? Alignment => RoleOptionType.Crewmate_Miscellaneous;
 

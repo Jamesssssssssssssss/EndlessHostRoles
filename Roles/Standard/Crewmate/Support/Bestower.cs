@@ -15,6 +15,8 @@ public class Bestower : StandardRoleBase
     private static OptionItem GivenUses;
     public static OptionItem UsePet;
 
+    public override CustomGamemodes GamemodeId => CustomGamemodes.Standard;
+    public override CustomRoles RoleId => CustomRoles.Bestower;
     public override Team Faction => Team.Crewmate;
     public override RoleOptionType? Alignment => RoleOptionType.Crewmate_Support;
 

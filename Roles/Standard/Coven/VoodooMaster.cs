@@ -15,6 +15,8 @@ public class VoodooMaster : CovenBase
 
     public override bool IsEnable => On;
 
+    public override CustomGamemodes GamemodeId => CustomGamemodes.Standard;
+    public override CustomRoles RoleId => CustomRoles.VoodooMaster;
     public override Team Faction => Team.Coven;
     public override RoleOptionType? Alignment => RoleOptionType.Coven_Miscellaneous;
 

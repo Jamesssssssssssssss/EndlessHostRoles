@@ -26,7 +26,7 @@ public abstract class OptionItem
 
         NameColor = Color.white;
         ValueFormat = OptionFormat.None;
-        GameMode = CustomGameMode.All;
+        GameMode = CustomGamemodes.All;
         IsHeader = false;
         IsHidden = false;
         IsText = false;
@@ -60,7 +60,7 @@ public abstract class OptionItem
 
     public Color NameColor { get; set; }
     private OptionFormat ValueFormat { get; set; }
-    public CustomGameMode GameMode { get; private set; }
+    public CustomGamemodes GameMode { get; private set; }
     public bool IsHeader { get; protected set; }
     private bool IsHidden { get; set; }
     public bool IsText { get; protected set; }
@@ -111,7 +111,7 @@ public abstract class OptionItem
         return Do(i => i.ValueFormat = value);
     }
 
-    public OptionItem SetGameMode(CustomGameMode value)
+    public OptionItem SetGameMode(CustomGamemodes value)
     {
         return Do(i => i.GameMode = value);
     }
@@ -244,9 +244,9 @@ public abstract class OptionItem
         static bool Hidden(OptionItem oi)
         {
             if (oi.Header is { CollapsesSection: true }) return true;
-            CustomGameMode mode = EHR.Options.CurrentGameMode;
-            const CustomGameMode nd = CustomGameMode.NaturalDisasters;
-            return (oi.IsHidden || (oi.GameMode != CustomGameMode.All && oi.GameMode != mode) ||
+            CustomGamemodes mode = EHR.Options.CurrentGameMode;
+            const CustomGamemodes nd = CustomGamemodes.NaturalDisasters;
+            return (oi.IsHidden || (oi.GameMode != CustomGamemodes.All && oi.GameMode != mode) ||
                     (oi.Name == "IntegrateNaturalDisasters" && mode == nd)) &&
                    !(oi.GameMode == nd && EHR.Options.IntegrateNaturalDisasters.GetBool());
         }

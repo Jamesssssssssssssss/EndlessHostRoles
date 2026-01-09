@@ -38,24 +38,24 @@ internal class CustomHnS : GamemodeBase
         Color color = new(52, 94, 235, byte.MaxValue);
 
         MaxGameLength = new IntegerOptionItem(id, "FFA_GameTime", new(0, 1200, 10), 300, TabGroup.GameSettings)
-            .SetGameMode(CustomGameMode.HideAndSeek)
+            .SetGameMode(CustomGamemodes.HideAndSeek)
             .SetValueFormat(OptionFormat.Seconds)
             .SetColor(color);
 
         MinNeutrals = new IntegerOptionItem(id + 1, "HNS.MinNeutrals", new(0, 13, 1), 0, TabGroup.GameSettings)
-            .SetGameMode(CustomGameMode.HideAndSeek)
+            .SetGameMode(CustomGamemodes.HideAndSeek)
             .SetColor(color);
 
         MaxNeutrals = new IntegerOptionItem(id + 2, "HNS.MaxNeutrals", new(0, 13, 1), 2, TabGroup.GameSettings)
-            .SetGameMode(CustomGameMode.HideAndSeek)
+            .SetGameMode(CustomGamemodes.HideAndSeek)
             .SetColor(color);
 
         DangerMeter = new BooleanOptionItem(id + 3, "HNS.DangerMeter", true, TabGroup.GameSettings)
-            .SetGameMode(CustomGameMode.HideAndSeek)
+            .SetGameMode(CustomGamemodes.HideAndSeek)
             .SetColor(color);
 
         PlayersSeeRoles = new BooleanOptionItem(id + 4, "HNS.PlayersSeeRoles", true, TabGroup.GameSettings)
-            .SetGameMode(CustomGameMode.HideAndSeek)
+            .SetGameMode(CustomGamemodes.HideAndSeek)
             .SetColor(color);
     }
 
@@ -301,7 +301,7 @@ internal class CustomHnS : GamemodeBase
 
     public static string GetSuffixText(PlayerControl seer, PlayerControl target, bool hud = false)
     {
-        if (GameStates.IsLobby || Options.CurrentGameMode != CustomGameMode.HideAndSeek || Main.HasJustStarted || seer.PlayerId != target.PlayerId || (seer.IsHost() && !hud) || TimeLeft < 0) return string.Empty;
+        if (GameStates.IsLobby || Options.CurrentGameMode != CustomGamemodes.HideAndSeek || Main.HasJustStarted || seer.PlayerId != target.PlayerId || (seer.IsHost() && !hud) || TimeLeft < 0) return string.Empty;
 
         string dangerMeter = GetDangerMeter(seer);
 
@@ -454,7 +454,7 @@ internal class CustomHnS : GamemodeBase
     {
         public static void Postfix()
         {
-            if (!AmongUsClient.Instance.AmHost || !GameStates.IsInTask || ExileController.Instance || Options.CurrentGameMode != CustomGameMode.HideAndSeek || Main.HasJustStarted) return;
+            if (!AmongUsClient.Instance.AmHost || !GameStates.IsInTask || ExileController.Instance || Options.CurrentGameMode != CustomGamemodes.HideAndSeek || Main.HasJustStarted) return;
 
             long now = Utils.TimeStamp;
             if (LastUpdate == now) return;

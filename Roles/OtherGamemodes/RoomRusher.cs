@@ -6,7 +6,10 @@ namespace EHR.Roles;
 
 internal class RRPlayer : RoleBase
 {
-    public override bool IsEnable => Options.CurrentGameMode == CustomGameMode.RoomRush;
+    public override CustomGamemodes GamemodeId => CustomGamemodes.RoomRush;
+    public override CustomRoles RoleId => CustomRoles.RRPlayer;
+
+    public override bool IsEnable => Options.CurrentGameMode == CustomGamemodes.RoomRush;
 
     public override void Init() { }
 

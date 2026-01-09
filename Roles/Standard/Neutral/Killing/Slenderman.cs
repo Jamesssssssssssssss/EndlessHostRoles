@@ -22,6 +22,8 @@ public class Slenderman : StandardRoleBase
     private PlayerControl SlendermanPC;
     private long MeetingCooldownEndTS;
 
+    public override CustomGamemodes GamemodeId => CustomGamemodes.Standard;
+    public override CustomRoles RoleId => CustomRoles.Slenderman;
     public override Team Faction => Team.Neutral;
     public override RoleOptionType? Alignment => RoleOptionType.Neutral_Killing;
 

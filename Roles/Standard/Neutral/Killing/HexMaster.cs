@@ -14,6 +14,8 @@ public class HexMaster : StandardRoleBase
 
     public override bool IsEnable => false;
 
+    public override CustomGamemodes GamemodeId => CustomGamemodes.Standard;
+    public override CustomRoles RoleId => CustomRoles.HexMaster;
     public override Team Faction => Team.Neutral;
     public override RoleOptionType? Alignment => RoleOptionType.Neutral_Killing;
 

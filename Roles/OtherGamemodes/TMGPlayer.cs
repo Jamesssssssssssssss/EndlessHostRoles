@@ -4,6 +4,8 @@ namespace EHR.Roles;
 
 public class TMGPlayer : RoleBase
 {
+    public override CustomGamemodes GamemodeId => CustomGamemodes.TheMindGame;
+    public override CustomRoles RoleId => CustomRoles.TMGPlayer;
     private static bool On;
 
     public override bool IsEnable => On;

@@ -30,6 +30,8 @@ public class Thanos : StandardRoleBase
     private List<byte> PlayersWithStones;
     private byte ThanosId;
 
+    public override CustomGamemodes GamemodeId => CustomGamemodes.Standard;
+    public override CustomRoles RoleId => CustomRoles.Thanos;
     public override Team Faction => Team.Neutral;
     public override RoleOptionType? Alignment => RoleOptionType.Neutral_Killing;
 

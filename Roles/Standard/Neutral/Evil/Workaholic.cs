@@ -21,6 +21,8 @@ internal class Workaholic : StandardRoleBase
     public static OptionItem WorkaholicSpeed;
     public override bool IsEnable => On;
 
+    public override CustomGamemodes GamemodeId => CustomGamemodes.Standard;
+    public override CustomRoles RoleId => CustomRoles.Workaholic;
     public override Team Faction => Team.Neutral;
     public override RoleOptionType? Alignment => RoleOptionType.Neutral_Evil;
 

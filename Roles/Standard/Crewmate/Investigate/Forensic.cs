@@ -17,6 +17,8 @@ internal class Forensic : StandardRoleBase
 
     public override bool IsEnable => false;
 
+    public override CustomGamemodes GamemodeId => CustomGamemodes.Standard;
+    public override CustomRoles RoleId => CustomRoles.Forensic;
     public override Team Faction => Team.Crewmate;
     public override RoleOptionType? Alignment => RoleOptionType.Crewmate_Investigate;
 

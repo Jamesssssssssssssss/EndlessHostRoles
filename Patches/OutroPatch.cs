@@ -64,8 +64,8 @@ internal static class EndGamePatch
             if (date == DateTime.MinValue) continue;
 
             byte killerId = value.GetRealKiller();
-            bool gmIsFm = Options.CurrentGameMode is CustomGameMode.FFA or CustomGameMode.StopAndGo;
-            bool gmIsFmhh = gmIsFm || Options.CurrentGameMode is CustomGameMode.HotPotato or CustomGameMode.HideAndSeek or CustomGameMode.Speedrun or CustomGameMode.CaptureTheFlag or CustomGameMode.NaturalDisasters or CustomGameMode.RoomRush or CustomGameMode.KingOfTheZones or CustomGameMode.Quiz or CustomGameMode.TheMindGame or CustomGameMode.BedWars or CustomGameMode.Deathrace or CustomGameMode.Mingle or CustomGameMode.Snowdown;
+            bool gmIsFm = Options.CurrentGameMode is CustomGamemodes.FFA or CustomGamemodes.StopAndGo;
+            bool gmIsFmhh = gmIsFm || Options.CurrentGameMode is CustomGamemodes.HotPotato or CustomGamemodes.HideAndSeek or CustomGamemodes.Speedrun or CustomGamemodes.CaptureTheFlag or CustomGamemodes.NaturalDisasters or CustomGamemodes.RoomRush or CustomGamemodes.KingOfTheZones or CustomGamemodes.Quiz or CustomGamemodes.TheMindGame or CustomGamemodes.BedWars or CustomGamemodes.Deathrace or CustomGamemodes.Mingle or CustomGamemodes.Snowdown;
             sb.Append($"\n{date:T} {Main.AllPlayerNames[key]} ({(gmIsFmhh ? string.Empty : Utils.GetDisplayRoleName(key, true))}{(gmIsFm ? string.Empty : Utils.GetSubRolesText(key, summary: true))}) [{Utils.GetVitalText(key)}]");
             if (killerId != byte.MaxValue && killerId != key) sb.Append($"\n\t⇐ {Main.AllPlayerNames[killerId]} ({(gmIsFmhh ? string.Empty : Utils.GetDisplayRoleName(killerId, true))}{(gmIsFm ? string.Empty : Utils.GetSubRolesText(killerId, summary: true))})");
         }
@@ -121,25 +121,25 @@ internal static class EndGamePatch
 
             switch (Options.CurrentGameMode)
             {
-                case CustomGameMode.Standard:
+                case CustomGamemodes.Standard:
                     if (GameStates.CurrentServerType == GameStates.ServerType.Vanilla) Main.GamesPlayed.AddRange(Main.AllPlayerControls.ToDictionary(x => x.FriendCode, _ => 0), false);
                     Main.GamesPlayed.AdjustAllValues(x => ++x);
                     Main.GotShieldAnimationInfoThisGame.Clear();
                     if (Main.GM.Value) Main.PlayerStates[PlayerControl.LocalPlayer.PlayerId].IsDead = false;
                     break;
-                case CustomGameMode.StopAndGo:
+                case CustomGamemodes.StopAndGo:
                     Main.AllPlayerControls.Do(x => StopAndGo.HasPlayed.Add(x.FriendCode));
                     break;
-                case CustomGameMode.RoomRush:
+                case CustomGamemodes.RoomRush:
                     Main.AllPlayerControls.Do(x => RoomRush.HasPlayedFriendCodes.Add(x.FriendCode));
                     break;
-                case CustomGameMode.KingOfTheZones:
+                case CustomGamemodes.KingOfTheZones:
                     Main.AllPlayerControls.Do(x => KingOfTheZones.PlayedFCs.Add(x.FriendCode));
                     break;
-                case CustomGameMode.Quiz:
+                case CustomGamemodes.Quiz:
                     Main.AllPlayerControls.Do(x => Quiz.HasPlayedFriendCodes.Add(x.FriendCode));
                     break;
-                case CustomGameMode.Deathrace:
+                case CustomGamemodes.Deathrace:
                     MapNames map = Main.CurrentMap;
                     
                     foreach (PlayerControl pc in Main.AllPlayerControls)
@@ -151,7 +151,7 @@ internal static class EndGamePatch
                     }
 
                     break;
-                case CustomGameMode.Mingle:
+                case CustomGamemodes.Mingle:
                     Main.AllPlayerControls.Do(x => Mingle.HasPlayedFCs.Add(x.FriendCode));
                     break;
                 default:
@@ -208,7 +208,7 @@ internal static class SetEverythingUpPatch
         {
             switch (Options.CurrentGameMode)
             {
-                case CustomGameMode.SoloPVP:
+                case CustomGamemodes.SoloPVP:
                 {
                     __instance.BackgroundBar.material.color = new Color32(245, 82, 82, 255);
                     customWinnerText = CustomWinnerHolder.WinnerIds.Select(x => x.ColoredPlayerName()).Join() + GetString("Win");
@@ -216,7 +216,7 @@ internal static class SetEverythingUpPatch
                     additionalWinnerText = "\n" + string.Format(GetString("SoloPVP.WinnersKillCount"), SoloPVP.PlayerScore[CustomWinnerHolder.WinnerIds.First()]);
                     goto Skip;
                 }
-                case CustomGameMode.FFA:
+                case CustomGamemodes.FFA:
                 {
                     byte winnerId = CustomWinnerHolder.WinnerIds.FirstOrDefault();
                     __instance.BackgroundBar.material.color = new Color32(0, 255, 255, 255);
@@ -224,7 +224,7 @@ internal static class SetEverythingUpPatch
                     winnerText.color = Main.PlayerColors[winnerId];
                     goto EndOfText;
                 }
-                case CustomGameMode.StopAndGo:
+                case CustomGamemodes.StopAndGo:
                 {
                     byte winnerId = CustomWinnerHolder.WinnerIds.FirstOrDefault();
                     __instance.BackgroundBar.material.color = new Color32(0, 255, 165, 255);
@@ -232,7 +232,7 @@ internal static class SetEverythingUpPatch
                     winnerText.color = Main.PlayerColors[winnerId];
                     goto EndOfText;
                 }
-                case CustomGameMode.HotPotato:
+                case CustomGamemodes.HotPotato:
                 {
                     byte winnerId = CustomWinnerHolder.WinnerIds.FirstOrDefault();
                     __instance.BackgroundBar.material.color = new Color32(232, 205, 70, 255);
@@ -240,7 +240,7 @@ internal static class SetEverythingUpPatch
                     winnerText.color = Main.PlayerColors[winnerId];
                     goto EndOfText;
                 }
-                case CustomGameMode.Speedrun:
+                case CustomGamemodes.Speedrun:
                 {
                     byte winnerId = CustomWinnerHolder.WinnerIds.FirstOrDefault();
                     __instance.BackgroundBar.material.color = Utils.GetRoleColor(CustomRoles.Speedrunner);
@@ -248,7 +248,7 @@ internal static class SetEverythingUpPatch
                     winnerText.color = Main.PlayerColors[winnerId];
                     goto EndOfText;
                 }
-                case CustomGameMode.CaptureTheFlag:
+                case CustomGamemodes.CaptureTheFlag:
                 {
                     (Color Color, string Team) winnerData = CaptureTheFlag.WinnerData;
                     __instance.BackgroundBar.material.color = winnerData.Color;
@@ -256,7 +256,7 @@ internal static class SetEverythingUpPatch
                     winnerText.color = winnerData.Color;
                     goto EndOfText;
                 }
-                case CustomGameMode.NaturalDisasters:
+                case CustomGamemodes.NaturalDisasters:
                 {
                     var ndColor = new Color32(3, 252, 74, 255);
                     __instance.BackgroundBar.material.color = ndColor;
@@ -275,7 +275,7 @@ internal static class SetEverythingUpPatch
                 
                     goto EndOfText;
                 }
-                case CustomGameMode.RoomRush:
+                case CustomGamemodes.RoomRush:
                 {
                     byte winnerId = CustomWinnerHolder.WinnerIds.FirstOrDefault();
                     __instance.BackgroundBar.material.color = new Color32(255, 171, 27, 255);
@@ -283,7 +283,7 @@ internal static class SetEverythingUpPatch
                     winnerText.color = Main.PlayerColors[winnerId];
                     goto EndOfText;
                 }
-                case CustomGameMode.KingOfTheZones:
+                case CustomGamemodes.KingOfTheZones:
                 {
                     (Color Color, string Team) winnerData = KingOfTheZones.WinnerData;
                     __instance.BackgroundBar.material.color = winnerData.Color;
@@ -291,7 +291,7 @@ internal static class SetEverythingUpPatch
                     winnerText.color = winnerData.Color;
                     goto EndOfText;
                 }
-                case CustomGameMode.Quiz:
+                case CustomGamemodes.Quiz:
                 {
                     byte winnerId = CustomWinnerHolder.WinnerIds.FirstOrDefault();
                     __instance.BackgroundBar.material.color = Utils.GetRoleColor(CustomRoles.QuizMaster);
@@ -299,14 +299,14 @@ internal static class SetEverythingUpPatch
                     winnerText.color = Main.PlayerColors[winnerId];
                     goto EndOfText;
                 }
-                case CustomGameMode.TheMindGame:
+                case CustomGamemodes.TheMindGame:
                 {
                     __instance.BackgroundBar.material.color = Color.yellow;
                     winnerText.text = CustomWinnerHolder.WinnerIds.Select(x => x.ColoredPlayerName()).Join() + GetString("Win");
                     winnerText.color = Color.yellow;
                     goto EndOfText;
                 }
-                case CustomGameMode.BedWars:
+                case CustomGamemodes.BedWars:
                 {
                     (Color Color, string Team) winnerData = BedWars.WinnerData;
                     __instance.BackgroundBar.material.color = winnerData.Color;
@@ -314,7 +314,7 @@ internal static class SetEverythingUpPatch
                     winnerText.color = winnerData.Color;
                     goto EndOfText;
                 }
-                case CustomGameMode.Deathrace:
+                case CustomGamemodes.Deathrace:
                 {
                     byte winnerId = CustomWinnerHolder.WinnerIds.FirstOrDefault();
                     __instance.BackgroundBar.material.color = Utils.GetRoleColor(CustomRoles.Racer);
@@ -322,7 +322,7 @@ internal static class SetEverythingUpPatch
                     winnerText.color = Main.PlayerColors[winnerId];
                     goto EndOfText;
                 }
-                case CustomGameMode.Mingle:
+                case CustomGamemodes.Mingle:
                 {
                     if (CustomWinnerHolder.WinnerIds.Count <= 1)
                     {
@@ -341,7 +341,7 @@ internal static class SetEverythingUpPatch
                     
                     goto EndOfText;
                 }
-                case CustomGameMode.Snowdown:
+                case CustomGamemodes.Snowdown:
                 {
                     Color color = Utils.GetRoleColor(CustomRoles.SnowdownPlayer);
                     __instance.BackgroundBar.material.color = color;
@@ -482,7 +482,7 @@ internal static class SetEverythingUpPatch
 
             switch (Options.CurrentGameMode)
             {
-                case CustomGameMode.SoloPVP:
+                case CustomGamemodes.SoloPVP:
                 {
                     List<(int, byte)> list = [];
                     list.AddRange(cloneRoles.Select(id => (SoloPVP.GetRankFromScore(id), id)));
@@ -493,7 +493,7 @@ internal static class SetEverythingUpPatch
 
                     break;
                 }
-                case CustomGameMode.FFA:
+                case CustomGamemodes.FFA:
                 {
                     List<(int, byte)> list = [];
                     list.AddRange(cloneRoles.Select(id => (FreeForAll.GetRankFromScore(id), id)));
@@ -504,7 +504,7 @@ internal static class SetEverythingUpPatch
 
                     break;
                 }
-                case CustomGameMode.StopAndGo:
+                case CustomGamemodes.StopAndGo:
                 {
                     List<(int, byte)> list = [];
                     list.AddRange(cloneRoles.Select(id => (StopAndGo.GetRankFromScore(id), id)));
@@ -515,60 +515,60 @@ internal static class SetEverythingUpPatch
 
                     break;
                 }
-                case CustomGameMode.HotPotato:
+                case CustomGamemodes.HotPotato:
                 {
                     IOrderedEnumerable<byte> list = cloneRoles.OrderByDescending(HotPotato.GetSurvivalTime);
                     foreach (byte id in list.Where(EndGamePatch.SummaryText.ContainsKey)) sb.Append('\n').Append(EndGamePatch.SummaryText[id]);
 
                     break;
                 }
-                case CustomGameMode.Speedrun:
+                case CustomGamemodes.Speedrun:
                 {
                     IOrderedEnumerable<byte> list = cloneRoles.OrderByDescending(id => Main.PlayerStates[id].TaskState.CompletedTasksCount);
                     foreach (byte id in list.Where(EndGamePatch.SummaryText.ContainsKey)) sb.Append('\n').Append(EndGamePatch.SummaryText[id]);
 
                     break;
                 }
-                case CustomGameMode.CaptureTheFlag:
+                case CustomGamemodes.CaptureTheFlag:
                 {
                     IOrderedEnumerable<byte> list = cloneRoles.OrderByDescending(CaptureTheFlag.GetFlagTime);
                     foreach (byte id in list.Where(EndGamePatch.SummaryText.ContainsKey)) sb.Append('\n').Append(EndGamePatch.SummaryText[id]);
 
                     break;
                 }
-                case CustomGameMode.NaturalDisasters:
+                case CustomGamemodes.NaturalDisasters:
                 {
                     IOrderedEnumerable<byte> list = cloneRoles.OrderByDescending(NaturalDisasters.SurvivalTime);
                     foreach (byte id in list.Where(EndGamePatch.SummaryText.ContainsKey)) sb.Append('\n').Append(EndGamePatch.SummaryText[id]);
 
                     break;
                 }
-                case CustomGameMode.RoomRush:
+                case CustomGamemodes.RoomRush:
                 {
                     IOrderedEnumerable<byte> list = RoomRush.PointsSystem ? cloneRoles.OrderByDescending(x => int.TryParse(RoomRush.GetPoints(x).Split('/')[0], out int i) ? i : 0) : cloneRoles.OrderByDescending(RoomRush.GetSurvivalTime);
                     foreach (byte id in list.Where(EndGamePatch.SummaryText.ContainsKey)) sb.Append('\n').Append(EndGamePatch.SummaryText[id]);
 
                     break;
                 }
-                case CustomGameMode.KingOfTheZones:
+                case CustomGamemodes.KingOfTheZones:
                 {
                     IOrderedEnumerable<byte> list = cloneRoles.OrderByDescending(KingOfTheZones.GetZoneTime);
                     foreach (byte id in list.Where(EndGamePatch.SummaryText.ContainsKey)) sb.Append('\n').Append(EndGamePatch.SummaryText[id]);
 
                     break;
                 }
-                case CustomGameMode.Snowdown:
-                case CustomGameMode.Mingle:
-                case CustomGameMode.Deathrace:
-                case CustomGameMode.BedWars:
-                case CustomGameMode.Quiz:
+                case CustomGamemodes.Snowdown:
+                case CustomGamemodes.Mingle:
+                case CustomGamemodes.Deathrace:
+                case CustomGamemodes.BedWars:
+                case CustomGamemodes.Quiz:
                 {
                     foreach (byte id in cloneRoles.Where(EndGamePatch.SummaryText.ContainsKey))
                         sb.Append('\n').Append(EndGamePatch.SummaryText[id]);
 
                     break;
                 }
-                case CustomGameMode.TheMindGame:
+                case CustomGamemodes.TheMindGame:
                 {
                     IOrderedEnumerable<byte> list = cloneRoles.OrderByDescending(TheMindGame.GetPoints);
                     foreach (byte id in list.Where(EndGamePatch.SummaryText.ContainsKey)) sb.Append('\n').Append(EndGamePatch.SummaryText[id]);
@@ -593,7 +593,7 @@ internal static class SetEverythingUpPatch
 
             yield return null;
 
-            if (Options.CurrentGameMode != CustomGameMode.Standard)
+            if (Options.CurrentGameMode != CustomGamemodes.Standard)
             {
                 if (Statistics.WinCountsForOutro != string.Empty)
                 {
@@ -687,7 +687,7 @@ internal static class SetEverythingUpPatch
                 FontSize = 2f
             };
 
-            if (Options.CurrentGameMode == CustomGameMode.Standard)
+            if (Options.CurrentGameMode == CustomGamemodes.Standard)
             {
                 yield return null;
 

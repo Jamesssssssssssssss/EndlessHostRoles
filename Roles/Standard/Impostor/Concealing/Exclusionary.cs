@@ -16,6 +16,8 @@ public class Exclusionary : StandardRoleBase
 
     private List<(byte ID, long TS)> ExcludedPlayers;
 
+    public override CustomGamemodes GamemodeId => CustomGamemodes.Standard;
+    public override CustomRoles RoleId => CustomRoles.Exclusionary;
     public override Team Faction => Team.Impostor;
     public override RoleOptionType? Alignment => RoleOptionType.Impostor_Concealing;
 

@@ -32,6 +32,8 @@ public class Ambusher : StandardRoleBase
 
     public static Dictionary<byte, long> FragilePlayers = [];
 
+    public override CustomGamemodes GamemodeId => CustomGamemodes.Standard;
+    public override CustomRoles RoleId => CustomRoles.Ambusher;
     public override Team Faction => Team.Impostor;
     public override RoleOptionType? Alignment => RoleOptionType.Impostor_Concealing;
 

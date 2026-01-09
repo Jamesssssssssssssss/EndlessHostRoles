@@ -129,7 +129,7 @@ internal class KingOfTheZones : GamemodeBase
     {
         var id = 69_219_001;
         Color color = ColorUtility.TryParseHtmlString("#ff0000", out Color c) ? c : Color.red;
-        const CustomGameMode gameMode = CustomGameMode.KingOfTheZones;
+        const CustomGamemodes gameMode = CustomGamemodes.KingOfTheZones;
 
         AutoSetNumTeams = new BooleanOptionItem(id++, "KingOfTheZones.AutoSetNumTeams", true, TabGroup.GameSettings)
             .SetHeader(true)
@@ -287,7 +287,7 @@ internal class KingOfTheZones : GamemodeBase
 
     public static IEnumerator GameStart()
     {
-        if (Options.CurrentGameMode != CustomGameMode.KingOfTheZones) yield break;
+        if (Options.CurrentGameMode != CustomGamemodes.KingOfTheZones) yield break;
 
         yield return new WaitForSecondsRealtime(3f);
 
@@ -675,7 +675,7 @@ internal class KingOfTheZones : GamemodeBase
 
         public static void Postfix()
         {
-            if (!AmongUsClient.Instance.AmHost || !GameStates.IsInTask || ExileController.Instance || Options.CurrentGameMode != CustomGameMode.KingOfTheZones || !Main.IntroDestroyed || !GameGoing) return;
+            if (!AmongUsClient.Instance.AmHost || !GameStates.IsInTask || ExileController.Instance || Options.CurrentGameMode != CustomGamemodes.KingOfTheZones || !Main.IntroDestroyed || !GameGoing) return;
 
             long now = Utils.TimeStamp;
             if (LastUpdate == now) return;

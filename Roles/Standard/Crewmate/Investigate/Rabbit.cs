@@ -14,6 +14,8 @@ internal class Rabbit : StandardRoleBase
     private static int Id => 643330;
     public override bool IsEnable => RabbitStates.Count > 0;
 
+    public override CustomGamemodes GamemodeId => CustomGamemodes.Standard;
+    public override CustomRoles RoleId => CustomRoles.Rabbit;
     public override Team Faction => Team.Crewmate;
     public override RoleOptionType? Alignment => RoleOptionType.Crewmate_Investigate;
 

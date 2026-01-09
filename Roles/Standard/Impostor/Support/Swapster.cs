@@ -27,6 +27,8 @@ internal class Swapster : StandardRoleBase
         FirstSwapTarget.Remove(playerId);
     }
 
+    public override CustomGamemodes GamemodeId => CustomGamemodes.Standard;
+    public override CustomRoles RoleId => CustomRoles.Swapster;
     public override Team Faction => Team.Impostor;
     public override RoleOptionType? Alignment => RoleOptionType.Impostor_Support;
 

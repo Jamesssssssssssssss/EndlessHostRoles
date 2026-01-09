@@ -8,6 +8,8 @@ internal class EvilGuesser : StandardRoleBase
 {
     public override bool IsEnable => false;
 
+    public override CustomGamemodes GamemodeId => CustomGamemodes.Standard;
+    public override CustomRoles RoleId => CustomRoles.EvilGuesser;
     public override Team Faction => Team.Impostor;
     public override RoleOptionType? Alignment => RoleOptionType.Impostor_Killing;
 

@@ -30,6 +30,8 @@ internal class Bodyguard : StandardRoleBase
         Instances.Remove(this);
     }
 
+    public override CustomGamemodes GamemodeId => CustomGamemodes.Standard;
+    public override CustomRoles RoleId => CustomRoles.Bodyguard;
     public override Team Faction => Team.Crewmate;
     public override RoleOptionType? Alignment => RoleOptionType.Crewmate_Support;
 

@@ -21,6 +21,8 @@ public class Doorjammer : StandardRoleBase
 
     public static List<SystemTypes> JammedRooms = [];
 
+    public override CustomGamemodes GamemodeId => CustomGamemodes.Standard;
+    public override CustomRoles RoleId => CustomRoles.Doorjammer;
     public override Team Faction => Team.Crewmate;
     public override RoleOptionType? Alignment => RoleOptionType.Crewmate_Support;
 

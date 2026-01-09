@@ -46,6 +46,8 @@ public class Romantic : StandardRoleBase
 
     public override bool IsEnable => RomanticId != byte.MaxValue;
 
+    public override CustomGamemodes GamemodeId => CustomGamemodes.Standard;
+    public override CustomRoles RoleId => CustomRoles.Romantic;
     public override Team Faction => Team.Neutral;
     public override RoleOptionType? Alignment => RoleOptionType.Neutral_Benign;
 
@@ -349,6 +351,8 @@ public class VengefulRomantic : StandardRoleBase
 
     public override bool IsEnable => VengefulRomanticId != byte.MaxValue;
 
+    public override CustomGamemodes GamemodeId => CustomGamemodes.Standard;
+    public override CustomRoles RoleId => CustomRoles.VengefulRomantic;
     public override Team Faction => Team.Neutral;
     public override RoleOptionType? Alignment => RoleOptionType.Neutral_Benign;
 
@@ -434,6 +438,8 @@ public class RuthlessRomantic : StandardRoleBase
 
     public override bool IsEnable => PlayerIdList.Count > 0;
 
+    public override CustomGamemodes GamemodeId => CustomGamemodes.Standard;
+    public override CustomRoles RoleId => CustomRoles.RuthlessRomantic;
     public override Team Faction => Team.Neutral;
     public override RoleOptionType? Alignment => RoleOptionType.Neutral_Benign;
 

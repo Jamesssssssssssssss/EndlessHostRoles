@@ -16,6 +16,8 @@ public class PortalMaker : StandardRoleBase
     private List<Vector2> Marks;
     private Dictionary<byte, long> LastTP;
 
+    public override CustomGamemodes GamemodeId => CustomGamemodes.Standard;
+    public override CustomRoles RoleId => CustomRoles.PortalMaker;
     public override Team Faction => Team.Crewmate;
     public override RoleOptionType? Alignment => RoleOptionType.Crewmate_Miscellaneous;
 

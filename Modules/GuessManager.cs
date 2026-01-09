@@ -1053,7 +1053,7 @@ public static class GuessManager
 
         if (role.IsForOtherGameMode()) return false;
         if (!role.IsEnable() && !role.RoleExist(true) && !CanMakeRoleSpawn(role)) return false;
-        return Options.CurrentGameMode == CustomGameMode.Standard && !CustomHnS.AllHnSRoles.Contains(role) && !role.IsGhostRole() && !role.IsVanilla();
+        return Options.CurrentGameMode == CustomGamemodes.Standard && !CustomHnS.AllHnSRoles.Contains(role) && !role.IsGhostRole() && !role.IsVanilla();
 
         bool CanMakeRoleSpawn(CustomRoles r)
         {

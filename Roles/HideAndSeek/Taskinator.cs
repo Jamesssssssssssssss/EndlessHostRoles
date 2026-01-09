@@ -17,24 +17,27 @@ public class Taskinator : RoleBase, IHideAndSeekRole
     public float RoleSpeed => Speed.GetFloat();
     public float RoleVision => Vision.GetFloat();
 
+    public override CustomGamemodes GamemodeId => CustomGamemodes.HideAndSeek;
+    public override CustomRoles RoleId => CustomRoles.Taskinator;
+
     public override void SetupCustomOption()
     {
-        Options.SetupRoleOptions(69_211_3001, TabGroup.NeutralRoles, CustomRoles.Taskinator, CustomGameMode.HideAndSeek);
+        Options.SetupRoleOptions(69_211_3001, TabGroup.NeutralRoles, CustomRoles.Taskinator, CustomGamemodes.HideAndSeek);
 
         Vision = new FloatOptionItem(69_211_3003, "TaskinatorVision", new(0.05f, 5f, 0.05f), 1.25f, TabGroup.NeutralRoles)
-            .SetGameMode(CustomGameMode.HideAndSeek)
+            .SetGameMode(CustomGamemodes.HideAndSeek)
             .SetValueFormat(OptionFormat.Multiplier)
             .SetColor(new(86, 29, 209, byte.MaxValue))
             .SetParent(Options.CustomRoleSpawnChances[CustomRoles.Taskinator]);
 
         Speed = new FloatOptionItem(69_213_3004, "TaskinatorSpeed", new(0.05f, 5f, 0.05f), 1.25f, TabGroup.NeutralRoles)
-            .SetGameMode(CustomGameMode.HideAndSeek)
+            .SetGameMode(CustomGamemodes.HideAndSeek)
             .SetValueFormat(OptionFormat.Multiplier)
             .SetColor(new(86, 29, 209, byte.MaxValue))
             .SetParent(Options.CustomRoleSpawnChances[CustomRoles.Taskinator]);
 
         CanWinWhenDead = new BooleanOptionItem(69_213_3005, "TaskinatorCanWinAfterDeath", true, TabGroup.NeutralRoles)
-            .SetGameMode(CustomGameMode.HideAndSeek)
+            .SetGameMode(CustomGamemodes.HideAndSeek)
             .SetColor(new(86, 29, 209, byte.MaxValue))
             .SetParent(Options.CustomRoleSpawnChances[CustomRoles.Taskinator]);
 

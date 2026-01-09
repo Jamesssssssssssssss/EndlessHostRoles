@@ -132,7 +132,7 @@ public static class Translator
         if (SubmergedCompatibility.IsSubmerged() && int.TryParse(s, out int roomNumber) && roomNumber is >= 128 and <= 135)
             s = $"SubmergedRoomName.{roomNumber}";
         
-        if (GameStates.InGame && Options.CurrentGameMode == CustomGameMode.Deathrace && int.TryParse(s, out roomNumber) && Deathrace.CoordinateChecks.ContainsKey(roomNumber))
+        if (GameStates.InGame && Options.CurrentGameMode == CustomGamemodes.Deathrace && int.TryParse(s, out roomNumber) && Deathrace.CoordinateChecks.ContainsKey(roomNumber))
             s = "Deathrace.CoordinateCheck";
         
         SupportedLangs langId = TranslationController.InstanceExists ? TranslationController.Instance.currentLanguage.languageID : SupportedLangs.English;

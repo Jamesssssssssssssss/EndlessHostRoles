@@ -24,6 +24,8 @@ public class MoonDancer : CovenBase
 
     private Dictionary<byte, List<CustomRoles>> ToAssign = [];
 
+    public override CustomGamemodes GamemodeId => CustomGamemodes.Standard;
+    public override CustomRoles RoleId => CustomRoles.MoonDancer;
     public override Team Faction => Team.Coven;
     public override RoleOptionType? Alignment => RoleOptionType.Coven_Miscellaneous;
 

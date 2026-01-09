@@ -110,7 +110,7 @@ internal class Quiz : GamemodeBase
     {
         var id = 69_220_001;
         var color = Utils.GetRoleColor(CustomRoles.QuizMaster);
-        const CustomGameMode gameMode = CustomGameMode.Quiz;
+        const CustomGamemodes gameMode = CustomGamemodes.Quiz;
 
         FFAEventLength = new IntegerOptionItem(id++, "Quiz.Settings.FFAEventLength", new(5, 120, 1), 30, TabGroup.GameSettings)
             .SetValueFormat(OptionFormat.Seconds)
@@ -578,7 +578,7 @@ internal class Quiz : GamemodeBase
 
         public static void Postfix()
         {
-            if (!AmongUsClient.Instance.AmHost || !GameStates.IsInTask || ExileController.Instance || Options.CurrentGameMode != CustomGameMode.Quiz || !Main.IntroDestroyed) return;
+            if (!AmongUsClient.Instance.AmHost || !GameStates.IsInTask || ExileController.Instance || Options.CurrentGameMode != CustomGamemodes.Quiz || !Main.IntroDestroyed) return;
 
             long now = Utils.TimeStamp;
             if (LastUpdate == now) return;

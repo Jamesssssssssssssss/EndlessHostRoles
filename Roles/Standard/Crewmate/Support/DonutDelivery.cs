@@ -28,6 +28,8 @@ public class DonutDelivery : StandardRoleBase
 
     public override bool IsEnable => Instances.Count > 0;
 
+    public override CustomGamemodes GamemodeId => CustomGamemodes.Standard;
+    public override CustomRoles RoleId => CustomRoles.DonutDelivery;
     public override Team Faction => Team.Crewmate;
     public override RoleOptionType? Alignment => RoleOptionType.Crewmate_Support;
 

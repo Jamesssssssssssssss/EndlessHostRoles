@@ -30,6 +30,8 @@ public class Investigator : StandardRoleBase
     private static CustomRoles[] RandomRolesForTrickster => Enum.GetValues<CustomRoles>().Where(x => x.IsCrewmate()).ToArray();
     public override bool IsEnable => On;
 
+    public override CustomGamemodes GamemodeId => CustomGamemodes.Standard;
+    public override CustomRoles RoleId => CustomRoles.Investigator;
     public override Team Faction => Team.Crewmate;
     public override RoleOptionType? Alignment => RoleOptionType.Crewmate_Investigate;
 

@@ -11,6 +11,8 @@ public class Clairvoyant : StandardRoleBase
     public static readonly Dictionary<Options.GameStateInfo, OptionItem> Settings = [];
     public override bool IsEnable => On;
 
+    public override CustomGamemodes GamemodeId => CustomGamemodes.Standard;
+    public override CustomRoles RoleId => CustomRoles.Clairvoyant;
     public override Team Faction => Team.Crewmate;
     public override RoleOptionType? Alignment => RoleOptionType.Crewmate_Investigate;
 

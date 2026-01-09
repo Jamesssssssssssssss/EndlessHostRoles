@@ -518,7 +518,7 @@ internal static class CheckForEndVotingPatch
 
         EndOfSession:
 
-        if (Options.CurrentGameMode == CustomGameMode.TheMindGame)
+        if (Options.CurrentGameMode == CustomGamemodes.TheMindGame)
             name = TheMindGame.GetEjectionMessage(exileId);
 
         name = name.Replace("color=", string.Empty) + "<size=0>";
@@ -684,7 +684,7 @@ internal static class MeetingHudStartPatch
 
         List<Message> msgToSend = [];
 
-        if (Options.SendRoleDescriptionFirstMeeting.GetBool() && MeetingStates.FirstMeeting && Options.CurrentGameMode == CustomGameMode.Standard)
+        if (Options.SendRoleDescriptionFirstMeeting.GetBool() && MeetingStates.FirstMeeting && Options.CurrentGameMode == CustomGamemodes.Standard)
         {
             List<Message> roleDescMsgs = [];
 
@@ -1464,7 +1464,7 @@ internal static class MeetingHudRpcClosePatch
         
         AllowClose = false;
 
-        if (Options.CurrentGameMode is CustomGameMode.Standard or CustomGameMode.TheMindGame)
+        if (Options.CurrentGameMode is CustomGamemodes.Standard or CustomGamemodes.TheMindGame)
         {
             if (AmongUsClient.Instance.AmClient)
                 __instance.Close();
@@ -1548,7 +1548,7 @@ internal static class ExileControllerBeginPatch
 {
     public static void Postfix(ExileController __instance, [HarmonyArgument(0)] ExileController.InitProperties init)
     {
-        if (CheckForEndVotingPatch.EjectionText.EndsWith("<size=0>") && Options.CurrentGameMode is CustomGameMode.Standard or CustomGameMode.TheMindGame && init is { outfit: not null })
+        if (CheckForEndVotingPatch.EjectionText.EndsWith("<size=0>") && Options.CurrentGameMode is CustomGamemodes.Standard or CustomGamemodes.TheMindGame && init is { outfit: not null })
             __instance.completeString = CheckForEndVotingPatch.EjectionText[..^8];
     }
 

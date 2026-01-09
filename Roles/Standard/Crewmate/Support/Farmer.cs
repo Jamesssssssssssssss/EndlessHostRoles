@@ -25,6 +25,8 @@ public class Farmer : StandardRoleBase
     private static OptionItem ShieldDuration;
     private static OptionItem InvisibilityDuration;
 
+    public override CustomGamemodes GamemodeId => CustomGamemodes.Standard;
+    public override CustomRoles RoleId => CustomRoles.Farmer;
     public override Team Faction => Team.Crewmate;
     public override RoleOptionType? Alignment => RoleOptionType.Crewmate_Support;
 

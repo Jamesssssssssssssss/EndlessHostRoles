@@ -154,7 +154,7 @@ internal class BedWars : GamemodeBase
     {
         var id = 69_222_001;
         Color color = Utils.GetRoleColor(CustomRoles.BedWarsPlayer);
-        const CustomGameMode gameMode = CustomGameMode.BedWars;
+        const CustomGamemodes gameMode = CustomGamemodes.BedWars;
         const TabGroup tab = TabGroup.GameSettings;
 
         InventorySlotsOption = new IntegerOptionItem(id++, "BedWars.InventorySlotsOption", new(1, 12, 1), 9, tab)
@@ -492,7 +492,7 @@ internal class BedWars : GamemodeBase
 
     public static IEnumerator OnGameStart()
     {
-        if (Options.CurrentGameMode != CustomGameMode.BedWars) yield break;
+        if (Options.CurrentGameMode != CustomGamemodes.BedWars) yield break;
 
         WinnerData = (Color.white, "No one wins");
 
@@ -670,7 +670,7 @@ internal class BedWars : GamemodeBase
 
         public static void Postfix(PlayerControl __instance)
         {
-            if (!AmongUsClient.Instance.AmHost || !GameStates.IsInTask || ExileController.Instance || Options.CurrentGameMode != CustomGameMode.BedWars || !Main.IntroDestroyed || GameStates.IsEnded || __instance == null || __instance.PlayerId >= 254 || IntroCutsceneDestroyPatch.IntroDestroyTS + 10 > Utils.TimeStamp) return;
+            if (!AmongUsClient.Instance.AmHost || !GameStates.IsInTask || ExileController.Instance || Options.CurrentGameMode != CustomGamemodes.BedWars || !Main.IntroDestroyed || GameStates.IsEnded || __instance == null || __instance.PlayerId >= 254 || IntroCutsceneDestroyPatch.IntroDestroyTS + 10 > Utils.TimeStamp) return;
 
             long now = Utils.TimeStamp;
 

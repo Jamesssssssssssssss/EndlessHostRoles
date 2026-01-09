@@ -36,6 +36,8 @@ public class RoomRusher : StandardRoleBase
 
     public bool Won => CompletedNum >= RoomsToWin.GetInt();
 
+    public override CustomGamemodes GamemodeId => CustomGamemodes.Standard;
+    public override CustomRoles RoleId => CustomRoles.RoomRusher;
     public override Team Faction => Team.Neutral;
     public override RoleOptionType? Alignment => RoleOptionType.Neutral_Benign;
 

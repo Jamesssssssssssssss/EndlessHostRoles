@@ -15,24 +15,27 @@ public class Venter : RoleBase, IHideAndSeekRole
     public float RoleSpeed => Speed.GetFloat();
     public float RoleVision => Vision.GetFloat();
 
+    public override CustomGamemodes GamemodeId => CustomGamemodes.HideAndSeek;
+    public override CustomRoles RoleId => CustomRoles.Venter;
+
     public override void SetupCustomOption()
     {
-        Options.SetupRoleOptions(69_211_1001, TabGroup.ImpostorRoles, CustomRoles.Venter, CustomGameMode.HideAndSeek);
+        Options.SetupRoleOptions(69_211_1001, TabGroup.ImpostorRoles, CustomRoles.Venter, CustomGamemodes.HideAndSeek);
 
         Vision = new FloatOptionItem(69_211_1003, "VenterVision", new(0.05f, 5f, 0.05f), 0.25f, TabGroup.ImpostorRoles)
-            .SetGameMode(CustomGameMode.HideAndSeek)
+            .SetGameMode(CustomGamemodes.HideAndSeek)
             .SetValueFormat(OptionFormat.Multiplier)
             .SetColor(new(105, 65, 65, byte.MaxValue))
             .SetParent(Options.CustomRoleSpawnChances[CustomRoles.Venter]);
 
         Speed = new FloatOptionItem(69_213_1004, "VenterSpeed", new(0.05f, 5f, 0.05f), 1.5f, TabGroup.ImpostorRoles)
-            .SetGameMode(CustomGameMode.HideAndSeek)
+            .SetGameMode(CustomGamemodes.HideAndSeek)
             .SetValueFormat(OptionFormat.Multiplier)
             .SetColor(new(105, 65, 65, byte.MaxValue))
             .SetParent(Options.CustomRoleSpawnChances[CustomRoles.Venter]);
 
         UseLimit = new FloatOptionItem(69_213_1007, "AbilityUseLimit", new(0, 20, 0.05f), 3, TabGroup.ImpostorRoles)
-            .SetGameMode(CustomGameMode.HideAndSeek)
+            .SetGameMode(CustomGamemodes.HideAndSeek)
             .SetColor(new(105, 65, 65, byte.MaxValue))
             .SetParent(Options.CustomRoleSpawnChances[CustomRoles.Venter]);
     }

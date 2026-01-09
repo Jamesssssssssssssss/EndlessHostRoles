@@ -27,6 +27,8 @@ public class Swapper : StandardRoleBase
 
     private ShapeshiftMenuElement CNO;
 
+    public override CustomGamemodes GamemodeId => CustomGamemodes.Standard;
+    public override CustomRoles RoleId => CustomRoles.Swapper;
     public override Team Faction => Team.Crewmate;
     public override RoleOptionType? Alignment => RoleOptionType.Crewmate_Power;
 

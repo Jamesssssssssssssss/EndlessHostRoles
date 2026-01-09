@@ -27,6 +27,8 @@ public class Mastermind : StandardRoleBase
 
     public override bool IsEnable => MastermindId != byte.MaxValue || Randomizer.Exists;
 
+    public override CustomGamemodes GamemodeId => CustomGamemodes.Standard;
+    public override CustomRoles RoleId => CustomRoles.Mastermind;
     public override Team Faction => Team.Impostor;
     public override RoleOptionType? Alignment => RoleOptionType.Impostor_Concealing;
 

@@ -16,6 +16,8 @@ public class SoulCollector : StandardRoleBase
 
     public List<byte> ToExile = [];
 
+    public override CustomGamemodes GamemodeId => CustomGamemodes.Standard;
+    public override CustomRoles RoleId => CustomRoles.SoulCollector;
     public override Team Faction => Team.Neutral;
     public override RoleOptionType? Alignment => RoleOptionType.Neutral_Killing;
 

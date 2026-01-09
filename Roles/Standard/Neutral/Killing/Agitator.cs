@@ -28,6 +28,8 @@ public class Agitator : StandardRoleBase
 
     public override bool IsEnable => PlayerIdList.Count > 0 || Randomizer.Exists;
 
+    public override CustomGamemodes GamemodeId => CustomGamemodes.Standard;
+    public override CustomRoles RoleId => CustomRoles.Agitator;
     public override Team Faction => Team.Neutral;
     public override RoleOptionType? Alignment => RoleOptionType.Neutral_Killing;
 

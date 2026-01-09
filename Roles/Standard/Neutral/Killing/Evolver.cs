@@ -25,6 +25,8 @@ public class Evolver : StandardRoleBase
     public override bool IsEnable => On;
     private (float MinKillCooldown, float MaxVision, float MaxSpeed, int MaxKillDistance) Limits => (1f, Stats.ImpostorVision ? 1.5f : 5f, 3f, 2);
 
+    public override CustomGamemodes GamemodeId => CustomGamemodes.Standard;
+    public override CustomRoles RoleId => CustomRoles.Evolver;
     public override Team Faction => Team.Neutral;
     public override RoleOptionType? Alignment => RoleOptionType.Neutral_Killing;
 

@@ -14,18 +14,21 @@ internal class Troll : RoleBase, IHideAndSeekRole
     public float RoleSpeed => Speed.GetFloat();
     public float RoleVision => Vision.GetFloat();
 
+    public override CustomGamemodes GamemodeId => CustomGamemodes.HideAndSeek;
+    public override CustomRoles RoleId => CustomRoles.Troll;
+
     public override void SetupCustomOption()
     {
-        Options.SetupRoleOptions(69_211_401, TabGroup.NeutralRoles, CustomRoles.Troll, CustomGameMode.HideAndSeek);
+        Options.SetupRoleOptions(69_211_401, TabGroup.NeutralRoles, CustomRoles.Troll, CustomGamemodes.HideAndSeek);
 
         Vision = new FloatOptionItem(69_211_403, "TrollVision", new(0.05f, 5f, 0.05f), 1.25f, TabGroup.NeutralRoles)
-            .SetGameMode(CustomGameMode.HideAndSeek)
+            .SetGameMode(CustomGamemodes.HideAndSeek)
             .SetValueFormat(OptionFormat.Multiplier)
             .SetColor(new(255, 0, 255, byte.MaxValue))
             .SetParent(Options.CustomRoleSpawnChances[CustomRoles.Troll]);
 
         Speed = new FloatOptionItem(69_211_404, "TrollSpeed", new(0.05f, 5f, 0.05f), 1.25f, TabGroup.NeutralRoles)
-            .SetGameMode(CustomGameMode.HideAndSeek)
+            .SetGameMode(CustomGamemodes.HideAndSeek)
             .SetValueFormat(OptionFormat.Multiplier)
             .SetColor(new(255, 0, 255, byte.MaxValue))
             .SetParent(Options.CustomRoleSpawnChances[CustomRoles.Troll]);

@@ -42,7 +42,7 @@ internal class Mingle : GamemodeBase
     {
         var id = 69_224_001;
         Color color = Utils.GetRoleColor(CustomRoles.MinglePlayer);
-        const CustomGameMode gameMode = CustomGameMode.Mingle;
+        const CustomGamemodes gameMode = CustomGamemodes.Mingle;
         const TabGroup tab = TabGroup.GameSettings;
         
         TimeLimitOption = new IntegerOptionItem(id++, "Mingle.TimeLimitOption", new(1, 300, 1), 60, tab)

@@ -19,7 +19,9 @@ public abstract class RoleBase : IComparable<RoleBase>
 {
     public abstract bool IsEnable { get; }
 
-    public virtual CustomRoles RoleId => ResolveRoleId();
+    public abstract CustomRoles RoleId { get; }
+    public abstract CustomGamemodes GamemodeId { get; }
+
     public virtual IReadOnlyList<CustomRoles> IncompatibleRoles => [];
     public virtual void PreAnyRolesSelected(RoleSelectionContext ctx) { }
     public virtual void PreEachRoleSelection(RoleSelectionContext ctx) { }
@@ -71,7 +73,7 @@ public abstract class RoleBase : IComparable<RoleBase>
     public virtual bool CanUseSabotage(PlayerControl pc)
     {
         if (pc.Is(CustomRoles.Aide)) return false;
-        if (Options.DisableSabotagingOn1v1.GetBool() && Options.CurrentGameMode == CustomGameMode.Standard && Main.AllAlivePlayerControls.Length == 2) return false;
+        if (Options.DisableSabotagingOn1v1.GetBool() && Options.CurrentGameMode == CustomGamemodes.Standard && Main.AllAlivePlayerControls.Length == 2) return false;
         return pc.Is(CustomRoleTypes.Impostor) || pc.Is(CustomRoles.Trickster) || pc.Is(CustomRoles.Mischievous) || (pc.Is(CustomRoles.Bloodlust) && Bloodlust.HasImpVision.GetBool() && pc.IsAlive());
     }
 

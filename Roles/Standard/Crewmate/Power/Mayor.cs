@@ -101,6 +101,8 @@ internal class Mayor : StandardRoleBase
             TaskVotes = maxVotes;
     }
 
+    public override CustomGamemodes GamemodeId => CustomGamemodes.Standard;
+    public override CustomRoles RoleId => CustomRoles.Mayor;
     public override Team Faction => Team.Crewmate;
     public override RoleOptionType? Alignment => RoleOptionType.Crewmate_Power;
 

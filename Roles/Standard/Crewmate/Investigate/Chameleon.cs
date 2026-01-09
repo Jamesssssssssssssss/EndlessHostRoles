@@ -15,6 +15,8 @@ public class Chameleon : StandardRoleBase
 
     public override bool IsEnable => false;
 
+    public override CustomGamemodes GamemodeId => CustomGamemodes.Standard;
+    public override CustomRoles RoleId => CustomRoles.Chameleon;
     public override Team Faction => Team.Crewmate;
     public override RoleOptionType? Alignment => RoleOptionType.Crewmate_Investigate;
 

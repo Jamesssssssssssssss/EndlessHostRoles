@@ -98,7 +98,7 @@ internal static class AddTasksFromListPatch
             };
         }
 
-        if (!Options.DisableShortTasks.GetBool() && !Options.DisableCommonTasks.GetBool() && !Options.DisableLongTasks.GetBool() && !Options.DisableOtherTasks.GetBool() && Options.CurrentGameMode == CustomGameMode.Standard) return;
+        if (!Options.DisableShortTasks.GetBool() && !Options.DisableCommonTasks.GetBool() && !Options.DisableLongTasks.GetBool() && !Options.DisableOtherTasks.GetBool() && Options.CurrentGameMode == CustomGamemodes.Standard) return;
 
         List<NormalPlayerTask> disabledTasks = [];
 
@@ -118,9 +118,9 @@ internal static class AddTasksFromListPatch
 
         bool IsTaskAlwaysDisabled(TaskTypes type) => type switch
         {
-            TaskTypes.FuelEngines => Options.CurrentGameMode is CustomGameMode.StopAndGo or CustomGameMode.Speedrun,
-            TaskTypes.VentCleaning => Options.CurrentGameMode == CustomGameMode.RoomRush,
-            TaskTypes.RunDiagnostics => Options.CurrentGameMode == CustomGameMode.Speedrun,
+            TaskTypes.FuelEngines => Options.CurrentGameMode is CustomGamemodes.StopAndGo or CustomGamemodes.Speedrun,
+            TaskTypes.VentCleaning => Options.CurrentGameMode == CustomGamemodes.RoomRush,
+            TaskTypes.RunDiagnostics => Options.CurrentGameMode == CustomGamemodes.Speedrun,
             _ => false
         };
     }
@@ -175,7 +175,7 @@ internal static class RpcSetTasksPatch
         }
 
         // GM and Lazy Guy have no tasks
-        if (pc.Is(CustomRoles.GM) || pc.Is(CustomRoles.LazyGuy) || Options.CurrentGameMode is CustomGameMode.SoloPVP or CustomGameMode.FFA or CustomGameMode.HotPotato or CustomGameMode.NaturalDisasters or CustomGameMode.RoomRush or CustomGameMode.Quiz or CustomGameMode.CaptureTheFlag or CustomGameMode.KingOfTheZones or CustomGameMode.TheMindGame or CustomGameMode.BedWars or CustomGameMode.Deathrace or CustomGameMode.Mingle or CustomGameMode.Snowdown)
+        if (pc.Is(CustomRoles.GM) || pc.Is(CustomRoles.LazyGuy) || Options.CurrentGameMode is CustomGamemodes.SoloPVP or CustomGamemodes.FFA or CustomGamemodes.HotPotato or CustomGamemodes.NaturalDisasters or CustomGamemodes.RoomRush or CustomGamemodes.Quiz or CustomGamemodes.CaptureTheFlag or CustomGamemodes.KingOfTheZones or CustomGamemodes.TheMindGame or CustomGamemodes.BedWars or CustomGamemodes.Deathrace or CustomGamemodes.Mingle or CustomGamemodes.Snowdown)
         {
             hasCommonTasks = false;
             numShortTasks = 0;

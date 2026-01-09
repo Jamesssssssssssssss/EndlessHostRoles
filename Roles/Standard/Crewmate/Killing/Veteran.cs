@@ -19,6 +19,8 @@ internal class Veteran : StandardRoleBase
     public static OptionItem VeteranAbilityChargesWhenFinishedTasks;
     public static OptionItem VeteranAlertActivatesOnNonKillingInteractions;
 
+    public override CustomGamemodes GamemodeId => CustomGamemodes.Standard;
+    public override CustomRoles RoleId => CustomRoles.Veteran;
     public override Team Faction => Team.Crewmate;
     public override RoleOptionType? Alignment => RoleOptionType.Crewmate_Killing;
 

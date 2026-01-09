@@ -58,7 +58,7 @@ internal class Lovers : AddonBase
     {
         const CustomRoles role = CustomRoles.Lovers;
         const int id = 16200;
-        const CustomGameMode customGameMode = CustomGameMode.Standard;
+        const CustomGamemodes customGameMode = CustomGamemodes.Standard;
 
         var spawnOption = new StringOptionItem(id, role.ToString(), RatesZeroOne, 0, TabGroup.Addons)
             .SetColor(Utils.GetRoleColor(role))

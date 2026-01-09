@@ -93,9 +93,9 @@ public static class FixedUpdateCaller
                     Predicate<PlayerControl> predicate = amongUsClient.AmHost
                         ? Options.CurrentGameMode switch
                         {
-                            CustomGameMode.BedWars => BedWars.IsNotInLocalPlayersTeam,
-                            CustomGameMode.CaptureTheFlag => CaptureTheFlag.IsNotInLocalPlayersTeam,
-                            CustomGameMode.KingOfTheZones => KingOfTheZones.IsNotInLocalPlayersTeam,
+                            CustomGamemodes.BedWars => BedWars.IsNotInLocalPlayersTeam,
+                            CustomGamemodes.CaptureTheFlag => CaptureTheFlag.IsNotInLocalPlayersTeam,
+                            CustomGamemodes.KingOfTheZones => KingOfTheZones.IsNotInLocalPlayersTeam,
                             _ => _ => true
                         }
                         : _ => true;
@@ -139,7 +139,7 @@ public static class FixedUpdateCaller
                 if (NonLowLoadPlayerIndex >= count)
                     NonLowLoadPlayerIndex = Math.Min(0, -(30 - count));
 
-                CustomGameMode currentGameMode = Options.CurrentGameMode;
+                CustomGamemodes currentGameMode = Options.CurrentGameMode;
 
                 for (var index = 0; index < count; index++)
                 {
@@ -155,25 +155,25 @@ public static class FixedUpdateCaller
 
                         switch (currentGameMode)
                         {
-                            case CustomGameMode.CaptureTheFlag:
+                            case CustomGamemodes.CaptureTheFlag:
                                 CaptureTheFlag.FixedUpdatePatch.Postfix(pc);
                                 break;
-                            case CustomGameMode.HotPotato:
+                            case CustomGamemodes.HotPotato:
                                 HotPotato.FixedUpdatePatch.Postfix(pc);
                                 break;
-                            case CustomGameMode.StopAndGo:
+                            case CustomGamemodes.StopAndGo:
                                 StopAndGo.FixedUpdatePatch.Postfix(pc);
                                 break;
-                            case CustomGameMode.SoloPVP:
+                            case CustomGamemodes.SoloPVP:
                                 SoloPVP.FixedUpdatePatch.Postfix(pc);
                                 break;
-                            case CustomGameMode.Speedrun:
+                            case CustomGamemodes.Speedrun:
                                 Speedrun.FixedUpdatePatch.Postfix(pc);
                                 break;
-                            case CustomGameMode.BedWars:
+                            case CustomGamemodes.BedWars:
                                 BedWars.FixedUpdatePatch.Postfix(pc);
                                 break;
-                            case CustomGameMode.Snowdown:
+                            case CustomGamemodes.Snowdown:
                                 Snowdown.FixedUpdatePatch.Postfix(pc);
                                 break;
                         }
@@ -189,32 +189,32 @@ public static class FixedUpdateCaller
                 {
                     switch (currentGameMode)
                     {
-                        case CustomGameMode.HideAndSeek:
+                        case CustomGamemodes.HideAndSeek:
                             CustomHnS.FixedUpdatePatch.Postfix();
                             goto default;
-                        case CustomGameMode.FFA:
+                        case CustomGamemodes.FFA:
                             FreeForAll.FixedUpdatePatch.Postfix();
                             goto default;
-                        case CustomGameMode.KingOfTheZones:
+                        case CustomGamemodes.KingOfTheZones:
                             KingOfTheZones.FixedUpdatePatch.Postfix();
                             goto default;
-                        case CustomGameMode.NaturalDisasters:
+                        case CustomGamemodes.NaturalDisasters:
                             NaturalDisasters.FixedUpdatePatch.Postfix();
                             break;
-                        case CustomGameMode.Quiz:
+                        case CustomGamemodes.Quiz:
                             Quiz.FixedUpdatePatch.Postfix();
                             goto default;
-                        case CustomGameMode.RoomRush:
+                        case CustomGamemodes.RoomRush:
                             RoomRush.FixedUpdatePatch.Postfix();
                             goto default;
-                        case CustomGameMode.Deathrace:
+                        case CustomGamemodes.Deathrace:
                             Deathrace.FixedUpdatePatch.Postfix();
                             goto default;
-                        case CustomGameMode.Mingle:
+                        case CustomGamemodes.Mingle:
                             Mingle.FixedUpdatePatch.Postfix();
                             goto default;
                         default:
-                            if (Options.IntegrateNaturalDisasters.GetBool()) goto case CustomGameMode.NaturalDisasters;
+                            if (Options.IntegrateNaturalDisasters.GetBool()) goto case CustomGamemodes.NaturalDisasters;
                             break;
                     }
                 }
@@ -226,13 +226,13 @@ public static class FixedUpdateCaller
                     {
                         Main.GameTimer += Time.fixedDeltaTime;
                         
-                        if (Main.GameTimer > Options.GameTimeLimit.GetInt() && Options.CurrentGameMode is CustomGameMode.Standard or CustomGameMode.NaturalDisasters)
+                        if (Main.GameTimer > Options.GameTimeLimit.GetInt() && Options.CurrentGameMode is CustomGamemodes.Standard or CustomGamemodes.NaturalDisasters)
                         {
                             Main.GameTimer = 0f;
                             Main.GameEndDueToTimer = true;
                             CustomWinnerHolder.ResetAndSetWinner(CustomWinner.None);
                         
-                            if (Options.CurrentGameMode == CustomGameMode.NaturalDisasters)
+                            if (Options.CurrentGameMode == CustomGamemodes.NaturalDisasters)
                                 CustomWinnerHolder.WinnerIds.UnionWith(Main.AllAlivePlayerControls.Select(x => x.PlayerId));
                         }
                     }

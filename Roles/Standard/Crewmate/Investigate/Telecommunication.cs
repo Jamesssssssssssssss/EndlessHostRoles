@@ -28,6 +28,8 @@ internal class Telecommunication : StandardRoleBase
         playerId.SetAbilityUseLimit(UseLimitOpt.GetFloat());
     }
 
+    public override CustomGamemodes GamemodeId => CustomGamemodes.Standard;
+    public override CustomRoles RoleId => CustomRoles.Telecommunication;
     public override Team Faction => Team.Crewmate;
     public override RoleOptionType? Alignment => RoleOptionType.Crewmate_Investigate;
 

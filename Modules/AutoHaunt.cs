@@ -16,18 +16,18 @@ public static class AutoHaunt
 
         return Options.CurrentGameMode switch
         {
-            CustomGameMode.Standard => validPCs.OrderByDescending(x => x.GetCustomRole() is CustomRoles.Workaholic or CustomRoles.Snitch && x.GetTaskState().RemainingTasksCount <= 2).ThenByDescending(x => x.Is(CustomRoleTypes.Coven)).ThenByDescending(x => x.IsNeutralKiller()).ThenByDescending(x => x.IsImpostor()).ThenByDescending(x => x.GetCustomRole().IsNeutral()).FirstOrDefault(),
-            CustomGameMode.SoloPVP => validPCs.Where(x => SoloPVP.IsAliveInSoloPVP(x)).MinBy(x => SoloPVP.GetRankFromScore(x.PlayerId)),
-            CustomGameMode.FFA => validPCs.MaxBy(x => FreeForAll.KillCount.GetValueOrDefault(x.PlayerId, 0)),
-            CustomGameMode.StopAndGo => validPCs.MaxBy(x => x.GetTaskState().CompletedTasksCount),
-            CustomGameMode.HotPotato => HotPotato.GetState().HolderID.GetPlayer(),
-            CustomGameMode.HideAndSeek => validPCs.OrderByDescending(x => x.GetCustomRole() is CustomRoles.Venter or CustomRoles.Dasher).ThenByDescending(x => CustomHnS.PlayerRoles.TryGetValue(x.PlayerId, out (IHideAndSeekRole Interface, CustomRoles Role) info) && info.Interface.Team == Team.Impostor).ThenByDescending(x => CustomHnS.PlayerRoles.TryGetValue(x.PlayerId, out (IHideAndSeekRole Interface, CustomRoles Role) info) && info.Interface.Team == Team.Neutral).FirstOrDefault(),
-            CustomGameMode.Speedrun => Speedrun.CanKill.Count > 0 ? Speedrun.CanKill.ToValidPlayers().RandomElement() : validPCs.MaxBy(x => x.GetTaskState().CompletedTasksCount),
-            CustomGameMode.CaptureTheFlag => validPCs.OrderByDescending(x => CaptureTheFlag.IsCarrier(x.PlayerId)).ThenByDescending(x => CaptureTheFlag.GetFlagTime(x.PlayerId)).ThenByDescending(x => CaptureTheFlag.GetTagCount(x.PlayerId)).FirstOrDefault(),
-            CustomGameMode.RoomRush => RoomRush.PointsSystem ? validPCs.MaxBy(x => RoomRush.GetPoints(x.PlayerId)) : validPCs.RandomElement(),
-            CustomGameMode.KingOfTheZones => validPCs.MaxBy(x => KingOfTheZones.GetZoneTime(x.PlayerId)),
-            CustomGameMode.Deathrace => validPCs.MaxBy(x => Deathrace.Data.TryGetValue(x.PlayerId, out var drData) ? drData.Lap : 0),
-            CustomGameMode.Snowdown => validPCs.Where(x => Snowdown.Data.ContainsKey(x.PlayerId)).Select(x => (pc: x, data: Snowdown.Data[x.PlayerId])).OrderByDescending(x => x.data.Points).ThenBy(x => x.data.SnowballGainInterval).ThenByDescending(x => x.data.Coins).ThenByDescending(x => x.data.SnowballsReady).Select(x => x.pc).FirstOrDefault(),
+            CustomGamemodes.Standard => validPCs.OrderByDescending(x => x.GetCustomRole() is CustomRoles.Workaholic or CustomRoles.Snitch && x.GetTaskState().RemainingTasksCount <= 2).ThenByDescending(x => x.Is(CustomRoleTypes.Coven)).ThenByDescending(x => x.IsNeutralKiller()).ThenByDescending(x => x.IsImpostor()).ThenByDescending(x => x.GetCustomRole().IsNeutral()).FirstOrDefault(),
+            CustomGamemodes.SoloPVP => validPCs.Where(x => SoloPVP.IsAliveInSoloPVP(x)).MinBy(x => SoloPVP.GetRankFromScore(x.PlayerId)),
+            CustomGamemodes.FFA => validPCs.MaxBy(x => FreeForAll.KillCount.GetValueOrDefault(x.PlayerId, 0)),
+            CustomGamemodes.StopAndGo => validPCs.MaxBy(x => x.GetTaskState().CompletedTasksCount),
+            CustomGamemodes.HotPotato => HotPotato.GetState().HolderID.GetPlayer(),
+            CustomGamemodes.HideAndSeek => validPCs.OrderByDescending(x => x.GetCustomRole() is CustomRoles.Venter or CustomRoles.Dasher).ThenByDescending(x => CustomHnS.PlayerRoles.TryGetValue(x.PlayerId, out (IHideAndSeekRole Interface, CustomRoles Role) info) && info.Interface.Team == Team.Impostor).ThenByDescending(x => CustomHnS.PlayerRoles.TryGetValue(x.PlayerId, out (IHideAndSeekRole Interface, CustomRoles Role) info) && info.Interface.Team == Team.Neutral).FirstOrDefault(),
+            CustomGamemodes.Speedrun => Speedrun.CanKill.Count > 0 ? Speedrun.CanKill.ToValidPlayers().RandomElement() : validPCs.MaxBy(x => x.GetTaskState().CompletedTasksCount),
+            CustomGamemodes.CaptureTheFlag => validPCs.OrderByDescending(x => CaptureTheFlag.IsCarrier(x.PlayerId)).ThenByDescending(x => CaptureTheFlag.GetFlagTime(x.PlayerId)).ThenByDescending(x => CaptureTheFlag.GetTagCount(x.PlayerId)).FirstOrDefault(),
+            CustomGamemodes.RoomRush => RoomRush.PointsSystem ? validPCs.MaxBy(x => RoomRush.GetPoints(x.PlayerId)) : validPCs.RandomElement(),
+            CustomGamemodes.KingOfTheZones => validPCs.MaxBy(x => KingOfTheZones.GetZoneTime(x.PlayerId)),
+            CustomGamemodes.Deathrace => validPCs.MaxBy(x => Deathrace.Data.TryGetValue(x.PlayerId, out var drData) ? drData.Lap : 0),
+            CustomGamemodes.Snowdown => validPCs.Where(x => Snowdown.Data.ContainsKey(x.PlayerId)).Select(x => (pc: x, data: Snowdown.Data[x.PlayerId])).OrderByDescending(x => x.data.Points).ThenBy(x => x.data.SnowballGainInterval).ThenByDescending(x => x.data.Coins).ThenByDescending(x => x.data.SnowballsReady).Select(x => x.pc).FirstOrDefault(),
             _ => validPCs.RandomElement()
         };
     }

@@ -22,6 +22,8 @@ public class Sharpshooter : StandardRoleBase
     private Vector2 RealPosition;
     private byte SharpshooterId;
 
+    public override CustomGamemodes GamemodeId => CustomGamemodes.Standard;
+    public override CustomRoles RoleId => CustomRoles.Sharpshooter;
     public override Team Faction => Team.Neutral;
     public override RoleOptionType? Alignment => RoleOptionType.Neutral_Killing;
 

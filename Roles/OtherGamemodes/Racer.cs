@@ -9,6 +9,8 @@ namespace EHR.Roles;
 
 internal class Racer : RoleBase
 {
+    public override CustomGamemodes GamemodeId => CustomGamemodes.Deathrace;
+    public override CustomRoles RoleId => CustomRoles.Racer;
     public static bool On;
 
     public override bool IsEnable => On;

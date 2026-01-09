@@ -11,6 +11,6 @@ public class Onbound : AddonBase
 
         GuesserSuicides = new BooleanOptionItem(14508, "GuesserSuicides", false, TabGroup.Addons)
             .SetParent(Options.CustomRoleSpawnChances[CustomRoles.Onbound])
-            .SetGameMode(CustomGameMode.Standard);
+            .SetGameMode(CustomGamemodes.Standard);
     }
 }

@@ -34,54 +34,54 @@ internal class SoloPVP : GamemodeBase
     public static void SetupCustomOption()
     {
         SoloPVP_GameTime = new IntegerOptionItem(66_233_001, "SoloPVP_GameTime", new(30, 300, 5), 180, TabGroup.GameSettings)
-            .SetGameMode(CustomGameMode.SoloPVP)
+            .SetGameMode(CustomGamemodes.SoloPVP)
             .SetColor(new Color32(245, 82, 82, byte.MaxValue))
             .SetValueFormat(OptionFormat.Seconds)
             .SetHeader(true);
 
         SoloPVP_ATKCooldown = new FloatOptionItem(66_223_008, "SoloPVP_ATKCooldown", new(1f, 10f, 0.1f), 1f, TabGroup.GameSettings)
-            .SetGameMode(CustomGameMode.SoloPVP)
+            .SetGameMode(CustomGamemodes.SoloPVP)
             .SetColor(new Color32(245, 82, 82, byte.MaxValue))
             .SetValueFormat(OptionFormat.Seconds);
 
         SoloPVP_HPMax = new FloatOptionItem(66_233_002, "SoloPVP_HPMax", new(10f, 990f, 5f), 100f, TabGroup.GameSettings)
-            .SetGameMode(CustomGameMode.SoloPVP)
+            .SetGameMode(CustomGamemodes.SoloPVP)
             .SetColor(new Color32(245, 82, 82, byte.MaxValue))
             .SetValueFormat(OptionFormat.Health);
 
         SoloPVP_ATK = new FloatOptionItem(66_233_003, "SoloPVP_ATK", new(1f, 100f, 1f), 8f, TabGroup.GameSettings)
-            .SetGameMode(CustomGameMode.SoloPVP)
+            .SetGameMode(CustomGamemodes.SoloPVP)
             .SetColor(new Color32(245, 82, 82, byte.MaxValue))
             .SetValueFormat(OptionFormat.Health);
 
         SoloPVP_RecoverPerSecond = new FloatOptionItem(66_233_005, "SoloPVP_RecoverPerSecond", new(1f, 180f, 1f), 2f, TabGroup.GameSettings)
-            .SetGameMode(CustomGameMode.SoloPVP)
+            .SetGameMode(CustomGamemodes.SoloPVP)
             .SetColor(new Color32(245, 82, 82, byte.MaxValue))
             .SetValueFormat(OptionFormat.Health);
 
         SoloPVP_RecoverAfterSecond = new IntegerOptionItem(66_233_004, "SoloPVP_RecoverAfterSecond", new(0, 60, 1), 8, TabGroup.GameSettings)
-            .SetGameMode(CustomGameMode.SoloPVP)
+            .SetGameMode(CustomGamemodes.SoloPVP)
             .SetColor(new Color32(245, 82, 82, byte.MaxValue))
             .SetValueFormat(OptionFormat.Seconds);
 
         SoloPVP_ResurrectionWaitingTime = new IntegerOptionItem(66_233_006, "SoloPVP_ResurrectionWaitingTime", new(3, 990, 1), 15, TabGroup.GameSettings)
-            .SetGameMode(CustomGameMode.SoloPVP)
+            .SetGameMode(CustomGamemodes.SoloPVP)
             .SetColor(new Color32(245, 82, 82, byte.MaxValue))
             .SetValueFormat(OptionFormat.Seconds);
 
         SoloPVP_KillBonusMultiplier = new FloatOptionItem(66_233_007, "SoloPVP_KillBonusMultiplier", new(0.25f, 5f, 0.25f), 1.25f, TabGroup.GameSettings)
-            .SetGameMode(CustomGameMode.SoloPVP)
+            .SetGameMode(CustomGamemodes.SoloPVP)
             .SetColor(new Color32(245, 82, 82, byte.MaxValue))
             .SetValueFormat(OptionFormat.Multiplier);
 
         SoloPVP_CanVent = new BooleanOptionItem(66_233_009, "SoloPVP_CanVent", true, TabGroup.GameSettings)
-            .SetGameMode(CustomGameMode.SoloPVP)
+            .SetGameMode(CustomGamemodes.SoloPVP)
             .SetColor(new Color32(245, 82, 82, byte.MaxValue));
     }
 
     public static void Init()
     {
-        if (Options.CurrentGameMode != CustomGameMode.SoloPVP) return;
+        if (Options.CurrentGameMode != CustomGamemodes.SoloPVP) return;
 
         PlayerHPMax = [];
         PlayerHP = [];
@@ -169,7 +169,7 @@ internal class SoloPVP : GamemodeBase
 
     public static void GetNameNotify(PlayerControl player, ref string name)
     {
-        if (Options.CurrentGameMode != CustomGameMode.SoloPVP || player == null) return;
+        if (Options.CurrentGameMode != CustomGamemodes.SoloPVP || player == null) return;
 
         if (BackCountdown.TryGetValue(player.PlayerId, out int value))
         {
@@ -206,7 +206,7 @@ internal class SoloPVP : GamemodeBase
 
     public static void OnPlayerAttack(PlayerControl killer, PlayerControl target)
     {
-        if (killer == null || target == null || Options.CurrentGameMode != CustomGameMode.SoloPVP || !Main.IntroDestroyed) return;
+        if (killer == null || target == null || Options.CurrentGameMode != CustomGamemodes.SoloPVP || !Main.IntroDestroyed) return;
 
         if (!IsAliveInSoloPVP(killer) || !IsAliveInSoloPVP(target) || target.inVent || target.MyPhysics.Animations.IsPlayingEnterVentAnimation()) return;
 
@@ -302,7 +302,7 @@ internal class SoloPVP : GamemodeBase
         public static void Postfix(PlayerControl __instance)
         {
             byte id = __instance.PlayerId;
-            if (!GameStates.IsInTask || ExileController.Instance || !Main.IntroDestroyed || Options.CurrentGameMode != CustomGameMode.SoloPVP || !AmongUsClient.Instance.AmHost || id >= 254) return;
+            if (!GameStates.IsInTask || ExileController.Instance || !Main.IntroDestroyed || Options.CurrentGameMode != CustomGamemodes.SoloPVP || !AmongUsClient.Instance.AmHost || id >= 254) return;
 
             long now = Utils.TimeStamp;
             if (LastCountdownTime[id] == now) return;

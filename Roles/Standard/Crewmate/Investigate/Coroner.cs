@@ -28,6 +28,8 @@ public class Coroner : StandardRoleBase
 
     public override bool SeesArrowsToDeadBodies => ArrowsPointingToDeadBody.GetBool();
 
+    public override CustomGamemodes GamemodeId => CustomGamemodes.Standard;
+    public override CustomRoles RoleId => CustomRoles.Coroner;
     public override Team Faction => Team.Crewmate;
     public override RoleOptionType? Alignment => RoleOptionType.Crewmate_Investigate;
 

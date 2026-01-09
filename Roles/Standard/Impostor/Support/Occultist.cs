@@ -33,6 +33,8 @@ public class Occultist : StandardRoleBase
 
     public override bool SeesArrowsToDeadBodies => ArrowsToBodies.GetBool();
 
+    public override CustomGamemodes GamemodeId => CustomGamemodes.Standard;
+    public override CustomRoles RoleId => CustomRoles.Occultist;
     public override Team Faction => Team.Impostor;
     public override RoleOptionType? Alignment => RoleOptionType.Impostor_Support;
 

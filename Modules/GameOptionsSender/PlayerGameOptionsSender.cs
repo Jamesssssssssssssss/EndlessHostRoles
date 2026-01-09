@@ -148,7 +148,7 @@ public sealed class PlayerGameOptionsSender(PlayerControl player) : GameOptionsS
 
             switch (Options.CurrentGameMode)
             {
-                case CustomGameMode.FFA:
+                case CustomGamemodes.FFA:
                 {
                     if (FreeForAll.FFALowerVisionList.ContainsKey(player.PlayerId))
                     {
@@ -160,43 +160,43 @@ public sealed class PlayerGameOptionsSender(PlayerControl player) : GameOptionsS
 
                     break;
                 }
-                case CustomGameMode.CaptureTheFlag:
+                case CustomGamemodes.CaptureTheFlag:
                 {
                     CaptureTheFlag.ApplyGameOptions();
-                    goto case CustomGameMode.RoomRush;
+                    goto case CustomGamemodes.RoomRush;
                 }
-                case CustomGameMode.Snowdown:
+                case CustomGamemodes.Snowdown:
                 {
                     Snowdown.ApplyGameOptions();
-                    goto case CustomGameMode.RoomRush;
+                    goto case CustomGamemodes.RoomRush;
                 }
-                case CustomGameMode.NaturalDisasters:
+                case CustomGamemodes.NaturalDisasters:
                 {
                     SetMaxVision();
                     NaturalDisasters.ApplyGameOptions(opt, player.PlayerId);
                     break;
                 }
-                case CustomGameMode.RoomRush when RoomRush.VentLimit.TryGetValue(player.PlayerId, out int vl) && vl > 0:
+                case CustomGamemodes.RoomRush when RoomRush.VentLimit.TryGetValue(player.PlayerId, out int vl) && vl > 0:
                 {
                     AURoleOptions.EngineerCooldown = 0.01f;
                     AURoleOptions.EngineerInVentMaxTime = 0f;
-                    goto case CustomGameMode.RoomRush;
+                    goto case CustomGamemodes.RoomRush;
                 }
-                case CustomGameMode.Mingle:
-                case CustomGameMode.RoomRush:
-                case CustomGameMode.Speedrun:
-                case CustomGameMode.HotPotato:
+                case CustomGamemodes.Mingle:
+                case CustomGamemodes.RoomRush:
+                case CustomGamemodes.Speedrun:
+                case CustomGamemodes.HotPotato:
                 {
                     SetMaxVision();
                     break;
                 }
-                case CustomGameMode.Deathrace:
-                case CustomGameMode.BedWars:
+                case CustomGamemodes.Deathrace:
+                case CustomGamemodes.BedWars:
                 {
                     AURoleOptions.PhantomCooldown = 0.1f;
-                    goto case CustomGameMode.RoomRush;
+                    goto case CustomGamemodes.RoomRush;
                 }
-                case CustomGameMode.Quiz:
+                case CustomGamemodes.Quiz:
                 {
                     try
                     {
@@ -205,9 +205,9 @@ public sealed class PlayerGameOptionsSender(PlayerControl player) : GameOptionsS
                     }
                     catch (Exception e) { Utils.ThrowException(e); }
 
-                    goto case CustomGameMode.RoomRush;
+                    goto case CustomGamemodes.RoomRush;
                 }
-                case CustomGameMode.StopAndGo:
+                case CustomGamemodes.StopAndGo:
                 {
                     try
                     {
@@ -216,29 +216,29 @@ public sealed class PlayerGameOptionsSender(PlayerControl player) : GameOptionsS
                     }
                     catch (Exception e) { Utils.ThrowException(e); }
 
-                    goto case CustomGameMode.RoomRush;
+                    goto case CustomGamemodes.RoomRush;
                 }
-                case CustomGameMode.HideAndSeek:
+                case CustomGamemodes.HideAndSeek:
                 {
                     CustomHnS.ApplyGameOptions(opt, player);
                     break;
                 }
-                case CustomGameMode.TheMindGame:
+                case CustomGamemodes.TheMindGame:
                 {
                     try { AURoleOptions.PhantomCooldown = 0.1f; }
                     catch (Exception e) { Utils.ThrowException(e); }
 
-                    goto case CustomGameMode.RoomRush;
+                    goto case CustomGamemodes.RoomRush;
                 }
-                case CustomGameMode.KingOfTheZones:
-                case CustomGameMode.SoloPVP:
+                case CustomGamemodes.KingOfTheZones:
+                case CustomGamemodes.SoloPVP:
                 {
                     try { AURoleOptions.GuardianAngelCooldown = 900f; }
                     catch (Exception e) { Utils.ThrowException(e); }
 
-                    goto case CustomGameMode.RoomRush;
+                    goto case CustomGamemodes.RoomRush;
                 }
-                case CustomGameMode.Standard:
+                case CustomGamemodes.Standard:
                 {
                     President.OnAnyoneApplyGameOptions(opt);
             

@@ -7,6 +7,8 @@ internal class Detour : StandardRoleBase
     public static int TotalRedirections;
     public override bool IsEnable => false;
 
+    public override CustomGamemodes GamemodeId => CustomGamemodes.Standard;
+    public override CustomRoles RoleId => CustomRoles.Detour;
     public override Team Faction => Team.Crewmate;
     public override RoleOptionType? Alignment => RoleOptionType.Crewmate_Power;
 

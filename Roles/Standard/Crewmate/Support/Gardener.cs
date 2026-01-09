@@ -16,6 +16,8 @@ public class Gardener : StandardRoleBase
 
     private static List<Plant> Plants = [];
 
+    public override CustomGamemodes GamemodeId => CustomGamemodes.Standard;
+    public override CustomRoles RoleId => CustomRoles.Gardener;
     public override Team Faction => Team.Crewmate;
     public override RoleOptionType? Alignment => RoleOptionType.Crewmate_Support;
 

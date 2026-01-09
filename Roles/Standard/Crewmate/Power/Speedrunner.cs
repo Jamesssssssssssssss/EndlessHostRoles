@@ -28,6 +28,8 @@ internal class Speedrunner : StandardRoleBase
         SpeedrunnerPC = null;
     }
 
+    public override CustomGamemodes GamemodeId => CustomGamemodes.Standard;
+    public override CustomRoles RoleId => CustomRoles.Speedrunner;
     public override Team Faction => Team.Crewmate;
     public override RoleOptionType? Alignment => RoleOptionType.Crewmate_Power;
 

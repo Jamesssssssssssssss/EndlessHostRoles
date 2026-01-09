@@ -19,36 +19,39 @@ public class Jumper : RoleBase, IHideAndSeekRole
     public float RoleSpeed => Speed.GetFloat();
     public float RoleVision => Vision.GetFloat();
 
+    public override CustomGamemodes GamemodeId => CustomGamemodes.HideAndSeek;
+    public override CustomRoles RoleId => CustomRoles.Jumper;
+
     public override void SetupCustomOption()
     {
-        Options.SetupRoleOptions(69_211_501, TabGroup.CrewmateRoles, CustomRoles.Jumper, CustomGameMode.HideAndSeek);
+        Options.SetupRoleOptions(69_211_501, TabGroup.CrewmateRoles, CustomRoles.Jumper, CustomGamemodes.HideAndSeek);
 
         Vision = new FloatOptionItem(69_211_503, "JumperVision", new(0.05f, 5f, 0.05f), 1.25f, TabGroup.CrewmateRoles)
-            .SetGameMode(CustomGameMode.HideAndSeek)
+            .SetGameMode(CustomGamemodes.HideAndSeek)
             .SetValueFormat(OptionFormat.Multiplier)
             .SetColor(new(221, 245, 66, byte.MaxValue))
             .SetParent(Options.CustomRoleSpawnChances[CustomRoles.Jumper]);
 
         Speed = new FloatOptionItem(69_213_504, "JumperSpeed", new(0.05f, 5f, 0.05f), 1.25f, TabGroup.CrewmateRoles)
-            .SetGameMode(CustomGameMode.HideAndSeek)
+            .SetGameMode(CustomGamemodes.HideAndSeek)
             .SetValueFormat(OptionFormat.Multiplier)
             .SetColor(new(221, 245, 66, byte.MaxValue))
             .SetParent(Options.CustomRoleSpawnChances[CustomRoles.Jumper]);
 
         VentCooldown = new FloatOptionItem(69_213_505, "VentCooldown", new(0f, 60f, 0.5f), 20f, TabGroup.CrewmateRoles)
-            .SetGameMode(CustomGameMode.HideAndSeek)
+            .SetGameMode(CustomGamemodes.HideAndSeek)
             .SetValueFormat(OptionFormat.Seconds)
             .SetColor(new(221, 245, 66, byte.MaxValue))
             .SetParent(Options.CustomRoleSpawnChances[CustomRoles.Jumper]);
 
         MaxInVentTime = new FloatOptionItem(69_213_506, "MaxInVentTime", new(0f, 60f, 0.5f), 3f, TabGroup.CrewmateRoles)
-            .SetGameMode(CustomGameMode.HideAndSeek)
+            .SetGameMode(CustomGamemodes.HideAndSeek)
             .SetValueFormat(OptionFormat.Seconds)
             .SetColor(new(221, 245, 66, byte.MaxValue))
             .SetParent(Options.CustomRoleSpawnChances[CustomRoles.Jumper]);
 
         UseLimit = new FloatOptionItem(69_213_507, "AbilityUseLimit", new(0, 20, 0.05f), 3, TabGroup.CrewmateRoles)
-            .SetGameMode(CustomGameMode.HideAndSeek)
+            .SetGameMode(CustomGamemodes.HideAndSeek)
             .SetColor(new(221, 245, 66, byte.MaxValue))
             .SetParent(Options.CustomRoleSpawnChances[CustomRoles.Jumper]);
     }

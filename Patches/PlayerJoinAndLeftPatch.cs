@@ -215,10 +215,10 @@ internal static class OnGameJoinedPatch
                     try { Utils.SendMessage(HudManagerPatch.BuildAutoGMRotationStatusText(true), title: GetString("AutoGMRotationStatusText")); }
                     catch (Exception e) { Utils.ThrowException(e); }
 
-                    CustomGameMode nextGM = Options.AutoGMRotationCompiled[Options.AutoGMRotationIndex];
+                    CustomGamemodes nextGM = Options.AutoGMRotationCompiled[Options.AutoGMRotationIndex];
 
                     float timer;
-                    if (nextGM != CustomGameMode.All) timer = 0f;
+                    if (nextGM != CustomGamemodes.All) timer = 0f;
                     else if (Options.AutoGMPollCommandAfterJoin.GetBool()) timer = Options.AutoGMPollCommandCooldown.GetInt() - 10;
                     else if (Main.AutoStart.Value) timer = (Options.MinWaitAutoStart.GetFloat() * 60) - 65;
                     else timer = 30f;
@@ -236,7 +236,7 @@ internal static class OnGameJoinedPatch
 
                     if (Options.AutoGMRotationEnabled)
                     {
-                        if (nextGM == CustomGameMode.All) ChatCommands.GameModePollCommand(PlayerControl.LocalPlayer, "Command.GameModePoll", "/gmpoll", ["/gmpoll"]);
+                        if (nextGM == CustomGamemodes.All) ChatCommands.GameModePollCommand(PlayerControl.LocalPlayer, "Command.GameModePoll", "/gmpoll", ["/gmpoll"]);
                         else Options.GameMode.SetValue((int)nextGM - 1);
 
                         Logger.Info($"Auto GM Rotation: Next Game Mode = {nextGM}", "Auto GM Rotation");
@@ -558,13 +558,13 @@ internal static class OnPlayerLeftPatch
 
                 switch (Options.CurrentGameMode)
                 {
-                    case CustomGameMode.HideAndSeek:
+                    case CustomGamemodes.HideAndSeek:
                         CustomHnS.PlayerRoles.Remove(id);
                         break;
-                    case CustomGameMode.Mingle when data.Character.IsAlive():
+                    case CustomGamemodes.Mingle when data.Character.IsAlive():
                         Mingle.HandleDisconnect();
                         break;
-                    case CustomGameMode.BedWars:
+                    case CustomGamemodes.BedWars:
                         BedWars.OnDisconnect(data.Character);
                         break;
                 }

@@ -19,6 +19,8 @@ public class Captain : StandardRoleBase
     private byte TargetId;
     private List<SystemTypes> TargetRooms;
 
+    public override CustomGamemodes GamemodeId => CustomGamemodes.Standard;
+    public override CustomRoles RoleId => CustomRoles.Captain;
     public override Team Faction => Team.Crewmate;
     public override RoleOptionType? Alignment => RoleOptionType.Crewmate_Investigate;
 

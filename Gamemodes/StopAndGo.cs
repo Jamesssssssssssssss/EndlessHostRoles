@@ -258,7 +258,7 @@ internal class StopAndGo : GamemodeBase
     private static OptionItem CreateSetting(int id, string direction, bool red, bool min)
     {
         return new IntegerOptionItem(id, CounterSettingString(direction, red, min), CounterValueRule, min ? DefaultMinValue : DefaultMaxValue, TabGroup.GameSettings)
-            .SetGameMode(CustomGameMode.StopAndGo)
+            .SetGameMode(CustomGamemodes.StopAndGo)
             .SetColor(new Color32(0, 255, 255, byte.MaxValue))
             .SetValueFormat(OptionFormat.Seconds)
             .AddReplacement(new("Red", Utils.ColorString(Color.red, "Red")))
@@ -273,7 +273,7 @@ internal class StopAndGo : GamemodeBase
     private static OptionItem CreateExtraTimeSetting(int id, string mapName, int defaultValue)
     {
         return new IntegerOptionItem(id, $"StopAndGo_ExtraGreenTimeOn{mapName}", ExtraTimeValue, defaultValue, TabGroup.GameSettings)
-            .SetGameMode(CustomGameMode.StopAndGo)
+            .SetGameMode(CustomGamemodes.StopAndGo)
             .SetColor(new Color32(0, 255, 255, byte.MaxValue))
             .SetValueFormat(OptionFormat.Seconds)
             .AddReplacement(new("Green", Utils.ColorString(Color.green, "Green")));
@@ -282,13 +282,13 @@ internal class StopAndGo : GamemodeBase
     public static void SetupCustomOption()
     {
         GameTime = new IntegerOptionItem(68_213_001, "FFA_GameTime", new(30, 3600, 10), 900, TabGroup.GameSettings)
-            .SetGameMode(CustomGameMode.StopAndGo)
+            .SetGameMode(CustomGamemodes.StopAndGo)
             .SetColor(new Color32(0, 255, 255, byte.MaxValue))
             .SetValueFormat(OptionFormat.Seconds)
             .SetHeader(true);
 
         PlayerLives = new IntegerOptionItem(68_213_017, "StopAndGo_PlayerLives", new(1, 10, 1), 2, TabGroup.GameSettings)
-            .SetGameMode(CustomGameMode.StopAndGo)
+            .SetGameMode(CustomGamemodes.StopAndGo)
             .SetColor(new Color32(0, 255, 255, byte.MaxValue))
             .SetValueFormat(OptionFormat.Health)
             .SetHeader(true);
@@ -309,12 +309,12 @@ internal class StopAndGo : GamemodeBase
         ExtraGreenTimeOnFungle = CreateExtraTimeSetting(68_213_015, "Fungle", 10);
 
         EnableTutorial = new BooleanOptionItem(68_213_016, "StopAndGo_EnableTutorial", true, TabGroup.GameSettings)
-            .SetGameMode(CustomGameMode.StopAndGo)
+            .SetGameMode(CustomGamemodes.StopAndGo)
             .SetHeader(true)
             .SetColor(new Color32(0, 255, 255, byte.MaxValue));
 
         EventFrequency = new IntegerOptionItem(68_213_018, "StopAndGo_EventFrequency", new(2, 120, 1), 30, TabGroup.GameSettings)
-            .SetGameMode(CustomGameMode.StopAndGo)
+            .SetGameMode(CustomGamemodes.StopAndGo)
             .SetColor(new Color32(0, 255, 255, byte.MaxValue))
             .SetValueFormat(OptionFormat.Seconds)
             .SetHeader(true);
@@ -322,12 +322,12 @@ internal class StopAndGo : GamemodeBase
         Events[] events = Enum.GetValues<Events>();
 
         EventChances = events.ToDictionary(x => x, x => new IntegerOptionItem(68_213_019 + (int)x, $"StopAndGo_EventChance_{x}", new(0, 100, 5), EventDefaults(x).Chance, TabGroup.GameSettings)
-            .SetGameMode(CustomGameMode.StopAndGo)
+            .SetGameMode(CustomGamemodes.StopAndGo)
             .SetColor(new Color32(0, 255, 255, byte.MaxValue))
             .SetValueFormat(OptionFormat.Percent));
 
         EventDurations = events.ToDictionary(x => x, x => new IntegerOptionItem(68_213_019 + events.Length + (int)x, $"StopAndGo_EventDuration_{x}", new(5, 120, 5), EventDefaults(x).Duration, TabGroup.GameSettings)
-            .SetGameMode(CustomGameMode.StopAndGo)
+            .SetGameMode(CustomGamemodes.StopAndGo)
             .SetColor(new Color32(0, 255, 255, byte.MaxValue))
             .SetValueFormat(OptionFormat.Seconds));
 
@@ -347,7 +347,7 @@ internal class StopAndGo : GamemodeBase
 
     public static void Init()
     {
-        if (Options.CurrentGameMode != CustomGameMode.StopAndGo) return;
+        if (Options.CurrentGameMode != CustomGamemodes.StopAndGo) return;
 
         FixedUpdatePatch.LastSuffix = [];
         FixedUpdatePatch.Limit = [];
@@ -428,7 +428,7 @@ internal class StopAndGo : GamemodeBase
 
         public static void Postfix(PlayerControl __instance)
         {
-            if (!GameStates.IsInTask || ExileController.Instance || Options.CurrentGameMode != CustomGameMode.StopAndGo || !__instance.IsAlive() || !AmongUsClient.Instance.AmHost || !DoChecks || !Main.IntroDestroyed || __instance.PlayerId >= 254) return;
+            if (!GameStates.IsInTask || ExileController.Instance || Options.CurrentGameMode != CustomGamemodes.StopAndGo || !__instance.IsAlive() || !AmongUsClient.Instance.AmHost || !DoChecks || !Main.IntroDestroyed || __instance.PlayerId >= 254) return;
 
             PlayerControl pc = __instance;
             long now = Utils.TimeStamp;

@@ -25,6 +25,8 @@ public class Stasis : StandardRoleBase
 
     public static bool IsTimeFrozen => Instances.Any(x => x.UsingAbility);
 
+    public override CustomGamemodes GamemodeId => CustomGamemodes.Standard;
+    public override CustomRoles RoleId => CustomRoles.Stasis;
     public override Team Faction => Team.Impostor;
     public override RoleOptionType? Alignment => RoleOptionType.Impostor_Concealing;
 

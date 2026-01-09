@@ -104,6 +104,8 @@ internal class Sentinel : StandardRoleBase
 
     public override bool IsEnable => PatrolStates.Count > 0 || Randomizer.Exists;
 
+    public override CustomGamemodes GamemodeId => CustomGamemodes.Standard;
+    public override CustomRoles RoleId => CustomRoles.Sentinel;
     public override Team Faction => Team.Crewmate;
     public override RoleOptionType? Alignment => RoleOptionType.Crewmate_Killing;
 

@@ -382,43 +382,43 @@ public sealed class PlayerGameOptionsSender(PlayerControl player) : GameOptionsS
             switch (role)
             {
                 case CustomRoles.PhantomEHR:
-                    AURoleOptions.PhantomCooldown = ImpostorVanillaRoles.PhantomCooldown.GetFloat();
-                    AURoleOptions.PhantomDuration = ImpostorVanillaRoles.PhantomDuration.GetFloat();
+                    AURoleOptions.PhantomCooldown = PhantomEHR.PhantomCooldown.GetFloat();
+                    AURoleOptions.PhantomDuration = PhantomEHR.PhantomDuration.GetFloat();
                     break;
                 case CustomRoles.ShapeshifterEHR:
-                    AURoleOptions.ShapeshifterCooldown = ImpostorVanillaRoles.ShapeshiftCD.GetFloat();
-                    AURoleOptions.ShapeshifterDuration = ImpostorVanillaRoles.ShapeshiftDur.GetFloat();
+                    AURoleOptions.ShapeshifterCooldown = ShapeshifterEHR.ShapeshiftCD.GetFloat();
+                    AURoleOptions.ShapeshifterDuration = ShapeshifterEHR.ShapeshiftDur.GetFloat();
                     break;
                 case CustomRoles.EngineerEHR:
-                    AURoleOptions.EngineerCooldown = CrewmateVanillaRoles.EngineerCD.GetFloat();
-                    AURoleOptions.EngineerInVentMaxTime = CrewmateVanillaRoles.EngineerDur.GetFloat();
+                    AURoleOptions.EngineerCooldown = EngineerEHR.EngineerCD.GetFloat();
+                    AURoleOptions.EngineerInVentMaxTime = EngineerEHR.EngineerDur.GetFloat();
                     break;
                 case CustomRoles.NoisemakerEHR:
-                    AURoleOptions.NoisemakerImpostorAlert = CrewmateVanillaRoles.NoiseMakerImpostorAlert.GetBool();
-                    AURoleOptions.NoisemakerAlertDuration = CrewmateVanillaRoles.NoisemakerAlertDuration.GetFloat();
+                    AURoleOptions.NoisemakerImpostorAlert = NoisemakerEHR.NoiseMakerImpostorAlert.GetBool();
+                    AURoleOptions.NoisemakerAlertDuration = NoisemakerEHR.NoisemakerAlertDuration.GetFloat();
                     break;
                 case CustomRoles.ScientistEHR:
-                    AURoleOptions.ScientistCooldown = CrewmateVanillaRoles.ScientistCD.GetFloat();
-                    AURoleOptions.ScientistBatteryCharge = CrewmateVanillaRoles.ScientistDur.GetFloat();
+                    AURoleOptions.ScientistCooldown = ScientistEHR.ScientistCD.GetFloat();
+                    AURoleOptions.ScientistBatteryCharge = ScientistEHR.ScientistDur.GetFloat();
                     break;
                 case CustomRoles.TrackerEHR:
-                    AURoleOptions.TrackerCooldown = CrewmateVanillaRoles.TrackerCooldown.GetFloat();
-                    AURoleOptions.TrackerDuration = CrewmateVanillaRoles.TrackerDuration.GetFloat();
-                    AURoleOptions.TrackerDelay = CrewmateVanillaRoles.TrackerDelay.GetFloat();
+                    AURoleOptions.TrackerCooldown = TrackerEHR.TrackerCooldown.GetFloat();
+                    AURoleOptions.TrackerDuration = TrackerEHR.TrackerDuration.GetFloat();
+                    AURoleOptions.TrackerDelay = TrackerEHR.TrackerDelay.GetFloat();
                     break;
                 case CustomRoles.DetectiveEHR:
-                    AURoleOptions.DetectiveSuspectLimit = CrewmateVanillaRoles.DetectiveSuspectLimit.GetFloat();
+                    AURoleOptions.DetectiveSuspectLimit = DetectiveEHR.DetectiveSuspectLimit.GetFloat();
                     break;
                 case CustomRoles.ViperEHR:
-                    AURoleOptions.ViperDissolveTime  = ImpostorVanillaRoles.ViperDissolveTime.GetFloat();
+                    AURoleOptions.ViperDissolveTime  = ViperEHR.ViperDissolveTime.GetFloat();
                     break;
             }
 
             // When impostor alert is off, and the player is a desync crewmate, set impostor alert as true
-            if (role.IsDesyncRole() && role.IsCrewmate() && !CrewmateVanillaRoles.NoiseMakerImpostorAlert.GetBool())
+            if (role.IsDesyncRole() && role.IsCrewmate() && !NoisemakerEHR.NoiseMakerImpostorAlert.GetBool())
                 AURoleOptions.NoisemakerImpostorAlert = true;
             else
-                AURoleOptions.NoisemakerImpostorAlert = CrewmateVanillaRoles.NoiseMakerImpostorAlert.GetBool();
+                AURoleOptions.NoisemakerImpostorAlert = NoisemakerEHR.NoiseMakerImpostorAlert.GetBool();
 
             try
             {

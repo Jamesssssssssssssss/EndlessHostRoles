@@ -1,13 +1,13 @@
 ﻿namespace EHR.Roles;
 
-internal class VanillaRole : RoleBase
+internal class NotAssigned : RoleBase
 {
     public static bool On;
 
     public override bool IsEnable => On;
 
-    public override CustomGamemodes GamemodeId => CustomGamemodes.Standard;
-    public override CustomRoles RoleId => null;
+    public override CustomGamemodes GamemodeId => CustomGamemodes.All;
+    public override CustomRoles RoleId => CustomRoles.NotAssigned;
 
     public override void SetupCustomOption() { }
 

@@ -271,7 +271,7 @@ public static class GuessManager
 
                     switch (role)
                     {
-                        case CustomRoles.Crewmate or CustomRoles.CrewmateEHR when CrewmateVanillaRoles.VanillaCrewmateCannotBeGuessed.GetBool():
+                        case CustomRoles.Crewmate or CustomRoles.CrewmateEHR when CrewmateEHR.VanillaCrewmateCannotBeGuessed.GetBool():
                             ShowMessage("GuessVanillaCrewmate");
                             return true;
                         case CustomRoles.Workaholic when Workaholic.WorkaholicVisibleToEveryone.GetBool():

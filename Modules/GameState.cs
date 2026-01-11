@@ -94,7 +94,7 @@ public class PlayerState(byte playerId)
     public CustomRoles MainRole = CustomRoles.NotAssigned;
     public NetworkedPlayerInfo.PlayerOutfit NormalOutfit;
     public (DateTime TimeStamp, byte ID) RealKiller = (DateTime.MinValue, byte.MaxValue);
-    public RoleBase Role = new VanillaRole();
+    public RoleBase Role = new NotAssigned();
 
     private int RoleChangeTimes = -1;
 

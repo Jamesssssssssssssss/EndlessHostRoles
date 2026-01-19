@@ -4,7 +4,7 @@ using System.Windows;
 using System.Windows.Controls;
 using EHR;
 
-namespace CustomTeamAssigner
+namespace EHRControlPanel
 {
     public partial class RoleDescFinder : Page
     {

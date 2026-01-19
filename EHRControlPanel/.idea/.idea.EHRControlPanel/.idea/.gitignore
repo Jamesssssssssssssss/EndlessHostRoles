@@ -3,7 +3,7 @@
 /workspace.xml
 # Rider ignored files
 /contentModel.xml
-/.idea.CustomTeamAssigner.iml
+/.idea.EHRControlPanel.iml
 /modules.xml
 /projectSettingsUpdater.xml
 # Editor-based HTTP Client requests

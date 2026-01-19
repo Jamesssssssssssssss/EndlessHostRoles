@@ -10,7 +10,7 @@ using System.Windows;
  * README file in the root directory of this source tree.
  */
 
-namespace CustomTeamAssigner
+namespace EHRControlPanel
 {
     public class Team(string teamName)
     {

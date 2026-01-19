@@ -11,7 +11,7 @@ using System.Windows.Media;
  * README file in the root directory of this source tree.
  */
 
-namespace CustomTeamAssigner
+namespace EHRControlPanel
 {
     public partial class TeamEditorPage : Page
     {

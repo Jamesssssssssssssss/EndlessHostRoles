@@ -10,7 +10,7 @@ using System.Windows.Controls;
  * README file in the root directory of this source tree.
  */
 
-namespace CustomTeamAssigner
+namespace EHRControlPanel
 {
     public partial class PlaySetListerPage : Page
     {

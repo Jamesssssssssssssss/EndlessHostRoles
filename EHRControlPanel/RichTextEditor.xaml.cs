@@ -7,7 +7,7 @@ using System.Windows.Markup;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 
-namespace CustomTeamAssigner
+namespace EHRControlPanel
 {
     public partial class RichTextEditor : Page
     {

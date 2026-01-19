@@ -13,7 +13,7 @@ using System.Windows.Media;
  * README file in the root directory of this source tree.
  */
 
-namespace CustomTeamAssigner
+namespace EHRControlPanel
 {
     internal static partial class Utils
     {
